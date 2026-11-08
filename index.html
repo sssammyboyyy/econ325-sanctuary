@@ -649,78 +649,274 @@
 
     </div>
 
+    
     <!-- ======================================================= -->
-    <!-- TAB 4: 26-MARK WRITTEN THEORY PILLARS                    -->
+    <!-- TAB 4: THEORY PAPER 1 GYM (Q1: 15M • Q2: 26M • Q3: 19M) -->
     <!-- ======================================================= -->
     <div id="tab-theory-vault" class="tab-pane hidden space-y-6">
       
-      <!-- Theory Banner -->
-      <div class="paper-card p-6 bg-gradient-to-r from-[#FAF7F2] via-[#EBF3F5] to-[#FAF3EC] flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <!-- Gym Header Banner -->
+      <div class="paper-card p-6 bg-gradient-to-r from-[#FAF3EC] via-[#F4EBE1] to-[#EBF3F5] border-[#E2DACB] flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <span class="tag-bauhaus px-3 py-1 rounded-full bg-[#1D3557] text-white text-[11px] uppercase tracking-wider">PAPER 1 GUARANTEED 26-MARK BLOCK</span>
-          <h2 class="text-2xl font-extrabold text-[#1D3557] mt-1.5">The 4 Diagnostic Theory Pillars</h2>
+          <span class="tag-bauhaus px-3 py-1 rounded-full bg-[#1D3557] text-[#FAF7F2] text-[11px] uppercase tracking-wider font-bold">PAPER 1 MASTER SCOPE • 60 MARKS • ZERO ARITHMETIC</span>
+          <h2 class="text-2xl font-extrabold text-[#1D3557] mt-1.5">Theory Paper 1 Physical Reps Gym</h2>
           <p class="text-xs text-[#555A68] mt-1 max-w-2xl leading-relaxed">
-            Every year, Question 1 or Question 4 asks the same 5-part architecture: Assumption, Nature of Violation, Detection Method, Consequences for OLS, and Remedies.
+            Rebuilt directly from the professor's final revision class hints: <strong>Q1 (15M)</strong> True/False Justification, <strong>Q2 (26M)</strong> Written BLUE & Diagnostics, and <strong>Q3 (19M)</strong> Output & Interaction Terms (D×X). Type your answers to build muscle memory!
           </p>
         </div>
-        <div class="flex items-center gap-2">
-          <button onclick="toggleArchAnswer()" class="paper-btn px-3.5 py-2 bg-[#D95D39] text-white hover:bg-[#C85A32] text-xs font-bold">
-            ⭐ Bank All Pillars +15 XP
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <div class="text-xs font-bold text-[#7A8294] uppercase tracking-wider">Gym Score</div>
+            <div id="gym-score-display" class="text-2xl font-black text-[#D95D39] font-mono-code">0 / 60 M</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Workout Switcher Tabs (Q1, Q2, Q3) -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <button id="gym-w1-btn" onclick="switchGymWorkout(1)" class="paper-btn p-3 bg-white text-[#1D3557] border-[#D95D39] text-left text-xs font-bold">
+          🥊 Workout 1: Q1 True/False Bank<br><span class="text-[10px] font-normal text-[#6B7280]">15 Marks • 9 Core Concepts with Typed Justification</span>
+        </button>
+        <button id="gym-w2-btn" onclick="switchGymWorkout(2)" class="paper-btn p-3 bg-white text-[#555A68] text-left text-xs font-medium">
+          🏋️ Workout 2: Q2 Written BLUE & Diagnostics<br><span class="text-[10px] font-normal text-[#6B7280]">26 Marks • The "BLUE" Riddle, RESET, White, DW</span>
+        </button>
+        <button id="gym-w3-btn" onclick="switchGymWorkout(3)" class="paper-btn p-3 bg-white text-[#555A68] text-left text-xs font-medium">
+          🎯 Workout 3: Q3 Output & Interaction Terms<br><span class="text-[10px] font-normal text-[#6B7280]">19 Marks • Visual D×X Simulator, Gender MPC, F-Test</span>
+        </button>
+      </div>
+
+      <!-- ===================================================== -->
+      <!-- WORKOUT 1: Q1 TRUE/FALSE BANK WITH TYPED REPS [15M]   -->
+      <!-- ===================================================== -->
+      <div id="gym-workout-1" class="space-y-4">
+        <div class="paper-card p-5 bg-white space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+            <div>
+              <span id="q1-item-tag" class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] text-xs font-mono-code font-bold">Q1 DRILL #1 OF 10</span>
+              <h3 id="q1-statement" class="font-extrabold text-[#1D3557] text-base mt-2 leading-relaxed">
+                The sample variance divides the sum of squared deviations by n.
+              </h3>
+            </div>
+            <div class="text-right">
+              <span class="text-[11px] font-mono-code text-[#7A8294]">Item 1 / 10</span>
+            </div>
+          </div>
+
+          <!-- True / False Selection -->
+          <div class="grid grid-cols-2 gap-3">
+            <button id="q1-btn-t" onclick="selectQ1Choice(true)" class="paper-btn py-2.5 bg-[#EBF3F5] hover:bg-[#D9EAEB] text-[#1D3557] font-bold text-xs">TRUE (T)</button>
+            <button id="q1-btn-f" onclick="selectQ1Choice(false)" class="paper-btn py-2.5 bg-[#FAF3EC] hover:bg-[#F3E5D8] text-[#D95D39] font-bold text-xs">FALSE (F)</button>
+          </div>
+
+          <!-- Type-in Justification Rep -->
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-[#555A68]">Type the 1-Sentence Reason / Justification (Physical Muscle Memory Rep):</label>
+            <textarea id="q1-input-text" rows="2" placeholder="Explain why it is True or False using econometric keywords..." class="w-full bg-[#FAF7F2] border border-[#D6CEC1] rounded-xl p-3 font-mono-code text-xs text-[#1D3557] focus:outline-none focus:border-[#D95D39]"></textarea>
+          </div>
+
+          <div class="flex items-center justify-between pt-2">
+            <span id="q1-rep-feedback" class="text-xs font-mono-code text-[#7A8294]">Type reason above and click check.</span>
+            <div class="flex gap-2">
+              <button onclick="checkQ1Rep()" class="paper-btn px-4 py-2 bg-[#D95D39] text-white hover:bg-[#C85A32] text-xs font-bold">
+                ✓ Check My Rep & View Lecturer Memo
+              </button>
+              <button onclick="advanceQ1Item()" class="paper-btn px-3 py-2 bg-[#FAF7F2] text-[#1D3557] text-xs font-bold">
+                Next Item →
+              </button>
+            </div>
+          </div>
+
+          <!-- Lecturer Memo Reveal Box -->
+          <div id="q1-memo-box" class="hidden p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2 text-xs">
+            <div class="flex items-center justify-between">
+              <span id="q1-memo-verdict" class="font-bold font-mono-code">VERDICT: FALSE</span>
+              <span class="text-[10px] text-[#7A8294] font-mono-code">LECTURER'S MARKING MEMO</span>
+            </div>
+            <div id="q1-memo-text" class="text-[#2B2D42] leading-relaxed"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================== -->
+      <!-- WORKOUT 2: Q2 WRITTEN BLUE & DIAGNOSTICS ARENA [26M]  -->
+      <!-- ===================================================== -->
+      <div id="gym-workout-2" class="hidden space-y-4">
+        
+        <!-- Drill Selector Strip -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+          <button id="q2-tab-0" onclick="setQ2Drill(0)" class="paper-btn p-2.5 bg-white text-[#1D3557] border-[#1D3557] text-xs font-bold text-left">
+            2.1 The "BLUE" Riddle<br><span class="text-[10px] font-normal text-[#6B7280]">Gauss-Markov [5M]</span>
+          </button>
+          <button id="q2-tab-1" onclick="setQ2Drill(1)" class="paper-btn p-2.5 bg-white text-[#555A68] text-xs font-medium text-left">
+            2.2 Model Specification<br><span class="text-[10px] font-normal text-[#6B7280]">RESET & Omitted [5M]</span>
+          </button>
+          <button id="q2-tab-2" onclick="setQ2Drill(2)" class="paper-btn p-2.5 bg-white text-[#555A68] text-xs font-medium text-left">
+            2.3 Autocorrelation<br><span class="text-[10px] font-normal text-[#6B7280]">DW & HAC [5M]</span>
+          </button>
+          <button id="q2-tab-3" onclick="setQ2Drill(3)" class="paper-btn p-2.5 bg-white text-[#555A68] text-xs font-medium text-left">
+            2.4 Multicollinearity<br><span class="text-[10px] font-normal text-[#6B7280]">Auxiliary & VIF [5M]</span>
+          </button>
+          <button id="q2-tab-4" onclick="setQ2Drill(4)" class="paper-btn p-2.5 bg-white text-[#555A68] text-xs font-medium text-left">
+            2.5 Heteroscedasticity<br><span class="text-[10px] font-normal text-[#6B7280]">White Auxiliary [6M]</span>
           </button>
         </div>
+
+        <!-- Selected Q2 Interactive Writing Pad -->
+        <div class="paper-card p-6 bg-white space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+            <div>
+              <span id="q2-drill-marks" class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] text-xs font-mono-code font-bold">QUESTION 2 • 5 MARKS</span>
+              <h3 id="q2-drill-title" class="font-extrabold text-[#1D3557] text-base mt-1.5">Gauss-Markov Theorem & The "BLUE" Riddle</h3>
+            </div>
+            <span class="text-xs font-mono-code text-[#4E878C] font-bold">Written Theory Block</span>
+          </div>
+
+          <p id="q2-drill-prompt" class="text-xs font-semibold text-[#1D3557] leading-relaxed bg-[#FAF7F2] p-3 rounded-xl border border-[#D6CEC1]">
+            State the Gauss-Markov Theorem and explain what each letter of <strong>BLUE</strong> stands for in the context of OLS. Under what conditions is OLS BLUE, and when does it lose this status?
+          </p>
+
+          <!-- Writing Pad -->
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between text-xs">
+              <label class="font-bold text-[#555A68]">Your Written Answer (Type complete point-by-point sentences):</label>
+              <span id="q2-word-count" class="font-mono-code text-[11px] text-[#7A8294]">0 words</span>
+            </div>
+            <textarea id="q2-text-input" rows="5" oninput="updateQ2WordCount()" placeholder="1. B stands for... &#10;2. L stands for... &#10;3. U stands for... &#10;4. E stands for... &#10;5. OLS is BLUE when..." class="w-full bg-[#FAF7F2] border border-[#D6CEC1] rounded-xl p-3.5 font-mono-code text-xs text-[#1D3557] focus:outline-none focus:border-[#1D3557] leading-relaxed"></textarea>
+          </div>
+
+          <!-- Action & Keyword Match Bar -->
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-[#E8E2D8]">
+            <div id="q2-keyword-meter" class="flex flex-wrap gap-1 text-[11px] font-mono-code">
+              <!-- Keyword chips injected via JS -->
+            </div>
+            <div class="flex gap-2">
+              <button onclick="checkQ2Rep()" class="paper-btn px-4 py-2 bg-[#1D3557] text-white hover:bg-[#14233A] text-xs font-bold">
+                ✓ Grade Rep & Reveal Memo
+              </button>
+              <button onclick="clearQ2Rep()" class="paper-btn px-3 py-2 bg-white text-[#555A68] text-xs font-bold">
+                Clear & Redo ↺
+              </button>
+            </div>
+          </div>
+
+          <!-- Lecturer Marking Memo Box -->
+          <div id="q2-memo-box" class="hidden p-5 rounded-xl border-2 border-[#4E878C] bg-[#EBF3F5]/60 space-y-3 text-xs leading-relaxed">
+            <div class="flex items-center justify-between border-b border-[#BBD5D9] pb-2">
+              <span class="font-black text-[#1D3557] uppercase tracking-wide">Official NWU Marking Memo (Full Credit Points)</span>
+              <span id="q2-score-badge" class="tag-bauhaus px-2.5 py-0.5 rounded bg-white text-[#4E878C] font-bold font-mono-code">SCORE: 5/5 M</span>
+            </div>
+            <div id="q2-memo-content" class="text-[#1D3557] space-y-2"></div>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Pillar Selector Tabs -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <button id="arch-btn-multi" onclick="setArchView('multi')" class="paper-btn p-3 bg-white text-[#1D3557] border-[#1D3557] text-left text-xs font-bold">
-          1. Multicollinearity<br><span class="text-[10px] font-normal text-[#6B7280]">OLS Remains BLUE!</span>
-        </button>
-        <button id="arch-btn-hetero" onclick="setArchView('hetero')" class="paper-btn p-3 bg-white text-[#1D3557] text-left text-xs font-bold">
-          2. Heteroscedasticity<br><span class="text-[10px] font-normal text-[#6B7280]">White Test & Robust SE</span>
-        </button>
-        <button id="arch-btn-auto" onclick="setArchView('auto')" class="paper-btn p-3 bg-white text-[#1D3557] text-left text-xs font-bold">
-          3. Autocorrelation<br><span class="text-[10px] font-normal text-[#6B7280]">Durbin-Watson & Newey-West</span>
-        </button>
-        <button id="arch-btn-spec" onclick="setArchView('spec')" class="paper-btn p-3 bg-white text-[#1D3557] text-left text-xs font-bold">
-          4. Specification Bias<br><span class="text-[10px] font-normal text-[#6B7280]">Omitted vs Irrelevant</span>
-        </button>
-      </div>
+      <!-- ===================================================== -->
+      <!-- WORKOUT 3: Q3 OUTPUT & INTERACTION TERMS (D×X) [19M]  -->
+      <!-- ===================================================== -->
+      <div id="gym-workout-3" class="hidden space-y-6">
+        
+        <!-- Interactive Visual D×X Canvas Card -->
+        <div class="paper-card p-6 bg-white space-y-5 border-2 border-[#D6CEC1]">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E8E2D8] pb-3">
+            <div>
+              <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] text-xs font-mono-code font-bold">REVISION CLASS FOCUS • INTERACTION TERMS</span>
+              <h3 class="font-extrabold text-[#1D3557] text-base mt-1">Interactive Interaction Term Visualizer (D×X)</h3>
+            </div>
+            <div class="text-xs text-[#555A68]">
+              Model: <code class="font-mono-code font-bold text-[#1D3557]">Expenditure = β₀ + β₁·Income + β₂·Female + β₃·(Female×Income)</code>
+            </div>
+          </div>
 
-      <!-- Selected Pillar Details Card -->
-      <div class="paper-card p-6 bg-white space-y-4">
-        <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
-          <h3 id="arch-title" class="text-lg font-black text-[#1D3557]">Multicollinearity Pillar</h3>
-          <span class="tag-bauhaus px-3 py-1 rounded bg-[#EBF3F5] text-[#1D3557] text-xs font-bold font-mono-code">5 MARKS EACH</span>
+          <!-- Coordinate Canvas & Sliders -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            
+            <!-- SVG Interactive Graph -->
+            <div class="lg:col-span-7 bg-[#FAF7F2] p-4 rounded-xl border border-[#D6CEC1] flex flex-col items-center">
+              <svg id="interaction-svg" viewBox="0 0 450 260" class="w-full h-56">
+                <!-- Axes -->
+                <line x1="50" y1="220" x2="420" y2="220" stroke="#7A8294" stroke-width="2" />
+                <line x1="50" y1="220" x2="50" y2="20" stroke="#7A8294" stroke-width="2" />
+                <!-- Axis Labels -->
+                <text x="360" y="245" font-size="11" font-family="JetBrains Mono" fill="#555A68">Income (X)</text>
+                <text x="15" y="30" font-size="11" font-family="JetBrains Mono" fill="#555A68" transform="rotate(-90 15,30)">Expenditure (Y)</text>
+                
+                <!-- Baseline Line (Male: Female = 0) -->
+                <line id="line-male" x1="50" y1="180" x2="400" y2="100" stroke="#1D3557" stroke-width="3" stroke-dasharray="4,4" />
+                <text x="310" y="90" font-size="10" font-family="JetBrains Mono" font-weight="bold" fill="#1D3557">Male: Y = β₀ + β₁X</text>
+
+                <!-- Shifted Line (Female: Female = 1) -->
+                <line id="line-female" x1="50" y1="150" x2="400" y2="50" stroke="#D95D39" stroke-width="3.5" />
+                <text x="260" y="40" font-size="10" font-family="JetBrains Mono" font-weight="bold" fill="#D95D39">Female: Y = (β₀+β₂) + (β₁+β₃)X</text>
+
+                <!-- Intercept Differential Bracket -->
+                <line x1="45" y1="180" x2="45" y2="150" stroke="#D95D39" stroke-width="2" />
+                <text x="10" y="168" font-size="9" font-family="JetBrains Mono" fill="#D95D39" font-weight="bold">β₂ (Shift)</text>
+              </svg>
+              <div class="flex items-center gap-6 mt-2 text-xs font-mono-code">
+                <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-[#1D3557] inline-block"></span> Male (Base Line)</span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-1 bg-[#D95D39] inline-block"></span> Female (Shifted & Tilted)</span>
+              </div>
+            </div>
+
+            <!-- Tactile Sliders for Intercept and Slope Differentials -->
+            <div class="lg:col-span-5 space-y-4 text-xs font-mono-code">
+              <div>
+                <div class="flex justify-between font-bold text-[#1D3557] mb-1">
+                  <span>β₂ (Intercept Shift):</span>
+                  <span id="slider-b2-val">+120 (R thousands)</span>
+                </div>
+                <input id="slider-b2" type="range" min="0" max="100" value="30" oninput="updateInteractionGraph()" class="w-full accent-[#D95D39] cursor-pointer">
+                <span class="text-[10px] text-[#7A8294]">Changes the baseline expenditure at zero income.</span>
+              </div>
+
+              <div>
+                <div class="flex justify-between font-bold text-[#1D3557] mb-1">
+                  <span>β₃ (Slope Differential):</span>
+                  <span id="slider-b3-val">+0.15 (Extra MPC)</span>
+                </div>
+                <input id="slider-b3" type="range" min="-30" max="60" value="25" oninput="updateInteractionGraph()" class="w-full accent-[#D95D39] cursor-pointer">
+                <span class="text-[10px] text-[#7A8294]">Tilts the slope (how much faster female spending rises with income).</span>
+              </div>
+
+              <div class="p-3 bg-[#FAF7F2] rounded-xl border border-[#D6CEC1] text-[11px] text-[#1D3557] space-y-1">
+                <div><strong>Current Female Equation:</strong></div>
+                <div id="dyn-female-eq" class="font-bold text-[#D95D39]">Expenditure = 620 + 0.75·Income</div>
+                <div class="text-[#7A8294] text-[10px] pt-1">Base male slope is 0.60; female slope is 0.60 + 0.15 = 0.75.</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Active Written Rep Box for Q3 Interaction Interpretation -->
+          <div class="pt-4 border-t border-[#E8E2D8] space-y-3 text-xs">
+            <div class="font-black text-[#1D3557] text-sm">
+              Writing Rep: Type the Exact 2-Part Interpretation for β₂ and β₃ [5 Marks]
+            </div>
+            <textarea id="q3-rep-input" rows="3" placeholder="Holding other variables constant, the coefficient on Female (β₂) indicates that... while the interaction coefficient (β₃) indicates that..." class="w-full bg-[#FAF7F2] border border-[#D6CEC1] rounded-xl p-3 font-mono-code text-xs text-[#1D3557] focus:outline-none focus:border-[#D95D39] leading-relaxed"></textarea>
+            
+            <div class="flex items-center justify-between">
+              <span id="q3-feedback-text" class="text-xs font-mono-code text-[#7A8294]">Check that you included 'holding other variables constant'.</span>
+              <button onclick="checkQ3Rep()" class="paper-btn px-4 py-2 bg-[#D95D39] text-white hover:bg-[#C85A32] text-xs font-bold">
+                ✓ Check Written Rep & View Memo
+              </button>
+            </div>
+
+            <!-- Q3 Memo Reveal -->
+            <div id="q3-memo-box" class="hidden p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2 text-xs">
+              <div class="font-bold text-[#1D3557]">Official Lecture Marking Standard:</div>
+              <p class="text-[#2B2D42] leading-relaxed">
+                1. <strong>Female Intercept (β₂ = 120):</strong> <em>Holding income constant</em>, at zero income female households spend on average R120 000 more than male households (the intercept differential). [2M]<br>
+                2. <strong>Interaction Term (β₃ = 0.15):</strong> <em>Holding other variables constant</em>, for every R1 increase in income, female expenditure increases by R0.15 <strong>more</strong> than male expenditure. The marginal propensity to consume for females is 0.75 (0.60 + 0.15) compared to 0.60 for males. [3M]
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-1.5">
-            <div class="font-extrabold text-[#1D3557] uppercase text-[11px] tracking-wide">1. CLRM Assumption</div>
-            <div id="arch-ass" class="text-[#555A68] leading-relaxed">No exact linear relationships among explanatory variables.</div>
-          </div>
-          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-1.5">
-            <div class="font-extrabold text-[#D95D39] uppercase text-[11px] tracking-wide">2. Nature of Violation</div>
-            <div id="arch-vio" class="text-[#555A68] leading-relaxed">High imperfect linear correlation among regressors in the sample.</div>
-          </div>
-          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-1.5">
-            <div class="font-extrabold text-[#4E878C] uppercase text-[11px] tracking-wide">3. Detection Methods</div>
-            <div id="arch-det" class="text-[#555A68] leading-relaxed">1. High R² (> 0.8) with low individual t-statistics.<br>2. Pairwise correlations > 0.8.<br>3. Variance Inflation Factor: VIF > 10 (Tolerance < 0.10).</div>
-          </div>
-          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-1.5">
-            <div class="font-extrabold text-[#B78103] uppercase text-[11px] tracking-wide">4. Consequences for OLS</div>
-            <div id="arch-con" class="text-[#555A68] leading-relaxed"><strong>OLS is STILL BLUE!</strong><br>• Variances/SEs inflate.<br>• Confidence intervals widen.<br>• t-ratios turn insignificant.</div>
-          </div>
-        </div>
-
-        <div class="p-4 rounded-xl bg-[#F4EBE1] border border-[#E2DACB] space-y-1.5 text-xs">
-          <div class="font-extrabold text-[#D95D39] uppercase text-[11px] tracking-wide">5. Remedies (Do's and Don'ts)</div>
-          <div id="arch-rem" class="text-[#2B2D42] leading-relaxed">1. Do nothing (often best).<br>2. Collect more data.<br>3. <strong>DO NOT</strong> drop an important variable, as this causes catastrophic omitted variable bias!</div>
-        </div>
       </div>
 
     </div>
-
-    <!-- ======================================================= -->
+<!-- ======================================================= -->
     <!-- TAB 5: INTERACTIVE DW 5-ZONE RADAR                      -->
     <!-- ======================================================= -->
     <div id="tab-dw-radar" class="tab-pane hidden space-y-6">
@@ -1852,6 +2048,9 @@
       if (currentQuizIdx < quizItems.length - 1) {
         currentQuizIdx++;
         renderQuizItem();
+      renderQ1Item();
+      setQ2Drill(0);
+      updateGymScoreDisplay();
       } else {
         showToast(`🏆 Battle Complete! Cleared all 20 items. Total XP: ${xp}`, '🏆');
         currentQuizIdx = 0;
@@ -1920,7 +2119,367 @@
     }
     requestAnimationFrame(updateConfetti);
 
-    // Initial load
+    
+    // =========================================================
+    // THEORY PAPER 1 GYM JAVASCRIPT LOGIC (60M REPS ENGINE)
+    // =========================================================
+    let gymTotalScore = 0;
+
+    function updateGymScoreDisplay() {
+      const el = document.getElementById('gym-score-display');
+      if (el) el.textContent = Math.min(60, gymTotalScore) + ' / 60 M';
+    }
+
+    function switchGymWorkout(num) {
+      playSfx('click');
+      [1, 2, 3].forEach(n => {
+        const pane = document.getElementById('gym-workout-' + n);
+        const btn = document.getElementById('gym-w' + n + '-btn');
+        if (pane) pane.classList.toggle('hidden', n !== num);
+        if (btn) {
+          btn.className = (n === num)
+            ? 'paper-btn p-3 bg-white text-[#1D3557] border-[#D95D39] text-left text-xs font-bold'
+            : 'paper-btn p-3 bg-white text-[#555A68] text-left text-xs font-medium';
+        }
+      });
+      if (num === 3) updateInteractionGraph();
+    }
+
+    // --- WORKOUT 1: Q1 TRUE/FALSE BANK WITH TYPED JUSTIFICATIONS ---
+    const q1Items = [
+      {
+        q: "The sample variance divides the sum of squared deviations by n.",
+        a: false,
+        keywords: ["n - 1", "degrees of freedom", "bessel", "unbiased", "population"],
+        memo: "<strong>FALSE (1.5M).</strong> The sample variance divides by degrees of freedom <em>n − 1</em> (Bessel's correction) to be an unbiased estimator of σ². Dividing by n gives the population variance or a biased sample variance."
+      },
+      {
+        q: "A population parameter is a random variable; a sample statistic is a fixed constant.",
+        a: false,
+        keywords: ["fixed", "constant", "random", "reversed", "sample to sample"],
+        memo: "<strong>FALSE (1.5M).</strong> Reversed! A population parameter (e.g. β, μ) is a <em>fixed, unknown constant</em>. A sample statistic (e.g. b, X̄) is a <em>random variable</em> that varies from sample to sample."
+      },
+      {
+        q: "In an OLS regression with an intercept, Σeᵢ = 0, but Σeᵢ² need not be zero.",
+        a: true,
+        keywords: ["zero", "intercept", "normal equations", "sum of squared", "rss", "minimized"],
+        memo: "<strong>TRUE (1.5M).</strong> The first normal equation enforces strictly Σeᵢ = 0 when an intercept is included. The sum of squared residuals Σeᵢ² is minimized, but remains positive unless the regression fit is perfect."
+      },
+      {
+        q: "OLS chooses the parameter estimates that minimize the sum of the residuals.",
+        a: false,
+        keywords: ["squared", "sum of squared", "meaningless", "always zero"],
+        memo: "<strong>FALSE (1.5M).</strong> OLS minimizes the <em>SUM OF SQUARED residuals (Σeᵢ²)</em>. Since Σeᵢ is always zero by construction with an intercept, minimizing the raw sum of residuals is mathematically meaningless."
+      },
+      {
+        q: "A BLUE estimator has the smallest variance of all possible estimators, including non-linear estimators.",
+        a: false,
+        keywords: ["linear", "class of linear", "unbiased", "gauss-markov"],
+        memo: "<strong>FALSE (1.5M).</strong> BLUE means Best LINEAR Unbiased Estimator — it has minimum variance strictly within the class of <em>linear unbiased estimators</em>. Non-linear or biased estimators may have smaller variance."
+      },
+      {
+        q: "Autocorrelation causes the OLS parameter estimators to be biased.",
+        a: false,
+        keywords: ["unbiased", "consistent", "standard errors", "inefficient", "variances biased"],
+        memo: "<strong>FALSE (1.5M).</strong> OLS point estimators remain <em>unbiased and consistent</em> under autocorrelation. However, they lose efficiency (no longer BLUE), and the standard errors are biased, invalidating t and F tests."
+      },
+      {
+        q: "Multicollinearity causes OLS estimators to be biased.",
+        a: false,
+        keywords: ["still blue", "unbiased", "variances inflate", "standard errors large"],
+        memo: "<strong>FALSE (1.5M).</strong> OLS estimators <em>REMAIN BLUE</em> under multicollinearity! They are still unbiased with minimum variance among linear estimators. The variance is simply large in the sample, causing wide confidence intervals."
+      },
+      {
+        q: "Heteroscedasticity is primarily a problem in cross-sectional data, while autocorrelation is primarily a problem in time-series data.",
+        a: true,
+        keywords: ["cross-section", "time-series", "diversity", "inertia", "true"],
+        memo: "<strong>TRUE (1.5M).</strong> Cross-sectional units (e.g. large and small firms or families) naturally have non-constant variance (heteroscedasticity). Time-series observations exhibit temporal dependence and inertia (autocorrelation)."
+      },
+      {
+        q: "Including a dummy variable for every qualitative category together with an intercept avoids the dummy variable trap.",
+        a: false,
+        keywords: ["creates", "dummy trap", "perfect multicollinearity", "m - 1", "drop one"],
+        memo: "<strong>FALSE (1.5M).</strong> That <em>creates</em> the Dummy Variable Trap (perfect multicollinearity)! If there are m categories, strictly <em>m − 1</em> dummy variables must be included with an intercept."
+      },
+      {
+        q: "The Jarque-Bera test has a null hypothesis of homoscedasticity.",
+        a: false,
+        keywords: ["normality", "normal distribution", "skewness", "kurtosis", "white test"],
+        memo: "<strong>FALSE (1.5M).</strong> The Jarque-Bera test has a null hypothesis of <em>NORMALITY</em> of the residuals (skewness = 0 and kurtosis = 3). White's test tests homoscedasticity."
+      }
+    ];
+
+    let currentQ1Idx = 0;
+    let selectedQ1Choice = null;
+
+    function renderQ1Item() {
+      const item = q1Items[currentQ1Idx];
+      document.getElementById('q1-item-tag').textContent = `Q1 DRILL #${currentQ1Idx + 1} OF ${q1Items.length}`;
+      document.getElementById('q1-statement').textContent = item.q;
+      document.getElementById('q1-input-text').value = '';
+      document.getElementById('q1-rep-feedback').textContent = 'Select True or False, then type your justification reason.';
+      document.getElementById('q1-memo-box').classList.add('hidden');
+      selectedQ1Choice = null;
+
+      const btnT = document.getElementById('q1-btn-t');
+      const btnF = document.getElementById('q1-btn-f');
+      btnT.className = 'paper-btn py-2.5 bg-[#EBF3F5] hover:bg-[#D9EAEB] text-[#1D3557] font-bold text-xs';
+      btnF.className = 'paper-btn py-2.5 bg-[#FAF3EC] hover:bg-[#F3E5D8] text-[#D95D39] font-bold text-xs';
+    }
+
+    function selectQ1Choice(val) {
+      playSfx('click');
+      selectedQ1Choice = val;
+      const btnT = document.getElementById('q1-btn-t');
+      const btnF = document.getElementById('q1-btn-f');
+      if (val === true) {
+        btnT.className = 'paper-btn py-2.5 bg-[#1D3557] text-white font-bold text-xs border-[#1D3557] shadow-sm';
+        btnF.className = 'paper-btn py-2.5 bg-[#FAF3EC] text-[#D95D39] font-bold text-xs opacity-60';
+      } else {
+        btnF.className = 'paper-btn py-2.5 bg-[#D95D39] text-white font-bold text-xs border-[#D95D39] shadow-sm';
+        btnT.className = 'paper-btn py-2.5 bg-[#EBF3F5] text-[#1D3557] font-bold text-xs opacity-60';
+      }
+    }
+
+    function checkQ1Rep() {
+      if (selectedQ1Choice === null) {
+        showToast('Please select TRUE or FALSE first!', '⚠️');
+        return;
+      }
+      const item = q1Items[currentQ1Idx];
+      const typed = document.getElementById('q1-input-text').value.toLowerCase();
+      const isChoiceCorrect = (selectedQ1Choice === item.a);
+
+      // Check keywords
+      const matched = item.keywords.filter(k => typed.includes(k.toLowerCase()));
+      const memoBox = document.getElementById('q1-memo-box');
+      const memoVerdict = document.getElementById('q1-memo-verdict');
+      const memoText = document.getElementById('q1-memo-text');
+      memoBox.classList.remove('hidden');
+
+      memoVerdict.textContent = item.a ? 'VERDICT: TRUE' : 'VERDICT: FALSE';
+      memoVerdict.className = item.a ? 'font-bold font-mono-code text-[#4E878C]' : 'font-bold font-mono-code text-[#D95D39]';
+      memoText.innerHTML = item.memo;
+
+      if (isChoiceCorrect && (matched.length > 0 || typed.length > 20)) {
+        gymTotalScore += 1.5;
+        addXp(15);
+        showToast(`Q1 Rep Scored! +1.5 Marks (Matched ${matched.length} key points)`, '✓');
+      } else if (isChoiceCorrect) {
+        gymTotalScore += 1.0;
+        addXp(10);
+        showToast('Choice correct! Study the memo reason to secure full 1.5 marks.', '💡');
+      } else {
+        softResetStreak();
+        addXp(5);
+        showToast('Exam Clue: Review the memo explanation carefully.', '📖');
+      }
+      updateGymScoreDisplay();
+    }
+
+    function advanceQ1Item() {
+      playSfx('click');
+      if (currentQ1Idx < q1Items.length - 1) {
+        currentQ1Idx++;
+        renderQ1Item();
+      } else {
+        showToast('Workout 1 Complete! Moving to Q2 Written BLUE block.', '🏆');
+        switchGymWorkout(2);
+      }
+    }
+
+    // --- WORKOUT 2: Q2 WRITTEN BLUE & DIAGNOSTICS ARENA ---
+    const q2Drills = [
+      {
+        title: "Gauss-Markov Theorem & The 'BLUE' Riddle",
+        marks: "5 MARKS",
+        prompt: "State the Gauss-Markov Theorem and explain what each letter of BLUE stands for in the context of OLS. Under what conditions is OLS BLUE, and when does it lose this status?",
+        keywords: ["best", "minimum variance", "linear", "unbiased", "estimator", "homoscedasticity", "no autocorrelation"],
+        memo: `
+          <p><strong>1. Gauss-Markov Theorem:</strong> Under the classical assumptions (zero conditional mean, homoscedasticity, no autocorrelation, and no perfect multicollinearity), OLS is BLUE. [1M]</p>
+          <p><strong>2. B (Best):</strong> Minimum variance among all linear unbiased estimators (most efficient). [1M]</p>
+          <p><strong>3. L (Linear):</strong> The estimator is a linear function of the dependent variable Yᵢ (coefficients are linear in parameters). [1M]</p>
+          <p><strong>4. U (Unbiased):</strong> On average, the estimated coefficient equals the true population parameter: E(β̂) = β. [1M]</p>
+          <p><strong>5. When is OLS BLUE vs Not BLUE:</strong> Under Multicollinearity, OLS <em>is STILL BLUE</em>! OLS loses its BLUE status (becomes inefficient) when Homoscedasticity is violated (Heteroscedasticity) or when No Autocorrelation is violated (Autocorrelation). [1M]</p>
+        `
+      },
+      {
+        title: "Model Specification & Ramsey RESET",
+        marks: "5 MARKS",
+        prompt: "What does it mean to correctly specify a model? Compare the econometric consequences of omitting a relevant variable vs including an irrelevant variable. How do we test for misspecification?",
+        keywords: ["omitted", "biased", "inconsistent", "irrelevant", "inefficient", "reset", "functional form"],
+        memo: `
+          <p><strong>1. Model Specification:</strong> Selecting the correct dependent and independent variables, appropriate functional form (linear, log, quadratic), and adhering to economic theory. [1M]</p>
+          <p><strong>2. Omitted Relevant Variable:</strong> Catastrophic error! OLS estimators become <strong>BIASED AND INCONSISTENT</strong>. Error term absorbs omitted factor, violating Cov(X, u) = 0. [1.5M]</p>
+          <p><strong>3. Irrelevant Variable Included:</strong> Less severe. OLS remains <strong>unbiased and consistent</strong>, but variances and standard errors are unnecessarily inflated (loss of efficiency). [1.5M]</p>
+          <p><strong>4. Testing for Misspecification:</strong> Use <strong>Ramsey RESET test</strong> (regressing residuals on powers of fitted values Ŷ², Ŷ³) or inspect residual plots for systematic non-random patterns. [1M]</p>
+        `
+      },
+      {
+        title: "Autocorrelation & Durbin-Watson",
+        marks: "5 MARKS",
+        prompt: "Explain how autocorrelation is detected using the Durbin-Watson statistic (d). What does it mean when d < 1.5 or d > 2.5? What are the consequences for OLS and what is the EViews remedy?",
+        keywords: ["durbin-watson", "positive", "dl", "du", "standard errors", "newey-west", "hac"],
+        memo: `
+          <p><strong>1. Detection (Durbin-Watson d):</strong> d ≈ 2(1 − ρ̂). When d ≈ 2, no first-order serial correlation. [1M]</p>
+          <p><strong>2. Decision Zones:</strong> If d < dL (or < 1.5), reject H₀ → <strong>positive autocorrelation</strong>. If d > 4 − dL (or > 2.5), reject H₀ → <strong>negative autocorrelation</strong>. Between dL and dU is the inconclusive zone. [1.5M]</p>
+          <p><strong>3. Consequences for OLS:</strong> OLS is STILL UNBIASED and consistent, but <strong>NO LONGER BLUE (inefficient)</strong>. Standard errors are underestimated, causing inflated t-stats and spurious significance. [1.5M]</p>
+          <p><strong>4. Remedy:</strong> Use <strong>Newey-West HAC (Heteroskedasticity and Autocorrelation Consistent)</strong> standard errors in EViews (Estimate → Options → HAC). [1M]</p>
+        `
+      },
+      {
+        title: "Multicollinearity & Auxiliary Regressions",
+        marks: "5 MARKS",
+        prompt: "How is multicollinearity detected? Explain how auxiliary regressions are used to compute the Variance Inflation Factor (VIF). What are the consequences for OLS, and why must we NEVER drop a variable blindly?",
+        keywords: ["high r-squared", "low t", "auxiliary", "vif", "tolerance", "still blue", "omitted variable bias"],
+        memo: `
+          <p><strong>1. Detection Symptoms:</strong> High R² (> 0.80) with a statistically significant F-statistic, yet individual t-statistics are insignificant. Pairwise correlations > 0.80. [1M]</p>
+          <p><strong>2. Auxiliary Regression & VIF:</strong> Regress each Xⱼ on all other explanatory variables to get Rⱼ². Then VIFⱼ = 1 / (1 − Rⱼ²). A <strong>VIF > 10</strong> (or Tolerance < 0.10) indicates severe multicollinearity. [1.5M]</p>
+          <p><strong>3. Consequences:</strong> <strong>OLS is STILL BLUE!</strong> Point estimators are unbiased and minimum variance among linear estimators, but standard errors are inflated and confidence intervals are wide. [1M]</p>
+          <p><strong>4. Memo Warning on Remedies:</strong> NEVER drop a theoretically important variable simply because of high VIF, as doing so introduces devastating <strong>omitted variable bias</strong>! Accept it, get more data, or transform into ratios. [1.5M]</p>
+        `
+      },
+      {
+        title: "Heteroscedasticity & White's General Test",
+        marks: "6 MARKS",
+        prompt: "Explain how an auxiliary regression is used to detect heteroscedasticity. How are residuals eᵢ generated? State White's test statistic (n·R² ~ χ²) and list the three remedies.",
+        keywords: ["residuals", "squared residuals", "auxiliary", "n r-squared", "chi-square", "white standard errors", "weighted least squares"],
+        memo: `
+          <p><strong>1. Generating Residuals:</strong> First run the primary OLS regression: Yᵢ = β₀ + β₁X₁ᵢ + ... + eᵢ. Compute the residuals as eᵢ = Yᵢ − Ŷᵢ. [1M]</p>
+          <p><strong>2. Auxiliary Regression:</strong> Regress squared residuals eᵢ² on all original regressors, their squares (X²), and their cross-products (X₁·X₂). [1.5M]</p>
+          <p><strong>3. White Test Statistic:</strong> Test statistic is <strong>n × R²</strong> from the auxiliary regression, which asymptotically follows a <strong>χ² (chi-square) distribution</strong> with degrees of freedom equal to the number of regressors in the auxiliary equation. If p < 0.05, reject H₀ (homoscedasticity) in favor of heteroscedasticity. [1.5M]</p>
+          <p><strong>4. Three Remedies:</strong> [2M]<br>
+             • <em>White's Heteroscedasticity-Consistent (Huber-White) Standard Errors</em> (coefficients don't change, SEs corrected!).<br>
+             • <em>Weighted Least Squares (WLS)</em> / Generalized Least Squares.<br>
+             • <em>Logarithmic Transformation</em> (reduces scale variance across observations).
+          </p>
+        `
+      }
+    ];
+
+    let currentQ2Idx = 0;
+
+    function setQ2Drill(idx) {
+      playSfx('click');
+      currentQ2Idx = idx;
+      for (let i = 0; i < 5; i++) {
+        const btn = document.getElementById('q2-tab-' + i);
+        if (btn) {
+          btn.className = (i === idx)
+            ? 'paper-btn p-2.5 bg-white text-[#1D3557] border-[#1D3557] text-xs font-bold text-left'
+            : 'paper-btn p-2.5 bg-white text-[#555A68] text-xs font-medium text-left';
+        }
+      }
+      const d = q2Drills[idx];
+      document.getElementById('q2-drill-marks').textContent = `QUESTION 2 • ${d.marks}`;
+      document.getElementById('q2-drill-title').textContent = d.title;
+      document.getElementById('q2-drill-prompt').innerHTML = d.prompt;
+      document.getElementById('q2-text-input').value = '';
+      document.getElementById('q2-memo-box').classList.add('hidden');
+      updateQ2WordCount();
+    }
+
+    function updateQ2WordCount() {
+      const text = document.getElementById('q2-text-input').value.trim();
+      const words = text ? text.split(/\s+/).length : 0;
+      document.getElementById('q2-word-count').textContent = words + ' words';
+
+      // Check keywords dynamically
+      const d = q2Drills[currentQ2Idx];
+      const lower = text.toLowerCase();
+      let chipsHtml = '';
+      d.keywords.forEach(k => {
+        const hit = lower.includes(k.toLowerCase());
+        chipsHtml += `<span class="tag-bauhaus px-2 py-0.5 rounded text-[10px] ${hit ? 'bg-[#EBF3F5] text-[#4E878C] font-bold border-[#4E878C]' : 'bg-[#FAF7F2] text-[#A8B2C4] border-[#E8E2D8]'}">${hit ? '✓ ' : ''}${k}</span>`;
+      });
+      document.getElementById('q2-keyword-meter').innerHTML = chipsHtml;
+    }
+
+    function checkQ2Rep() {
+      const text = document.getElementById('q2-text-input').value.trim();
+      if (!text || text.length < 25) {
+        showToast('Type a more complete answer to grade your rep!', '✍️');
+        return;
+      }
+      const d = q2Drills[currentQ2Idx];
+      const lower = text.toLowerCase();
+      const hits = d.keywords.filter(k => lower.includes(k.toLowerCase())).length;
+      const maxMarks = parseInt(d.marks);
+      const earned = Math.max(2, Math.min(maxMarks, Math.round((hits / d.keywords.length) * maxMarks)));
+
+      gymTotalScore += earned;
+      addXp(earned * 10);
+
+      const memoBox = document.getElementById('q2-memo-box');
+      memoBox.classList.remove('hidden');
+      document.getElementById('q2-score-badge').textContent = `ESTIMATED SCORE: ${earned} / ${maxMarks} M`;
+      document.getElementById('q2-memo-content').innerHTML = d.memo;
+
+      showToast(`Drill 2.${currentQ2Idx + 1} Graded! +${earned} Marks banked.`, '🎉');
+      updateGymScoreDisplay();
+    }
+
+    function clearQ2Rep() {
+      playSfx('click');
+      document.getElementById('q2-text-input').value = '';
+      document.getElementById('q2-memo-box').classList.add('hidden');
+      updateQ2WordCount();
+    }
+
+    // --- WORKOUT 3: Q3 INTERACTION TERM VISUALIZER & WRITING REPS ---
+    function updateInteractionGraph() {
+      const b2Val = parseInt(document.getElementById('slider-b2')?.value || 30);
+      const b3Val = parseInt(document.getElementById('slider-b3')?.value || 25);
+
+      const b2Label = document.getElementById('slider-b2-val');
+      if (b2Label) b2Label.textContent = '+' + (b2Val * 4) + ' (R thousands)';
+      const b3Label = document.getElementById('slider-b3-val');
+      if (b3Label) b3Label.textContent = (b3Val >= 0 ? '+' : '') + (b3Val / 100).toFixed(2) + ' (Extra MPC)';
+
+      // Update female line coordinates on SVG
+      // Base male line: x1=50, y1=180; x2=400, y2=100
+      const femaleY1 = 180 - (b2Val * 0.7);
+      const femaleY2 = 100 - (b2Val * 0.7) - (b3Val * 0.9);
+
+      const femaleLine = document.getElementById('line-female');
+      if (femaleLine) {
+        femaleLine.setAttribute('y1', femaleY1);
+        femaleLine.setAttribute('y2', femaleY2);
+      }
+
+      const eqBox = document.getElementById('dyn-female-eq');
+      if (eqBox) {
+        const intercept = 500 + (b2Val * 4);
+        const slope = (0.60 + (b3Val / 100)).toFixed(2);
+        eqBox.textContent = `Expenditure = ${intercept} + ${slope}·Income`;
+      }
+    }
+
+    function checkQ3Rep() {
+      const typed = document.getElementById('q3-rep-input').value.toLowerCase();
+      const hasHolding = typed.includes('holding other variables constant') || typed.includes('holding income constant');
+      const hasIntercept = typed.includes('intercept') || typed.includes('zero income') || typed.includes('female spend');
+      const hasSlope = typed.includes('slope') || typed.includes('more than male') || typed.includes('increase in income');
+
+      document.getElementById('q3-memo-box').classList.remove('hidden');
+
+      if (hasHolding && hasIntercept && hasSlope) {
+        gymTotalScore += 5;
+        addXp(25);
+        showToast('Flawless 5/5 Marks! Included "holding other variables constant".', '🏆');
+      } else if (hasHolding) {
+        gymTotalScore += 3.5;
+        addXp(15);
+        showToast('Solid 3.5/5 Marks! See memo to capture both intercept and slope points.', '💡');
+      } else {
+        gymTotalScore += 2;
+        addXp(10);
+        showToast('Examiner Warning: You MUST include "holding other variables constant"!', '⚠️');
+      }
+      updateGymScoreDisplay();
+    }
+
+// Initial load
     window.addEventListener('DOMContentLoaded', () => {
       updateHud();
       renderSprintTimer();
