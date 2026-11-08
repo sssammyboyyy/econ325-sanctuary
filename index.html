@@ -113,6 +113,59 @@
     .xp-pulse {
       animation: pulseGlow 0.4s ease-out;
     }
+  
+    /* Contextual & Sensory-Friendly Animations (BoardUI & ADHD-Optimized) */
+    @keyframes modalSpring {
+      0% { opacity: 0; transform: scale(0.95) translateY(10px); }
+      70% { opacity: 1; transform: scale(1.01) translateY(-2px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes phaseBreathing {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(217, 93, 57, 0); }
+      50% { box-shadow: 0 0 0 6px rgba(217, 93, 57, 0.18); }
+    }
+
+    @keyframes xpShimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @keyframes checkmarkPop {
+      0% { transform: scale(0.8); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .modal-animated {
+      animation: modalSpring 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .phase-active-pulse {
+      animation: phaseBreathing 3s infinite ease-in-out;
+    }
+
+    .shimmer-bar {
+      background: linear-gradient(90deg, #D95D39 0%, #E9C46A 50%, #D95D39 100%);
+      background-size: 200% 100%;
+      animation: xpShimmer 4s infinite linear;
+    }
+
+    /* Tactile Papercraft Button Press Effect */
+    .paper-btn:active {
+      transform: translateY(1.5px) scale(0.985) !important;
+    }
+
+    /* Accessible Motion Controls */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-[#E9C46A] selection:text-[#1D3557]">
@@ -137,7 +190,7 @@
           </div>
           <div class="flex items-center gap-2 mt-1">
             <div class="w-36 sm:w-48 bg-[#EAE4D9] h-2.5 rounded-full overflow-hidden">
-              <div id="xp-bar" class="bg-gradient-to-r from-[#D95D39] to-[#E9C46A] h-full transition-all duration-300 rounded-full" style="width: 10%;"></div>
+              <div id="xp-bar" class="shimmer-bar h-full transition-all duration-300 rounded-full" style="width: 10%;"></div>
             </div>
             <span id="xp-display" class="text-xs font-mono-code font-medium text-[#6B7280]">0 / 200 XP</span>
           </div>
@@ -225,6 +278,33 @@
       </div>
     </div>
   </nav>
+
+
+  <!-- ========================================================= -->
+  <!-- PERSISTENT STUDY FLIGHT PLAN HUD BANNER                  -->
+  <!-- ========================================================= -->
+  <div id="active-flight-plan-hud" class="bg-[#FAF3EC] border-b border-[#E8E2D8] px-4 py-2 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-2.5">
+        <span class="text-sm">🧭</span>
+        <div>
+          <span class="font-bold text-[#1D3557]">ACTIVE FLIGHT PLAN:</span>
+          <span id="hud-plan-name" class="font-extrabold text-[#D95D39] ml-1">FOCUSED CRUNCH (12–36H)</span>
+          <span class="hidden sm:inline text-[#7A8294] ml-1.5">• High-Yield Survival Strategy</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="hud-next-step-btn" onclick="switchTab('tab-theory-vault')" class="paper-btn px-2.5 py-1 bg-white hover:bg-[#FAF7F2] text-[#1D3557] font-bold text-[11px] flex items-center gap-1 shadow-sm">
+          <span>🚀 Jump to Next Priority:</span>
+          <span id="hud-next-step-label" class="text-[#D95D39]">Theory Gym (60M)</span>
+        </button>
+        <button onclick="openFlightPlanModal()" class="paper-btn px-2.5 py-1 bg-[#EBF3F5] hover:bg-[#D9EAEB] text-[#1D3557] font-bold text-[11px]">
+          ⚙️ Adjust Flight Plan
+        </button>
+      </div>
+    </div>
+  </div>
+
 
   <!-- ========================================================= -->
   <!-- MAIN WORKSPACE CONTENT                                    -->
@@ -930,7 +1010,12 @@
           <div id="q2-memo-box" class="hidden p-5 rounded-xl border-2 border-[#4E878C] bg-[#EBF3F5]/60 space-y-3 text-xs leading-relaxed">
             <div class="flex items-center justify-between border-b border-[#BBD5D9] pb-2">
               <span class="font-black text-[#1D3557] uppercase tracking-wide">Official NWU Marking Memo (Full Credit Points)</span>
-              <span id="q2-score-badge" class="tag-bauhaus px-2.5 py-0.5 rounded bg-white text-[#4E878C] font-bold font-mono-code">SCORE: 5/5 M</span>
+              <div class="flex items-center gap-2">
+                <button onclick="copyToClipboard(document.getElementById('q2-memo-content').innerText, 'Q2 Marking Memo')" class="paper-btn px-2.5 py-1 bg-white hover:bg-[#FAF7F2] text-[11px] font-bold text-[#1D3557] flex items-center gap-1 shadow-sm">
+                  <span>📋 Copy for Word Doc</span>
+                </button>
+                <span id="q2-score-badge" class="tag-bauhaus px-2.5 py-0.5 rounded bg-white text-[#4E878C] font-bold font-mono-code">SCORE: 5/5 M</span>
+              </div>
             </div>
             <div id="q2-memo-content" class="text-[#1D3557] space-y-2"></div>
           </div>
@@ -1031,7 +1116,12 @@
 
             <!-- Q3 Memo Reveal -->
             <div id="q3-memo-box" class="hidden p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2 text-xs">
-              <div class="font-bold text-[#1D3557]">Official Lecture Marking Standard:</div>
+              <div class="flex items-center justify-between pb-1 border-b border-[#E8E2D8] mb-2">
+                <span class="font-bold text-[#1D3557]">Official Lecture Marking Standard:</span>
+                <button onclick="copyToClipboard(document.getElementById('q3-memo-box').innerText, 'Q3 Interaction Memo')" class="paper-btn px-2 py-0.5 bg-white hover:bg-[#FAF7F2] text-[11px] font-bold text-[#1D3557] flex items-center gap-1 shadow-sm">
+                  <span>📋 Copy for Word Doc</span>
+                </button>
+              </div>
               <p class="text-[#2B2D42] leading-relaxed">
                 1. <strong>Female Intercept (β₂ = 120):</strong> <em>Holding income constant</em>, at zero income female households spend on average R120 000 more than male households (the intercept differential). [2M]<br>
                 2. <strong>Interaction Term (β₃ = 0.15):</strong> <em>Holding other variables constant</em>, for every R1 increase in income, female expenditure increases by R0.15 <strong>more</strong> than male expenditure. The marginal propensity to consume for females is 0.75 (0.60 + 0.15) compared to 0.60 for males. [3M]
@@ -3240,6 +3330,25 @@ function generateFlightPlan() {
     `).join('');
   }
 
+  
+  // Update persistent HUD banner
+  const hudPlanName = document.getElementById('hud-plan-name');
+  const hudNextLabel = document.getElementById('hud-next-step-label');
+  const hudNextBtn = document.getElementById('hud-next-step-btn');
+  if (hudPlanName) hudPlanName.textContent = badgeText;
+  if (hudNextLabel && hudNextBtn) {
+    if (fpState.time === 'triage') {
+      hudNextLabel.textContent = 'Theory Paper 1 Gym (60M)';
+      hudNextBtn.setAttribute('onclick', "switchTab('tab-theory-vault')");
+    } else if (fpState.time === 'crunch') {
+      hudNextLabel.textContent = 'Final Boss 120m Simulator';
+      hudNextBtn.setAttribute('onclick', "switchTab('tab-final-boss')");
+    } else {
+      hudNextLabel.textContent = 'Quest Map Journey';
+      hudNextBtn.setAttribute('onclick', "switchTab('tab-quest-map')");
+    }
+  }
+
   showToast('🧭 Flight Plan Generated! Roadmap active.', 'success');
 }
 
@@ -3334,16 +3443,16 @@ function updateBossTimerDisplay() {
 
   if (elapsedMins < 20) {
     if (badge) badge.textContent = 'Phase 1 Active (0–20m): Q1 True/False Sprint';
-    if (p1) { p1.classList.remove('opacity-70', 'border', 'bg-white'); p1.classList.add('border-2', 'border-[#D95D39]', 'bg-[#FAF3EC]'); }
+    if (p1) { p1.classList.remove('opacity-70', 'border', 'bg-white'); p1.classList.add('border-2', 'border-[#D95D39]', 'bg-[#FAF3EC]', 'phase-active-pulse'); }
   } else if (elapsedMins < 60) {
     if (badge) badge.textContent = 'Phase 2 Active (20–60m): Q2 BLUE & Diagnostics';
-    if (p2) { p2.classList.remove('opacity-70', 'border', 'bg-white'); p2.classList.add('border-2', 'border-[#1D3557]', 'bg-[#EBF3F5]'); }
+    if (p2) { p2.classList.remove('opacity-70', 'border', 'bg-white'); p2.classList.add('border-2', 'border-[#1D3557]', 'bg-[#EBF3F5]', 'phase-active-pulse'); }
   } else if (elapsedMins < 100) {
     if (badge) badge.textContent = 'Phase 3 Active (60–100m): Q3 Output & Interactions';
-    if (p3) { p3.classList.remove('opacity-70', 'border', 'bg-white'); p3.classList.add('border-2', 'border-[#2A9D8F]', 'bg-[#E8F8F5]'); }
+    if (p3) { p3.classList.remove('opacity-70', 'border', 'bg-white'); p3.classList.add('border-2', 'border-[#2A9D8F]', 'bg-[#E8F8F5]', 'phase-active-pulse'); }
   } else {
     if (badge) badge.textContent = 'Phase 4 Active (100–120m): Paper 2 EViews & Word';
-    if (p4) { p4.classList.remove('opacity-70', 'border', 'bg-white'); p4.classList.add('border-2', 'border-[#8338EC]', 'bg-[#F3E8FF]'); }
+    if (p4) { p4.classList.remove('opacity-70', 'border', 'bg-white'); p4.classList.add('border-2', 'border-[#8338EC]', 'bg-[#F3E8FF]', 'phase-active-pulse'); }
   }
 }
 
@@ -3416,12 +3525,25 @@ function resetBossScorecard() {
   showToast('Exam Scorecard Reset', 'info');
 }
 
+
+
+
+// Universal Copy Helper with In-App Toast Feedback
+function copyToClipboard(text, label) {
+  navigator.clipboard.writeText(text).then(() => {
+    playSfx('pop');
+    showToast(`📋 ${label || 'Text'} copied to clipboard! Ready to paste into Word doc.`, 'success');
+  }).catch(err => {
+    showToast('Failed to copy text', 'warning');
+  });
+}
+
 </script>
   <!-- ========================================================= -->
   <!-- DIAGNOSTIC ONBOARDING & STUDY FLIGHT PLAN MODAL          -->
   <!-- ========================================================= -->
   <div id="flight-plan-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1D3557]/60 backdrop-blur-sm hidden transition-opacity duration-300">
-    <div class="paper-card w-full max-w-3xl max-h-[90vh] overflow-y-auto custom-scroll bg-[#FAF7F2] border-2 border-[#1D3557] shadow-2xl p-6 sm:p-8 space-y-6 animate-[fadeIn_0.25s_ease-out]">
+    <div class="paper-card w-full max-w-3xl max-h-[90vh] overflow-y-auto custom-scroll bg-[#FAF7F2] border-2 border-[#1D3557] shadow-2xl p-6 sm:p-8 space-y-6 modal-animated">
       
       <!-- Modal Header -->
       <div class="flex items-start justify-between border-b border-[#E8E2D8] pb-4">
