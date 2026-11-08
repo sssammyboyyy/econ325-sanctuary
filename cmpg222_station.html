@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMPG222 Weaponised Study Station — Data Analytics Exam Sanctuary</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%8A%3C/text%3E%3C/svg%3E">
+  <!-- Tailwind Play CDN -->
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <!-- KaTeX for mathematical rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --canvas-bg: #FAF7F2;
+      --paper-card: #FFFFFF;
+      --paper-subtle: #F3EFEA;
+      --terracotta: #D95D39;
+      --cobalt: #1D3557;
+      --sage: #4E878C;
+      --saffron: #E9C46A;
+      --charcoal: #2B2D42;
+      --warm-border: #E8E2D8;
+      --warm-border-strong: #D6CEC1;
+    }
+
+    body {
+      background-color: var(--canvas-bg);
+      background-image: radial-gradient(#DDD6CA 1.2px, transparent 1.2px);
+      background-size: 20px 20px;
+      color: var(--charcoal);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Soft Tactile Paper Elevations */
+    .paper-card {
+      background: var(--paper-card);
+      border: 1.5px solid var(--warm-border);
+      box-shadow: 0 4px 16px -2px rgba(50, 40, 30, 0.05), 0 2px 6px -1px rgba(50, 40, 30, 0.03);
+      border-radius: 18px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .paper-card:hover {
+      box-shadow: 0 8px 24px -4px rgba(50, 40, 30, 0.08), 0 3px 8px -2px rgba(50, 40, 30, 0.04);
+      border-color: var(--warm-border-strong);
+    }
+
+    .paper-btn {
+      border: 1.5px solid var(--warm-border-strong);
+      box-shadow: 0 2px 4px rgba(50, 40, 30, 0.04);
+      border-radius: 12px;
+      font-weight: 600;
+      transition: all 0.15s ease-out;
+      cursor: pointer;
+      user-select: none;
+    }
+    .paper-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(50, 40, 30, 0.08);
+    }
+    .paper-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 1px 2px rgba(50, 40, 30, 0.05);
+    }
+
+    /* Tab indicator styling */
+    .nav-tab {
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .nav-tab.active {
+      background-color: var(--cobalt);
+      color: #FFFFFF;
+      box-shadow: 0 3px 10px rgba(29, 53, 87, 0.25);
+    }
+
+    /* Drawer / Modal Transition */
+    .modal-overlay {
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+    .modal-overlay.hidden-modal {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .modal-overlay.visible-modal {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F3EFEA;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D6CEC1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #A89F91;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-[#E9C46A] selection:text-[#1D3557]">
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E8E2D8] px-4 py-3">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand & Module Badge -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-[#1D3557] flex items-center justify-center text-white font-bold text-xl shadow-sm">
+          📊
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#D95D39]/10 text-[#D95D39] border border-[#D95D39]/20">
+              CMPG222 • Opportunity 1
+            </span>
+            <span class="text-xs text-gray-500 font-medium hidden sm:inline">100 Marks • 3 Hours</span>
+          </div>
+          <h1 class="text-lg font-bold text-[#1D3557] leading-tight">Data Analytics Weaponised Study Station</h1>
+        </div>
+      </div>
+
+      <!-- Live XP, Level, Controls & Triage -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- 40Hz Focus Drone -->
+        <button id="btn-drone" onclick="toggleDrone()" class="px-2.5 py-1.5 rounded-lg border border-[#E8E2D8] bg-white text-xs font-semibold text-gray-700 hover:bg-[#F3EFEA] flex items-center gap-1.5 transition">
+          <span id="drone-icon">🎧</span>
+          <span id="drone-label" class="hidden md:inline">40Hz Drone</span>
+        </button>
+
+        <!-- Sound FX toggle -->
+        <button id="btn-sfx" onclick="toggleSfx()" class="p-1.5 rounded-lg border border-[#E8E2D8] bg-white text-xs font-semibold text-gray-700 hover:bg-[#F3EFEA] transition" title="Sound Effects">
+          <span id="sfx-icon">🔔</span>
+        </button>
+
+        <!-- Emergency Compass / Flight Plan Launch -->
+        <button id="btn-open-compass" onclick="openFlightPlanModal()" class="px-3 py-1.5 rounded-xl bg-[#D95D39] text-white text-xs font-bold hover:bg-[#C24D2B] shadow-sm flex items-center gap-1.5 transition">
+          <span>🧭</span>
+          <span>Emergency Compass</span>
+        </button>
+
+        <!-- XP Badge -->
+        <div class="flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E8E2D8] rounded-xl shadow-sm">
+          <span class="text-amber-500 text-sm">⭐</span>
+          <div class="text-left leading-none">
+            <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Analytics XP</div>
+            <div id="stat-xp" class="text-sm font-extrabold text-[#1D3557] font-mono-code tabular-nums">0 XP</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Engine Navigation Tabs -->
+    <div class="max-w-7xl mx-auto mt-3 pt-2 border-t border-[#E8E2D8]/60 flex items-center gap-1.5 overflow-x-auto pb-1 text-xs sm:text-sm font-semibold">
+      <button onclick="switchTab('tab-triage')" id="nav-tab-triage" class="nav-tab active px-3.5 py-2 rounded-xl border border-transparent whitespace-nowrap flex items-center gap-1.5">
+        <span>🧭</span>
+        <span>Flight Plan</span>
+      </button>
+      <button onclick="switchTab('tab-workbench')" id="nav-tab-workbench" class="nav-tab px-3.5 py-2 rounded-xl border border-transparent whitespace-nowrap flex items-center gap-1.5 text-gray-600 hover:bg-white/60">
+        <span>🔬</span>
+        <span>Visual Workbench</span>
+      </button>
+      <button onclick="switchTab('tab-gym')" id="nav-tab-gym" class="nav-tab px-3.5 py-2 rounded-xl border border-transparent whitespace-nowrap flex items-center gap-1.5 text-gray-600 hover:bg-white/60">
+        <span>⚡</span>
+        <span>Active Reps Gym</span>
+      </button>
+      <button onclick="switchTab('tab-mnemonics')" id="nav-tab-mnemonics" class="nav-tab px-3.5 py-2 rounded-xl border border-transparent whitespace-nowrap flex items-center gap-1.5 text-gray-600 hover:bg-white/60">
+        <span>🧠</span>
+        <span>Mnemonic Dossiers</span>
+      </button>
+      <button onclick="switchTab('tab-dojo')" id="nav-tab-dojo" class="nav-tab px-3.5 py-2 rounded-xl border border-transparent whitespace-nowrap flex items-center gap-1.5 text-gray-600 hover:bg-white/60">
+        <span>💻</span>
+        <span>Excel ToolPak Dojo</span>
+      </button>
+      <button onclick="switchTab('tab-boss')" id="nav-tab-boss" class="nav-tab px-3.5 py-2 rounded-xl border border-transparent whitespace-nowrap flex items-center gap-1.5 text-gray-600 hover:bg-white/60">
+        <span>👑</span>
+        <span>Final Boss Exam</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
+
+    <!-- ========================================================================= -->
+    <!-- ENGINE 1: STUDY FLIGHT PLAN & EMERGENCY COMPASS TAB -->
+    <!-- ========================================================================= -->
+    <section id="tab-triage" class="space-y-6">
+      
+      <!-- Welcome Hero Card -->
+      <div class="paper-card p-6 sm:p-8 bg-gradient-to-br from-white via-white to-[#F9F6F0] relative overflow-hidden border-l-4 border-l-[#D95D39]">
+        <div class="max-w-3xl space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1D3557]/10 text-[#1D3557] text-xs font-bold">
+            <span>🛡️</span> Ground-Truth Aligned with eFundi CMPG222 Mirror & Post-Mortem
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1D3557] tracking-tight">
+            Stop Passive Reading. Train the 7 Exact Excel Moves That Win Marks.
+          </h2>
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+            Your semester test post-mortem (<strong class="text-[#D95D39]">28.34% / 14.17 out of 50</strong>) was not a lack of intelligence. It was caused by <strong>7 fatal execution traps</strong>: arbitrary row slices like <code class="bg-[#F3EFEA] px-1 py-0.5 rounded text-[#D95D39] font-mono-code font-bold">C2:C98</code>, passing mean & median into <code class="bg-[#F3EFEA] px-1 py-0.5 rounded text-[#D95D39] font-mono-code font-bold">STDEV.S(mean, median)</code>, and missing ToolPak regression tables. 
+            This station enforces tactile reps to guarantee an <strong>85%+ Distinction</strong>.
+          </p>
+          <div class="pt-2 flex flex-wrap gap-3">
+            <button onclick="openFlightPlanModal()" class="px-5 py-2.5 rounded-xl bg-[#1D3557] text-white font-bold text-sm shadow hover:bg-[#142640] flex items-center gap-2 transition">
+              <span>🎯</span> Open Diagnostic Compass
+            </button>
+            <button onclick="switchTab('tab-dojo')" class="px-5 py-2.5 rounded-xl border border-[#E8E2D8] bg-white text-[#1D3557] font-bold text-sm hover:bg-[#F3EFEA] flex items-center gap-2 transition">
+              <span>💻</span> Launch ToolPak Simulator
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Triage Compass Matrix -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        
+        <!-- Emergency Column -->
+        <div class="paper-card p-5 bg-white border-t-4 border-t-[#D95D39] space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#D95D39]">Tier 1 • &lt; 12 Hours Left</span>
+            <span class="text-lg">🚨</span>
+          </div>
+          <h3 class="text-base font-bold text-[#1D3557]">The "Sub-Minimum Savior" (40%+ Safe)</h3>
+          <p class="text-xs text-gray-500 leading-relaxed">
+            Locked on the highest-ROI marks in Chapter 8 and Chapter 2. Stop reading all slides. Master three mechanical moves:
+          </p>
+          <ul class="text-xs space-y-2 text-gray-700 font-medium">
+            <li class="flex items-start gap-1.5">
+              <span class="text-[#D95D39] font-bold">1.</span>
+              <span>Enable ToolPak and run <strong>Q4 Regression</strong> (15 Marks, Drill 6).</span>
+            </li>
+            <li class="flex items-start gap-1.5">
+              <span class="text-[#D95D39] font-bold">2.</span>
+              <span>Sort countries descending + calculate relative frequency (Drill 1).</span>
+            </li>
+            <li class="flex items-start gap-1.5">
+              <span class="text-[#D95D39] font-bold">3.</span>
+              <span>Replace broken <code class="font-mono-code text-[11px] text-[#D95D39]">C2:C98</code> row slices with <code class="font-mono-code text-[11px] text-[#1D3557]">AVERAGEIF</code> (Drill 3).</span>
+            </li>
+          </ul>
+          <button onclick="launchTriagePreset('emergency')" class="w-full mt-2 py-2 rounded-lg bg-[#D95D39]/10 text-[#D95D39] hover:bg-[#D95D39] hover:text-white font-bold text-xs transition">
+            Load Emergency Track →
+          </button>
+        </div>
+
+        <!-- Crunch Column -->
+        <div class="paper-card p-5 bg-white border-t-4 border-t-[#E9C46A] space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#B78924]">Tier 2 • 12–36 Hours</span>
+            <span class="text-lg">⏱️</span>
+          </div>
+          <h3 class="text-base font-bold text-[#1D3557]">The "Solid Pass" Track (65–75%)</h3>
+          <p class="text-xs text-gray-500 leading-relaxed">
+            Adds the PivotTable two-dimension mark grabber and Chapter 6 distance classification:
+          </p>
+          <ul class="text-xs space-y-2 text-gray-700 font-medium">
+            <li class="flex items-start gap-1.5">
+              <span class="text-[#B78924] font-bold">1.</span>
+              <span>Build 2-variable PivotTable and name exact sheets (Drill 8).</span>
+            </li>
+            <li class="flex items-start gap-1.5">
+              <span class="text-[#B78924] font-bold">2.</span>
+              <span>Compute $z$-scores + Manhattan distance for Jane (Drill 9).</span>
+            </li>
+            <li class="flex items-start gap-1.5">
+              <span class="text-[#B78924] font-bold">3.</span>
+              <span>Memorize the 4-part regression interpretation sentence template.</span>
+            </li>
+          </ul>
+          <button onclick="launchTriagePreset('crunch')" class="w-full mt-2 py-2 rounded-lg bg-[#E9C46A]/20 text-[#855B09] hover:bg-[#E9C46A] hover:text-[#1D3557] font-bold text-xs transition">
+            Load Crunch Track →
+          </button>
+        </div>
+
+        <!-- Mastery Column -->
+        <div class="paper-card p-5 bg-white border-t-4 border-t-[#4E878C] space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#4E878C]">Tier 3 • Distinction Flight</span>
+            <span class="text-lg">🏆</span>
+          </div>
+          <h3 class="text-base font-bold text-[#1D3557]">The 85%+ Distinction Flight Plan</h3>
+          <p class="text-xs text-gray-500 leading-relaxed">
+            Total mastery across all 5 examinable chapters, zero trap susceptibility, and perfect MCQ theory recall:
+          </p>
+          <ul class="text-xs space-y-2 text-gray-700 font-medium">
+            <li class="flex items-start gap-1.5">
+              <span class="text-[#4E878C] font-bold">1.</span>
+              <span>Complete all 10 Active Recall Drills with keyword verification.</span>
+            </li>
+            <li class="flex items-start gap-1.5">
+              <span class="text-[#4E878C] font-bold">2.</span>
+              <span>Master missing ANOVA/t-stat equations in the Visual Workbench.</span>
+            </li>
+            <li class="flex items-start gap-1.5">
+              <span class="text-[#4E878C] font-bold">3.</span>
+              <span>Ace the 100-mark timed Final Boss Exam simulator.</span>
+            </li>
+          </ul>
+          <button onclick="launchTriagePreset('mastery')" class="w-full mt-2 py-2 rounded-lg bg-[#4E878C]/15 text-[#2F6166] hover:bg-[#4E878C] hover:text-white font-bold text-xs transition">
+            Load Distinction Track →
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Syllabus Mark Allocation Truth Map -->
+      <div class="paper-card p-6 bg-white space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-[#E8E2D8] pb-3">
+          <div>
+            <h3 class="text-base font-bold text-[#1D3557]">The 100-Mark Scope Blueprint</h3>
+            <p class="text-xs text-gray-500">Official weighting directly from the lecturer's exam scope statement.</p>
+          </div>
+          <span class="px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
+            Ch 1 & Ch 18 Skipped (0 Marks)
+          </span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center">
+          <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8]">
+            <div class="text-xs font-bold text-gray-400 uppercase">Ch 2 Descriptives</div>
+            <div class="text-2xl font-extrabold text-[#D95D39] my-1">25 M</div>
+            <div class="text-[11px] text-gray-600">10 MCQ + 15 App</div>
+          </div>
+          <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8]">
+            <div class="text-xs font-bold text-gray-400 uppercase">Ch 3 Visualisation</div>
+            <div class="text-2xl font-extrabold text-[#1D3557] my-1">20 M</div>
+            <div class="text-[11px] text-gray-600">10 MCQ + 10 App</div>
+          </div>
+          <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8]">
+            <div class="text-xs font-bold text-gray-400 uppercase">Ch 6 Data Mining</div>
+            <div class="text-2xl font-extrabold text-[#4E878C] my-1">20 M</div>
+            <div class="text-[11px] text-gray-600">10 MCQ + 10 App</div>
+          </div>
+          <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8]">
+            <div class="text-xs font-bold text-gray-400 uppercase">Ch 8 Regression</div>
+            <div class="text-2xl font-extrabold text-[#D95D39] my-1">25 M</div>
+            <div class="text-[11px] text-gray-600">10 MCQ + 15 App</div>
+          </div>
+          <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8]">
+            <div class="text-xs font-bold text-gray-400 uppercase">Ch 10 Predictive</div>
+            <div class="text-2xl font-extrabold text-[#E9C46A] my-1">10 M</div>
+            <div class="text-[11px] text-gray-600">10 MCQ (0 App)</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- ENGINE 2: REAL EXAM WORKBENCH (VISUAL ANATOMY & LIVE CALCULATORS) -->
+    <!-- ========================================================================= -->
+    <section id="tab-workbench" class="space-y-6 hidden">
+      
+      <!-- Sub-tabs for workbench -->
+      <div class="flex items-center gap-2 border-b border-[#E8E2D8] pb-2">
+        <button onclick="switchWorkbenchView('wb-regression')" id="btn-wb-reg" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#1D3557] text-white transition">
+          Ch 8: Regression Anatomy & Forecast
+        </button>
+        <button onclick="switchWorkbenchView('wb-distance')" id="btn-wb-dist" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-gray-600 border border-[#E8E2D8] hover:bg-[#F3EFEA] transition">
+          Ch 6: Standardisation & Distance
+        </button>
+        <button onclick="switchWorkbenchView('wb-stats')" id="btn-wb-stats" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-gray-600 border border-[#E8E2D8] hover:bg-[#F3EFEA] transition">
+          Ch 2: Skewness & Boxplot Whiskers
+        </button>
+      </div>
+
+      <!-- WORKBENCH 1: REGRESSION ANATOMY -->
+      <div id="wb-regression" class="space-y-6">
+        
+        <!-- Equation Anatomy Hero -->
+        <div class="paper-card p-6 bg-white space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-bold text-[#1D3557]">Equation Anatomy: The Exam Model</h3>
+            <span class="text-xs font-mono-code px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
+              Q4 Past Paper Memo Model
+            </span>
+          </div>
+
+          <!-- Color Coded Anatomy Badges -->
+          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg font-mono-code">
+            <span class="px-3 py-1.5 rounded-lg bg-[#1D3557] text-white font-bold cursor-help" title="Dependent Variable Y (Sales in Rands)">
+              \(\widehat{\text{Sales}}\)
+            </span>
+            <span class="text-gray-400 font-bold">=</span>
+            <span class="px-3 py-1.5 rounded-lg bg-[#FAF7F2] border-2 border-[#D95D39] text-[#D95D39] font-bold cursor-help" title="Intercept b0: Baseline sales when Advertising is R0">
+              14 561.29
+            </span>
+            <span class="text-gray-400 font-bold">+</span>
+            <span class="px-3 py-1.5 rounded-lg bg-[#4E878C]/20 border-2 border-[#4E878C] text-[#2F6166] font-bold cursor-help" title="Slope b1: For each R1 increase in advertising spend, sales increase by R3.57">
+              3.5732
+            </span>
+            <span class="text-gray-400 font-bold">\(\times\)</span>
+            <span class="px-3 py-1.5 rounded-lg bg-amber-50 border-2 border-[#E9C46A] text-amber-900 font-bold cursor-help" title="Independent Variable X (Advertising Spend in Rands)">
+              \(\text{Advertising}\)
+            </span>
+          </div>
+
+          <!-- Anatomy Explanation Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 rounded-lg border border-[#E8E2D8] bg-[#FDFCFB]">
+              <div class="font-bold text-[#D95D39] flex items-center gap-1">
+                <span>📍 Intercept (\(b_0 = 14 561.29\))</span>
+              </div>
+              <p class="text-gray-600 mt-1">
+                Baseline revenue if marketing spend drops to R0. (Standard error = 1 454.12, \(t = 10.01\), \(p < 0.001\)).
+              </p>
+            </div>
+            <div class="p-3 rounded-lg border border-[#E8E2D8] bg-[#FDFCFB]">
+              <div class="font-bold text-[#4E878C] flex items-center gap-1">
+                <span>📈 Slope (\(b_1 = +3.5732\)) <span class="text-emerald-600">★ Sig</span></span>
+              </div>
+              <p class="text-gray-600 mt-1">
+                For every <strong>R1.00</strong> spent on advertising, sales rise by <strong>R3.57</strong> on average.
+              </p>
+            </div>
+            <div class="p-3 rounded-lg border border-[#E8E2D8] bg-[#FDFCFB]">
+              <div class="font-bold text-amber-800 flex items-center gap-1">
+                <span>🎯 Fit (\(R^2 = 0.9957\))</span>
+              </div>
+              <p class="text-gray-600 mt-1">
+                <strong>99.57%</strong> of the total sample variation in monthly sales is explained by advertising expenditure.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Live Regression Plotter & Sanity Check Slider -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <div class="paper-card p-6 bg-white space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-bold text-[#1D3557]">Interactive Forecast & Sanity Check</h4>
+              <span class="text-[11px] font-mono-code text-gray-500">Live Equation Tester</span>
+            </div>
+
+            <!-- Slider Control -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-xs font-semibold">
+                <label for="slider-ad" class="text-gray-700">Advertising Spend (\(X\)):</label>
+                <span id="ad-val-label" class="text-[#1D3557] font-bold font-mono-code">R16 500</span>
+              </div>
+              <input id="slider-ad" type="range" min="5000" max="30000" step="500" value="16500" oninput="updateRegressionCalc()" class="w-full h-2 bg-[#E8E2D8] rounded-lg appearance-none cursor-pointer accent-[#1D3557]">
+            </div>
+
+            <!-- Forecast Output Box -->
+            <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-2 text-center">
+              <div class="text-xs uppercase font-bold text-gray-400">Predicted Sales (\(\widehat{Y}\))</div>
+              <div id="reg-calc-output" class="text-2xl sm:text-3xl font-extrabold text-[#1D3557] font-mono-code">
+                R73 519.09
+              </div>
+              <div class="text-[11px] text-gray-500 font-mono-code">
+                \(14561.29 + (3.5732 \times 16500) = 73519.09\)
+              </div>
+            </div>
+
+            <!-- Sanity Check Trap Card -->
+            <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-1.5">
+              <div class="font-bold flex items-center gap-1.5 text-amber-800">
+                <span>🛡️ The 5-Second Sanity Check (Saves 4 Marks)</span>
+              </div>
+              <p>
+                In the semester test, students inverted the X and Y axes, producing a slope of <strong>2 216</strong>. 
+                Always check: <code class="font-mono-code font-bold">Slope × typical X ≈ typical Y</code>.<br>
+                <span class="text-emerald-700 font-bold">✔ Right:</span> \(3.57 \times 16500 = 58900 \approx 75000\) (plausible).<br>
+                <span class="text-rose-700 font-bold">✘ Wrong:</span> \(2216 \times 16500 = \text{R36.6 Million}\) (absurd!).
+              </p>
+            </div>
+          </div>
+
+          <!-- Missing Regression Table Solver (ANOVA & Coefficients) -->
+          <div class="paper-card p-6 bg-white space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="text-sm font-bold text-[#1D3557]">Missing ToolPak Table Calculator</h4>
+                <p class="text-xs text-gray-500">Examiners delete cells in regression tables. Calculate them here:</p>
+              </div>
+              <button onclick="checkMissingRegCells()" class="px-3 py-1 rounded-lg bg-[#1D3557] text-white text-xs font-bold hover:bg-[#142640]">
+                Check Answers
+              </button>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border border-[#E8E2D8] rounded-lg">
+                <thead class="bg-[#FAF7F2] border-b border-[#E8E2D8] font-bold text-gray-700">
+                  <tr>
+                    <th class="p-2">Parameter</th>
+                    <th class="p-2">Coefficients</th>
+                    <th class="p-2">Standard Error</th>
+                    <th class="p-2">t Stat (\(b/SE\))</th>
+                    <th class="p-2">P-value</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-[#E8E2D8] font-mono-code">
+                  <tr>
+                    <td class="p-2 font-sans font-semibold">Intercept</td>
+                    <td class="p-2">14 561.29</td>
+                    <td class="p-2">1 454.12</td>
+                    <td class="p-2">10.01</td>
+                    <td class="p-2">&lt; 0.001</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 font-sans font-semibold">Advertising</td>
+                    <td class="p-2">3.5732</td>
+                    <td class="p-2">0.0746</td>
+                    <td class="p-2">
+                      <input id="input-tstat" type="text" placeholder="?" class="w-16 px-1.5 py-0.5 border border-gray-300 rounded text-center focus:border-[#1D3557] focus:outline-none">
+                    </td>
+                    <td class="p-2">&lt; 0.001</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- ANOVA Missing Formula Help -->
+            <div class="p-3 bg-[#FAF7F2] rounded-lg border border-[#E8E2D8] text-xs space-y-1">
+              <div class="font-bold text-[#1D3557]">Essential ToolPak Identities:</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-gray-600 font-mono-code">
+                <div>\(t\text{-stat} = \frac{\text{Coefficient}}{\text{Std Error}} = \frac{3.5732}{0.0746} = 47.90\)</div>
+                <div>\(F = \frac{MSR}{MSE} = \frac{SSR / 1}{SSE / (n-2)} = 2294.63\)</div>
+                <div>\(R^2 = \frac{SSR}{SST} = 1 - \frac{SSE}{SST} = 0.9957\)</div>
+                <div>\(\text{df}_{\text{Total}} = n - 1 = 12 - 1 = 11\)</div>
+              </div>
+            </div>
+            <div id="reg-table-feedback" class="text-xs font-bold text-center"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- WORKBENCH 2: DISTANCE & CLASSIFICATION (CHAPTER 6) -->
+      <div id="wb-distance" class="space-y-6 hidden">
+        <div class="paper-card p-6 bg-white space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h3 class="text-lg font-bold text-[#1D3557]">Chapter 6: Distance & Nearest Neighbour Engine</h3>
+              <p class="text-xs text-gray-500">Based on Past Exam Memo Question 3 (Jane vs Runner 1 vs Runner 2)</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="btn-toggle-metric" onclick="toggleDistanceMetric()" class="px-3 py-1 rounded-lg bg-[#4E878C] text-white text-xs font-bold">
+                Metric: Manhattan (|Δ|)
+              </button>
+            </div>
+          </div>
+
+          <!-- Scenario Data Table -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border border-[#E8E2D8] rounded-xl">
+              <thead class="bg-[#FAF7F2] text-gray-700 font-bold border-b border-[#E8E2D8]">
+                <tr>
+                  <th class="p-2.5">Participant</th>
+                  <th class="p-2.5">Age (Raw)</th>
+                  <th class="p-2.5">Distance (Raw km)</th>
+                  <th class="p-2.5">Age Z-Score (\(\mu=31.6, \sigma=2.881\))</th>
+                  <th class="p-2.5">Distance Z-Score (\(\mu=5.6, \sigma=2.881\))</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#E8E2D8] font-mono-code text-gray-800">
+                <tr class="bg-blue-50/50">
+                  <td class="p-2.5 font-sans font-bold text-[#1D3557]">Jane (Target)</td>
+                  <td class="p-2.5">32</td>
+                  <td class="p-2.5">5.0</td>
+                  <td class="p-2.5 text-blue-700 font-bold">+0.1388</td>
+                  <td class="p-2.5 text-blue-700 font-bold">-0.2083</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-sans font-medium">Runner 1</td>
+                  <td class="p-2.5">30</td>
+                  <td class="p-2.5">5.0</td>
+                  <td class="p-2.5">-0.5554</td>
+                  <td class="p-2.5">-0.2083</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-sans font-medium">Runner 2</td>
+                  <td class="p-2.5">34</td>
+                  <td class="p-2.5">6.0</td>
+                  <td class="p-2.5">+0.8331</td>
+                  <td class="p-2.5">+0.1388</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Interactive Distance Calculation Visualizer -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+            
+            <div class="p-4 rounded-xl border border-[#E8E2D8] bg-[#FAF7F2] space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="font-bold text-[#1D3557] text-sm">Jane ↔ Runner 1 Distance</div>
+                <span id="dist-tag-r1" class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-xs font-bold">Nearest Neighbour 🏆</span>
+              </div>
+              <div id="dist-math-r1" class="font-mono-code text-xs text-gray-600 bg-white p-2.5 rounded border border-[#E8E2D8]">
+                |0.1388 - (-0.5554)| + |-0.2083 - (-0.2083)| = 0.6942 + 0.0000 = 0.6942
+              </div>
+              <div class="text-xs text-gray-600">
+                <strong>Why nearest?</strong> Exact same distance run (-0.2083), minimal age delta.
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl border border-[#E8E2D8] bg-[#FAF7F2] space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="font-bold text-[#1D3557] text-sm">Jane ↔ Runner 2 Distance</div>
+                <span id="dist-tag-r2" class="px-2 py-0.5 rounded bg-gray-100 text-gray-600 text-xs font-medium">Further</span>
+              </div>
+              <div id="dist-math-r2" class="font-mono-code text-xs text-gray-600 bg-white p-2.5 rounded border border-[#E8E2D8]">
+                |0.1388 - 0.8331| + |-0.2083 - 0.1388| = 0.6942 + 0.3471 = 1.0413
+              </div>
+              <div class="text-xs text-gray-600">
+                <strong>Why further?</strong> Both age and distance deviate from Jane's standardised coordinates.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Exam Trap Alert Box -->
+          <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900">
+            <strong>⚠️ The Scale Bias Trap:</strong> If data is NOT standardised into z-scores, variables with large units (e.g. Salary in Rands) completely dominate variables with small units (e.g. Age in years), making nearest neighbour completely invalid.
+          </div>
+        </div>
+      </div>
+
+      <!-- WORKBENCH 3: CHAPTER 2 STATS, SKEWNESS & OUTLIERS -->
+      <div id="wb-stats" class="space-y-6 hidden">
+        <div class="paper-card p-6 bg-white space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-bold text-[#1D3557]">Chapter 2: Skewness, Outliers & Descriptives</h3>
+            <span class="text-xs font-mono-code text-gray-500">Camm 6e Ch 2.1–2.8</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Skewness Dynamic Decider -->
+            <div class="space-y-3 p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8]">
+              <div class="font-bold text-sm text-[#1D3557]">Distribution Skewness Decoder</div>
+              <p class="text-xs text-gray-600">Test how mean and median behave under economic asymmetry:</p>
+
+              <div class="flex gap-2">
+                <button onclick="setSkewness('right')" id="btn-skew-r" class="px-3 py-1.5 rounded-lg bg-[#D95D39] text-white text-xs font-bold">
+                  Right-Skewed (Positive)
+                </button>
+                <button onclick="setSkewness('symmetric')" id="btn-skew-s" class="px-3 py-1.5 rounded-lg bg-white border border-[#E8E2D8] text-gray-700 text-xs font-bold">
+                  Symmetric (Normal)
+                </button>
+                <button onclick="setSkewness('left')" id="btn-skew-l" class="px-3 py-1.5 rounded-lg bg-white border border-[#E8E2D8] text-gray-700 text-xs font-bold">
+                  Left-Skewed (Negative)
+                </button>
+              </div>
+
+              <div id="skew-explanation" class="p-3 bg-white rounded-lg border border-[#E8E2D8] text-xs text-gray-700 space-y-1">
+                <div class="font-bold text-[#D95D39]">Mean &gt; Median (Pulled Right)</div>
+                <p>Economic wealth and income are classic right-skewed examples. A few ultra-wealthy outliers inflate the mean, while the median represents the true middle observation.</p>
+              </div>
+            </div>
+
+            <!-- Outlier Whiskers 1.5 * IQR -->
+            <div class="space-y-3 p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8]">
+              <div class="font-bold text-sm text-[#1D3557]">Boxplot Outlier Limits (1.5 × IQR Rule)</div>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div>
+                  <label class="block text-gray-500">Q1 (25th Percentile):</label>
+                  <input id="box-q1" type="number" value="40" oninput="calcBoxplot()" class="w-full px-2 py-1 rounded border border-[#E8E2D8] font-mono-code">
+                </div>
+                <div>
+                  <label class="block text-gray-500">Q3 (75th Percentile):</label>
+                  <input id="box-q3" type="number" value="70" oninput="calcBoxplot()" class="w-full px-2 py-1 rounded border border-[#E8E2D8] font-mono-code">
+                </div>
+              </div>
+
+              <div class="p-3 bg-white rounded-lg border border-[#E8E2D8] text-xs space-y-1 font-mono-code">
+                <div>IQR = Q3 - Q1 = <span id="box-iqr" class="font-bold text-[#1D3557]">30</span></div>
+                <div>Lower Limit = Q1 - 1.5(IQR) = <span id="box-lower" class="font-bold text-rose-600">-5.0</span></div>
+                <div>Upper Limit = Q3 + 1.5(IQR) = <span id="box-upper" class="font-bold text-rose-600">115.0</span></div>
+              </div>
+              <p class="text-[11px] text-gray-500">Any point outside [Lower, Upper] is flagged as an outlier.</p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- ENGINE 3: PHYSICAL REPS GYM (ACTIVE TYPING + KEYWORD GRADING) -->
+    <!-- ========================================================================= -->
+    <section id="tab-gym" class="space-y-6 hidden">
+      
+      <div class="paper-card p-6 bg-white space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-[#E8E2D8] pb-3">
+          <div>
+            <h3 class="text-xl font-bold text-[#1D3557]">The Physical Reps Gym</h3>
+            <p class="text-xs text-gray-500">
+              Reading memos creates illusions of competence. Type the required exam answers below to unlock XP.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold text-gray-600">Select Drill:</span>
+            <select id="drill-selector" onchange="loadDrill(this.value)" class="text-xs font-bold border border-[#E8E2D8] rounded-lg px-2.5 py-1.5 bg-[#FAF7F2] text-[#1D3557] focus:outline-none focus:border-[#1D3557]">
+              <option value="d1">D1: Frequency Table & COUNTIF (Ch2)</option>
+              <option value="d2">D2: 40th Percentile Calculation (Ch2)</option>
+              <option value="d3">D3: Grouped Mean via AVERAGEIF (Ch2)</option>
+              <option value="d4">D4: Sample SD & The Fatal Formula (Ch2)</option>
+              <option value="d5">D5: Coefficient of Variation Interpretation (Ch2)</option>
+              <option value="d6" selected>D6: Analysis ToolPak Regression Interpretation (Ch8)</option>
+              <option value="d7">D7: Scatter Chart X-Axis Sanity Check (Ch8)</option>
+              <option value="d8">D8: Two-Dimension PivotTable (Ch3)</option>
+              <option value="d9">D9: Z-Score Standardisation & Manhattan (Ch6)</option>
+              <option value="d10">D10: Forecast Error Metrics (RMSE/MAD) (Ch10)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Active Drill Card -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span id="drill-badge-ch" class="px-2 py-0.5 rounded text-xs font-bold bg-[#D95D39]/10 text-[#D95D39] border border-[#D95D39]/20">
+                Chapter 8 • 15 Application Marks
+              </span>
+              <h4 id="drill-title" class="text-base font-bold text-[#1D3557]">
+                ToolPak Regression Slope & R² Interpretation
+              </h4>
+            </div>
+            <span id="drill-xp-badge" class="text-xs font-extrabold text-amber-600 font-mono-code">+30 XP</span>
+          </div>
+
+          <!-- Prompt Details -->
+          <div id="drill-scenario" class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] text-xs sm:text-sm text-gray-700 space-y-2">
+            <p>
+              Given the regression equation <code class="font-mono-code font-bold text-[#1D3557]">Sales = 14561.29 + 3.5732 × Advertising</code> with <code class="font-mono-code font-bold text-[#1D3557]">R² = 0.9957</code> and slope <code class="font-mono-code font-bold text-[#1D3557]">t = 47.90</code>:
+            </p>
+            <p class="font-semibold text-[#1D3557]">
+              Draft the complete exam sentence interpreting the slope and R-squared values for the marketing director.
+            </p>
+          </div>
+
+          <!-- Interactive Typing Pad -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs font-semibold text-gray-600">
+              <label for="drill-input">Your Draft Answer:</label>
+              <span id="drill-keyword-counter" class="text-gray-400">0/3 Essential Keywords</span>
+            </div>
+            <textarea id="drill-input" rows="4" oninput="evaluateDrillText()" placeholder="Type your answer here... (must include numerical values and economic interpretation)" class="w-full p-3 text-xs sm:text-sm border border-[#E8E2D8] rounded-xl focus:border-[#1D3557] focus:ring-1 focus:ring-[#1D3557] focus:outline-none font-sans leading-relaxed"></textarea>
+          </div>
+
+          <!-- Mandatory Keyword Tracker Chips -->
+          <div class="space-y-1.5">
+            <div class="text-[11px] font-bold uppercase text-gray-400 tracking-wider">Mandatory Marking Rubric Criteria:</div>
+            <div id="drill-keywords-chips" class="flex flex-wrap gap-2 text-xs">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-2">
+            <button onclick="submitDrill()" id="btn-submit-drill" class="px-5 py-2.5 rounded-xl bg-[#1D3557] text-white font-bold text-xs sm:text-sm hover:bg-[#142640] shadow transition flex items-center gap-1.5">
+              <span>🚀</span> Submit for Automated Grading
+            </button>
+            <div class="flex items-center gap-2">
+              <button onclick="revealModelAnswer()" class="px-3.5 py-2 rounded-xl border border-[#E8E2D8] bg-white text-gray-700 font-semibold text-xs hover:bg-[#F3EFEA] transition">
+                🔍 Reveal Model Memo
+              </button>
+              <button onclick="copyMemoForWord()" class="px-3.5 py-2 rounded-xl bg-[#4E878C] text-white font-semibold text-xs hover:bg-[#3D6C70] shadow-sm transition flex items-center gap-1">
+                <span>📋</span> Copy Memo for Word
+              </button>
+            </div>
+          </div>
+
+          <!-- Model Answer Drawer (hidden initially) -->
+          <div id="drill-model-box" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 space-y-2">
+            <div class="font-bold flex items-center gap-1 text-emerald-800">
+              <span>✔ Authoritative Memo Model Answer:</span>
+            </div>
+            <div id="drill-model-text" class="leading-relaxed font-sans">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- ENGINE 4: MNEMONIC WALL & EXPANDABLE DEEP DOSSIERS -->
+    <!-- ========================================================================= -->
+    <section id="tab-mnemonics" class="space-y-6 hidden">
+      
+      <div class="paper-card p-6 bg-white space-y-2">
+        <h3 class="text-xl font-bold text-[#1D3557]">The Tactical Mnemonic Wall</h3>
+        <p class="text-xs text-gray-500">
+          Click any tactical dossier to open deep plain-English analogies, textbook slide citations, and examiner traps.
+        </p>
+      </div>
+
+      <!-- Tactical Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <!-- Card 1: Row Slice Death Trap -->
+        <div onclick="openDossier('dossier-row-slice')" class="paper-card p-5 cursor-pointer hover:-translate-y-1 hover:border-[#1D3557] space-y-3 bg-white">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#D95D39] uppercase">Chapter 2 Trap</span>
+            <span class="text-xl">⚠️</span>
+          </div>
+          <h4 class="text-base font-bold text-[#1D3557]">The "Row-Slice" Death Trap</h4>
+          <p class="text-xs text-gray-600 line-clamp-3">
+            Why typing <code class="font-mono-code text-[#D95D39]">C2:C98</code> fails in exam data sorted alphabetically by country, and how <code class="font-mono-code text-[#1D3557]">AVERAGEIF</code> protects your marks.
+          </p>
+          <div class="text-xs font-bold text-[#1D3557] flex items-center gap-1 pt-1">
+            <span>Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Two-Number SD -->
+        <div onclick="openDossier('dossier-stdev')" class="paper-card p-5 cursor-pointer hover:-translate-y-1 hover:border-[#1D3557] space-y-3 bg-white">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#D95D39] uppercase">Fatal Mistake</span>
+            <span class="text-xl">💥</span>
+          </div>
+          <h4 class="text-base font-bold text-[#1D3557]">The "Two-Number SD" Horror</h4>
+          <p class="text-xs text-gray-600 line-clamp-3">
+            What happens when you write <code class="font-mono-code text-[#D95D39]">=STDEV.S(mean, median)</code>. Why passing two summary metrics into a sample variance function loses 8 full marks.
+          </p>
+          <div class="text-xs font-bold text-[#1D3557] flex items-center gap-1 pt-1">
+            <span>Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 3: ToolPak Activation Rite -->
+        <div onclick="openDossier('dossier-toolpak')" class="paper-card p-5 cursor-pointer hover:-translate-y-1 hover:border-[#1D3557] space-y-3 bg-white">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#4E878C] uppercase">Exam Mechanics</span>
+            <span class="text-xl">🛠️</span>
+          </div>
+          <h4 class="text-base font-bold text-[#1D3557]">The ToolPak Activation Rite</h4>
+          <p class="text-xs text-gray-600 line-clamp-3">
+            Analysis ToolPak is disabled by default on NWU computer lab PCs. Follow the exact 10-second sequence before reading the first question.
+          </p>
+          <div class="text-xs font-bold text-[#1D3557] flex items-center gap-1 pt-1">
+            <span>Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Unstandardised Distance -->
+        <div onclick="openDossier('dossier-distance')" class="paper-card p-5 cursor-pointer hover:-translate-y-1 hover:border-[#1D3557] space-y-3 bg-white">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#1D3557] uppercase">Chapter 6 Data Mining</span>
+            <span class="text-xl">📏</span>
+          </div>
+          <h4 class="text-base font-bold text-[#1D3557]">The Unstandardised Distance Illusion</h4>
+          <p class="text-xs text-gray-600 line-clamp-3">
+            Why R100 000 in income completely swallows 2 years of age in distance formulas without z-scores, causing completely invalid nearest neighbours.
+          </p>
+          <div class="text-xs font-bold text-[#1D3557] flex items-center gap-1 pt-1">
+            <span>Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 5: Association Rules Base Rate Trap -->
+        <div onclick="openDossier('dossier-association')" class="paper-card p-5 cursor-pointer hover:-translate-y-1 hover:border-[#1D3557] space-y-3 bg-white">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#E9C46A] uppercase">Chapter 6 Theory</span>
+            <span class="text-xl">🛒</span>
+          </div>
+          <h4 class="text-base font-bold text-[#1D3557]">The Trivial Association Rule Trap</h4>
+          <p class="text-xs text-gray-600 line-clamp-3">
+            Support vs Confidence vs Lift. Why 100% confidence means nothing if the consequent product has a 99% base purchase frequency.
+          </p>
+          <div class="text-xs font-bold text-[#1D3557] flex items-center gap-1 pt-1">
+            <span>Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 6: Chart Choice & Cognitive Load -->
+        <div onclick="openDossier('dossier-charts')" class="paper-card p-5 cursor-pointer hover:-translate-y-1 hover:border-[#1D3557] space-y-3 bg-white">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#4E878C] uppercase">Chapter 3 Visualisation</span>
+            <span class="text-xl">📊</span>
+          </div>
+          <h4 class="text-base font-bold text-[#1D3557]">The Chart Choice Matrix</h4>
+          <p class="text-xs text-gray-600 line-clamp-3">
+            Data-ink ratio, truncated y-axes, avoiding 3D pie charts, and choosing between line, clustered column, and scatter plots.
+          </p>
+          <div class="text-xs font-bold text-[#1D3557] flex items-center gap-1 pt-1">
+            <span>Read Dossier →</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- ENGINE 5: ZERO-LATENCY IN-BROWSER SOFTWARE DOJO (EXCEL SIMULATOR) -->
+    <!-- ========================================================================= -->
+    <section id="tab-dojo" class="space-y-6 hidden">
+      
+      <div class="paper-card p-6 bg-white space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h3 class="text-xl font-bold text-[#1D3557]">Zero-Latency Excel ToolPak Dojo</h3>
+            <p class="text-xs text-gray-500">
+              Interactive browser simulator replicating the exact Excel ribbons, dialog boxes, and ToolPak regression output.
+            </p>
+          </div>
+          <button onclick="resetDojo()" class="px-3 py-1.5 rounded-lg border border-[#E8E2D8] bg-[#FAF7F2] text-xs font-semibold text-gray-700 hover:bg-[#E8E2D8] transition">
+            🔄 Reset Dojo
+          </button>
+        </div>
+      </div>
+
+      <!-- Mock Excel Window Container -->
+      <div class="paper-card bg-white border border-[#D6CEC1] overflow-hidden shadow-lg">
+        
+        <!-- Mock Excel Title Bar -->
+        <div class="bg-[#107C41] text-white px-4 py-2 flex items-center justify-between text-xs font-semibold">
+          <div class="flex items-center gap-2">
+            <span>📗</span>
+            <span>Excel — CMPG222_Practical_Exam_Workbook.xlsx</span>
+          </div>
+          <div class="flex items-center gap-2 text-white/80">
+            <span>AutoSave: ON</span>
+            <span class="px-1.5 py-0.5 rounded bg-black/20 text-[10px]">NWU Lab Ready</span>
+          </div>
+        </div>
+
+        <!-- Mock Excel Ribbon Tabs -->
+        <div class="bg-[#F3EFEA] border-b border-[#D6CEC1] px-3 py-1 flex items-center gap-2 text-xs font-medium text-gray-700">
+          <span class="px-2.5 py-1 rounded hover:bg-white cursor-pointer">File</span>
+          <span class="px-2.5 py-1 rounded hover:bg-white cursor-pointer">Home</span>
+          <span class="px-2.5 py-1 rounded hover:bg-white cursor-pointer">Insert</span>
+          <span class="px-2.5 py-1 rounded hover:bg-white cursor-pointer">Page Layout</span>
+          <span class="px-2.5 py-1 rounded hover:bg-white cursor-pointer">Formulas</span>
+          <span class="px-2.5 py-1 rounded bg-white text-[#107C41] font-bold border-t-2 border-[#107C41] shadow-xs">Data</span>
+          <span class="px-2.5 py-1 rounded hover:bg-white cursor-pointer">Review</span>
+          <span class="px-2.5 py-1 rounded hover:bg-white cursor-pointer">View</span>
+        </div>
+
+        <!-- Mock Ribbon Action Toolbar -->
+        <div class="p-3 bg-white border-b border-[#E8E2D8] flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="text-gray-400">Sort & Filter | Data Tools | Forecast</span>
+          </div>
+
+          <!-- Highlighted Analysis Group -->
+          <div class="flex items-center gap-2 border-l border-[#E8E2D8] pl-3">
+            <button id="dojo-btn-analysis" onclick="openToolpakDialog()" class="px-3.5 py-1.5 rounded-lg bg-[#107C41] text-white font-bold text-xs hover:bg-[#0D6535] shadow-sm flex items-center gap-1.5 transition animate-pulse">
+              <span>📈</span>
+              <span>Data Analysis (ToolPak)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Interactive Dojo Workspace / Spreadsheet View -->
+        <div class="p-4 sm:p-6 bg-[#FAF7F2] space-y-4">
+          
+          <!-- Instructions banner -->
+          <div id="dojo-instruction" class="p-3 rounded-xl bg-white border border-[#E8E2D8] text-xs flex items-center justify-between">
+            <span class="text-gray-700">
+              👉 <strong>Step 1:</strong> Click the green <strong>"Data Analysis (ToolPak)"</strong> button on the ribbon above to open the regression setup dialog.
+            </span>
+            <span id="dojo-step-badge" class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-bold text-[11px]">Step 1/3</span>
+          </div>
+
+          <!-- Simulated Spreadsheet Grid -->
+          <div class="overflow-x-auto bg-white rounded-xl border border-[#E8E2D8] shadow-xs">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="bg-[#F3EFEA] text-gray-500 font-mono-code border-b border-[#E8E2D8]">
+                  <th class="p-2 w-10 text-center border-r border-[#E8E2D8]">#</th>
+                  <th class="p-2 border-r border-[#E8E2D8]">A: Month</th>
+                  <th class="p-2 border-r border-[#E8E2D8]">B: Advertising (X)</th>
+                  <th class="p-2">C: Sales (Y)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#E8E2D8] font-mono-code text-gray-800">
+                <tr><td class="p-2 text-center bg-[#FAF7F2] border-r border-[#E8E2D8]">1</td><td class="p-2 border-r border-[#E8E2D8] font-bold">Month</td><td class="p-2 border-r border-[#E8E2D8] font-bold">Advertising</td><td class="p-2 font-bold">Sales</td></tr>
+                <tr><td class="p-2 text-center bg-[#FAF7F2] border-r border-[#E8E2D8]">2</td><td class="p-2 border-r border-[#E8E2D8]">Jan</td><td class="p-2 border-r border-[#E8E2D8]">12 000</td><td class="p-2">57 400</td></tr>
+                <tr><td class="p-2 text-center bg-[#FAF7F2] border-r border-[#E8E2D8]">3</td><td class="p-2 border-r border-[#E8E2D8]">Feb</td><td class="p-2 border-r border-[#E8E2D8]">14 500</td><td class="p-2">66 300</td></tr>
+                <tr><td class="p-2 text-center bg-[#FAF7F2] border-r border-[#E8E2D8]">4</td><td class="p-2 border-r border-[#E8E2D8]">Mar</td><td class="p-2 border-r border-[#E8E2D8]">16 500</td><td class="p-2">73 500</td></tr>
+                <tr><td class="p-2 text-center bg-[#FAF7F2] border-r border-[#E8E2D8]">5</td><td class="p-2 border-r border-[#E8E2D8]">...</td><td class="p-2 border-r border-[#E8E2D8]">...</td><td class="p-2">...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Mock ToolPak Output Area (Revealed on Step 3) -->
+          <div id="dojo-output-container" class="hidden space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-emerald-800">✔ Output Generated in Sheet: "Regression_Output"</span>
+              <span class="text-[11px] text-gray-500">Summary Output (ANOVA + Coefficients)</span>
+            </div>
+
+            <div class="p-4 bg-white rounded-xl border border-emerald-300 shadow-sm overflow-x-auto space-y-4">
+              
+              <!-- Regression Statistics -->
+              <table class="w-full text-left text-xs font-mono-code">
+                <thead class="bg-[#FAF7F2] font-bold text-gray-700">
+                  <tr><th colspan="2" class="p-1.5 font-sans font-bold">Regression Statistics</th></tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                  <tr><td class="p-1.5 text-gray-600">Multiple R</td><td class="p-1.5 font-bold">0.9978</td></tr>
+                  <tr class="bg-amber-50/60"><td class="p-1.5 text-gray-600">R Square</td><td class="p-1.5 font-bold text-[#D95D39]">0.9957 (99.57%)</td></tr>
+                  <tr><td class="p-1.5 text-gray-600">Adjusted R Square</td><td class="p-1.5 font-bold">0.9953</td></tr>
+                  <tr><td class="p-1.5 text-gray-600">Standard Error</td><td class="p-1.5 font-bold">712.72</td></tr>
+                  <tr><td class="p-1.5 text-gray-600">Observations</td><td class="p-1.5 font-bold">12</td></tr>
+                </tbody>
+              </table>
+
+              <!-- Coefficients Table -->
+              <table class="w-full text-left text-xs font-mono-code border-t border-gray-200">
+                <thead class="bg-[#FAF7F2] font-bold text-gray-700">
+                  <tr>
+                    <th class="p-1.5 font-sans">Variable</th>
+                    <th class="p-1.5">Coefficients</th>
+                    <th class="p-1.5">Standard Error</th>
+                    <th class="p-1.5">t Stat</th>
+                    <th class="p-1.5">P-value</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                  <tr class="hover:bg-blue-50/50">
+                    <td class="p-1.5 font-sans font-bold">Intercept</td>
+                    <td class="p-1.5 font-bold text-[#1D3557]">14 561.29</td>
+                    <td class="p-1.5">1 454.12</td>
+                    <td class="p-1.5">10.01</td>
+                    <td class="p-1.5">0.000002</td>
+                  </tr>
+                  <tr class="hover:bg-emerald-50/50 bg-emerald-50/20">
+                    <td class="p-1.5 font-sans font-bold text-emerald-800">Advertising</td>
+                    <td class="p-1.5 font-bold text-emerald-800">3.5732</td>
+                    <td class="p-1.5">0.0746</td>
+                    <td class="p-1.5 font-bold text-emerald-800">47.90</td>
+                    <td class="p-1.5 font-bold text-emerald-800">1.41E-13</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- ENGINE 6: THE FINAL BOSS EXAM SIMULATOR -->
+    <!-- ========================================================================= -->
+    <section id="tab-boss" class="space-y-6 hidden">
+      
+      <!-- Exam Control Header -->
+      <div class="paper-card p-6 bg-white space-y-4 border-l-4 border-l-[#1D3557]">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-[#1D3557]/10 text-[#1D3557] text-xs font-bold">
+              <span>👑</span> Capstone Synthesis Challenge
+            </div>
+            <h3 class="text-xl font-extrabold text-[#1D3557]">The Final Boss Exam Simulator</h3>
+            <p class="text-xs text-gray-500">100 Marks • MCQ Theory + Numerical Interpretation • Timed</p>
+          </div>
+
+          <!-- Timer & Action -->
+          <div class="flex items-center gap-3">
+            <div class="px-4 py-2 bg-[#FAF7F2] border border-[#E8E2D8] rounded-xl text-center">
+              <div class="text-[10px] uppercase font-bold text-gray-400">Time Remaining</div>
+              <div id="boss-timer" class="text-xl font-extrabold text-[#D95D39] font-mono-code">25:00</div>
+            </div>
+            <button id="btn-start-boss" onclick="startBossExam()" class="px-5 py-2.5 rounded-xl bg-[#1D3557] text-white font-bold text-xs sm:text-sm hover:bg-[#142640] shadow transition">
+              Start Exam Clock ⏱️
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss Exam Questions List -->
+      <div id="boss-questions-container" class="space-y-5">
+        <!-- Rendered via JS -->
+      </div>
+
+      <!-- Exam Submit Footer -->
+      <div id="boss-footer" class="p-6 paper-card bg-white flex flex-wrap items-center justify-between gap-3">
+        <div class="text-xs text-gray-500">
+          Make sure all 10 questions are answered before submitting for distinction scoring.
+        </div>
+        <button onclick="submitBossExam()" class="px-6 py-3 rounded-xl bg-[#D95D39] text-white font-extrabold text-sm hover:bg-[#C24D2B] shadow-md transition flex items-center gap-2">
+          <span>📝</span> Submit Complete Examination
+        </button>
+      </div>
+
+      <!-- Boss Result Diagnostic Modal / Card -->
+      <div id="boss-results-card" class="hidden paper-card p-6 sm:p-8 bg-white border-2 border-[#1D3557] space-y-4">
+        <!-- Rendered dynamically upon submission -->
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- MODALS & SLIDE-OVER DOSSIERS -->
+  <!-- ========================================================================= -->
+
+  <!-- 1. FLIGHT PLAN DIAGNOSTIC MODAL -->
+  <div id="modal-flight-plan" class="modal-overlay hidden-modal fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="paper-card bg-white max-w-xl w-full p-6 sm:p-8 space-y-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">🧭</span>
+          <h3 class="text-lg font-bold text-[#1D3557]">Emergency Compass & Diagnostic Triage</h3>
+        </div>
+        <button onclick="closeFlightPlanModal()" class="text-gray-400 hover:text-gray-700 text-lg font-bold">✕</button>
+      </div>
+
+      <!-- Diagnostic Questions -->
+      <div class="space-y-4 text-xs sm:text-sm">
+        
+        <!-- Q1: Time Remaining -->
+        <div class="space-y-1.5">
+          <label class="font-bold text-gray-800">1. How much time do you have until your sitting?</label>
+          <div class="grid grid-cols-3 gap-2">
+            <button onclick="setTriageTime('emergency')" id="triage-t1" class="p-2.5 rounded-xl border border-[#E8E2D8] hover:border-[#D95D39] text-left transition text-xs font-semibold">
+              🚨 &lt; 12 Hours
+            </button>
+            <button onclick="setTriageTime('crunch')" id="triage-t2" class="p-2.5 rounded-xl border border-[#E8E2D8] hover:border-[#E9C46A] text-left transition text-xs font-semibold">
+              ⏱️ 12–36 Hours
+            </button>
+            <button onclick="setTriageTime('mastery')" id="triage-t3" class="p-2.5 rounded-xl border border-[#E8E2D8] hover:border-[#4E878C] text-left transition text-xs font-semibold bg-[#4E878C]/10 border-[#4E878C]">
+              🏆 3+ Days
+            </button>
+          </div>
+        </div>
+
+        <!-- Q2: Panic Point -->
+        <div class="space-y-1.5">
+          <label class="font-bold text-gray-800">2. What causes your biggest fear or freezing right now?</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="setTriagePanic('excel')" id="triage-p1" class="p-2.5 rounded-xl border border-[#E8E2D8] hover:border-[#1D3557] text-left transition text-xs font-semibold bg-[#1D3557]/10 border-[#1D3557]">
+              💻 Excel ToolPak & Formulas
+            </button>
+            <button onclick="setTriagePanic('stats')" id="triage-p2" class="p-2.5 rounded-xl border border-[#E8E2D8] hover:border-[#1D3557] text-left transition text-xs font-semibold">
+              📐 Skewness, Outliers & Descriptives
+            </button>
+            <button onclick="setTriagePanic('distance')" id="triage-p3" class="p-2.5 rounded-xl border border-[#E8E2D8] hover:border-[#1D3557] text-left transition text-xs font-semibold">
+              📏 Z-scores & Manhattan Distance
+            </button>
+            <button onclick="setTriagePanic('mcq')" id="triage-p4" class="p-2.5 rounded-xl border border-[#E8E2D8] hover:border-[#1D3557] text-left transition text-xs font-semibold">
+              ❓ 50 Marks Theory MCQ Traps
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action -->
+      <div class="pt-2 flex items-center justify-end gap-3 border-t border-[#E8E2D8]">
+        <button onclick="closeFlightPlanModal()" class="px-4 py-2 rounded-xl text-gray-500 font-bold text-xs hover:bg-gray-100">
+          Close
+        </button>
+        <button onclick="applyFlightPlanDiagnostic()" class="px-5 py-2.5 rounded-xl bg-[#1D3557] text-white font-bold text-xs hover:bg-[#142640] shadow">
+          Apply & Generate Roadmap
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. DEEP DOSSIER DRAWER -->
+  <div id="modal-dossier" class="modal-overlay hidden-modal fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="paper-card bg-white max-w-2xl w-full p-6 sm:p-8 space-y-4 shadow-2xl max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+        <div class="flex items-center gap-2">
+          <span id="dossier-icon" class="text-xl">📁</span>
+          <h3 id="dossier-title" class="text-lg font-bold text-[#1D3557]">Tactical Dossier Title</h3>
+        </div>
+        <button onclick="closeDossier()" class="text-gray-400 hover:text-gray-700 text-lg font-bold">✕</button>
+      </div>
+
+      <div id="dossier-content" class="text-xs sm:text-sm text-gray-700 space-y-3 leading-relaxed">
+        <!-- Injected via JS -->
+      </div>
+
+      <div class="pt-3 border-t border-[#E8E2D8] flex justify-end">
+        <button onclick="closeDossier()" class="px-4 py-2 rounded-xl bg-[#1D3557] text-white font-bold text-xs">
+          Understood & Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MOCK TOOLPAK DIALOG MODAL (DOJO) -->
+  <div id="modal-toolpak" class="modal-overlay hidden-modal fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="paper-card bg-[#FAF7F2] max-w-md w-full p-5 space-y-4 shadow-2xl border-2 border-[#107C41]">
+      <div class="flex items-center justify-between border-b border-[#D6CEC1] pb-2">
+        <h4 class="text-sm font-bold text-[#107C41] flex items-center gap-1.5">
+          <span>📊</span> Regression Configuration (ToolPak)
+        </h4>
+        <button onclick="closeToolpakDialog()" class="text-gray-400 hover:text-gray-700 font-bold">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-gray-700">Input Y Range (Dependent: Sales):</label>
+          <input id="tp-input-y" type="text" value="$C$1:$C$13" class="w-full px-2 py-1.5 rounded border border-[#D6CEC1] font-mono-code bg-white text-gray-800">
+          <span class="text-[10px] text-gray-500">Includes header label</span>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700">Input X Range (Independent: Advertising):</label>
+          <input id="tp-input-x" type="text" value="$B$1:$B$13" class="w-full px-2 py-1.5 rounded border border-[#D6CEC1] font-mono-code bg-white text-gray-800">
+          <span class="text-[10px] text-gray-500">Includes header label</span>
+        </div>
+
+        <div class="flex items-center gap-2 pt-1">
+          <input id="tp-check-labels" type="checkbox" checked class="w-4 h-4 rounded text-[#107C41] accent-[#107C41]">
+          <label for="tp-check-labels" class="font-bold text-gray-700">Labels in first row</label>
+        </div>
+
+        <div class="p-2.5 rounded bg-amber-50 border border-amber-200 text-amber-900 text-[11px]">
+          ⚠️ <strong>Exam Trap:</strong> If you select row 1 with text labels, you <strong>MUST</strong> tick the "Labels" box, otherwise Excel throws a runtime data-type error!
+        </div>
+      </div>
+
+      <div class="pt-2 flex justify-end gap-2 border-t border-[#D6CEC1]">
+        <button onclick="closeToolpakDialog()" class="px-3 py-1.5 rounded text-xs font-semibold text-gray-600 hover:bg-gray-200">
+          Cancel
+        </button>
+        <button onclick="executeToolpakRun()" class="px-4 py-1.5 rounded bg-[#107C41] text-white text-xs font-bold hover:bg-[#0D6535]">
+          OK (Run Regression)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Pill -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none px-4 py-2.5 rounded-xl bg-[#1D3557] text-white text-xs sm:text-sm font-bold shadow-lg flex items-center gap-2">
+    <span id="toast-icon">⭐</span>
+    <span id="toast-msg">Notification Message</span>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT APP LOGIC -->
+  <!-- ========================================================================= -->
+  <script>
+    /* -------------------------------------------------------------------------
+       1. STATE & AUDIO SYNTHESIZER
+       ------------------------------------------------------------------------- */
+    const state = {
+      xp: parseInt(localStorage.getItem('cmpg222_xp') || '0', 10),
+      sfxEnabled: localStorage.getItem('cmpg222_sfx') !== 'false',
+      droneActive: false,
+      completedDrills: JSON.parse(localStorage.getItem('cmpg222_drills') || '[]'),
+      triageTime: 'mastery',
+      triagePanic: 'excel',
+      activeDrill: 'd6',
+      activeDistMetric: 'manhattan',
+      skewnessState: 'right',
+      bossStarted: false,
+      bossSeconds: 1500,
+      bossTimerId: null
+    };
+
+    let audioCtx = null;
+    let droneOsc = null;
+    let droneGain = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playSfx(type) {
+      if (!state.sfxEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+
+        if (type === 'fanfare') {
+          // Marimba pentatonic chord: 440, 554.37, 659.25, 880 Hz
+          [440, 554.37, 659.25, 880].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, now + idx * 0.07);
+            gain.gain.setValueAtTime(0.04, now + idx * 0.07);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.07 + 0.35);
+            osc.start(now + idx * 0.07);
+            osc.stop(now + idx * 0.07 + 0.35);
+          });
+        } else if (type === 'pop') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(640, now + 0.08);
+          gain.gain.setValueAtTime(0.04, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.08);
+          osc.start(now);
+          osc.stop(now + 0.08);
+        } else if (type === 'tap') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(200, now);
+          gain.gain.setValueAtTime(0.02, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
+          osc.start(now);
+          osc.stop(now + 0.04);
+        }
+      } catch (e) {
+        console.warn('Audio play error:', e);
+      }
+    }
+
+    function toggleSfx() {
+      state.sfxEnabled = !state.sfxEnabled;
+      localStorage.setItem('cmpg222_sfx', state.sfxEnabled);
+      document.getElementById('sfx-icon').textContent = state.sfxEnabled ? '🔔' : '🔕';
+      showToast(state.sfxEnabled ? 'Sound Effects Enabled' : 'Sound Effects Muted', '🔔');
+    }
+
+    function toggleDrone() {
+      try {
+        const ctx = getAudioContext();
+        if (!state.droneActive) {
+          droneOsc = ctx.createOscillator();
+          droneGain = ctx.createGain();
+          droneOsc.type = 'sine';
+          droneOsc.frequency.setValueAtTime(40, ctx.currentTime); // 40Hz Gamma Focus Frequency
+          droneGain.gain.setValueAtTime(0.01, ctx.currentTime);
+          droneOsc.connect(droneGain);
+          droneGain.connect(ctx.destination);
+          droneOsc.start();
+          state.droneActive = true;
+          document.getElementById('btn-drone').classList.add('bg-[#1D3557]', 'text-white');
+          document.getElementById('drone-icon').textContent = '🎵';
+          showToast('40Hz Gamma Focus Drone Activated', '🎧');
+        } else {
+          if (droneOsc) {
+            droneGain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.1);
+            setTimeout(() => {
+              try { droneOsc.stop(); droneOsc.disconnect(); } catch (e) {}
+            }, 120);
+          }
+          state.droneActive = false;
+          document.getElementById('btn-drone').classList.remove('bg-[#1D3557]', 'text-white');
+          document.getElementById('drone-icon').textContent = '🎧';
+          showToast('Focus Drone Deactivated', '🎧');
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function addXp(pts, reason) {
+      state.xp += pts;
+      localStorage.setItem('cmpg222_xp', state.xp);
+      const el = document.getElementById('stat-xp');
+      if (el) el.textContent = `${state.xp} XP`;
+      playSfx('fanfare');
+      showToast(`+${pts} XP: ${reason}`, '⭐');
+    }
+
+    function showToast(msg, icon = '⭐') {
+      const toast = document.getElementById('toast');
+      const msgEl = document.getElementById('toast-msg');
+      const iconEl = document.getElementById('toast-icon');
+      if (!toast) return;
+      msgEl.textContent = msg;
+      iconEl.textContent = icon;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2600);
+    }
+
+    /* -------------------------------------------------------------------------
+       2. TAB NAVIGATION
+       ------------------------------------------------------------------------- */
+    function switchTab(tabId) {
+      playSfx('tap');
+      const tabs = ['tab-triage', 'tab-workbench', 'tab-gym', 'tab-mnemonics', 'tab-dojo', 'tab-boss'];
+      tabs.forEach(t => {
+        const el = document.getElementById(t);
+        const navEl = document.getElementById(`nav-${t}`);
+        if (el) el.classList.toggle('hidden', t !== tabId);
+        if (navEl) {
+          if (t === tabId) {
+            navEl.classList.add('active', 'bg-[#1D3557]', 'text-white');
+            navEl.classList.remove('text-gray-600');
+          } else {
+            navEl.classList.remove('active', 'bg-[#1D3557]', 'text-white');
+            navEl.classList.add('text-gray-600');
+          }
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchWorkbenchView(viewId) {
+      playSfx('tap');
+      ['wb-regression', 'wb-distance', 'wb-stats'].forEach(v => {
+        const el = document.getElementById(v);
+        if (el) el.classList.toggle('hidden', v !== viewId);
+      });
+      document.getElementById('btn-wb-reg').className = viewId === 'wb-regression' ? 'px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#1D3557] text-white transition' : 'px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-gray-600 border border-[#E8E2D8] hover:bg-[#F3EFEA] transition';
+      document.getElementById('btn-wb-dist').className = viewId === 'wb-distance' ? 'px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#4E878C] text-white transition' : 'px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-gray-600 border border-[#E8E2D8] hover:bg-[#F3EFEA] transition';
+      document.getElementById('btn-wb-stats').className = viewId === 'wb-stats' ? 'px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#D95D39] text-white transition' : 'px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-gray-600 border border-[#E8E2D8] hover:bg-[#F3EFEA] transition';
+    }
+
+    /* -------------------------------------------------------------------------
+       3. WORKBENCH ENGINES
+       ------------------------------------------------------------------------- */
+    function updateRegressionCalc() {
+      const slider = document.getElementById('slider-ad');
+      const val = parseFloat(slider.value);
+      document.getElementById('ad-val-label').textContent = `R${val.toLocaleString()}`;
+      
+      const intercept = 14561.29;
+      const slope = 3.5732;
+      const predicted = intercept + slope * val;
+      
+      document.getElementById('reg-calc-output').textContent = `R${predicted.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+
+    function checkMissingRegCells() {
+      const tInput = document.getElementById('input-tstat');
+      const val = parseFloat(tInput.value.replace(',', '.').trim());
+      const feedback = document.getElementById('reg-table-feedback');
+
+      if (!isNaN(val) && Math.abs(val - 47.9) < 0.5) {
+        feedback.textContent = '✔ Correct! t = 3.5732 / 0.0746 = 47.90 (Highly statistically significant, p < 0.001)';
+        feedback.className = 'text-xs font-bold text-center text-emerald-700';
+        addXp(25, 'Computed Missing Regression t-stat');
+      } else {
+        feedback.textContent = '✘ Check: t-statistic = Slope Coefficient / Standard Error (3.5732 / 0.0746 ≈ 47.90)';
+        feedback.className = 'text-xs font-bold text-center text-rose-600';
+        playSfx('pop');
+      }
+    }
+
+    function toggleDistanceMetric() {
+      state.activeDistMetric = state.activeDistMetric === 'manhattan' ? 'euclidean' : 'manhattan';
+      const btn = document.getElementById('btn-toggle-metric');
+      const tagR1 = document.getElementById('dist-tag-r1');
+      const tagR2 = document.getElementById('dist-tag-r2');
+      const mathR1 = document.getElementById('dist-math-r1');
+      const mathR2 = document.getElementById('dist-math-r2');
+
+      if (state.activeDistMetric === 'manhattan') {
+        btn.textContent = 'Metric: Manhattan (|Δ|)';
+        mathR1.textContent = '|0.1388 - (-0.5554)| + |-0.2083 - (-0.2083)| = 0.6942 + 0.0000 = 0.6942';
+        mathR2.textContent = '|0.1388 - 0.8331| + |-0.2083 - 0.1388| = 0.6942 + 0.3471 = 1.0413';
+      } else {
+        btn.textContent = 'Metric: Euclidean (SQRT(Δ²))';
+        mathR1.textContent = 'SQRT((0.1388 - (-0.5554))² + 0²) = SQRT(0.4819) = 0.6942';
+        mathR2.textContent = 'SQRT((0.1388 - 0.8331)² + (-0.2083 - 0.1388)²) = SQRT(0.4819 + 0.1205) = 0.7761';
+      }
+      playSfx('tap');
+    }
+
+    function setSkewness(type) {
+      playSfx('tap');
+      state.skewnessState = type;
+      ['r', 's', 'l'].forEach(k => {
+        document.getElementById(`btn-skew-${k}`).className = 'px-3 py-1.5 rounded-lg bg-white border border-[#E8E2D8] text-gray-700 text-xs font-bold';
+      });
+
+      const exp = document.getElementById('skew-explanation');
+      if (type === 'right') {
+        document.getElementById('btn-skew-r').className = 'px-3 py-1.5 rounded-lg bg-[#D95D39] text-white text-xs font-bold';
+        exp.innerHTML = '<div class="font-bold text-[#D95D39]">Right-Skewed (Positive): Mean &gt; Median</div><p>High outliers pull the arithmetic mean upward. The median remains resistant and sits lower. Examples: CEO salaries, country GDP, housing prices.</p>';
+      } else if (type === 'symmetric') {
+        document.getElementById('btn-skew-s').className = 'px-3 py-1.5 rounded-lg bg-[#1D3557] text-white text-xs font-bold';
+        exp.innerHTML = '<div class="font-bold text-[#1D3557]">Symmetric (Bell Curve): Mean ≈ Median ≈ Mode</div><p>Distribution is balanced around the center. Standard deviation and mean are ideal summary statistics. 68% falls within ±1σ, 95% within ±2σ.</p>';
+      } else {
+        document.getElementById('btn-skew-l').className = 'px-3 py-1.5 rounded-lg bg-[#4E878C] text-white text-xs font-bold';
+        exp.innerHTML = '<div class="font-bold text-[#4E878C]">Left-Skewed (Negative): Mean &lt; Median</div><p>Low outliers drag the mean downward below the median. Examples: age of death, easy test scores clustered near 100%.</p>';
+      }
+    }
+
+    function calcBoxplot() {
+      const q1 = parseFloat(document.getElementById('box-q1').value) || 0;
+      const q3 = parseFloat(document.getElementById('box-q3').value) || 0;
+      const iqr = q3 - q1;
+      const lower = q1 - 1.5 * iqr;
+      const upper = q3 + 1.5 * iqr;
+
+      document.getElementById('box-iqr').textContent = iqr.toFixed(1);
+      document.getElementById('box-lower').textContent = lower.toFixed(1);
+      document.getElementById('box-upper').textContent = upper.toFixed(1);
+    }
+
+    /* -------------------------------------------------------------------------
+       4. PHYSICAL REPS GYM DRILLS DATA & ENGINE
+       ------------------------------------------------------------------------- */
+    const DRILLS = {
+      d1: {
+        ch: 'Chapter 2 • 15 Application Marks',
+        title: 'Frequency Table & COUNTIF Descending Sort',
+        scenario: 'You have 125 countries in column B (Continents: Europe, Asia, Africa, North America, South America, Oceania). You must construct a summary frequency and relative frequency table.',
+        prompt: 'Specify the exact Excel formula for absolute count, relative frequency, and the critical post-creation move.',
+        keywords: ['COUNTIF', 'relative', 'sort', 'descending', '125'],
+        model: 'Absolute frequency: =COUNTIF($B$2:$B$126, A2)\nRelative frequency: =B2/$B$8 (formatted as percentage with 2 decimal places, no nested AVERAGE).\nCritical move: Select table and click Data ▸ Sort by Count (Largest to Smallest). Verify the sum equals exactly 125.'
+      },
+      d2: {
+        ch: 'Chapter 2 • 4 Application Marks',
+        title: '40th Percentile Calculation',
+        scenario: 'The exam asks for the 40th percentile of country values in C2:C126. On the semester test, you wrote MAX(C2:C51) and lost 4 marks.',
+        prompt: 'Write the correct Excel formula for the 40th percentile and explain why MAX is invalid.',
+        keywords: ['PERCENTILE.INC', '0.4', 'range', 'not MAX'],
+        model: 'Correct formula: =PERCENTILE.INC(\'Question 1 data\'!C2:C126, 0.4) which yields 48 511.60.\nMAX finds the single largest value in a set, whereas PERCENTILE.INC partitions the distribution so that 40% of observations fall below that threshold.'
+      },
+      d3: {
+        ch: 'Chapter 2 • 4 Application Marks',
+        title: 'Grouped Mean via AVERAGEIF',
+        scenario: 'You need the mean economic output for Africa from 125 countries sorted alphabetically by country name.',
+        prompt: 'Provide the formula. Explain why typing C2:C98 causes catastrophic mark loss.',
+        keywords: ['AVERAGEIF', 'Africa', 'alphabetical', 'criteria'],
+        model: 'Correct formula: =AVERAGEIF($B$2:$B$126, "Africa", $C$2:$C$126) which yields 62 786.59.\nTyping hardcoded row blocks like C2:C98 fails completely because countries are listed alphabetically by name, scattering African countries across the entire column rather than in a contiguous block.'
+      },
+      d4: {
+        ch: 'Chapter 2 • 4 Application Marks',
+        title: 'Sample Standard Deviation & The Fatal Formula',
+        scenario: 'You are calculating the sample standard deviation for the 29 African countries. In the semester test, you typed =STDEV.S(mean, median) which returned 37 165 and scored 0.',
+        prompt: 'State the correct approach and explain why STDEV.S(mean, median) was a fatal error.',
+        keywords: ['STDEV.S', 'sample', 'range', 'raw observations', 'not two numbers'],
+        model: 'Correct formula: Array formula =STDEV.S(IF($B$2:$B$126="Africa", $C$2:$C$126)) or filter by Africa and run =STDEV.S on visible raw rows (giving SD = 92 119.37).\nPassing mean and median into STDEV.S calculates the standard deviation of just two numbers rather than the 29 raw country observations.'
+      },
+      d5: {
+        ch: 'Chapter 2 • 3 Application Marks',
+        title: 'Coefficient of Variation & The 1-Mark Distinction Sentence',
+        scenario: 'Africa has mean = 62 786.59, SD = 92 119.37 (CV = 1.467). Europe has mean = 517 280.54, SD = 856 243.59 (CV = 1.655).',
+        prompt: 'Write the complete 1-mark exam interpretation sentence comparing their relative variation.',
+        keywords: ['coefficient of variation', 'relative', 'higher', 'inequality', 'Europe'],
+        model: 'Both distributions are strongly right-skewed as the mean sits well above the median. Europe exhibits a higher coefficient of variation (1.655 vs 1.467), demonstrating greater relative economic dispersion and inequality across its economies compared to Africa.'
+      },
+      d6: {
+        ch: 'Chapter 8 • 15 Application Marks',
+        title: 'ToolPak Regression Slope & R² Interpretation',
+        scenario: 'Sales = 14561.29 + 3.5732 × Advertising with R² = 0.9957, SEE = 712.72, and slope t = 47.90.',
+        prompt: 'Draft the complete exam sentence interpreting the slope and R-squared values for the marketing director.',
+        keywords: ['additional rand', 'associated with', '3.57', 'variation', 'explained'],
+        model: 'For each additional rand (R1.00) invested in advertising spend, monthly sales are predicted to increase by R3.57 on average, holding other factors constant. The R² of 0.9957 indicates that 99.57% of the total sample variation in monthly sales is explained by advertising expenditure.'
+      },
+      d7: {
+        ch: 'Chapter 8 • 4 Application Marks',
+        title: 'Scatter Chart X-Axis Sanity Check',
+        scenario: 'You generate a scatter chart and fit a linear trendline. The slope comes out as 2216.50.',
+        prompt: 'Perform the 5-second mental sanity check. What error was committed?',
+        keywords: ['inverted', 'X and Y', 'sanity check', 'typical X', 'plausible'],
+        model: 'Sanity check: Slope × typical X should approximate typical Y. 2216 × 16500 = R36.6 Million, which is absurd compared to actual sales of R75 000. The X and Y axes were inverted! Select Advertising as X and Sales as Y to recover the true slope of 3.57.'
+      },
+      d8: {
+        ch: 'Chapter 3 • 10 Application Marks',
+        title: 'Two-Dimension PivotTable & Sheet Naming',
+        scenario: 'The question instructs you to create a PivotTable showing Average Purchase Amount broken down by Age Group and Region, placed on a sheet named Pivot_Q2_1.',
+        prompt: 'Describe the row, column, and value field placements, and the free-mark rule.',
+        keywords: ['Rows: Age Group', 'Columns: Region', 'Average', 'Pivot_Q2_1'],
+        model: 'Place Age Group in Rows, Region in Columns, and Average of Purchase Amount in Values. Name the worksheet exactly Pivot_Q2_1. In past exams, full questions scored 0 simply because sheets were omitted or named Sheet1.'
+      },
+      d9: {
+        ch: 'Chapter 6 • 10 Application Marks',
+        title: 'Z-Score Standardisation & Distance Ranking',
+        scenario: 'Jane has age z = +0.1388, distance z = -0.2083. Runner 1 has age z = -0.5554, dist z = -0.2083. Runner 2 has age z = +0.8331, dist z = +0.1388.',
+        prompt: 'Calculate Manhattan distance for both runners and identify Jane’s nearest neighbour.',
+        keywords: ['Manhattan', '0.6942', '1.0413', 'Runner 1', 'nearest neighbour'],
+        model: 'Jane ↔ Runner 1 Manhattan = |0.1388 - (-0.5554)| + |-0.2083 - (-0.2083)| = 0.6942 + 0.0000 = 0.6942.\nJane ↔ Runner 2 Manhattan = |0.1388 - 0.8331| + |-0.2083 - 0.1388| = 0.6942 + 0.3471 = 1.0413.\nRunner 1 has the smaller distance (0.6942) and is Jane\'s nearest neighbour.'
+      },
+      d10: {
+        ch: 'Chapter 10 • 10 MCQ Marks',
+        title: 'Forecast Error Metrics (RMSE/MAD/MAPE)',
+        scenario: 'Five forecasting errors produce squared residuals totaling 0.710 (mean = 0.142).',
+        prompt: 'Calculate RMSE and explain the unit difference between RMSE, MAD, and MAPE.',
+        keywords: ['RMSE', 'SQRT', '0.3768', 'same units', 'percentage'],
+        model: 'RMSE = SQRT(0.142) = 0.3768. RMSE and MAD are expressed in the exact same physical units as the original dependent variable Y. MAPE expresses error as a scale-free percentage (%).'
+      }
+    };
+
+    function loadDrill(drillKey) {
+      playSfx('tap');
+      state.activeDrill = drillKey;
+      const d = DRILLS[drillKey];
+      document.getElementById('drill-badge-ch').textContent = d.ch;
+      document.getElementById('drill-title').textContent = d.title;
+      document.getElementById('drill-scenario').innerHTML = `<p>${d.scenario}</p><p class="font-semibold text-[#1D3557]">${d.prompt}</p>`;
+      document.getElementById('drill-input').value = '';
+      document.getElementById('drill-model-box').classList.add('hidden');
+      document.getElementById('drill-model-text').textContent = d.model;
+
+      renderDrillKeywordChips(d.keywords);
+    }
+
+    function renderDrillKeywordChips(keywords) {
+      const container = document.getElementById('drill-keywords-chips');
+      container.innerHTML = '';
+      keywords.forEach(kw => {
+        const span = document.createElement('span');
+        span.id = `kw-${kw.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+        span.className = 'px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 border border-gray-200 font-mono-code text-[11px]';
+        span.textContent = `○ ${kw}`;
+        container.appendChild(span);
+      });
+      document.getElementById('drill-keyword-counter').textContent = `0/${keywords.length} Criteria Met`;
+    }
+
+    function evaluateDrillText() {
+      const text = document.getElementById('drill-input').value.toLowerCase();
+      const d = DRILLS[state.activeDrill];
+      let matches = 0;
+
+      d.keywords.forEach(kw => {
+        const id = `kw-${kw.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+        const chip = document.getElementById(id);
+        const match = text.includes(kw.toLowerCase());
+        if (match) matches++;
+
+        if (chip) {
+          if (match) {
+            chip.className = 'px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 font-mono-code text-[11px] font-bold';
+            chip.textContent = `✔ ${kw}`;
+          } else {
+            chip.className = 'px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 border border-gray-200 font-mono-code text-[11px]';
+            chip.textContent = `○ ${kw}`;
+          }
+        }
+      });
+
+      document.getElementById('drill-keyword-counter').textContent = `${matches}/${d.keywords.length} Criteria Met`;
+    }
+
+    function submitDrill() {
+      const text = document.getElementById('drill-input').value.toLowerCase();
+      const d = DRILLS[state.activeDrill];
+      let matches = 0;
+      d.keywords.forEach(kw => {
+        if (text.includes(kw.toLowerCase())) matches++;
+      });
+
+      if (matches >= Math.ceil(d.keywords.length * 0.6)) {
+        if (!state.completedDrills.includes(state.activeDrill)) {
+          state.completedDrills.push(state.activeDrill);
+          localStorage.setItem('cmpg222_drills', JSON.stringify(state.completedDrills));
+          addXp(30, `Completed ${d.title}`);
+        } else {
+          addXp(10, `Repetition Bonus for ${d.title}`);
+        }
+        revealModelAnswer();
+      } else {
+        playSfx('pop');
+        showToast('Answer needs more required terminology. Check criteria!', '⚠️');
+      }
+    }
+
+    function revealModelAnswer() {
+      playSfx('pop');
+      document.getElementById('drill-model-box').classList.remove('hidden');
+    }
+
+    function copyMemoForWord() {
+      const d = DRILLS[state.activeDrill];
+      navigator.clipboard.writeText(d.model).then(() => {
+        playSfx('fanfare');
+        showToast('Model Memo Copied to Clipboard for Word!', '📋');
+      }).catch(() => {
+        showToast('Clipboard access denied', '⚠️');
+      });
+    }
+
+    /* -------------------------------------------------------------------------
+       5. MNEMONIC WALL DOSSIERS
+       ------------------------------------------------------------------------- */
+    const DOSSIERS = {
+      'dossier-row-slice': {
+        icon: '⚠️',
+        title: 'The "Row-Slice" Death Trap: Why C2:C98 Destroys Marks',
+        html: `
+          <div class="space-y-3">
+            <p><strong>The Post-Mortem Evidence:</strong> In Question 1.3 of the semester test, you wrote <code class="bg-[#F3EFEA] text-[#D95D39] px-1 py-0.5 rounded font-mono-code">=AVERAGE('Question 1 data'!C2:C98)</code> for Africa and <code class="bg-[#F3EFEA] text-[#D95D39] px-1 py-0.5 rounded font-mono-code">=MEDIAN('Question 1 data'!C7:C123)</code> for Europe.</p>
+            <p><strong>Why This is Fatal:</strong> The dataset is sorted <em>alphabetically by country name</em> (Algeria, Angola, Argentina, Australia...), NOT by continent! Therefore, rows 2 to 98 contain a random mixture of European, African, Asian, and American nations. You calculated the average of an arbitrary geographic slice.</p>
+            <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-900 font-mono-code text-xs">
+              <strong>The Ironclad Solution:</strong><br>
+              =AVERAGEIF($B$2:$B$126, "Africa", $C$2:$C$126)<br>
+              =AVERAGEIF($B$2:$B$126, "Europe", $C$2:$C$126)
+            </div>
+            <p><strong>Golden Rule:</strong> Never hardcode row numbers when calculating category aggregates unless you have explicitly sorted by that exact category column first!</p>
+          </div>
+        `
+      },
+      'dossier-stdev': {
+        icon: '💥',
+        title: 'The "Two-Number SD" Horror: Anatomy of =STDEV.S(mean, median)',
+        html: `
+          <div class="space-y-3">
+            <p><strong>The Post-Mortem Evidence:</strong> In Question 1.3, cell B52 contained <code class="bg-[#F3EFEA] text-[#D95D39] px-1 py-0.5 rounded font-mono-code">=STDEV.S(B50, C50)</code> which evaluated to 37 165.</p>
+            <p><strong>The Mathematical Absurdity:</strong> Cell B50 was the Mean, and C50 was the Median! You passed two numbers into a sample standard deviation function. Excel calculated the standard deviation between those two summary numbers, completely ignoring the 29 raw country observations.</p>
+            <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-900 font-mono-code text-xs">
+              <strong>The Two Legitimate Routes:</strong><br>
+              1. Array Formula: =STDEV.S(IF($B$2:$B$126="Africa", $C$2:$C$126))<br>
+              2. Filter Data: Data ▸ Filter ▸ Continent = Africa, copy the visible numbers to a separate scratch column, and run =STDEV.S(scratch_range)
+            </div>
+            <p>Africa true SD = <strong>92 119.37</strong>. If a standard deviation formula returns a number based on two cells, you have failed the question.</p>
+          </div>
+        `
+      },
+      'dossier-toolpak': {
+        icon: '🛠️',
+        title: 'The Analysis ToolPak Activation Rite for NWU Labs',
+        html: `
+          <div class="space-y-3">
+            <p><strong>The Lab Reality:</strong> Computers in VC-A21 Room 103 reset their user profiles between sessions. Analysis ToolPak is <strong>disabled by default</strong>.</p>
+            <p><strong>The 10-Second Ritual (Do this the moment you log in):</strong></p>
+            <ol class="list-decimal list-inside space-y-1 text-gray-800 font-semibold">
+              <li>Open Excel</li>
+              <li>Click <code>File ▸ Options ▸ Add-ins</code></li>
+              <li>At the bottom, set Manage to <code>Excel Add-ins</code> and click <code>Go...</code></li>
+              <li>Tick <code>[x] Analysis ToolPak</code> and click <code>OK</code></li>
+              <li>Verify that the <code>Data ▸ Data Analysis</code> button now appears on the ribbon</li>
+            </ol>
+            <p>If you don't do this upfront, you will waste 15 minutes during the exam panicking that regression tools are missing!</p>
+          </div>
+        `
+      },
+      'dossier-distance': {
+        icon: '📏',
+        title: 'The Unstandardised Distance Illusion in Data Mining',
+        html: `
+          <div class="space-y-3">
+            <p><strong>Why Scale Distorts Reality:</strong> Suppose we cluster customers based on Age (years, range 20–70) and Annual Income (Rands, range 150 000–1 500 000).</p>
+            <p>A difference of R10 000 in income squared is <strong>100 000 000</strong>. A difference of 10 years in age squared is <strong>100</strong>. The income variable completely overpowers age by a factor of 1 000 000!</p>
+            <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-900 font-mono-code text-xs">
+              <strong>Z-Score Standardisation:</strong><br>
+              z = (X - μ) / σ<br>
+              =STANDARDIZE(X, mean, stdev)
+            </div>
+            <p>Standardising transforms all variables into dimensionless units centered at 0 with standard deviation 1, ensuring fair distance metrics.</p>
+          </div>
+        `
+      },
+      'dossier-association': {
+        icon: '🛒',
+        title: 'The Trivial Association Rule Trap (Support vs Confidence vs Lift)',
+        html: `
+          <div class="space-y-3">
+            <p><strong>Exam Scenario:</strong> An association rule states: <code>{Bread} ⟹ {Milk}</code> with 100% Confidence. Does this prove a strong relationship?</p>
+            <p><strong>The Trap:</strong> If 98% of all shoppers buy milk anyway, milk's base rate is 0.98. The fact that bread buyers also buy milk is trivial!</p>
+            <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-900 font-mono-code text-xs">
+              <strong>The Triad Formulas:</strong><br>
+              • Support = P(A ∩ B) = Count(A and B) / Total Transactions<br>
+              • Confidence = P(B | A) = Count(A and B) / Count(A)<br>
+              • Lift = Confidence / P(B) = P(A ∩ B) / [P(A) × P(B)]
+            </div>
+            <p>If <strong>Lift ≈ 1.0</strong>, the rule is independent and trivial. Look for <strong>Lift &gt; 1.5</strong> for actionable cross-selling opportunities.</p>
+          </div>
+        `
+      },
+      'dossier-charts': {
+        icon: '📊',
+        title: 'The Chart Choice Matrix & Cognitive Load Rules',
+        html: `
+          <div class="space-y-3">
+            <p><strong>Chapter 3 Visualisation Principles (Camm 6e):</strong></p>
+            <ul class="list-disc list-inside space-y-1 text-gray-800">
+              <li><strong>Time Series Trends:</strong> Line Chart (never a bar chart).</li>
+              <li><strong>Categorical Comparisons:</strong> Clustered Bar or Column Chart (sorted descending).</li>
+              <li><strong>Bivariate Relationships:</strong> Scatter Plot (X = Independent, Y = Dependent).</li>
+              <li><strong>Part-of-Whole:</strong> 100% Stacked Bar (Avoid Pie Charts unless &le; 3 slices).</li>
+            </ul>
+            <p><strong>Never Use in Exams:</strong> 3D effects, heavy decorative background gridlines, or truncated non-zero y-axes that distort bar heights.</p>
+          </div>
+        `
+      }
+    };
+
+    function openDossier(key) {
+      playSfx('tap');
+      const d = DOSSIERS[key];
+      if (!d) return;
+      document.getElementById('dossier-icon').textContent = d.icon;
+      document.getElementById('dossier-title').textContent = d.title;
+      document.getElementById('dossier-content').innerHTML = d.html;
+
+      const modal = document.getElementById('modal-dossier');
+      modal.classList.remove('hidden-modal');
+      modal.classList.add('visible-modal');
+    }
+
+    function closeDossier() {
+      playSfx('pop');
+      const modal = document.getElementById('modal-dossier');
+      modal.classList.remove('visible-modal');
+      modal.classList.add('hidden-modal');
+    }
+
+    /* -------------------------------------------------------------------------
+       6. ZERO-LATENCY TOOLPAK DOJO
+       ------------------------------------------------------------------------- */
+    function openToolpakDialog() {
+      playSfx('tap');
+      const modal = document.getElementById('modal-toolpak');
+      modal.classList.remove('hidden-modal');
+      modal.classList.add('visible-modal');
+    }
+
+    function closeToolpakDialog() {
+      const modal = document.getElementById('modal-toolpak');
+      modal.classList.remove('visible-modal');
+      modal.classList.add('hidden-modal');
+    }
+
+    function executeToolpakRun() {
+      closeToolpakDialog();
+      playSfx('fanfare');
+
+      document.getElementById('dojo-instruction').innerHTML = '<span>🎉 <strong>Step 2 Complete:</strong> Regression summary generated in Sheet "Regression_Output"! Analyze the highlighted R² and coefficients below.</span><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[11px]">Success</span>';
+      document.getElementById('dojo-output-container').classList.remove('hidden');
+
+      addXp(35, 'Executed ToolPak Regression Dojo');
+    }
+
+    function resetDojo() {
+      playSfx('pop');
+      document.getElementById('dojo-output-container').classList.add('hidden');
+      document.getElementById('dojo-instruction').innerHTML = '<span>👉 <strong>Step 1:</strong> Click the green <strong>"Data Analysis (ToolPak)"</strong> button on the ribbon above to open the regression setup dialog.</span><span id="dojo-step-badge" class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-bold text-[11px]">Step 1/3</span>';
+      showToast('Dojo Reset to Initial State', '🔄');
+    }
+
+    /* -------------------------------------------------------------------------
+       7. FINAL BOSS EXAM SIMULATOR
+       ------------------------------------------------------------------------- */
+    const BOSS_QUESTIONS = [
+      {
+        id: 1,
+        ch: 'Chapter 2 (10M)',
+        q: 'Which descriptive statistic is strictly resistant to extreme outlier observations in a skewed distribution?',
+        options: ['Arithmetic Mean', 'Median', 'Sample Variance', 'Standard Deviation'],
+        correct: 1,
+        exp: 'The median is an order-based statistic and is unaffected by extreme tails.'
+      },
+      {
+        id: 2,
+        ch: 'Chapter 2 (10M)',
+        q: 'In the formula =PERCENTILE.INC(array, k), what valid range must k belong to?',
+        options: ['1 to 100', '0 to 1 inclusive', '-1 to +1', 'Any positive integer'],
+        correct: 1,
+        exp: 'Percentile in Excel takes a fraction between 0.0 and 1.0 (e.g., 0.4 for 40th percentile).'
+      },
+      {
+        id: 3,
+        ch: 'Chapter 3 (10M)',
+        q: 'According to Edward Tufte and Camm 6e, what is the primary goal of data visualization?',
+        options: ['Maximizing decorative 3D shading', 'Maximizing the Data-Ink ratio while minimizing chartjunk', 'Using at least 8 colors per graph', 'Truncating the y-axis to exaggerate trends'],
+        correct: 1,
+        exp: 'High data-ink ratio ensures cognitive focus on actual information without clutter.'
+      },
+      {
+        id: 4,
+        ch: 'Chapter 6 (10M)',
+        q: 'Why MUST numeric data be standardised into z-scores before calculating Euclidean or Manhattan distance in k-NN classification?',
+        options: ['To eliminate negative numbers', 'To prevent variables with large measurement scales from dominating the distance metric', 'To convert all data into categorical labels', 'To satisfy the normal distribution theorem'],
+        correct: 1,
+        exp: 'Variables with large units (e.g. Rands) overpower smaller units (e.g. Years) without standardisation.'
+      },
+      {
+        id: 5,
+        ch: 'Chapter 6 (10M)',
+        q: 'In association rules, what does a Lift ratio of approximately 1.0 indicate?',
+        options: ['The antecedent and consequent items are purchased completely independently', 'The rule is extremely strong and actionable', 'The rule has 100% confidence', 'The consequent is never purchased'],
+        correct: 0,
+        exp: 'Lift = P(A ∩ B) / [P(A)P(B)]. A value of 1.0 indicates statistical independence.'
+      },
+      {
+        id: 6,
+        ch: 'Chapter 8 (10M)',
+        q: 'In simple linear regression, what does the R-squared value represent?',
+        options: ['The statistical significance of the intercept', 'The proportion of total sample variation in Y explained by variation in X', 'The correlation coefficient multiplied by standard error', 'The probability of committing a Type I error'],
+        correct: 1,
+        exp: 'R² = SSR / SST, representing the fraction of total variability accounted for by the model.'
+      },
+      {
+        id: 7,
+        ch: 'Chapter 8 (10M)',
+        q: 'In the regression output, how is the t-statistic for a slope coefficient calculated?',
+        options: ['Slope × Std Error', 'Slope / Std Error', 'Slope / Intercept', 'Std Error / Residuals'],
+        correct: 1,
+        exp: 't = b / SE(b).'
+      },
+      {
+        id: 8,
+        ch: 'Chapter 8 (10M)',
+        q: 'Sales = 14561.29 + 3.5732 × Advertising. What is the predicted sales when Advertising = R10 000?',
+        options: ['R50 293.29', 'R35 732.00', 'R14 561.29', 'R40 293.29'],
+        correct: 0,
+        exp: '14561.29 + (3.5732 × 10000) = 14561.29 + 35732 = 50293.29.'
+      },
+      {
+        id: 9,
+        ch: 'Chapter 10 (10M)',
+        q: 'What is the distinguishing mathematical property of Root Mean Squared Error (RMSE)?',
+        options: ['It is expressed in squared units', 'It is in the same units as the dependent variable and penalizes large errors heavily', 'It is always a percentage between 0 and 100%', 'It ignores negative forecasting errors'],
+        correct: 1,
+        exp: 'RMSE = SQRT(Mean Squared Error), bringing the units back to Y while penalizing big errors.'
+      },
+      {
+        id: 10,
+        ch: 'Chapter 10 (10M)',
+        q: 'What does partitioning data into Training and Validation sets prevent?',
+        options: ['Slow Excel calculations', 'Overfitting the model to sample noise rather than generalizable patterns', 'Missing regression coefficients', 'Negative correlation'],
+        correct: 1,
+        exp: 'Validation partitions test model generalization on unseen data.'
+      }
+    ];
+
+    function renderBossExam() {
+      const container = document.getElementById('boss-questions-container');
+      container.innerHTML = '';
+
+      BOSS_QUESTIONS.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = 'paper-card p-5 bg-white space-y-3';
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="px-2 py-0.5 rounded text-xs font-bold bg-[#1D3557]/10 text-[#1D3557]">Q${idx + 1} • ${q.ch}</span>
+            <span class="text-xs font-mono-code text-gray-400">10 Marks</span>
+          </div>
+          <p class="text-sm font-semibold text-gray-800">${q.q}</p>
+          <div class="space-y-2 pt-1 text-xs sm:text-sm">
+            ${q.options.map((opt, oIdx) => `
+              <label class="flex items-center gap-2.5 p-2.5 rounded-lg border border-[#E8E2D8] hover:bg-[#FAF7F2] cursor-pointer transition">
+                <input type="radio" name="boss-q-${idx}" value="${oIdx}" class="accent-[#1D3557]">
+                <span>${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function startBossExam() {
+      if (state.bossStarted) return;
+      playSfx('fanfare');
+      state.bossStarted = true;
+      document.getElementById('btn-start-boss').disabled = true;
+      document.getElementById('btn-start-boss').textContent = 'Exam Clock Running ⏳';
+      document.getElementById('btn-start-boss').className = 'px-5 py-2.5 rounded-xl bg-gray-400 text-white font-bold text-xs sm:text-sm cursor-not-allowed';
+
+      state.bossTimerId = setInterval(() => {
+        state.bossSeconds--;
+        const mins = Math.floor(state.bossSeconds / 60);
+        const secs = state.bossSeconds % 60;
+        document.getElementById('boss-timer').textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+        if (state.bossSeconds <= 0) {
+          clearInterval(state.bossTimerId);
+          submitBossExam();
+        }
+      }, 1000);
+
+      showToast('Exam clock started! 25 minutes on the clock.', '⏱️');
+    }
+
+    function submitBossExam() {
+      if (state.bossTimerId) clearInterval(state.bossTimerId);
+
+      let correctCount = 0;
+      let unanswered = 0;
+
+      BOSS_QUESTIONS.forEach((q, idx) => {
+        const selected = document.querySelector(`input[name="boss-q-${idx}"]:checked`);
+        if (!selected) {
+          unanswered++;
+        } else if (parseInt(selected.value, 10) === q.correct) {
+          correctCount++;
+        }
+      });
+
+      const totalMarks = correctCount * 10;
+      const pct = (totalMarks / 100) * 100;
+
+      playSfx(pct >= 75 ? 'fanfare' : 'pop');
+
+      const card = document.getElementById('boss-results-card');
+      card.classList.remove('hidden');
+      card.scrollIntoView({ behavior: 'smooth' });
+
+      let verdict = '';
+      let badgeClass = '';
+      if (pct >= 85) {
+        verdict = '🏆 Distinction Mastery (85%+) — High Distinction Predicted!';
+        badgeClass = 'bg-emerald-100 text-emerald-900 border-emerald-300';
+      } else if (pct >= 75) {
+        verdict = '⭐ Distinction Safe (75–84%) — Solid Performance!';
+        badgeClass = 'bg-blue-100 text-blue-900 border-blue-300';
+      } else if (pct >= 50) {
+        verdict = '✔ Pass Confirmed (50–74%) — Review missed questions in the Gym!';
+        badgeClass = 'bg-amber-100 text-amber-900 border-amber-300';
+      } else {
+        verdict = '🚨 Sub-Minimum Risk (&lt; 50%) — Re-drill ToolPak & Ch 2 formulas immediately!';
+        badgeClass = 'bg-rose-100 text-rose-900 border-rose-300';
+      }
+
+      card.innerHTML = `
+        <div class="text-center space-y-3">
+          <div class="inline-block px-4 py-1.5 rounded-full border text-sm font-extrabold ${badgeClass}">
+            ${verdict}
+          </div>
+          <div class="text-4xl font-extrabold text-[#1D3557] font-mono-code">${totalMarks} / 100 Marks</div>
+          <p class="text-xs text-gray-500">Unanswered questions: ${unanswered}</p>
+        </div>
+
+        <div class="pt-4 border-t border-[#E8E2D8] space-y-2 text-xs">
+          <div class="font-bold text-[#1D3557]">Question Breakdown & Explanations:</div>
+          <div class="space-y-1.5">
+            ${BOSS_QUESTIONS.map((q, idx) => {
+              const sel = document.querySelector(`input[name="boss-q-${idx}"]:checked`);
+              const isCorr = sel && parseInt(sel.value, 10) === q.correct;
+              return `
+                <div class="p-2.5 rounded-lg border ${isCorr ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200'} flex items-start justify-between gap-2">
+                  <div>
+                    <span class="font-bold">Q${idx + 1}:</span> ${q.q}<br>
+                    <span class="text-[11px] text-gray-600 mt-0.5 block">✔ <strong>Answer:</strong> ${q.options[q.correct]} — ${q.exp}</span>
+                  </div>
+                  <span class="font-bold font-mono-code text-xs ${isCorr ? 'text-emerald-700' : 'text-rose-700'}">${isCorr ? '+10M' : '0M'}</span>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+
+      addXp(totalMarks, 'Completed Boss Exam Challenge');
+    }
+
+    /* -------------------------------------------------------------------------
+       8. TRIAGE & FLIGHT PLAN MODAL
+       ------------------------------------------------------------------------- */
+    function openFlightPlanModal() {
+      playSfx('tap');
+      const m = document.getElementById('modal-flight-plan');
+      m.classList.remove('hidden-modal');
+      m.classList.add('visible-modal');
+    }
+
+    function closeFlightPlanModal() {
+      playSfx('pop');
+      const m = document.getElementById('modal-flight-plan');
+      m.classList.remove('visible-modal');
+      m.classList.add('hidden-modal');
+    }
+
+    function setTriageTime(tier) {
+      playSfx('tap');
+      state.triageTime = tier;
+      ['t1', 't2', 't3'].forEach(id => {
+        document.getElementById(`triage-${id}`).className = 'p-2.5 rounded-xl border border-[#E8E2D8] hover:border-[#1D3557] text-left transition text-xs font-semibold';
+      });
+      const mapping = { emergency: 't1', crunch: 't2', mastery: 't3' };
+      document.getElementById(`triage-${mapping[tier]}`).className = 'p-2.5 rounded-xl border-2 border-[#1D3557] bg-[#1D3557]/10 text-left transition text-xs font-bold text-[#1D3557]';
+    }
+
+    function setTriagePanic(point) {
+      playSfx('tap');
+      state.triagePanic = point;
+      ['p1', 'p2', 'p3', 'p4'].forEach(id => {
+        document.getElementById(`triage-${id}`).className = 'p-2.5 rounded-xl border border-[#E8E2D8] hover:border-[#1D3557] text-left transition text-xs font-semibold';
+      });
+      const mapping = { excel: 'p1', stats: 'p2', distance: 'p3', mcq: 'p4' };
+      document.getElementById(`triage-${mapping[point]}`).className = 'p-2.5 rounded-xl border-2 border-[#1D3557] bg-[#1D3557]/10 text-left transition text-xs font-bold text-[#1D3557]';
+    }
+
+    function applyFlightPlanDiagnostic() {
+      closeFlightPlanModal();
+      playSfx('fanfare');
+
+      if (state.triageTime === 'emergency') {
+        launchTriagePreset('emergency');
+      } else if (state.triageTime === 'crunch') {
+        launchTriagePreset('crunch');
+      } else {
+        launchTriagePreset('mastery');
+      }
+    }
+
+    function launchTriagePreset(tier) {
+      playSfx('fanfare');
+      if (tier === 'emergency') {
+        switchTab('tab-dojo');
+        showToast('Emergency Track: Master ToolPak Regression first!', '🚨');
+      } else if (tier === 'crunch') {
+        switchTab('tab-gym');
+        document.getElementById('drill-selector').value = 'd6';
+        loadDrill('d6');
+        showToast('Crunch Track: Drilling Ch 8 & Ch 2 high-yield marks!', '⏱️');
+      } else {
+        switchTab('tab-workbench');
+        showToast('Distinction Track: Visualizing all 3 examinable models!', '🏆');
+      }
+    }
+
+    /* -------------------------------------------------------------------------
+       9. INITIALIZATION
+       ------------------------------------------------------------------------- */
+    window.addEventListener('DOMContentLoaded', () => {
+      // Restore XP
+      const xpEl = document.getElementById('stat-xp');
+      if (xpEl) xpEl.textContent = `${state.xp} XP`;
+
+      // Load initial drill
+      loadDrill('d6');
+
+      // Render Boss Exam
+      renderBossExam();
+
+      // Render KaTeX auto-render if available
+      if (window.renderMathInElement) {
+        try {
+          renderMathInElement(document.body, {
+            delimiters: [
+              { left: '$$', right: '$$', display: true },
+              { left: '\\[', right: '\\]', display: true },
+              { left: '\\(', right: '\\)', display: false },
+              { left: '$', right: '$', display: false }
+            ]
+          });
+        } catch (e) {
+          console.warn('KaTeX auto-render warning:', e);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

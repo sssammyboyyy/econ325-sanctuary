@@ -8,6 +8,7 @@
 ## 🚀 Live Interactive Station
 - **Artsy Studio Edition (Recommended)**: [https://sssammyboyyy.github.io/econ325-sanctuary/](https://sssammyboyyy.github.io/econ325-sanctuary/)
 - **Pop Arcade Edition**: [https://sssammyboyyy.github.io/econ325-sanctuary/econ325_pop_arcade.html](https://sssammyboyyy.github.io/econ325_pop_arcade.html)
+- **CMPG222 Data Analytics Station**: [https://sssammyboyyy.github.io/econ325-sanctuary/cmpg222_station.html](https://sssammyboyyy.github.io/econ325-sanctuary/cmpg222_station.html)
 
 ---
 
