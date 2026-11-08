@@ -1306,6 +1306,7 @@
           <button id="p-btn-charity" onclick="setPaperView('charity')" class="paper-btn px-3 py-1.5 bg-white text-[#1D3557] text-xs font-bold">2023 Charity Donations</button>
           <button id="p-btn-comrades" onclick="setPaperView('comrades')" class="paper-btn px-3 py-1.5 bg-white text-[#1D3557] text-xs font-bold">2024 Comrades Marathon</button>
             <button id="p-btn-pass" onclick="setPaperView('pass')" class="paper-btn px-3 py-1.5 bg-white text-[#1D3557] text-xs font-bold">2023 Grade 7 Pass Rate</button>
+          <button id="p-btn-ftest" onclick="setPaperView('ftest')" class="paper-btn px-3 py-1.5 bg-white text-[#1D3557] text-xs font-bold">⚡ 2024 Q4: Restricted F-Test [7M]</button>
         </div>
       </div>
 
@@ -2655,6 +2656,25 @@
           }
         ]
       },
+      ftest: {
+        title: "2024 Question 4 [7 Marks] — Restricted F-Test & Joint Hypothesis Testing by Hand",
+        eq: "F = [(R²_UR − R²_R) / m] / [(1 − R²_UR) / (n − k)]   [Unrestricted: ln(WAGE) on EDUC, EXPER, FEMALE, TENURE, IQ | Restricted: excludes FEMALE, TENURE]",
+        stats: "R²_UR = 0.6542, R²_R = 0.6120 | n = 425 observations, k = 5 parameters, m = 2 restrictions | Critical F(2, 420) at 5% = 3.02, at 1% = 4.66",
+        qa: [
+          {
+            q: "4.1 State the null and alternative hypotheses to test whether FEMALE and TENURE are jointly significant. [2M]",
+            a: "<strong>Null Hypothesis (H₀):</strong> β_FEMALE = β_TENURE = 0 (The omitted variables have no joint explanatory effect; their coefficients are simultaneously zero).<br><strong>Alternative Hypothesis (H₁):</strong> At least one βⱼ ≠ 0 (At least one of the omitted variables has a statistically significant effect on wage)."
+          },
+          {
+            q: "4.2 State the degrees of freedom for the numerator (df₁) and the denominator (df₂). [2M]",
+            a: "<strong>Numerator df (df₁):</strong> df₁ = m = 2 (number of linear restrictions imposed, i.e. number of omitted parameters).<br><strong>Denominator df (df₂):</strong> df₂ = n − k = 425 − 5 = 420 (sample size minus total parameters in the unrestricted model, including intercept)."
+          },
+          {
+            q: "4.3 Calculate the F-statistic by hand using the R² values and make an econometric decision at the 5% level of significance. [3M]",
+            a: "<strong>Step 1: Formula:</strong> F = [(R²_UR − R²_R) / m] / [(1 − R²_UR) / (n − k)]<br><strong>Step 2: Substitution & Math:</strong><br>Numerator = (0.6542 − 0.6120) / 2 = 0.0422 / 2 = 0.0211<br>Denominator = (1 − 0.6542) / (425 − 5) = 0.3458 / 420 ≈ 0.0008233<br>Calculated F = 0.0211 / 0.0008233 ≈ <strong>25.63</strong><br><strong>Step 3: Decision Rule:</strong> Critical F(2, 420) at 5% = 3.02.<br>Since Calculated F (25.63) > Critical F (3.02), we <strong>REJECT H₀</strong>.<br><strong>Conclusion:</strong> FEMALE and TENURE are jointly statistically significant at the 5% level. They must NOT be dropped from the regression model (omitting them would trigger specification bias)."
+          }
+        ]
+      },
       pass: {
         title: "2023 Test 2 Question 3 [11 Marks] — Grade 7 Maths Pass Rate (n = 500)",
         eq: "PASS = 36.21 + 0.00122 AVGSAL + 0.0426 ENROL + 0.00136 EXPP − 0.3979 LUNCH + 0.0172 STAFF",
@@ -2702,7 +2722,7 @@ function renderPaperView(k) {
   if (!p) return;
 
   // 1. Update Paper Buttons
-  ['beef', 'charity', 'comrades', 'pass'].forEach(id => {
+  ['beef', 'charity', 'comrades', 'pass', 'ftest'].forEach(id => {
     const btn = document.getElementById('p-btn-' + id);
     if (btn) {
       btn.className = (id === k) 
@@ -2847,6 +2867,42 @@ function buildEquationAnatomy(k, p) {
         <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>DW:</strong> 2.007 (Perfect no auto)</span>
       </div>
     `;
+  } else if (k === 'ftest') {
+    return `
+      <div class="p-6 bg-white rounded-2xl border border-[#E0D9CD] shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E8E2D8] pb-3">
+          <div>
+            <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] text-xs font-bold">2024 PAPER 1 • QUESTION 4 [7 MARKS]</span>
+            <h3 class="text-lg font-extrabold text-[#1D3557] mt-1">Joint Hypothesis & Restricted F-Test Equation</h3>
+          </div>
+          <span class="text-xs font-mono-code font-bold bg-[#FAF7F2] text-[#1D3557] px-3 py-1 rounded-lg border border-[#DDD6CA]">
+            n = 425 | m = 2 | k = 5
+          </span>
+        </div>
+        <div class="p-4 bg-[#FAF7F2] rounded-xl border border-[#DDD6CA] overflow-x-auto text-center font-mono-code text-sm text-[#1D3557]">
+          <strong>F = \frac{(R²_{UR} − R²_R) / m}{(1 − R²_{UR}) / (n − k)}</strong>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+          <div class="p-3 bg-[#FAF3EC] rounded-xl border border-[#E8C5B0]">
+            <span class="font-bold text-[#D95D39]">R²_UR = 0.6542</span>
+            <p class="text-[11px] text-[#555A68] mt-1">Unrestricted model (all 5 variables included).</p>
+          </div>
+          <div class="p-3 bg-[#FAF7F2] rounded-xl border border-[#DDD6CA]">
+            <span class="font-bold text-[#1D3557]">R²_R = 0.6120</span>
+            <p class="text-[11px] text-[#555A68] mt-1">Restricted model (FEMALE & TENURE dropped).</p>
+          </div>
+          <div class="p-3 bg-[#FAF7F2] rounded-xl border border-[#DDD6CA]">
+            <span class="font-bold text-[#1D3557]">m = 2 restrictions</span>
+            <p class="text-[11px] text-[#555A68] mt-1">Numerator degrees of freedom (df₁).</p>
+          </div>
+          <div class="p-3 bg-[#EBF3F5] rounded-xl border border-[#BBD5D9]">
+            <span class="font-bold text-[#4E878C]">df₂ = 420</span>
+            <p class="text-[11px] text-[#555A68] mt-1">n − k = 425 − 5 denominator df.</p>
+          </div>
+        </div>
+      </div>
+    `;
+
   } else if (k === 'pass') {
     chips = `
       <div class="flex flex-wrap items-center gap-2 text-xs">
@@ -2909,6 +2965,52 @@ function buildEquationAnatomy(k, p) {
 
 // Build Contextual Interactive Visualizer Workbench
 function buildContextualVisualizer(k) {
+  if (k === 'ftest') {
+    return `
+      <div class="p-5 bg-white rounded-2xl border border-[#E0D9CD] shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E8E2D8] pb-3">
+          <div>
+            <span class="tag-bauhaus px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] text-[11px] font-bold">INTERACTIVE F-TEST SOLVER</span>
+            <h4 class="font-extrabold text-[#1D3557] text-sm mt-1">Restricted vs Unrestricted F-Calculation Engine</h4>
+            <p class="text-[11px] text-[#7A8294]">Adjust the inputs below to calculate the exact F-statistic and automatic rejection decision.</p>
+          </div>
+          <div class="text-right">
+            <span id="ftest-decision-badge" class="text-xs font-mono-code font-bold bg-[#EBF3F5] text-[#4E878C] px-3 py-1 rounded-lg border border-[#BBD5D9]">
+              F = 25.63 > 3.02 (REJECT H₀)
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs font-mono-code">
+          <label class="block">
+            <span class="text-[#555A68] text-[11px]">R²_UR (Unrestricted):</span>
+            <input type="number" id="ft-r2ur" step="0.001" value="0.654" class="w-full mt-1 p-2 bg-[#FAF7F2] border border-[#DDD6CA] rounded-lg text-[#1D3557] font-bold" oninput="updateFTestVisualizer()">
+          </label>
+          <label class="block">
+            <span class="text-[#555A68] text-[11px]">R²_R (Restricted):</span>
+            <input type="number" id="ft-r2r" step="0.001" value="0.612" class="w-full mt-1 p-2 bg-[#FAF7F2] border border-[#DDD6CA] rounded-lg text-[#1D3557] font-bold" oninput="updateFTestVisualizer()">
+          </label>
+          <label class="block">
+            <span class="text-[#555A68] text-[11px]">m (Restrictions):</span>
+            <input type="number" id="ft-m" value="2" class="w-full mt-1 p-2 bg-[#FAF7F2] border border-[#DDD6CA] rounded-lg text-[#1D3557] font-bold" oninput="updateFTestVisualizer()">
+          </label>
+          <label class="block">
+            <span class="text-[#555A68] text-[11px]">n (Sample Size):</span>
+            <input type="number" id="ft-n" value="425" class="w-full mt-1 p-2 bg-[#FAF7F2] border border-[#DDD6CA] rounded-lg text-[#1D3557] font-bold" oninput="updateFTestVisualizer()">
+          </label>
+          <label class="block">
+            <span class="text-[#555A68] text-[11px]">k (UR Parameters):</span>
+            <input type="number" id="ft-k" value="5" class="w-full mt-1 p-2 bg-[#FAF7F2] border border-[#DDD6CA] rounded-lg text-[#1D3557] font-bold" oninput="updateFTestVisualizer()">
+          </label>
+        </div>
+
+        <div id="ftest-math-breakdown" class="p-3 bg-[#FAF7F2] rounded-xl border border-[#E8E2D8] text-xs font-mono-code text-[#1D3557] space-y-1">
+          <!-- Injected via updateFTestVisualizer -->
+        </div>
+      </div>
+    `;
+  }
+
   if (k === 'beef') {
     return `
       <div class="p-5 bg-white rounded-2xl border border-[#E0D9CD] shadow-sm space-y-4">
@@ -3218,7 +3320,42 @@ function buildSubQuestions(k, p) {
 // Interactive Model Update Handlers
 // -------------------------------------------------------------
 
+function updateFTestVisualizer() {
+  const r2ur = parseFloat(document.getElementById('ft-r2ur')?.value) || 0.6542;
+  const r2r = parseFloat(document.getElementById('ft-r2r')?.value) || 0.6120;
+  const m = parseInt(document.getElementById('ft-m')?.value) || 2;
+  const n = parseInt(document.getElementById('ft-n')?.value) || 425;
+  const k = parseInt(document.getElementById('ft-k')?.value) || 5;
+
+  const num = (r2ur - r2r) / (m > 0 ? m : 1);
+  const den = (1 - r2ur) / (n - k > 0 ? n - k : 1);
+  const fCalc = den > 0 ? (num / den) : 0;
+  const fCrit = 3.02; // Approximation for 5% with df1=2, df2=420
+
+  const badge = document.getElementById('ftest-decision-badge');
+  const breakdown = document.getElementById('ftest-math-breakdown');
+
+  if (badge) {
+    if (fCalc > fCrit) {
+      badge.className = 'text-xs font-mono-code font-bold bg-[#FAF3EC] text-[#D95D39] px-3 py-1 rounded-lg border border-[#D95D39]';
+      badge.textContent = `Calculated F = ${fCalc.toFixed(2)} > ${fCrit} (REJECT H₀ • JOINTLY SIGNIFICANT)`;
+    } else {
+      badge.className = 'text-xs font-mono-code font-bold bg-[#FAF7F2] text-[#7A8294] px-3 py-1 rounded-lg border border-[#DDD6CA]';
+      badge.textContent = `Calculated F = ${fCalc.toFixed(2)} ≤ ${fCrit} (FAIL TO REJECT H₀ • INSIGNIFICANT)`;
+    }
+  }
+
+  if (breakdown) {
+    breakdown.innerHTML = `
+      <div>• <strong>Numerator:</strong> (R²_UR − R²_R) / m = (${r2ur.toFixed(4)} − ${r2r.toFixed(4)}) / ${m} = <strong>${num.toFixed(5)}</strong></div>
+      <div>• <strong>Denominator:</strong> (1 − R²_UR) / (n − k) = (1 − ${r2ur.toFixed(4)}) / (${n} − ${k}) = <strong>${den.toFixed(6)}</strong></div>
+      <div>• <strong>Calculated F:</strong> ${num.toFixed(5)} / ${den.toFixed(6)} = <strong class="text-base text-[#D95D39]">${fCalc.toFixed(2)}</strong> (df₁ = ${m}, df₂ = ${n - k})</div>
+    `;
+  }
+}
+
 function initVisualizerInteractivity(k) {
+  if (k === 'ftest') updateFTestVisualizer();
   if (k === 'beef') updateBeefVisualizer();
   if (k === 'charity') updateCharityVisualizer();
   if (k === 'comrades') updateComradesVisualizer();
@@ -4142,8 +4279,8 @@ function copyActiveDossierNotes() {
 
     // Boss Quiz Data
     const quizItems = [
-      { q: "The sample variance divides the sum of squared deviations by n.", a: false, exp: "False! It divides by degrees of freedom n − 1 (Bessel's correction) for an unbiased sample variance." },
-      { q: "A population parameter is a random variable; a sample statistic is fixed.", a: false, exp: "False! Population parameters are fixed constants; sample statistics are random variables that vary from sample to sample." },
+      { q: "In a log-log regression model (ln Y = β₁ + β₂ ln X), the slope coefficient β₂ measures the constant elasticity of Y with respect to X.", a: true, exp: "True! In a double-log specification, β₂ = (%ΔY / %ΔX), representing a direct elasticity." },
+      { q: "Under perfect multicollinearity, OLS estimators cannot be calculated because the (X'X) matrix is singular.", a: true, exp: "True! Perfect collinearity creates a division by zero in the OLS normal equations; standard errors explode to infinity." },
       { q: "In an OLS regression with an intercept, Σeᵢ = 0, but Σeᵢ² need not be zero.", a: true, exp: "True! The sum of residuals Σeᵢ is strictly 0, while the sum of squared residuals Σeᵢ² is minimised, not zero." },
       { q: "OLS chooses the coefficients that minimise the sum of the residuals.", a: false, exp: "False! OLS minimises the SUM OF SQUARED residuals (Σeᵢ²), not the sum of residuals (which always equals zero with an intercept)." },
       { q: "A BLUE estimator has the smallest variance of all estimators, including non-linear estimators.", a: false, exp: "False! BLUE means Best LINEAR Unbiased Estimator — minimum variance strictly within the class of LINEAR unbiased estimators." },
@@ -4161,7 +4298,11 @@ function copyActiveDossierNotes() {
       { q: "The Jarque–Bera test has a null hypothesis of homoscedasticity.", a: false, exp: "False! The Jarque–Bera test has a null hypothesis of NORMALITY (skewness = 0 and kurtosis = 3)." },
       { q: "White's test regresses the squared residuals on the regressors, their squares, and cross-products.", a: true, exp: "True! That is the auxiliary regression equation for White's General Heteroscedasticity test." },
       { q: "In a simple two-variable regression, the F test and the t test on the slope give identical conclusions.", a: true, exp: "True! With one regressor, F = t² and both test exactly the same hypothesis with identical p-values." },
-      { q: "A dummy variable can be used to test for a structural break, such as before and after an economic crisis.", a: true, exp: "True! A dummy taking 0 before the crisis and 1 after tests for a structural shift in the intercept and/or slope." }
+      { q: "A dummy variable can be used to test for a structural break, such as before and after an economic crisis.", a: true, exp: "True! A dummy taking 0 before the crisis and 1 after tests for a structural shift in the intercept and/or slope." },
+      { q: "A restricted F-test evaluates whether a subset of explanatory variables can be jointly omitted without significant loss of explanatory power.", a: true, exp: "True! The null hypothesis is H₀: β₃ = β₄ = 0. If F_calc > F_crit, the variables must remain in the model." },
+      { q: "When an irrelevant variable is included in an OLS regression, the estimators become biased and inconsistent.", a: false, exp: "False! OLS estimators remain UNBIASED and consistent; only efficiency is lost (variances are needlessly inflated)." },
+      { q: "In the presence of heteroscedasticity, conventional OLS standard errors are typically underestimated, leading to inflated t-statistics and false significance.", a: true, exp: "True! This leads to a Type I error (rejecting a true null hypothesis of no relationship)." },
+      { q: "The Durbin-Watson statistic d is approximately related to the first-order autocorrelation coefficient ρ̂ by d ≈ 2(1 − ρ̂).", a: true, exp: "True! Hence when ρ̂ = 0, d ≈ 2; when ρ̂ = +1, d ≈ 0; when ρ̂ = −1, d ≈ 4." }
     ];
 
     let currentQuizIdx = 0;
@@ -4520,6 +4661,17 @@ function copyActiveDossierNotes() {
           <p><strong>2. Auxiliary Regression & VIF:</strong> Regress each Xⱼ on all other explanatory variables to get Rⱼ². Then VIFⱼ = 1 / (1 − Rⱼ²). A <strong>VIF > 10</strong> (or Tolerance < 0.10) indicates severe multicollinearity. [1.5M]</p>
           <p><strong>3. Consequences:</strong> <strong>OLS is STILL BLUE!</strong> Point estimators are unbiased and minimum variance among linear estimators, but standard errors are inflated and confidence intervals are wide. [1M]</p>
           <p><strong>4. Memo Warning on Remedies:</strong> NEVER drop a theoretically important variable simply because of high VIF, as doing so introduces devastating <strong>omitted variable bias</strong>! Accept it, get more data, or transform into ratios. [1.5M]</p>
+        `
+      },
+      {
+        title: "Structural Breaks & Quadratic Regressors",
+        marks: "5 MARKS",
+        prompt: "Explain how dummy variables are used to test for a structural break in a time-series relationship (such as Trump tariffs or Covid-19). Contrast this with modeling diminishing marginal returns using quadratic terms (X and X²).",
+        keywords: ["structural break", "dummy", "intercept", "slope", "interaction", "quadratic", "diminishing"],
+        memo: `
+          <p><strong>1. Structural Break Concept:</strong> Occurs when the underlying economic structure or trend permanently shifts due to an external shock (e.g., tariffs, pandemic). [1M]</p>
+          <p><strong>2. Intercept vs Slope Shift:</strong> Create dummy D = 0 (before shock) and D = 1 (after shock). Include D as is to test for an <em>intercept shift</em> (β₃·D). Include an interaction term (β₄·[D × X]) to test for a <em>slope/elasticity shift</em>. If significant, a structural break occurred. [2M]</p>
+          <p><strong>3. Quadratic Regressors (X and X²):</strong> Used when the marginal effect depends on the level of X. If the coefficient of X is positive and X² is negative, Y initially increases at a decreasing rate, reaches a maximum turning point at X* = −β₁ / (2β₂), and then declines. Confirmed when both t-statistics are statistically significant. [2M]</p>
         `
       },
       {
