@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECON325 Studio Atelier — Warm Bauhaus & Papercraft Study Station</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%A8%3C/text%3E%3C/svg%3E">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --canvas-bg: #FAF7F2;
+      --paper-card: #FFFFFF;
+      --paper-subtle: #F3EFEA;
+      --terracotta: #D95D39;
+      --cobalt: #1D3557;
+      --sage: #4E878C;
+      --saffron: #E9C46A;
+      --charcoal: #2B2D42;
+      --warm-border: #E8E2D8;
+      --warm-border-strong: #D6CEC1;
+    }
+
+    body {
+      background-color: var(--canvas-bg);
+      background-image: radial-gradient(#DDD6CA 1.2px, transparent 1.2px);
+      background-size: 20px 20px;
+      color: var(--charcoal);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Soft Tactile Paper Elevations */
+    .paper-card {
+      background: var(--paper-card);
+      border: 1.5px solid var(--warm-border);
+      box-shadow: 0 4px 16px -2px rgba(50, 40, 30, 0.05), 0 2px 6px -1px rgba(50, 40, 30, 0.03);
+      border-radius: 18px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .paper-card:hover {
+      box-shadow: 0 8px 24px -4px rgba(50, 40, 30, 0.08), 0 3px 8px -2px rgba(50, 40, 30, 0.04);
+      border-color: var(--warm-border-strong);
+    }
+
+    .paper-btn {
+      border: 1.5px solid var(--warm-border-strong);
+      box-shadow: 0 2px 4px rgba(50, 40, 30, 0.04);
+      border-radius: 12px;
+      font-weight: 600;
+      transition: all 0.15s ease-out;
+      cursor: pointer;
+      user-select: none;
+    }
+    .paper-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(50, 40, 30, 0.08);
+    }
+    .paper-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 1px 2px rgba(50, 40, 30, 0.04);
+    }
+
+    .nav-tab-btn {
+      border: 1.5px solid transparent;
+      border-radius: 12px;
+      font-weight: 600;
+      color: #555A68;
+      background: transparent;
+      transition: all 0.15s ease-out;
+    }
+    .nav-tab-btn:hover {
+      background: rgba(232, 226, 216, 0.5);
+      color: #1D3557;
+    }
+    .nav-tab-btn.active {
+      background: #FFFFFF;
+      color: #1D3557;
+      border-color: var(--warm-border-strong);
+      box-shadow: 0 2px 8px rgba(50, 40, 30, 0.06);
+      font-weight: 700;
+    }
+
+    .tag-bauhaus {
+      border: 1px solid var(--warm-border-strong);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .custom-scroll::-webkit-scrollbar { width: 7px; height: 7px; }
+    .custom-scroll::-webkit-scrollbar-track { background: var(--canvas-bg); }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #D6CEC1; border-radius: 4px; }
+    .custom-scroll::-webkit-scrollbar-thumb:hover { background: #B8B0A2; }
+
+    /* Sensory-Friendly Smooth Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .tab-pane:not(.hidden) {
+      animation: fadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .xp-pulse {
+      animation: pulseGlow 0.4s ease-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-[#E9C46A] selection:text-[#1D3557]">
+
+  <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+  <!-- ========================================================= -->
+  <!-- TOP STUDIO HEADER & HARMONY BAR                           -->
+  <!-- ========================================================= -->
+  <header class="bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#E8E2D8] sticky top-0 z-40 px-4 py-3 shadow-[0_2px_12px_rgba(50,40,30,0.03)]">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Studio Atelier Logo & Mastery Level -->
+      <div class="flex items-center space-x-3.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#D95D39] via-[#E9C46A] to-[#4E878C] flex items-center justify-center text-white font-bold text-lg shadow-sm">
+          🎨
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-base tracking-tight text-[#1D3557]">ECON325 Studio Atelier</span>
+            <span id="rank-badge" class="text-xs px-2.5 py-0.5 rounded-full bg-[#F3EFEA] border border-[#D6CEC1] font-bold text-[#D95D39] uppercase tracking-wide">LVL 1: APPRENTICE</span>
+          </div>
+          <div class="flex items-center gap-2 mt-1">
+            <div class="w-36 sm:w-48 bg-[#EAE4D9] h-2.5 rounded-full overflow-hidden">
+              <div id="xp-bar" class="bg-gradient-to-r from-[#D95D39] to-[#E9C46A] h-full transition-all duration-300 rounded-full" style="width: 10%;"></div>
+            </div>
+            <span id="xp-display" class="text-xs font-mono-code font-medium text-[#6B7280]">0 / 200 XP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flow Sprint Timer & 40Hz Audio Focus Synthesizer -->
+      <div class="flex items-center space-x-2 bg-[#FAF7F2] border border-[#E0D9CD] px-3.5 py-1.5 rounded-xl shadow-sm">
+        <span class="text-sm">⏳</span>
+        <span id="timer-display" class="font-mono-code text-base font-bold text-[#1D3557] tracking-wider">15:00</span>
+        <button id="timer-btn" onclick="toggleSprintTimer()" class="paper-btn px-2.5 py-1 bg-white hover:bg-[#F3EFEA] text-xs text-[#1D3557] uppercase font-bold">
+          <span id="timer-btn-text">Start</span>
+        </button>
+        <button onclick="resetSprintTimer()" class="px-2 py-1 text-xs font-medium text-[#71717A] hover:text-[#1D3557]">Reset</button>
+        <div class="h-4 w-px bg-[#D6CEC1] mx-1"></div>
+        <button id="focus-audio-btn" onclick="toggleFocusAmbience()" class="paper-btn px-2.5 py-1 bg-white hover:bg-[#F3EFEA] text-xs flex items-center gap-1.5 text-[#264653]">
+          <span id="focus-audio-icon">🎧</span>
+          <span id="focus-audio-label" class="hidden sm:inline">40Hz Calm: OFF</span>
+        </button>
+      </div>
+
+      <!-- Right Streak & Edition Jumpers -->
+      <div class="flex items-center space-x-2.5">
+        <div class="bg-[#FDF6E2] border border-[#EADBB6] px-3 py-1.5 rounded-xl font-bold text-xs text-[#996515] flex items-center gap-1.5 shadow-sm">
+          <span>✨</span>
+          <span id="streak-val">0x FLOW</span>
+        </div>
+        <a href="econ325_pop_arcade.html" class="paper-btn px-3 py-1.5 bg-[#FFF9C4] hover:bg-[#FFF59D] text-xs text-[#B78103] border-[#F0E68C] flex items-center gap-1">
+          <span>⚡ Pop Arcade</span>
+        </a>
+        <a href="econ325_command_console.html" class="paper-btn px-2.5 py-1.5 bg-[#2B2D42] hover:bg-[#1E1F2E] text-xs text-white border-[#2B2D42] flex items-center gap-1">
+          <span>💻 Terminal</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================= -->
+  <!-- NAVIGATION BAR (Bauhaus Warm Tactile Tabs)                -->
+  <!-- ========================================================= -->
+  <nav class="bg-[#FAF7F2] border-b border-[#E8E2D8] px-4 py-2">
+    <div class="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto custom-scroll pb-0.5 gap-2 text-xs">
+      <div class="flex items-center gap-1.5 min-w-max">
+        <button onclick="switchTab('tab-quest-map')" class="nav-tab-btn active px-3.5 py-2">
+          🗺️ Quest Journey [1]
+        </button>
+        <button onclick="switchTab('tab-eviews-dojo')" class="nav-tab-btn px-3.5 py-2">
+          ⚡ EViews Studio [2]
+        </button>
+        <button onclick="switchTab('tab-mad-libs')" class="nav-tab-btn px-3.5 py-2">
+          📝 Word Answer Lab [3]
+        </button>
+        <button onclick="switchTab('tab-theory-vault')" class="nav-tab-btn px-3.5 py-2">
+          🏛️ 26M Theory Pillars [4]
+        </button>
+        <button onclick="switchTab('tab-dw-radar')" class="nav-tab-btn px-3.5 py-2">
+          🧭 DW 5-Zone Radar [5]
+        </button>
+        <button onclick="switchTab('tab-past-papers')" class="nav-tab-btn px-3.5 py-2">
+          📊 Exam Decoders [6]
+        </button>
+        <button onclick="switchTab('tab-boss-quiz')" class="nav-tab-btn px-3.5 py-2">
+          ⚔️ Recall Atelier [7]
+        </button>
+        <button onclick="switchTab('tab-exam-card')" class="nav-tab-btn px-3.5 py-2">
+          📋 Protocol Card [8]
+        </button>
+      </div>
+      <div class="hidden lg:flex items-center gap-1.5 text-[11px] font-mono-code text-[#7A8294] pl-2">
+        <span>Keys:</span>
+        <span class="bg-[#FFFFFF] border border-[#D6CEC1] text-[#1D3557] px-1.5 py-0.5 rounded font-bold">1-8</span>
+        <span class="bg-[#FFFFFF] border border-[#D6CEC1] text-[#1D3557] px-1.5 py-0.5 rounded font-bold">Space</span>
+        <span class="bg-[#FFFFFF] border border-[#D6CEC1] text-[#1D3557] px-1.5 py-0.5 rounded font-bold">T/F</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========================================================= -->
+  <!-- MAIN WORKSPACE CONTENT                                    -->
+  <!-- ========================================================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- ======================================================= -->
+    <!-- TAB 1: BAUHAUS LEARNING JOURNEY & QUEST MAP               -->
+    <!-- ======================================================= -->
+    <div id="tab-quest-map" class="tab-pane space-y-6">
+      
+      <!-- Studio Hero Header -->
+      <div class="paper-card p-6 bg-gradient-to-r from-[#FAF3EC] via-[#F4EBE1] to-[#EBF3F5] border-[#E2DACB] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="tag-bauhaus px-3 py-1 rounded-full bg-[#1D3557] text-[#FAF7F2] text-[11px] uppercase tracking-wider">43 HOURS REMAINING • DISTINCTION BLUEPRINT</span>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-[#1D3557] mt-2 tracking-tight">The 8-Node Econometrics Mastery Tree</h1>
+          <p class="text-sm font-normal text-[#555A68] mt-1 max-w-2xl leading-relaxed">
+            Click any node below to unlock an active 60-second micro-challenge card. Complete nodes to earn flow XP, master the foundational theorems, and cruise through both papers!
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <div class="text-xs font-bold text-[#7A8294] uppercase tracking-wider">Total Progress</div>
+            <div class="text-2xl font-black text-[#D95D39] font-mono-code">8 / 8 Nodes</div>
+          </div>
+          <button onclick="switchTab('tab-boss-quiz')" class="paper-btn px-4 py-2.5 bg-[#D95D39] text-white hover:bg-[#C85A32] text-xs font-bold shadow-sm">
+            Launch Recall Quiz →
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Node Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- Node 1 -->
+        <div onclick="launchNodeChallenge('clrm')" class="paper-card p-5 cursor-pointer hover:border-[#D95D39] group relative overflow-hidden bg-white">
+          <div class="w-1.5 h-full bg-[#D95D39] absolute left-0 top-0"></div>
+          <div class="flex items-center justify-between pl-2">
+            <span class="text-xs font-mono-code font-bold text-[#D95D39]">NODE 01</span>
+            <span id="node-clrm-status" class="tag-bauhaus text-[10px] px-2 py-0.5 rounded-full bg-[#FAF3EC] text-[#D95D39]">READY</span>
+          </div>
+          <h3 class="font-extrabold text-[#1D3557] text-base mt-2 group-hover:text-[#D95D39] transition-colors pl-2">CLRM & Error Term</h3>
+          <p class="text-xs text-[#6B7280] mt-1 line-clamp-2 pl-2">Why disturbance term eᵢ is included: human error, omitted variables, functional misspecification.</p>
+          <div class="mt-4 pt-3 border-t border-[#F0EBE1] flex items-center justify-between text-xs text-[#8A92A6] pl-2">
+            <span>Lecture Activity 1</span>
+            <span class="font-bold text-[#D95D39] group-hover:translate-x-1 transition-transform">Solve +25 XP →</span>
+          </div>
+        </div>
+
+        <!-- Node 2 -->
+        <div onclick="launchNodeChallenge('multi')" class="paper-card p-5 cursor-pointer hover:border-[#1D3557] group relative overflow-hidden bg-white">
+          <div class="w-1.5 h-full bg-[#1D3557] absolute left-0 top-0"></div>
+          <div class="flex items-center justify-between pl-2">
+            <span class="text-xs font-mono-code font-bold text-[#1D3557]">NODE 02</span>
+            <span id="node-multi-status" class="tag-bauhaus text-[10px] px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#1D3557]">READY</span>
+          </div>
+          <h3 class="font-extrabold text-[#1D3557] text-base mt-2 group-hover:text-[#1D3557] transition-colors pl-2">Multicollinearity & VIF</h3>
+          <p class="text-xs text-[#6B7280] mt-1 line-clamp-2 pl-2">OLS is STILL BLUE! High R² with low t's, VIF > 10 rule, dropping collinear vars causes omitted variable bias.</p>
+          <div class="mt-4 pt-3 border-t border-[#F0EBE1] flex items-center justify-between text-xs text-[#8A92A6] pl-2">
+            <span>Lecture Activity 2</span>
+            <span class="font-bold text-[#1D3557] group-hover:translate-x-1 transition-transform">Solve +25 XP →</span>
+          </div>
+        </div>
+
+        <!-- Node 3 -->
+        <div onclick="launchNodeChallenge('hetero')" class="paper-card p-5 cursor-pointer hover:border-[#E9C46A] group relative overflow-hidden bg-white">
+          <div class="w-1.5 h-full bg-[#E9C46A] absolute left-0 top-0"></div>
+          <div class="flex items-center justify-between pl-2">
+            <span class="text-xs font-mono-code font-bold text-[#B78103]">NODE 03</span>
+            <span id="node-hetero-status" class="tag-bauhaus text-[10px] px-2 py-0.5 rounded-full bg-[#FDF6E2] text-[#B78103]">READY</span>
+          </div>
+          <h3 class="font-extrabold text-[#1D3557] text-base mt-2 group-hover:text-[#B78103] transition-colors pl-2">Heteroscedasticity</h3>
+          <p class="text-xs text-[#6B7280] mt-1 line-clamp-2 pl-2">Non-constant error variance: Var(uᵢ) = σᵢ². White test auxiliary regression (n·R² ~ χ²), Huber-White robust SEs.</p>
+          <div class="mt-4 pt-3 border-t border-[#F0EBE1] flex items-center justify-between text-xs text-[#8A92A6] pl-2">
+            <span>Lecture Activity 3</span>
+            <span class="font-bold text-[#B78103] group-hover:translate-x-1 transition-transform">Solve +25 XP →</span>
+          </div>
+        </div>
+
+        <!-- Node 4 -->
+        <div onclick="launchNodeChallenge('auto')" class="paper-card p-5 cursor-pointer hover:border-[#4E878C] group relative overflow-hidden bg-white">
+          <div class="w-1.5 h-full bg-[#4E878C] absolute left-0 top-0"></div>
+          <div class="flex items-center justify-between pl-2">
+            <span class="text-xs font-mono-code font-bold text-[#4E878C]">NODE 04</span>
+            <span id="node-auto-status" class="tag-bauhaus text-[10px] px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#4E878C]">READY</span>
+          </div>
+          <h3 class="font-extrabold text-[#1D3557] text-base mt-2 group-hover:text-[#4E878C] transition-colors pl-2">Autocorrelation & DW</h3>
+          <p class="text-xs text-[#6B7280] mt-1 line-clamp-2 pl-2">Durbin-Watson d statistic: d ≈ 2(1 − ρ̂). 5 decision zones (dL to 4 − dL). Remedy: HAC Newey-West standard errors.</p>
+          <div class="mt-4 pt-3 border-t border-[#F0EBE1] flex items-center justify-between text-xs text-[#8A92A6] pl-2">
+            <span>Lecture Activity 4</span>
+            <span class="font-bold text-[#4E878C] group-hover:translate-x-1 transition-transform">Solve +25 XP →</span>
+          </div>
+        </div>
+
+        <!-- Node 5 -->
+        <div onclick="launchNodeChallenge('spec')" class="paper-card p-5 cursor-pointer hover:border-[#D95D39] group relative overflow-hidden bg-white">
+          <div class="w-1.5 h-full bg-[#D95D39] absolute left-0 top-0"></div>
+          <div class="flex items-center justify-between pl-2">
+            <span class="text-xs font-mono-code font-bold text-[#D95D39]">NODE 05</span>
+            <span id="node-spec-status" class="tag-bauhaus text-[10px] px-2 py-0.5 rounded-full bg-[#FAF3EC] text-[#D95D39]">READY</span>
+          </div>
+          <h3 class="font-extrabold text-[#1D3557] text-base mt-2 group-hover:text-[#D95D39] transition-colors pl-2">Specification & RESET</h3>
+          <p class="text-xs text-[#6B7280] mt-1 line-clamp-2 pl-2">Omitted relevant variable causes BIAS and INCONSISTENCY. Irrelevant variable inflates variances. Ramsey RESET test.</p>
+          <div class="mt-4 pt-3 border-t border-[#F0EBE1] flex items-center justify-between text-xs text-[#8A92A6] pl-2">
+            <span>Lecture Activity 5</span>
+            <span class="font-bold text-[#D95D39] group-hover:translate-x-1 transition-transform">Solve +25 XP →</span>
+          </div>
+        </div>
+
+        <!-- Node 6 -->
+        <div onclick="launchNodeChallenge('dummy')" class="paper-card p-5 cursor-pointer hover:border-[#1D3557] group relative overflow-hidden bg-white">
+          <div class="w-1.5 h-full bg-[#1D3557] absolute left-0 top-0"></div>
+          <div class="flex items-center justify-between pl-2">
+            <span class="text-xs font-mono-code font-bold text-[#1D3557]">NODE 06</span>
+            <span id="node-dummy-status" class="tag-bauhaus text-[10px] px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#1D3557]">READY</span>
+          </div>
+          <h3 class="font-extrabold text-[#1D3557] text-base mt-2 group-hover:text-[#1D3557] transition-colors pl-2">Dummy Variables & Trap</h3>
+          <p class="text-xs text-[#6B7280] mt-1 line-clamp-2 pl-2">Strictly m − 1 dummies for m qualitative categories to prevent singular (X'X) matrix. Differential intercept interpretation.</p>
+          <div class="mt-4 pt-3 border-t border-[#F0EBE1] flex items-center justify-between text-xs text-[#8A92A6] pl-2">
+            <span>Lecture Activity 6</span>
+            <span class="font-bold text-[#1D3557] group-hover:translate-x-1 transition-transform">Solve +25 XP →</span>
+          </div>
+        </div>
+
+        <!-- Node 7 -->
+        <div onclick="switchTab('tab-eviews-dojo')" class="paper-card p-5 cursor-pointer hover:border-[#4E878C] group relative overflow-hidden bg-white">
+          <div class="w-1.5 h-full bg-[#4E878C] absolute left-0 top-0"></div>
+          <div class="flex items-center justify-between pl-2">
+            <span class="text-xs font-mono-code font-bold text-[#4E878C]">NODE 07</span>
+            <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#4E878C]">DOJO</span>
+          </div>
+          <h3 class="font-extrabold text-[#1D3557] text-base mt-2 group-hover:text-[#4E878C] transition-colors pl-2">EViews Step Sequences</h3>
+          <p class="text-xs text-[#6B7280] mt-1 line-clamp-2 pl-2">Interactive click-path simulations for Equation estimation, White test, and HAC standard errors.</p>
+          <div class="mt-4 pt-3 border-t border-[#F0EBE1] flex items-center justify-between text-xs text-[#8A92A6] pl-2">
+            <span>Paper 2 Practical</span>
+            <span class="font-bold text-[#4E878C] group-hover:translate-x-1 transition-transform">Open Dojo →</span>
+          </div>
+        </div>
+
+        <!-- Node 8 -->
+        <div onclick="switchTab('tab-mad-libs')" class="paper-card p-5 cursor-pointer hover:border-[#D95D39] group relative overflow-hidden bg-white">
+          <div class="w-1.5 h-full bg-[#D95D39] absolute left-0 top-0"></div>
+          <div class="flex items-center justify-between pl-2">
+            <span class="text-xs font-mono-code font-bold text-[#D95D39]">NODE 08</span>
+            <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded-full bg-[#FAF3EC] text-[#D95D39]">EXAM WIN</span>
+          </div>
+          <h3 class="font-extrabold text-[#1D3557] text-base mt-2 group-hover:text-[#D95D39] transition-colors pl-2">NWU 4-Part Word Script</h3>
+          <p class="text-xs text-[#6B7280] mt-1 line-clamp-2 pl-2">Never lose a mark on written interpretations. Mandatory phrase: "holding other variables constant".</p>
+          <div class="mt-4 pt-3 border-t border-[#F0EBE1] flex items-center justify-between text-xs text-[#8A92A6] pl-2">
+            <span>Mark Scheme Armor</span>
+            <span class="font-bold text-[#D95D39] group-hover:translate-x-1 transition-transform">Open Lab →</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Challenge Drawer Modal / Card -->
+      <div id="quest-challenge-drawer" class="hidden paper-card p-6 bg-[#FFFFFF] border-2 border-[#D95D39] shadow-lg space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-[#E8E2D8]">
+          <div class="flex items-center gap-2">
+            <span id="drawer-tag" class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] text-xs font-mono-code font-bold">NODE 01</span>
+            <h2 id="drawer-title" class="font-extrabold text-base text-[#1D3557]">Challenge Title</h2>
+          </div>
+          <button onclick="closeChallengeDrawer()" class="paper-btn px-2.5 py-1 bg-[#F3EFEA] hover:bg-[#EAE4D9] text-xs font-bold text-[#555A68]">✕ Close</button>
+        </div>
+        <p id="drawer-prompt" class="text-sm font-semibold text-[#1D3557] leading-relaxed"></p>
+        <div id="drawer-action-area" class="space-y-3"></div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- TAB 2: INTERACTIVE IN-APP EVIEWS GUIDED DOJO            -->
+    <!-- ======================================================= -->
+    <div id="tab-eviews-dojo" class="tab-pane hidden space-y-6">
+      
+      <!-- Dojo Intro Banner -->
+      <div class="paper-card p-6 bg-gradient-to-r from-[#EBF3F5] via-[#FAF7F2] to-[#FAF3EC] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="tag-bauhaus px-3 py-1 rounded-full bg-[#4E878C] text-white text-[11px] uppercase tracking-wider">PAPER 2 PRACTICAL SIMULATOR</span>
+          <h2 class="text-2xl font-extrabold text-[#1D3557] mt-1.5">Interactive EViews Guided Dojo</h2>
+          <p class="text-xs text-[#555A68] mt-1 max-w-2xl leading-relaxed">
+            Practice the exact menu click sequences and typed commands tested in the practical exam without Citrix lag or remote desktop crashes.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copyDojoScript()" class="paper-btn px-3.5 py-2 bg-[#FFFFFF] hover:bg-[#F3EFEA] text-xs text-[#1D3557] font-bold">
+            📋 Copy Exam Script
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Core Workflows Selector -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <button id="dojo-c0" onclick="setDojoCombo(0)" class="paper-btn p-3 bg-white text-[#1D3557] border-[#4E878C] text-left text-xs font-bold">
+          1. Descriptive Stats<br><span class="text-[10px] font-normal text-[#6B7280]">Mean, Median, Skew, Kurt</span>
+        </button>
+        <button id="dojo-c1" onclick="setDojoCombo(1)" class="paper-btn p-3 bg-white text-[#1D3557] text-left text-xs font-bold">
+          2. Estimate Equation<br><span class="text-[10px] font-normal text-[#6B7280]">Quick → Estimate Equation</span>
+        </button>
+        <button id="dojo-c2" onclick="setDojoCombo(2)" class="paper-btn p-3 bg-white text-[#1D3557] text-left text-xs font-bold">
+          3. White Hetero Test<br><span class="text-[10px] font-normal text-[#6B7280]">View → Residual Diagnostics</span>
+        </button>
+        <button id="dojo-c3" onclick="setDojoCombo(3)" class="paper-btn p-3 bg-white text-[#1D3557] text-left text-xs font-bold">
+          4. Robust Standard Errors<br><span class="text-[10px] font-normal text-[#6B7280]">Options → Huber-White / HAC</span>
+        </button>
+      </div>
+
+      <!-- Interactive EViews Virtual Window -->
+      <div class="paper-card overflow-hidden bg-white border border-[#D6CEC1]">
+        
+        <!-- EViews Top Title Bar -->
+        <div class="bg-[#1D3557] text-white px-4 py-2 flex items-center justify-between text-xs font-mono-code">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-[#D95D39] inline-block"></span>
+            <span class="font-bold">EViews 12 / 13 — [Workfile: ECON_325_DATA - (c:\data\exam.wf1)]</span>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] text-[#A8B2C4]">
+            <span>Sample: 1 500</span>
+            <span>n = 500</span>
+          </div>
+        </div>
+
+        <!-- EViews Menu Bar -->
+        <div class="bg-[#FAF7F2] border-b border-[#E8E2D8] px-4 py-1.5 flex items-center gap-4 text-xs font-medium text-[#4A4E5A]">
+          <span class="hover:text-[#1D3557] cursor-pointer">File</span>
+          <span class="hover:text-[#1D3557] cursor-pointer">Edit</span>
+          <span class="hover:text-[#1D3557] cursor-pointer">Object</span>
+          <span class="hover:text-[#1D3557] cursor-pointer font-bold text-[#1D3557]">View</span>
+          <span class="hover:text-[#1D3557] cursor-pointer font-bold text-[#1D3557]">Proc</span>
+          <span class="hover:text-[#1D3557] cursor-pointer font-bold text-[#D95D39]">Quick</span>
+          <span class="hover:text-[#1D3557] cursor-pointer">Options</span>
+          <span class="hover:text-[#1D3557] cursor-pointer">Window</span>
+          <span class="hover:text-[#1D3557] cursor-pointer">Help</span>
+        </div>
+
+        <!-- Guided Click Path Display -->
+        <div class="p-4 bg-[#F7F4EE] border-b border-[#E8E2D8] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-mono-code font-bold uppercase text-[#4E878C]">Tactile Click Path (GUI Method):</span>
+            <span class="text-[10px] text-[#7A8294]">Zero Typing Needed in Exam</span>
+          </div>
+          <div id="dojo-click-path" class="p-3 bg-white rounded-xl border border-[#D6CEC1] font-mono-code text-xs text-[#1D3557] font-semibold">
+            Double-click series in workfile → View → Descriptive Statistics & Tests → Stats Table
+          </div>
+          <div id="dojo-rules" class="text-xs text-[#555A68] leading-relaxed pt-1">
+            • Mean > Median: Right-skewed.<br>• Kurtosis > 3: Leptokurtic (fat tails).<br>• Jarque-Bera p < 0.05: Reject normality of distribution.
+          </div>
+        </div>
+
+        <!-- Simulated Interactive Regression Table Output -->
+        <div class="p-4 overflow-x-auto font-mono-code text-xs">
+          <div class="text-[#7A8294] text-[11px] pb-2 border-b border-[#E8E2D8]">
+            Dependent Variable: WAGE | Method: Least Squares | Included observations: 500
+          </div>
+          <table class="w-full text-left my-2">
+            <thead>
+              <tr class="border-b border-[#2B2D42] text-[#1D3557]">
+                <th class="py-1.5">Variable</th>
+                <th class="py-1.5">Coefficient</th>
+                <th class="py-1.5">Std. Error</th>
+                <th class="py-1.5">t-Statistic</th>
+                <th class="py-1.5">Prob.</th>
+                <th class="py-1.5 text-right">Quick Interpret</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#F0EBE1] text-[#2B2D42]">
+              <tr class="hover:bg-[#FAF7F2]">
+                <td class="py-2 font-bold">C (Intercept)</td>
+                <td class="py-2">-1.2450</td>
+                <td class="py-2">0.5420</td>
+                <td class="py-2">-2.2970</td>
+                <td class="py-2 text-[#D95D39] font-bold">0.0220</td>
+                <td class="py-2 text-right">
+                  <span class="text-[10px] text-[#8A92A6]">Baseline wage</span>
+                </td>
+              </tr>
+              <tr class="hover:bg-[#FAF7F2]">
+                <td class="py-2 font-bold text-[#1D3557]">EDUC</td>
+                <td class="py-2 text-[#4E878C] font-bold">0.8250</td>
+                <td class="py-2">0.0715</td>
+                <td class="py-2">11.5385</td>
+                <td class="py-2 text-[#4E878C] font-bold">0.0000</td>
+                <td class="py-2 text-right">
+                  <button onclick="injectIntoMadLibs('EDUC', 'years', 'WAGE', 0.8250, 11.5385, 0.0000)" class="paper-btn px-2 py-0.5 bg-[#EBF3F5] hover:bg-[#D9EAEB] text-[10px] text-[#1D3557]">
+                    Inject to Word →
+                  </button>
+                </td>
+              </tr>
+              <tr class="hover:bg-[#FAF7F2]">
+                <td class="py-2 font-bold text-[#1D3557]">EXPER</td>
+                <td class="py-2 text-[#4E878C] font-bold">0.2450</td>
+                <td class="py-2">0.0410</td>
+                <td class="py-2">5.9756</td>
+                <td class="py-2 text-[#4E878C] font-bold">0.0000</td>
+                <td class="py-2 text-right">
+                  <button onclick="injectIntoMadLibs('EXPER', 'years', 'WAGE', 0.2450, 5.9756, 0.0000)" class="paper-btn px-2 py-0.5 bg-[#EBF3F5] hover:bg-[#D9EAEB] text-[10px] text-[#1D3557]">
+                    Inject to Word →
+                  </button>
+                </td>
+              </tr>
+              <tr class="hover:bg-[#FAF7F2]">
+                <td class="py-2 font-bold text-[#1D3557]">FEMALE (Dummy)</td>
+                <td class="py-2 text-[#D95D39] font-bold">-2.1500</td>
+                <td class="py-2">0.3850</td>
+                <td class="py-2">-5.5844</td>
+                <td class="py-2 text-[#4E878C] font-bold">0.0000</td>
+                <td class="py-2 text-right">
+                  <button onclick="injectIntoMadLibs('FEMALE', 'dummy (1=F, 0=M)', 'WAGE', -2.1500, -5.5844, 0.0000)" class="paper-btn px-2 py-0.5 bg-[#FAF3EC] hover:bg-[#F3E5D8] text-[10px] text-[#D95D39]">
+                    Inject to Word →
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Bottom Regression Summary Stats -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-[#E8E2D8] text-[11px] text-[#555A68]">
+            <div>R-squared: <strong class="text-[#1D3557]">0.4285</strong></div>
+            <div>Adjusted R-squared: <strong class="text-[#1D3557]">0.4250</strong></div>
+            <div>F-statistic: <strong class="text-[#1D3557]">123.85</strong></div>
+            <div>Prob(F-statistic): <strong class="text-[#4E878C]">0.0000</strong></div>
+            <div>Durbin-Watson stat: <strong class="text-[#D95D39]">1.92</strong></div>
+            <div>S.E. of regression: <strong>3.125</strong></div>
+            <div>Sum squared resid: <strong>4842.1</strong></div>
+            <div>Mean dependent var: <strong>12.45</strong></div>
+          </div>
+        </div>
+
+        <!-- Command Line Strip -->
+        <div class="p-3 bg-[#FAF7F2] border-t border-[#E8E2D8] flex items-center gap-2">
+          <span class="text-xs font-mono-code font-bold text-[#D95D39]">CMD&gt;</span>
+          <input id="dojo-cmd-input" type="text" value="ls wage c educ exper female" class="flex-1 bg-white border border-[#D6CEC1] rounded-lg px-3 py-1 font-mono-code text-xs text-[#1D3557] focus:outline-none focus:border-[#4E878C]">
+          <button onclick="executeDojoCommand()" class="paper-btn px-3 py-1 bg-[#4E878C] text-white hover:bg-[#3D6C70] text-xs font-bold">
+            Execute +20 XP
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- TAB 3: WORD ANSWER GENERATOR (NWU 4-PART TEMPLATE)      -->
+    <!-- ======================================================= -->
+    <div id="tab-mad-libs" class="tab-pane hidden space-y-6">
+      
+      <!-- Word Lab Header -->
+      <div class="paper-card p-6 bg-gradient-to-r from-[#FAF3EC] via-[#FFFFFF] to-[#EBF3F5] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="tag-bauhaus px-3 py-1 rounded-full bg-[#D95D39] text-white text-[11px] uppercase tracking-wider">PAPER 1 & 2 MARK SCHEME CRUSHER</span>
+          <h2 class="text-2xl font-extrabold text-[#1D3557] mt-1.5">NWU 4-Part Word Answer Generator</h2>
+          <p class="text-xs text-[#555A68] mt-1 max-w-2xl leading-relaxed">
+            Every interpretation in ECON325 requires four distinct elements to score full marks: Hypotheses, Test Statistic, Decision Rule, and Economic Meaning with the mandatory phrase: <em>"holding other variables constant"</em>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copyBlankWordTemplate()" class="paper-btn px-3.5 py-2 bg-white hover:bg-[#F3EFEA] text-xs text-[#1D3557] font-bold">
+            📄 Copy Blank .docx Template
+          </button>
+        </div>
+      </div>
+
+      <!-- Generator Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left: Input Variables -->
+        <div class="lg:col-span-5 paper-card p-5 space-y-4 bg-white">
+          <h3 class="font-extrabold text-[#1D3557] text-sm border-b border-[#E8E2D8] pb-2 flex items-center justify-between">
+            <span>Regression Variables</span>
+            <span class="text-[10px] text-[#7A8294] font-normal">Auto-populated or Type</span>
+          </h3>
+
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block font-bold text-[#555A68] mb-1">Independent Variable (X)</label>
+              <input id="in-x" type="text" value="EDUC" oninput="renderMadLibsScript()" class="w-full bg-[#FAF7F2] border border-[#D6CEC1] rounded-lg px-3 py-1.5 font-mono-code text-[#1D3557] focus:outline-none focus:border-[#D95D39]">
+            </div>
+            <div>
+              <label class="block font-bold text-[#555A68] mb-1">Unit of Measurement for X</label>
+              <input id="in-x-unit" type="text" value="years" oninput="renderMadLibsScript()" class="w-full bg-[#FAF7F2] border border-[#D6CEC1] rounded-lg px-3 py-1.5 font-mono-code text-[#1D3557] focus:outline-none focus:border-[#D95D39]">
+            </div>
+            <div>
+              <label class="block font-bold text-[#555A68] mb-1">Dependent Variable (Y)</label>
+              <input id="in-y" type="text" value="WAGE" oninput="renderMadLibsScript()" class="w-full bg-[#FAF7F2] border border-[#D6CEC1] rounded-lg px-3 py-1.5 font-mono-code text-[#1D3557] focus:outline-none focus:border-[#D95D39]">
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <div>
+                <label class="block font-bold text-[#555A68] mb-1">Slope (b)</label>
+                <input id="in-b" type="number" step="0.001" value="0.825" oninput="renderMadLibsScript()" class="w-full bg-[#FAF7F2] border border-[#D6CEC1] rounded-lg px-2 py-1.5 font-mono-code text-[#1D3557] focus:outline-none focus:border-[#D95D39]">
+              </div>
+              <div>
+                <label class="block font-bold text-[#555A68] mb-1">t-Stat</label>
+                <input id="in-t" type="number" step="0.01" value="11.54" oninput="renderMadLibsScript()" class="w-full bg-[#FAF7F2] border border-[#D6CEC1] rounded-lg px-2 py-1.5 font-mono-code text-[#1D3557] focus:outline-none focus:border-[#D95D39]">
+              </div>
+              <div>
+                <label class="block font-bold text-[#555A68] mb-1">p-Value</label>
+                <input id="in-p" type="number" step="0.0001" value="0.0000" oninput="renderMadLibsScript()" class="w-full bg-[#FAF7F2] border border-[#D6CEC1] rounded-lg px-2 py-1.5 font-mono-code text-[#1D3557] focus:outline-none focus:border-[#D95D39]">
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-[#E8E2D8] flex items-center justify-between">
+            <span class="text-[11px] text-[#7A8294]">Presets:</span>
+            <div class="flex gap-1.5">
+              <button onclick="injectIntoMadLibs('EDUC', 'years', 'WAGE', 0.825, 11.54, 0.0000)" class="paper-btn px-2 py-1 bg-[#FAF7F2] text-[10px] text-[#1D3557]">Educ</button>
+              <button onclick="injectIntoMadLibs('EXPER', 'years', 'WAGE', 0.245, 5.98, 0.0000)" class="paper-btn px-2 py-1 bg-[#FAF7F2] text-[10px] text-[#1D3557]">Exper</button>
+              <button onclick="injectIntoMadLibs('PRICE', 'rand', 'DEMAND', -0.85, -4.25, 0.0012)" class="paper-btn px-2 py-1 bg-[#FAF7F2] text-[10px] text-[#D95D39]">Price</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Generated Live Output -->
+        <div class="lg:col-span-7 paper-card p-5 space-y-4 bg-white border-2 border-[#4E878C]">
+          <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-2">
+            <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#EBF3F5] text-[#4E878C] text-xs font-mono-code font-bold">READY TO PASTE INTO SURNAME_INITIALS.DOCX</span>
+            <button onclick="copyRenderedScript()" class="paper-btn px-3 py-1 bg-[#4E878C] text-white hover:bg-[#3D6C70] text-xs font-bold">
+              📋 Copy Formatted Script +15 XP
+            </button>
+          </div>
+
+          <div id="madlibs-rendered-box" class="p-4 bg-[#FAF7F2] rounded-xl border border-[#D6CEC1] font-mono-code text-xs text-[#1D3557] space-y-3 leading-relaxed">
+            <!-- Injected via JavaScript -->
+          </div>
+
+          <div class="p-3 bg-[#FAF3EC] rounded-xl border border-[#F0DBC9] text-[11px] text-[#8C3A22] leading-relaxed">
+            <strong>⚠️ Examiner Rule Check:</strong> Did you include <em>"holding other variables constant"</em>? Leaving this out costs 1 to 2 marks on every single interpretation question across both Paper 1 and Paper 2.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- TAB 4: 26-MARK WRITTEN THEORY PILLARS                    -->
+    <!-- ======================================================= -->
+    <div id="tab-theory-vault" class="tab-pane hidden space-y-6">
+      
+      <!-- Theory Banner -->
+      <div class="paper-card p-6 bg-gradient-to-r from-[#FAF7F2] via-[#EBF3F5] to-[#FAF3EC] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="tag-bauhaus px-3 py-1 rounded-full bg-[#1D3557] text-white text-[11px] uppercase tracking-wider">PAPER 1 GUARANTEED 26-MARK BLOCK</span>
+          <h2 class="text-2xl font-extrabold text-[#1D3557] mt-1.5">The 4 Diagnostic Theory Pillars</h2>
+          <p class="text-xs text-[#555A68] mt-1 max-w-2xl leading-relaxed">
+            Every year, Question 1 or Question 4 asks the same 5-part architecture: Assumption, Nature of Violation, Detection Method, Consequences for OLS, and Remedies.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="toggleArchAnswer()" class="paper-btn px-3.5 py-2 bg-[#D95D39] text-white hover:bg-[#C85A32] text-xs font-bold">
+            ⭐ Bank All Pillars +15 XP
+          </button>
+        </div>
+      </div>
+
+      <!-- Pillar Selector Tabs -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <button id="arch-btn-multi" onclick="setArchView('multi')" class="paper-btn p-3 bg-white text-[#1D3557] border-[#1D3557] text-left text-xs font-bold">
+          1. Multicollinearity<br><span class="text-[10px] font-normal text-[#6B7280]">OLS Remains BLUE!</span>
+        </button>
+        <button id="arch-btn-hetero" onclick="setArchView('hetero')" class="paper-btn p-3 bg-white text-[#1D3557] text-left text-xs font-bold">
+          2. Heteroscedasticity<br><span class="text-[10px] font-normal text-[#6B7280]">White Test & Robust SE</span>
+        </button>
+        <button id="arch-btn-auto" onclick="setArchView('auto')" class="paper-btn p-3 bg-white text-[#1D3557] text-left text-xs font-bold">
+          3. Autocorrelation<br><span class="text-[10px] font-normal text-[#6B7280]">Durbin-Watson & Newey-West</span>
+        </button>
+        <button id="arch-btn-spec" onclick="setArchView('spec')" class="paper-btn p-3 bg-white text-[#1D3557] text-left text-xs font-bold">
+          4. Specification Bias<br><span class="text-[10px] font-normal text-[#6B7280]">Omitted vs Irrelevant</span>
+        </button>
+      </div>
+
+      <!-- Selected Pillar Details Card -->
+      <div class="paper-card p-6 bg-white space-y-4">
+        <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+          <h3 id="arch-title" class="text-lg font-black text-[#1D3557]">Multicollinearity Pillar</h3>
+          <span class="tag-bauhaus px-3 py-1 rounded bg-[#EBF3F5] text-[#1D3557] text-xs font-bold font-mono-code">5 MARKS EACH</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-1.5">
+            <div class="font-extrabold text-[#1D3557] uppercase text-[11px] tracking-wide">1. CLRM Assumption</div>
+            <div id="arch-ass" class="text-[#555A68] leading-relaxed">No exact linear relationships among explanatory variables.</div>
+          </div>
+          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-1.5">
+            <div class="font-extrabold text-[#D95D39] uppercase text-[11px] tracking-wide">2. Nature of Violation</div>
+            <div id="arch-vio" class="text-[#555A68] leading-relaxed">High imperfect linear correlation among regressors in the sample.</div>
+          </div>
+          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-1.5">
+            <div class="font-extrabold text-[#4E878C] uppercase text-[11px] tracking-wide">3. Detection Methods</div>
+            <div id="arch-det" class="text-[#555A68] leading-relaxed">1. High R² (> 0.8) with low individual t-statistics.<br>2. Pairwise correlations > 0.8.<br>3. Variance Inflation Factor: VIF > 10 (Tolerance < 0.10).</div>
+          </div>
+          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-1.5">
+            <div class="font-extrabold text-[#B78103] uppercase text-[11px] tracking-wide">4. Consequences for OLS</div>
+            <div id="arch-con" class="text-[#555A68] leading-relaxed"><strong>OLS is STILL BLUE!</strong><br>• Variances/SEs inflate.<br>• Confidence intervals widen.<br>• t-ratios turn insignificant.</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-[#F4EBE1] border border-[#E2DACB] space-y-1.5 text-xs">
+          <div class="font-extrabold text-[#D95D39] uppercase text-[11px] tracking-wide">5. Remedies (Do's and Don'ts)</div>
+          <div id="arch-rem" class="text-[#2B2D42] leading-relaxed">1. Do nothing (often best).<br>2. Collect more data.<br>3. <strong>DO NOT</strong> drop an important variable, as this causes catastrophic omitted variable bias!</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- TAB 5: INTERACTIVE DW 5-ZONE RADAR                      -->
+    <!-- ======================================================= -->
+    <div id="tab-dw-radar" class="tab-pane hidden space-y-6">
+      
+      <!-- DW Radar Header -->
+      <div class="paper-card p-6 bg-gradient-to-r from-[#FAF3EC] via-[#FFFFFF] to-[#EBF3F5] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="tag-bauhaus px-3 py-1 rounded-full bg-[#D95D39] text-white text-[11px] uppercase tracking-wider">GUARANTEED AUTOCORRELATION QUESTION</span>
+          <h2 class="text-2xl font-extrabold text-[#1D3557] mt-1.5">Durbin-Watson 5-Zone Radar</h2>
+          <p class="text-xs text-[#555A68] mt-1 max-w-2xl leading-relaxed">
+            Drag the slider to test any computed d statistic against critical values (dL = 1.08, dU = 1.36). Watch the decision and first-order correlation estimate update in real time.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="setDWPreset(0.80)" class="paper-btn px-2.5 py-1.5 bg-[#FAF3EC] text-[#D95D39] text-xs font-bold">d = 0.80</button>
+          <button onclick="setDWPreset(1.20)" class="paper-btn px-2.5 py-1.5 bg-[#FDF6E2] text-[#B78103] text-xs font-bold">d = 1.20</button>
+          <button onclick="setDWPreset(1.95)" class="paper-btn px-2.5 py-1.5 bg-[#EBF3F5] text-[#4E878C] text-xs font-bold">d = 1.95</button>
+          <button onclick="setDWPreset(3.20)" class="paper-btn px-2.5 py-1.5 bg-[#FAF3EC] text-[#D95D39] text-xs font-bold">d = 3.20</button>
+        </div>
+      </div>
+
+      <!-- Radar Display Card -->
+      <div class="paper-card p-6 bg-white space-y-6">
+        
+        <!-- Live Slider -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <label class="text-xs font-bold text-[#555A68] uppercase tracking-wider">Computed Durbin-Watson Statistic (d):</label>
+            <div class="flex items-center gap-3">
+              <span id="dw-val-display" class="font-mono-code text-2xl font-black text-[#1D3557]">1.95</span>
+              <span id="dw-rho-display" class="font-mono-code text-xs px-2.5 py-1 rounded-full bg-[#FAF7F2] border border-[#D6CEC1] text-[#4E878C] font-bold">ρ̂ ≈ 0.03</span>
+            </div>
+          </div>
+          <input id="dw-range-input" type="range" min="0" max="4" step="0.01" value="1.95" oninput="handleDWChange(this.value)" class="w-full h-3 bg-[#EAE4D9] rounded-lg appearance-none cursor-pointer accent-[#D95D39]">
+          <div class="flex justify-between text-[11px] font-mono-code text-[#7A8294]">
+            <span>0.0 (ρ = +1)</span>
+            <span>dL (1.08)</span>
+            <span>dU (1.36)</span>
+            <span>2.0 (ρ = 0)</span>
+            <span>4-dU (2.64)</span>
+            <span>4-dL (2.92)</span>
+            <span>4.0 (ρ = -1)</span>
+          </div>
+        </div>
+
+        <!-- 5 Visual Zones -->
+        <div class="grid grid-cols-5 text-center text-xs font-bold border border-[#D6CEC1] rounded-xl overflow-hidden divide-x divide-[#D6CEC1]">
+          <div id="dw-z1" class="p-3 bg-white transition-colors">
+            <span class="block text-[10px] text-[#7A8294] font-normal">0 to dL</span>
+            Positive Auto
+          </div>
+          <div id="dw-z2" class="p-3 bg-white transition-colors">
+            <span class="block text-[10px] text-[#7A8294] font-normal">dL to dU</span>
+            Inconclusive
+          </div>
+          <div id="dw-z3" class="p-3 bg-[#EBF3F5] text-[#1D3557] transition-colors">
+            <span class="block text-[10px] text-[#7A8294] font-normal">dU to 4-dU</span>
+            No Auto (H₀)
+          </div>
+          <div id="dw-z4" class="p-3 bg-white transition-colors">
+            <span class="block text-[10px] text-[#7A8294] font-normal">4-dU to 4-dL</span>
+            Inconclusive
+          </div>
+          <div id="dw-z5" class="p-3 bg-white transition-colors">
+            <span class="block text-[10px] text-[#7A8294] font-normal">4-dL to 4.0</span>
+            Negative Auto
+          </div>
+        </div>
+
+        <!-- Decision Box -->
+        <div id="dw-decision-box" class="p-4 bg-[#FAF7F2] rounded-xl border border-[#D6CEC1] text-xs font-mono-code space-y-2 leading-relaxed">
+          <span class="tag-bauhaus px-2 py-0.5 rounded bg-[#EBF3F5] text-[#4E878C] font-bold">DECISION: DO NOT REJECT H₀</span>
+          <p class="text-[#2B2D42] pt-1">Since dU (1.36) &lt; d (1.95) &lt; 4 − dU (2.64), there is no evidence of first-order serial correlation. OLS standard errors and hypothesis tests remain valid.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- TAB 6: PAST PAPER DECODERS & EXAM QUESTIONS             -->
+    <!-- ======================================================= -->
+    <div id="tab-past-papers" class="tab-pane hidden space-y-6">
+      
+      <!-- Past Paper Header -->
+      <div class="paper-card p-6 bg-gradient-to-r from-[#FAF3EC] via-[#FFFFFF] to-[#EBF3F5] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="tag-bauhaus px-3 py-1 rounded-full bg-[#1D3557] text-white text-[11px] uppercase tracking-wider">PAST PAPERS ARCHIVE (2021-2025)</span>
+          <h2 class="text-2xl font-extrabold text-[#1D3557] mt-1.5">Real NWU Exam Questions & Memoranda</h2>
+          <p class="text-xs text-[#555A68] mt-1 max-w-2xl leading-relaxed">
+            Deconstruct real exam questions from previous years. Practice interpreting coefficients, missing t-statistics, and joint hypothesis tests.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="p-btn-beef" onclick="setPaperView('beef')" class="paper-btn px-3 py-1.5 bg-[#FAF3EC] text-[#D95D39] text-xs font-bold">2022 Beef Demand</button>
+          <button id="p-btn-charity" onclick="setPaperView('charity')" class="paper-btn px-3 py-1.5 bg-white text-[#1D3557] text-xs font-bold">2023 Charity Donations</button>
+          <button id="p-btn-comrades" onclick="setPaperView('comrades')" class="paper-btn px-3 py-1.5 bg-white text-[#1D3557] text-xs font-bold">2024 Comrades Marathon</button>
+            <button id="p-btn-pass" onclick="setPaperView('pass')" class="paper-btn px-3 py-1.5 bg-white text-[#1D3557] text-xs font-bold">2023 Grade 7 Pass Rate</button>
+        </div>
+      </div>
+
+      <!-- Paper View Display Card -->
+      <div class="paper-card p-6 bg-white space-y-5">
+        <div>
+          <h3 id="paper-title" class="text-base font-black text-[#1D3557]">2022 Question 2 [15 Marks] — Beef Demand Model (n = 10)</h3>
+          <div id="paper-eq" class="p-3 bg-[#FAF7F2] rounded-xl border border-[#D6CEC1] font-mono-code text-xs text-[#1D3557] font-bold mt-2">
+            ln Beef = 3.20 − 0.85 ln Price − 0.29 ln Income
+          </div>
+          <div id="paper-stats" class="text-xs font-mono-code text-[#7A8294] mt-1.5">
+            R² = 0.98 | Adj R² = 0.97 | F = 150.86 (p = 0.00) | DW = 2.49 | Price p = 0.01 | Income p = 0.12
+          </div>
+        </div>
+
+        <div id="paper-qa-container" class="space-y-3">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- TAB 7: ACTIVE RECALL QUIZ ATELIER                       -->
+    <!-- ======================================================= -->
+    <div id="tab-boss-quiz" class="tab-pane hidden space-y-6">
+      
+      <!-- Quiz Header -->
+      <div class="paper-card p-6 bg-gradient-to-r from-[#FAF3EC] via-[#FFFFFF] to-[#EBF3F5] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="tag-bauhaus px-3 py-1 rounded-full bg-[#D95D39] text-white text-[11px] uppercase tracking-wider">20-ITEM ACTIVE RECALL ATELIER</span>
+          <h2 class="text-2xl font-extrabold text-[#1D3557] mt-1.5">True / False Concept Mastery</h2>
+          <p class="text-xs text-[#555A68] mt-1 max-w-2xl leading-relaxed">
+            Fast, active-recall drills based on past NWU Section A exam questions. No negative feedback or score deductions — every attempt builds mastery.
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <span class="text-[10px] font-bold text-[#7A8294] uppercase tracking-wider">Quiz Flow Streak</span>
+            <div id="quiz-streak-display" class="text-xl font-black text-[#D95D39] font-mono-code">0x</div>
+          </div>
+          <button onclick="restartQuiz()" class="paper-btn px-3 py-1.5 bg-white text-xs font-bold text-[#555A68]">
+            🔄 Restart
+          </button>
+        </div>
+      </div>
+
+      <!-- Quiz Interactive Card -->
+      <div class="paper-card p-6 bg-white space-y-6 border-2 border-[#D6CEC1]">
+        
+        <div class="flex items-center justify-between pb-3 border-b border-[#E8E2D8]">
+          <span id="quiz-item-badge" class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#FAF7F2] text-[#1D3557] text-xs font-mono-code font-bold">ITEM #1 OF 20</span>
+          <span id="quiz-progress-text" class="text-xs font-mono-code text-[#7A8294]">Item 1 / 20</span>
+        </div>
+
+        <!-- Question Prompt -->
+        <p id="quiz-question-text" class="text-base sm:text-lg font-bold text-[#1D3557] leading-relaxed">
+          The sample variance divides the sum of squared deviations by n.
+        </p>
+
+        <!-- True / False Action Buttons -->
+        <div class="grid grid-cols-2 gap-4">
+          <button id="btn-choice-true" onclick="handleQuizAnswer(true)" class="paper-btn py-3 bg-[#EBF3F5] hover:bg-[#D9EAEB] text-[#1D3557] font-extrabold text-sm border-[#4E878C]">
+            TRUE (T)
+          </button>
+          <button id="btn-choice-false" onclick="handleQuizAnswer(false)" class="paper-btn py-3 bg-[#FAF3EC] hover:bg-[#F3E5D8] text-[#D95D39] font-extrabold text-sm border-[#D95D39]">
+            FALSE (F)
+          </button>
+        </div>
+
+        <!-- Feedback Box -->
+        <div id="quiz-feedback-box" class="hidden p-4 rounded-xl border space-y-2">
+          <div id="quiz-feedback-header" class="flex items-center justify-between"></div>
+          <p id="quiz-feedback-exp" class="text-xs text-[#2B2D42] leading-relaxed"></p>
+          <div class="pt-2 flex justify-end">
+            <button onclick="advanceQuiz()" class="paper-btn px-4 py-1.5 bg-[#1D3557] text-white hover:bg-[#14233A] text-xs font-bold">
+              Next Question →
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- TAB 8: PROTOCOL CARD & EXAM DAY LOGISTICS               -->
+    <!-- ======================================================= -->
+    <div id="tab-exam-card" class="tab-pane hidden space-y-6">
+      
+      <!-- Protocol Header -->
+      <div class="paper-card p-6 bg-gradient-to-r from-[#FAF3EC] via-[#FFFFFF] to-[#EBF3F5] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="tag-bauhaus px-3 py-1 rounded-full bg-[#1D3557] text-white text-[11px] uppercase tracking-wider">OFFICIAL NWU EXAM PROTOCOL</span>
+          <h2 class="text-2xl font-extrabold text-[#1D3557] mt-1.5">Exam Day Card & Venue Instructions</h2>
+          <p class="text-xs text-[#555A68] mt-1 max-w-2xl leading-relaxed">
+            Essential timetable coordinates, sub-minimum thresholds, and exam checklist for ECON325 students.
+          </p>
+        </div>
+        <button onclick="window.print()" class="paper-btn px-4 py-2 bg-white hover:bg-[#F3EFEA] text-xs font-bold text-[#1D3557]">
+          🖨️ Print Protocol Card
+        </button>
+      </div>
+
+      <!-- Protocol Cards Grid (2-Column Balanced) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        
+        <!-- Paper 1 Card -->
+        <div class="paper-card p-5 bg-white space-y-3 border-t-4 border-[#D95D39]">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono-code font-bold text-[#D95D39]">PAPER 1 (THEORY)</span>
+            <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39]">60 MARKS</span>
+          </div>
+          <h3 class="font-extrabold text-[#1D3557] text-base">Tuesday 10 Nov @ 09:00</h3>
+          <div class="text-xs space-y-1.5 text-[#555A68]">
+            <p><strong>Venue:</strong> VC-A24 Room G01</p>
+            <p><strong>Duration:</strong> 2 Hours (09:00 – 11:00)</p>
+            <p><strong>Format:</strong> Written Theory + MCQs + Output Interpretation</p>
+            <p><strong>Sub-Minimum:</strong> 40% (24 / 60)</p>
+          </div>
+        </div>
+
+        <!-- Paper 2 Practical Card -->
+        <div class="paper-card p-5 bg-white space-y-3 border-t-4 border-[#4E878C]">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono-code font-bold text-[#4E878C]">PAPER 2 (PRACTICAL)</span>
+            <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#EBF3F5] text-[#4E878C]">40 MARKS</span>
+          </div>
+          <h3 class="font-extrabold text-[#1D3557] text-base">Wednesday 11 Nov @ 14:00</h3>
+          <div class="text-xs space-y-1.5 text-[#555A68]">
+            <p><strong>Venue:</strong> VC-A21 Room 106 (PC Lab)</p>
+            <p><strong>Duration:</strong> 2 Hours (14:00 – 16:00)</p>
+            <p><strong>Format:</strong> EViews practical file + Word write-up</p>
+            <p><strong>Sub-Minimum:</strong> 40% (16 / 40)</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Checklist & What to Bring -->
+      <div class="paper-card p-6 bg-white space-y-3">
+        <h3 class="font-black text-sm text-[#1D3557] uppercase tracking-wide">Essential Exam Kit & Checklist</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#555A68]">
+          <div class="flex items-center gap-2"><span>✓</span> NWU Student Card</div>
+          <div class="flex items-center gap-2"><span>✓</span> Black/Blue pens, pencils, ruler</div>
+          <div class="flex items-center gap-2"><span>✓</span> Non-programmable financial/scientific calculator</div>
+          <div class="flex items-center gap-2"><span>✓</span> Printed Formula Sheet & Durbin-Watson Tables</div>
+          <div class="flex items-center gap-2"><span>✓</span> Arrive 30 minutes early (08:30 for Paper 1)</div>
+          <div class="flex items-center gap-2"><span>✓</span> Water bottle & light snack</div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- FOOTER                                                    -->
+  <!-- ========================================================= -->
+  <footer class="bg-white border-t border-[#E8E2D8] py-4 text-center text-xs text-[#7A8294]">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>ECON325 Studio Atelier • Open Educational Resource • North-West University 2026</div>
+      <div class="font-mono-code text-[11px] text-[#4E878C]">Status: Open Study Station • Free for All Students</div>
+    </div>
+  </footer>
+
+  <!-- ========================================================= -->
+  <!-- JAVASCRIPT LOGIC & AUDIO SYNTHESIS                        -->
+  <!-- ========================================================= -->
+  <script>
+    // Gamification state
+    let xp = parseInt(localStorage.getItem('e325_xp') || '0');
+    let streak = parseInt(localStorage.getItem('e325_stk') || '0');
+
+    function getLevelInfo(pts) {
+      if (pts < 200) return { title: 'LVL 1: APPRENTICE', max: 200 };
+      if (pts < 500) return { title: 'LVL 2: THEORIST', max: 500 };
+      if (pts < 900) return { title: 'LVL 3: BLUE HUNTER', max: 900 };
+      if (pts < 1400) return { title: 'LVL 4: ECONOMETRICIAN', max: 1400 };
+      return { title: 'LVL 5: DISTINCTION MASTER', max: 2000 };
+    }
+
+    function updateHud() {
+      const lvl = getLevelInfo(xp);
+      const rankBadge = document.getElementById('rank-badge');
+      if (rankBadge) rankBadge.textContent = lvl.title;
+      const xpDisplay = document.getElementById('xp-display');
+      if (xpDisplay) xpDisplay.textContent = `${xp} / ${lvl.max} XP`;
+      const pct = Math.min(100, Math.round((xp / lvl.max) * 100));
+      const xpBar = document.getElementById('xp-bar');
+      if (xpBar) xpBar.style.width = pct + '%';
+      const streakVal = document.getElementById('streak-val');
+      if (streakVal) streakVal.textContent = streak + 'x FLOW';
+    }
+
+    function showToast(msg, icon = '✨') {
+      let t = document.getElementById('studio-toast');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'studio-toast';
+        t.className = 'fixed bottom-5 right-5 z-50 bg-[#1D3557] text-white px-4 py-2.5 rounded-xl shadow-xl border border-[#D6CEC1] flex items-center gap-2.5 text-xs font-bold font-mono-code transition-all duration-300 pointer-events-none opacity-0 translate-y-3';
+        document.body.appendChild(t);
+      }
+      t.innerHTML = `<span>${icon}</span> <span>${msg}</span>`;
+      t.classList.remove('opacity-0', 'translate-y-3');
+      t.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(window._toastT);
+      window._toastT = setTimeout(() => {
+        t.classList.remove('opacity-100', 'translate-y-0');
+        t.classList.add('opacity-0', 'translate-y-3');
+      }, 2600);
+    }
+
+    function addXp(pts) {
+      streak++;
+      const multiplier = streak >= 5 ? 3 : streak >= 3 ? 2 : 1;
+      xp += pts * multiplier;
+      localStorage.setItem('e325_xp', xp);
+      localStorage.setItem('e325_stk', streak);
+      updateHud();
+      const xpBar = document.getElementById('xp-bar');
+      if (xpBar) {
+        xpBar.classList.remove('xp-pulse');
+        void xpBar.offsetWidth;
+        xpBar.classList.add('xp-pulse');
+      }
+      triggerConfetti();
+      playSfx('win');
+    }
+
+    function softResetStreak() {
+      streak = 0;
+      localStorage.setItem('e325_stk', 0);
+      updateHud();
+      playSfx('clue');
+    }
+
+    // Audio Engine: Pure Web Audio API
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    let focusOscillator = null;
+    let focusGain = null;
+    let focusAmbienceActive = false;
+
+    function initAudio() {
+      if (!audioCtx) audioCtx = new AudioContext();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+
+    function playSfx(type) {
+      try {
+        initAudio();
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === 'click') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(400, now);
+          gain.gain.setValueAtTime(0.02, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+          osc.start(now);
+          osc.stop(now + 0.05);
+        } else if (type === 'win') {
+          // Soft mellow marimba / bell chord: A4, C#5, E5, A5
+          [440, 554.37, 659.25, 880].forEach((freq, i) => {
+            const o = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            o.connect(g);
+            g.connect(audioCtx.destination);
+            o.type = 'sine';
+            o.frequency.setValueAtTime(freq, now + i * 0.07);
+            g.gain.setValueAtTime(0.03, now + i * 0.07);
+            g.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.07 + 0.4);
+            o.start(now + i * 0.07);
+            o.stop(now + i * 0.07 + 0.4);
+          });
+        } else if (type === 'clue') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(340, now);
+          osc.frequency.setValueAtTime(300, now + 0.08);
+          gain.gain.setValueAtTime(0.02, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
+          osc.start(now);
+          osc.stop(now + 0.2);
+        }
+      } catch (e) {
+        // Audio might fail if user has not interacted
+      }
+    }
+
+    function toggleFocusAmbience() {
+      initAudio();
+      const label = document.getElementById('focus-audio-label');
+      const icon = document.getElementById('focus-audio-icon');
+
+      if (focusAmbienceActive) {
+        if (focusGain) {
+          focusGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+          setTimeout(() => { if (focusOscillator) focusOscillator.stop(); }, 500);
+        }
+        focusAmbienceActive = false;
+        if (label) label.textContent = '40Hz Calm: OFF';
+        if (icon) icon.textContent = '🎧';
+      } else {
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        focusGain = audioCtx.createGain();
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(136.1, audioCtx.currentTime);
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(136.1 + 40, audioCtx.currentTime); // 40Hz Binaural Gamma
+        focusGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+        focusGain.gain.exponentialRampToValueAtTime(0.02, audioCtx.currentTime + 0.5);
+        osc1.connect(focusGain);
+        osc2.connect(focusGain);
+        focusGain.connect(audioCtx.destination);
+        osc1.start();
+        osc2.start();
+        focusOscillator = osc1;
+        focusAmbienceActive = true;
+        if (label) label.textContent = '40Hz Calm: ON';
+        if (icon) icon.textContent = '🌊';
+      }
+    }
+
+    // Sprint Flow Timer
+    let sprintSeconds = 15 * 60;
+    let timerInterval = null;
+    let isSprintRunning = false;
+
+    function renderSprintTimer() {
+      const m = Math.floor(sprintSeconds / 60);
+      const s = sprintSeconds % 60;
+      const display = document.getElementById('timer-display');
+      if (display) display.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function toggleSprintTimer() {
+      playSfx('click');
+      const btnText = document.getElementById('timer-btn-text');
+      if (isSprintRunning) {
+        clearInterval(timerInterval);
+        isSprintRunning = false;
+        if (btnText) btnText.textContent = 'Start';
+      } else {
+        isSprintRunning = true;
+        if (btnText) btnText.textContent = 'Pause';
+        timerInterval = setInterval(() => {
+          if (sprintSeconds > 0) {
+            sprintSeconds--;
+            renderSprintTimer();
+          } else {
+            clearInterval(timerInterval);
+            isSprintRunning = false;
+            addXp(50);
+            showToast('15-Min Sprint Complete! +50 XP banked. Stretch time!', '🎉');
+            sprintSeconds = 15 * 60;
+            renderSprintTimer();
+          }
+        }, 1000);
+      }
+    }
+
+    function resetSprintTimer() {
+      playSfx('click');
+      clearInterval(timerInterval);
+      isSprintRunning = false;
+      sprintSeconds = 15 * 60;
+      const btnText = document.getElementById('timer-btn-text');
+      if (btnText) btnText.textContent = 'Start';
+      renderSprintTimer();
+    }
+
+    // Tabs switching
+    const tabList = [
+      'tab-quest-map',
+      'tab-eviews-dojo',
+      'tab-mad-libs',
+      'tab-theory-vault',
+      'tab-dw-radar',
+      'tab-past-papers',
+      'tab-boss-quiz',
+      'tab-exam-card'
+    ];
+
+    function switchTab(targetId) {
+      playSfx('click');
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+      const activePane = document.getElementById(targetId);
+      if (activePane) activePane.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.nav-tab-btn')).find(b => b.getAttribute('onclick')?.includes(targetId));
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (targetId === 'tab-dw-radar') {
+        const slider = document.getElementById('dw-range-input');
+        if (slider) handleDWChange(slider.value);
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+      if (e.code === 'Space') {
+        e.preventDefault();
+        toggleSprintTimer();
+      } else if (e.key >= '1' && e.key <= '8') {
+        const idx = parseInt(e.key) - 1;
+        if (tabList[idx]) switchTab(tabList[idx]);
+      } else if (e.key === 't' || e.key === 'T') {
+        const quizPane = document.getElementById('tab-boss-quiz');
+        if (quizPane && !quizPane.classList.contains('hidden')) handleQuizAnswer(true);
+      } else if (e.key === 'f' || e.key === 'F') {
+        const quizPane = document.getElementById('tab-boss-quiz');
+        if (quizPane && !quizPane.classList.contains('hidden')) handleQuizAnswer(false);
+      }
+    });
+
+    // Node Challenge Data
+    const questChallenges = {
+      clrm: {
+        title: "CLRM Assumption & Error Term Strike",
+        tag: "NODE 01 • 4M",
+        prompt: "Why is the disturbance term eᵢ included in a regression equation? State the four reasons from the lecture slides.",
+        render: `
+          <div class="space-y-2 text-xs font-mono-code font-medium text-[#2B2D42]">
+            <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#D6CEC1]">1. <strong>Omission of variables:</strong> Other non-included factors affect Y.</div>
+            <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#D6CEC1]">2. <strong>Randomness in human behavior:</strong> Humans do not behave with exact mathematical consistency.</div>
+            <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#D6CEC1]">3. <strong>Measurement error:</strong> Inaccurate observation or recording of data.</div>
+            <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#D6CEC1]">4. <strong>Imperfect functional form:</strong> Linear models approximate non-linear reality.</div>
+            <div class="pt-2 flex justify-end">
+              <button onclick="claimNodeXp('clrm', 25)" class="paper-btn px-4 py-2 bg-[#D95D39] text-white hover:bg-[#C85A32] text-xs font-bold">
+                ✓ Got It! Bank +25 XP
+              </button>
+            </div>
+          </div>
+        `
+      },
+      multi: {
+        title: "Multicollinearity Detection & BLUE Status",
+        tag: "NODE 02 • 7M",
+        prompt: "Is OLS still BLUE under high multicollinearity? What is the standard diagnostic rule and the critical exam pitfall?",
+        render: `
+          <div class="space-y-2 text-xs font-mono-code font-medium text-[#2B2D42]">
+            <div class="p-3 rounded-xl bg-[#EBF3F5] border border-[#BBD5D9] text-[#1D3557]">
+              • <strong>TRUE!</strong> OLS estimators REMAIN BLUE (Best Linear Unbiased Estimators). They are still minimum variance among all linear unbiased estimators.
+            </div>
+            <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#D6CEC1]">
+              • <strong>VIF Threshold:</strong> VIF > 10 (or Tolerance < 0.10) indicates severe multicollinearity.
+            </div>
+            <div class="p-3 rounded-xl bg-[#FAF3EC] border border-[#F0DBC9] text-[#D95D39]">
+              • <strong>Memo Warning:</strong> Dropping a collinear variable causes OMITTED VARIABLE BIAS! Never drop unless theoretically irrelevant.
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button onclick="claimNodeXp('multi', 25)" class="paper-btn px-4 py-2 bg-[#1D3557] text-white hover:bg-[#14233A] text-xs font-bold">
+                ✓ Got It! Bank +25 XP
+              </button>
+            </div>
+          </div>
+        `
+      },
+      hetero: {
+        title: "Heteroscedasticity & White's Test",
+        tag: "NODE 03 • 7M",
+        prompt: "What is White's General Heteroscedasticity Test auxiliary regression, test statistic, and the EViews remedy?",
+        render: `
+          <div class="space-y-2 text-xs font-mono-code font-medium text-[#2B2D42]">
+            <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#D6CEC1]">
+              • Regress squared residuals (eᵢ²) on original regressors, squares of regressors, and cross-products.
+            </div>
+            <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#D6CEC1]">
+              • Test statistic: n × R² ~ χ²_df.
+            </div>
+            <div class="p-3 rounded-xl bg-[#EBF3F5] border border-[#BBD5D9] font-bold text-[#4E878C]">
+              • Remedy: Huber-White robust standard errors. Point coefficients DO NOT change!
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button onclick="claimNodeXp('hetero', 25)" class="paper-btn px-4 py-2 bg-[#4E878C] text-white hover:bg-[#3D6C70] text-xs font-bold">
+                ✓ Got It! Bank +25 XP
+              </button>
+            </div>
+          </div>
+        `
+      },
+      auto: {
+        title: "Autocorrelation & Durbin-Watson",
+        tag: "NODE 04 • 8M",
+        prompt: "If computed d = 0.85 and dL = 1.08, what is your decision?",
+        render: `
+          <div class="space-y-2 text-xs font-mono-code font-medium text-[#2B2D42]">
+            <div class="p-3 rounded-xl bg-[#FAF3EC] border border-[#F0DBC9] text-[#D95D39]">
+              • Since d = 0.85 < dL (1.08), REJECT H₀. Positive first-order autocorrelation is present.
+            </div>
+            <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#D6CEC1]">
+              • Remedy: HAC Newey-West standard errors.
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button onclick="claimNodeXp('auto', 25)" class="paper-btn px-4 py-2 bg-[#D95D39] text-white hover:bg-[#C85A32] text-xs font-bold">
+                ✓ Got It! Bank +25 XP
+              </button>
+            </div>
+          </div>
+        `
+      },
+      spec: {
+        title: "Model Specification & Ramsey RESET",
+        tag: "NODE 05 • 5M",
+        prompt: "Compare omitting a relevant variable vs including an irrelevant variable.",
+        render: `
+          <div class="space-y-2 text-xs font-mono-code font-medium text-[#2B2D42]">
+            <div class="p-3 rounded-xl bg-[#FAF3EC] border border-[#F0DBC9] text-[#D95D39]">
+              • <strong>Omitted Relevant:</strong> OLS is BIASED and INCONSISTENT!
+            </div>
+            <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#D6CEC1]">
+              • <strong>Irrelevant Variable:</strong> OLS remains UNBIASED and CONSISTENT, but variances are inefficiently inflated.
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button onclick="claimNodeXp('spec', 25)" class="paper-btn px-4 py-2 bg-[#1D3557] text-white hover:bg-[#14233A] text-xs font-bold">
+                ✓ Got It! Bank +25 XP
+              </button>
+            </div>
+          </div>
+        `
+      },
+      dummy: {
+        title: "Dummy Variable Trap",
+        tag: "NODE 06 • 6M",
+        prompt: "Why must a model with m categories have strictly m − 1 dummy variables when an intercept is included?",
+        render: `
+          <div class="space-y-2 text-xs font-mono-code font-medium text-[#2B2D42]">
+            <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#D6CEC1] font-bold text-[#1D3557]">
+              • To avoid the Dummy Variable Trap (perfect multicollinearity, as sum of dummies equals intercept column).
+            </div>
+            <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#D6CEC1]">
+              • The dummy coefficient represents the intercept differential relative to the benchmark category.
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button onclick="claimNodeXp('dummy', 25)" class="paper-btn px-4 py-2 bg-[#4E878C] text-white hover:bg-[#3D6C70] text-xs font-bold">
+                ✓ Got It! Bank +25 XP
+              </button>
+            </div>
+          </div>
+        `
+      }
+    };
+
+    function launchNodeChallenge(nodeId) {
+      playSfx('click');
+      const c = questChallenges[nodeId];
+      if (!c) return;
+      const tagEl = document.getElementById('drawer-tag');
+      if (tagEl) tagEl.textContent = c.tag;
+      const titleEl = document.getElementById('drawer-title');
+      if (titleEl) titleEl.textContent = c.title;
+      const promptEl = document.getElementById('drawer-prompt');
+      if (promptEl) promptEl.textContent = c.prompt;
+      const actionEl = document.getElementById('drawer-action-area');
+      if (actionEl) actionEl.innerHTML = c.render;
+      const drawer = document.getElementById('quest-challenge-drawer');
+      if (drawer) {
+        drawer.classList.remove('hidden');
+        drawer.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function closeChallengeDrawer() {
+      playSfx('click');
+      const drawer = document.getElementById('quest-challenge-drawer');
+      if (drawer) drawer.classList.add('hidden');
+    }
+
+    function claimNodeXp(nodeId, pts) {
+      addXp(pts);
+      const badge = document.getElementById(`node-${nodeId}-status`);
+      if (badge) {
+        badge.textContent = 'DONE ✓';
+        badge.className = 'tag-bauhaus text-[10px] px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#4E878C]';
+      }
+      closeChallengeDrawer();
+    }
+
+    // Dojo Data
+    const dojoData = [
+      {
+        click: "Double-click series in workfile → View → Descriptive Statistics & Tests → Stats Table",
+        rules: "• Mean > Median: Right-skewed.<br>• Kurtosis > 3: Leptokurtic (fat tails).<br>• Jarque-Bera p < 0.05: Reject normality of distribution.",
+        cmd: "group tab1.stats wage educ exper"
+      },
+      {
+        click: "Top menu: Quick → Estimate Equation... (or type 'ls wage c educ exper' in command bar)",
+        rules: "• Syntax: ls wage c educ exper.<br>• Elasticity log-log: ls log(wage) c log(educ) log(exper).",
+        cmd: "ls wage c educ exper"
+      },
+      {
+        click: "Equation window: View → Residual Diagnostics → Heteroskedasticity Tests... → White",
+        rules: "• White Test: Read Prob. Chi-Square on Obs*R-squared.<br>• Serial Correlation LM Test: View → Residual Diagnostics → Serial Correlation LM Test.",
+        cmd: "eq01.white"
+      },
+      {
+        click: "Equation window: Estimate button → Options tab → Covariance method dropdown",
+        rules: "• Select Huber-White (Hetero) or HAC Newey-West (Autocorrelation).<br>• Notice coefficients remain identical; only Standard Errors change!",
+        cmd: "ls(h) wage c educ exper"
+      }
+    ];
+
+    function setDojoCombo(idx) {
+      playSfx('click');
+      for (let i = 0; i < 4; i++) {
+        const b = document.getElementById('dojo-c' + i);
+        if (b) {
+          b.className = (i === idx) 
+            ? 'paper-btn p-3 bg-white text-[#1D3557] border-[#4E878C] text-left text-xs font-bold'
+            : 'paper-btn p-3 bg-white text-[#555A68] text-left text-xs font-medium';
+        }
+      }
+      const item = dojoData[idx];
+      const clickPath = document.getElementById('dojo-click-path');
+      if (clickPath) clickPath.innerHTML = item.click;
+      const rules = document.getElementById('dojo-rules');
+      if (rules) rules.innerHTML = item.rules;
+      const cmdInput = document.getElementById('dojo-cmd-input');
+      if (cmdInput) cmdInput.value = item.cmd;
+    }
+
+    function executeDojoCommand() {
+      playSfx('click');
+      addXp(20);
+      showToast('EViews Executed! Simulated table updated (+20 XP)', '⚡');
+    }
+
+    function injectIntoMadLibs(varName, unit, depName, bVal, tVal, pVal) {
+      playSfx('click');
+      const inX = document.getElementById('in-x');
+      if (inX) inX.value = varName;
+      const inXUnit = document.getElementById('in-x-unit');
+      if (inXUnit) inXUnit.value = unit;
+      const inY = document.getElementById('in-y');
+      if (inY) inY.value = depName;
+      const inB = document.getElementById('in-b');
+      if (inB) inB.value = bVal;
+      const inT = document.getElementById('in-t');
+      if (inT) inT.value = tVal;
+      const inP = document.getElementById('in-p');
+      if (inP) inP.value = pVal.toFixed(4);
+      switchTab('tab-mad-libs');
+      renderMadLibsScript();
+    }
+
+    function copyDojoScript() {
+      navigator.clipboard.writeText("ls wage c educ exper\neq01.white\neq01.auto(2)\nls(h) wage c educ exper");
+      playSfx('click');
+      showToast('EViews exam commands copied to clipboard!', '📋');
+    }
+
+    // Mad-Libs Logic
+    function renderMadLibsScript() {
+      const x = document.getElementById('in-x')?.value.trim() || 'X';
+      const xUnit = document.getElementById('in-x-unit')?.value.trim() || 'units';
+      const y = document.getElementById('in-y')?.value.trim() || 'Y';
+      const b = parseFloat(document.getElementById('in-b')?.value.trim() || '0');
+      const t = parseFloat(document.getElementById('in-t')?.value.trim() || '0');
+      const p = parseFloat(document.getElementById('in-p')?.value.trim() || '0');
+
+      const isSig = p < 0.05;
+      const dir = b >= 0 ? 'increase' : 'decrease';
+
+      const box = document.getElementById('madlibs-rendered-box');
+      if (box) {
+        box.innerHTML = `
+          <p><strong>1. Hypotheses:</strong><br><span class="font-mono-code font-bold">H₀: β_${x} = 0</span> vs <span class="font-mono-code font-bold">H₁: β_${x} ≠ 0</span> at 5% significance level.</p>
+          <p><strong>2. Test Statistic:</strong><br>Computed <span class="font-mono-code">t = ${t.toFixed(2)}</span>, with p-value = <span class="font-mono-code font-bold text-[#D95D39]">${p.toFixed(4)}</span>.</p>
+          <p><strong>3. Decision:</strong><br>Since <span class="font-mono-code">${p.toFixed(4)} ${isSig ? '< 0.05' : '≥ 0.05'}</span>, we <strong class="${isSig ? 'text-[#4E878C]' : 'text-[#D95D39]'}">${isSig ? 'REJECT H₀' : 'FAIL TO REJECT H₀'}</strong>. ${x} is ${isSig ? 'statistically significant' : 'not statistically significant'} at the 5% level.</p>
+          <p><strong>4. Economic Interpretation:</strong><br><span class="italic font-bold text-[#1D3557]">Holding other variables constant</span>, for every 1 ${xUnit} increase in ${x}, ${y} is estimated to ${dir} by on average <span class="font-mono-code font-bold text-[#D95D39]">${Math.abs(b).toFixed(4)}</span> units.</p>
+        `;
+      }
+    }
+
+    function copyRenderedScript() {
+      const text = document.getElementById('madlibs-rendered-box')?.innerText;
+      if (text) navigator.clipboard.writeText(text);
+      playSfx('win');
+      addXp(15);
+      showToast('Formatted script copied to clipboard!', '📝');
+    }
+
+    function copyBlankWordTemplate() {
+      const str = `=== SURNAME_INITIALS.DOCX TEMPLATE ===\nQuestion [X.X]\n1. Hypotheses:\n   H₀: β₁ = 0 vs H₁: β₁ ≠ 0\n2. Test Statistic:\n   Computed t = [X.XX], p-value = [0.0XXX]\n3. Decision:\n   Since p-value [</>] 0.05, we [reject / do not reject] H₀ at the 5% level.\n4. Economic Meaning:\n   Holding other variables constant, a 1-unit increase in [X] leads to an estimated [increase/decrease] in [Y] of [b] units on average.\n======================================`;
+      navigator.clipboard.writeText(str);
+      playSfx('click');
+      showToast('Blank .docx template copied!', '📄');
+    }
+
+    // Theory Data
+    const archData = {
+      multi: {
+        title: "Multicollinearity Pillar",
+        ass: "No exact linear relationships among explanatory variables.",
+        vio: "High imperfect linear correlation among regressors in sample.",
+        det: "1. High R² (> 0.8) with low individual t-statistics.<br>2. Pairwise correlations > 0.8.<br>3. Variance Inflation Factor: VIF > 10 (Tolerance < 0.10).",
+        con: "<strong>OLS is STILL BLUE!</strong><br>• Variances/SEs inflate.<br>• Confidence intervals widen.<br>• t-ratios turn insignificant.",
+        rem: "1. Do nothing (often best).<br>2. Collect more data.<br>3. <strong>DO NOT</strong> drop an important variable (omitted variable bias)!"
+      },
+      hetero: {
+        title: "Heteroscedasticity Pillar",
+        ass: "Constant variance of error terms: Var(uᵢ | Xᵢ) = σ².",
+        vio: "Variance of error term changes with X: Var(uᵢ | Xᵢ) = σᵢ².",
+        det: "1. Residual scatterplot (fan/trumpet shape).<br>2. Park / Glejser tests.<br>3. <strong>White's General Test:</strong> Auxiliary regression of eᵢ² on regressors, squares, and cross-products (n·R² ~ χ²).",
+        con: "<strong>OLS is NO LONGER BLUE!</strong><br>• OLS remains unbiased and consistent.<br>• Standard errors are biased and incorrect.<br>• t and F tests are invalid.",
+        rem: "1. Weighted Least Squares (WLS).<br>2. Log transformations.<br>3. <strong>Huber-White Robust Standard Errors</strong> in EViews."
+      },
+      auto: {
+        title: "Autocorrelation Pillar",
+        ass: "No correlation between disturbance terms: Cov(uᵢ, uⱼ) = 0 for i ≠ j.",
+        vio: "Error in one period correlates with previous error: u_t = ρ u_{t-1} + ε_t.",
+        det: "1. Residual time-series plot.<br>2. <strong>Durbin-Watson Test (d)</strong> for AR(1).<br>3. Breusch-Godfrey LM test for higher orders.",
+        con: "<strong>OLS is NO LONGER BLUE!</strong><br>• OLS remains unbiased and consistent.<br>• Variances usually underestimated (t-stats inflated, spurious significance).<br>• R² inflated.",
+        rem: "1. Newey-West HAC Robust standard errors.<br>2. Generalized Difference / Cochrane-Orcutt transformation."
+      },
+      spec: {
+        title: "Specification Bias Pillar",
+        ass: "Mathematical form and regressor choice correctly specified.",
+        vio: "Omission of relevant variable, inclusion of irrelevant variable, or incorrect functional form.",
+        det: "1. Ramsey RESET test.<br>2. Examination of residuals.<br>3. Comparison of adjusted R².",
+        con: "• <strong>Omitted variable:</strong> BIASED and INCONSISTENT!<br>• <strong>Irrelevant variable:</strong> Unbiased but inefficient (SEs inflated).",
+        rem: "Respecify model using economic theory. Retain necessary controls."
+      }
+    };
+
+    function setArchView(k) {
+      playSfx('click');
+      ['multi', 'hetero', 'auto', 'spec'].forEach(id => {
+        const btn = document.getElementById('arch-btn-' + id);
+        if (btn) {
+          btn.className = (id === k) 
+            ? 'paper-btn p-3 bg-white text-[#1D3557] border-[#1D3557] text-left text-xs font-bold'
+            : 'paper-btn p-3 bg-white text-[#555A68] text-left text-xs font-medium';
+        }
+      });
+      const d = archData[k];
+      const title = document.getElementById('arch-title');
+      if (title) title.textContent = d.title;
+      const ass = document.getElementById('arch-ass');
+      if (ass) ass.innerHTML = d.ass;
+      const vio = document.getElementById('arch-vio');
+      if (vio) vio.innerHTML = d.vio;
+      const det = document.getElementById('arch-det');
+      if (det) det.innerHTML = d.det;
+      const con = document.getElementById('arch-con');
+      if (con) con.innerHTML = d.con;
+      const rem = document.getElementById('arch-rem');
+      if (rem) rem.innerHTML = d.rem;
+    }
+
+    function toggleArchAnswer() {
+      playSfx('click');
+      addXp(15);
+      showToast('Pillar memorized! +15 XP banked', '🏛️');
+    }
+
+    // DW Radar
+    function handleDWChange(val) {
+      const d = parseFloat(val);
+      const rho = (1 - (d / 2)).toFixed(2);
+      const valDisp = document.getElementById('dw-val-display');
+      if (valDisp) valDisp.textContent = d.toFixed(2);
+      const rhoDisp = document.getElementById('dw-rho-display');
+      if (rhoDisp) rhoDisp.textContent = `ρ̂ ≈ ${rho} (${rho > 0 ? 'pos' : rho < 0 ? 'neg' : 'zero'})`;
+
+      for (let i = 1; i <= 5; i++) {
+        const el = document.getElementById('dw-z' + i);
+        if (el) el.className = 'p-3 bg-white text-[#555A68] transition-colors';
+      }
+
+      const box = document.getElementById('dw-decision-box');
+      if (!box) return;
+
+      if (d < 1.08) {
+        document.getElementById('dw-z1').className = 'p-3 bg-[#FAF3EC] text-[#D95D39] font-bold';
+        box.innerHTML = `<span class="tag-bauhaus px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] font-bold">DECISION: REJECT H₀ (POSITIVE AUTOCORRELATION)</span><p class="text-[#2B2D42] pt-1">Since d (${d.toFixed(2)}) &lt; dL (1.08), we reject H₀. There is statistically significant evidence of positive first-order serial correlation. Remedy: Newey-West HAC standard errors.</p>`;
+      } else if (d >= 1.08 && d <= 1.36) {
+        document.getElementById('dw-z2').className = 'p-3 bg-[#FDF6E2] text-[#B78103] font-bold';
+        box.innerHTML = `<span class="tag-bauhaus px-2 py-0.5 rounded bg-[#FDF6E2] text-[#B78103] font-bold">DECISION: INCONCLUSIVE (ZONE OF INDECISION)</span><p class="text-[#2B2D42] pt-1">Since dL (1.08) ≤ d (${d.toFixed(2)}) ≤ dU (1.36), the Durbin-Watson test cannot determine whether autocorrelation is present. Use the Breusch-Godfrey LM test in EViews to verify.</p>`;
+      } else if (d > 1.36 && d < 2.64) {
+        document.getElementById('dw-z3').className = 'p-3 bg-[#EBF3F5] text-[#1D3557] font-bold';
+        box.innerHTML = `<span class="tag-bauhaus px-2 py-0.5 rounded bg-[#EBF3F5] text-[#4E878C] font-bold">DECISION: DO NOT REJECT H₀ (NO AUTOCORRELATION)</span><p class="text-[#2B2D42] pt-1">Since dU (1.36) &lt; d (${d.toFixed(2)}) &lt; 4 − dU (2.64), there is no evidence of serial correlation. OLS standard errors and hypothesis tests remain valid.</p>`;
+      } else if (d >= 2.64 && d <= 2.92) {
+        document.getElementById('dw-z4').className = 'p-3 bg-[#FDF6E2] text-[#B78103] font-bold';
+        box.innerHTML = `<span class="tag-bauhaus px-2 py-0.5 rounded bg-[#FDF6E2] text-[#B78103] font-bold">DECISION: INCONCLUSIVE (NEGATIVE ZONE)</span><p class="text-[#2B2D42] pt-1">Since 4 − dU (2.64) ≤ d (${d.toFixed(2)}) ≤ 4 − dL (2.92), the test is inconclusive regarding negative serial correlation.</p>`;
+      } else {
+        document.getElementById('dw-z5').className = 'p-3 bg-[#FAF3EC] text-[#D95D39] font-bold';
+        box.innerHTML = `<span class="tag-bauhaus px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] font-bold">DECISION: REJECT H₀ (NEGATIVE AUTOCORRELATION)</span><p class="text-[#2B2D42] pt-1">Since d (${d.toFixed(2)}) &gt; 4 − dL (2.92), we reject H₀. There is statistically significant evidence of negative first-order serial correlation.</p>`;
+      }
+    }
+
+    function setDWPreset(val) {
+      playSfx('click');
+      const input = document.getElementById('dw-range-input');
+      if (input) input.value = val;
+      handleDWChange(val);
+      addXp(10);
+    }
+
+    // Past Papers Data
+    // Past Papers Data (Audited against exam-vault/past-papers ground truth)
+    const paperData = {
+      beef: {
+        title: "2022 Question 2 [15 Marks] — Beef Demand Model (n = 10, Vanderbijlpark)",
+        eq: "Y = 135.47 − 2.73 X₁ − 0.29 X₂   [Y: kg beef, X₁: price in Rand, X₂: consumer income in Rand]",
+        stats: "se: (122.34) (0.83) (0.41) | t: (1.11) (-3.29) (-0.70) | p: (0.30) (0.01) (0.51) | R² = 0.98, adj R² = 0.97 | F = 150.86 (p = 0.00) | DW = 2.49 | n = 10",
+        qa: [
+          {
+            q: "2.1 What are your a priori expectations for Price (X₁) and Income (X₂)? Explain. [4M]",
+            a: "<strong>Price (X₁):</strong> Expected sign is negative (−) due to the Law of Demand (higher price lowers quantity demanded). The estimated coefficient (−2.73) conforms to theory.<br><strong>Income (X₂):</strong> Expected sign is positive (+) for a normal good. The negative estimated coefficient (−0.29) suggests beef is treated as an inferior good in this sample (though statistically insignificant)."
+          },
+          {
+            q: "2.2 Test whether Price and Income are statistically significant at 5%. [4M]",
+            a: "<strong>Price (X₁):</strong> H₀: β₂ = 0 vs H₁: β₂ ≠ 0. p-value = 0.01 < 0.05 → Reject H₀. Price has a statistically significant effect on beef consumption.<br><strong>Income (X₂):</strong> H₀: β₃ = 0 vs H₁: β₃ ≠ 0. p-value = 0.51 > 0.05 → Fail to reject H₀. Income does not have a statistically significant effect on beef demand."
+          },
+          {
+            q: "2.3 Evaluate the overall significance of the regression model. [2M]",
+            a: "H₀: β₂ = β₃ = 0 vs H₁: at least one βⱼ ≠ 0. The F-statistic is 150.86 with p-value = 0.00 < 0.05. We reject H₀ at the 1% level; the model is jointly statistically significant overall."
+          },
+          {
+            q: "2.4 Interpret Goodness of Fit. [2M]",
+            a: "Adjusted R² = 0.97. Taking degrees of freedom into account, 97% of the total variation in beef demand is explained by price and income."
+          },
+          {
+            q: "2.5 Comment on serial correlation (DW = 2.49). [3M]",
+            a: "For n = 10, k' = 2 explanatory variables, critical bounds are dL ≈ 0.70, dU ≈ 1.64. The upper bound for negative autocorrelation is 4 − dL = 3.30 and 4 − dU = 2.36. Because 4 − dU (2.36) < 2.49 < 4 − dL (3.30), the DW test falls into the inconclusive region for negative first-order autocorrelation."
+          }
+        ]
+      },
+      charity: {
+        title: "2023 Question 2 [25 Marks] — Charity Donations (n = 65)",
+        eq: "Charity = −4.67 + 1.55 Age + 1.04 Income − 0.48 Tax + 0.18 Deps",
+        stats: "se: (1.30) (0.22) (0.13) (0.21) (0.04) | t: (-3.60) (7.13) (8.03) (???) (4.11) | R² = 0.22, adj R² = 0.21 | F = 26.86 | DW = 0.07 | n = 65",
+        qa: [
+          {
+            q: "2.1 Interpret the estimated coefficients of Age and Income. [4M]",
+            a: "<strong>Age (Dummy: 1 if > 64, 0 otherwise):</strong> Holding other variables constant, individuals older than 64 donate on average R1.55 more per year than younger individuals.<br><strong>Income (in R thousands):</strong> Holding other variables constant, for every R1,000 increase in annual income, donations increase by R1.04 on average."
+          },
+          {
+            q: "2.2 The examiner omitted t for Tax. Compute it and test at 1%. [4M]",
+            a: "<strong>Computation:</strong> t = b / se = −0.48 / 0.21 = <strong>−2.286</strong>.<br>Critical t at 1% with df = n − k = 65 − 5 = 60 is t(0.005, 60) ≈ 2.660. Since |t| = 2.286 < 2.660, we fail to reject H₀ at the 1% significance level (Tax is significant at 5% but not at 1%)."
+          },
+          {
+            q: "2.3 Evaluate overall fit and explain the general relationship between F and R². [5M]",
+            a: "F = 26.86 is highly significant (p < 0.01), showing joint significance, though adj R² = 0.21 is modest.<br><strong>General Relationship:</strong> F = [R² / (k − 1)] / [(1 − R²) / (n − k)]. F is a monotonic increasing function of R²: when R² = 0, F = 0; as R² → 1, F → ∞."
+          },
+          {
+            q: "2.4 Explain the DW statistic of 0.07. [3M]",
+            a: "Computed d = 0.07 is far below dL (≈ 1.40). There is severe positive first-order autocorrelation (or clustering / ordering of cross-sectional survey data). Remedy: Newey-West HAC robust standard errors."
+          },
+          {
+            q: "2.5 Is multicollinearity expected between Income and Tax? [5M]",
+            a: "Yes. Progressive income taxation directly links Tax liabilities to Income, creating high linear correlation between regressors. Consequences: OLS remains BLUE, but standard errors inflate, reducing individual t-statistics and widening confidence intervals."
+          },
+          {
+            q: "2.6 When should a quadratic specification be used? How would you test it? [4M]",
+            a: "Use a quadratic form when the marginal effect of a variable is non-constant or has a turning point (e.g. diminishing returns to income). To test: include Income², estimate Charity = ... + β₂Income + β₃Income², and conduct a t-test on β₃ (H₀: β₃ = 0 vs H₁: β₃ ≠ 0)."
+          }
+        ]
+      },
+      comrades: {
+        title: "2024 Question 3 [13 Marks] — Comrades Marathon Spending (n = 425, EViews Table)",
+        eq: "spendpp = 403.02 + 79.63 AGE2 + 633.36 AGE3 + 564.11 AGE4 + 143.99 EDU2 + 477.45 EDU3 + 316.43 GAUTENG",
+        stats: "EViews Table: Dependent Variable SPENDPP | Base categories: AGE1 (<20) and EDU1 (Secondary school) | adj R² = 0.343 | F = 4.196 (p = 0.000411) | DW = 2.007",
+        qa: [
+          {
+            q: "3.1 Explain the influence of age on spending per person (spendpp) at the Comrades. [5M]",
+            a: "AGE1 (&lt; 20 years) is the omitted benchmark category. Holding education and province constant:<br>• AGE2 (20–30): +R79.63 vs base, but p = 0.7602 &gt; 0.05 (statistically insignificant).<br>• AGE3 (30–40): +R633.36 vs base, p = 0.0054 &lt; 0.01 (statistically significant at 1%).<br>• AGE4 (&gt; 40): +R564.11 vs base, p = 0.0286 &lt; 0.05 (statistically significant at 5%).<br><strong>Conclusion:</strong> Spending peaks in the 30–40 age category (R633.36 higher than under-20s) and then plateaus/slightly tapers for over-40s."
+          },
+          {
+            q: "3.2 Interpret the results of the dummy variable GAUTENG. [2M]",
+            a: "Holding age category and education level constant, runners from Gauteng province spend on average R316.43 more per person than runners from other provinces. The effect is statistically significant at the 5% level (p = 0.0471 &lt; 0.05)."
+          },
+          {
+            q: "3.3 Determine average spending of: 35-year-old with a Master's degree working at Nedbank in Sandton. [3M]",
+            a: "Characteristics: 35 years old → AGE3 = 1; Master's degree → EDU3 = 1; Sandton (Gauteng) → GAUTENG = 1. All other dummies = 0.<br><strong>Calculation:</strong> Predicted spendpp = 403.0241 + 633.3581(1) + 477.4459(1) + 316.4310(1) = <strong>R1,830.26</strong>."
+          },
+          {
+            q: "3.4 How good is the overall fit (adj R²)? How can the model be improved? [3M]",
+            a: "Adjusted R² = 0.343, indicating that 34.3% of the variation in spending per person is explained by age, education, and province (modest explanatory power).<br><strong>Improvements:</strong> Include omitted continuous variables (income, travel distance, household size), interaction terms (e.g. AGE × EDU), or use continuous age instead of age categories."
+          }
+        ]
+      },
+      pass: {
+        title: "2023 Test 2 Question 3 [11 Marks] — Grade 7 Maths Pass Rate (n = 500)",
+        eq: "PASS = 36.21 + 0.00122 AVGSAL + 0.0426 ENROL + 0.00136 EXPP − 0.3979 LUNCH + 0.0172 STAFF",
+        stats: "PASS: % pass rate | AVGSAL: teacher salary | ENROL: school enrollment | EXPP: expenditure/pupil | LUNCH: % free lunch | STAFF: staff/1000 | adj R² = 0.222 | F = 29.48 (p = 0.0000) | DW = 1.717",
+        qa: [
+          {
+            q: "3.1 Interpret the coefficient of STAFF (0.0172). [2M]",
+            a: "Holding all other variables constant, an increase of one staff member per 1,000 learners increases the estimated mathematics pass rate by 0.0172 percentage points."
+          },
+          {
+            q: "3.2 Comment on the signs of LUNCH and AVGSAL vs a priori expectations. [3M]",
+            a: "<strong>LUNCH (−0.3979):</strong> Negative as expected. Higher % receiving free lunch proxies socio-economic deprivation, which lowers pass rates.<br><strong>AVGSAL (+0.00122):</strong> Positive as expected. Higher average teacher salaries attract and motivate better-qualified educators, raising student achievement."
+          },
+          {
+            q: "3.3 Interpret Adjusted R² (0.222). [1M]",
+            a: "Taking degrees of freedom into account, 22.2% of the variation in Grade 7 maths pass rates is explained by the five school characteristics."
+          },
+          {
+            q: "3.4 How would you test if expenditure per pupil (EXPP) exhibits diminishing returns? [2M]",
+            a: "Add a quadratic term EXPP² to the model. Diminishing returns requires a positive linear coefficient on EXPP and a statistically significant negative coefficient on EXPP² (H₀: β_EXPP² = 0 vs H₁: β_EXPP² < 0)."
+          },
+          {
+            q: "3.5 How would you incorporate urban vs rural school differences? [3M]",
+            a: "Define a dummy variable D_URBAN = 1 for urban schools and 0 for rural schools. Include D_URBAN to test for an intercept shift, and interaction terms (D_URBAN × X) to test if slopes differ between urban and rural schools."
+          }
+        ]
+      }
+    };
+
+    function setPaperView(k) {
+      playSfx('click');
+      ['beef', 'charity', 'comrades', 'pass'].forEach(id => {
+        const btn = document.getElementById('p-btn-' + id);
+        if (btn) {
+          btn.className = (id === k) 
+            ? 'paper-btn px-3 py-1.5 bg-[#FAF3EC] text-[#D95D39] text-xs font-bold'
+            : 'paper-btn px-3 py-1.5 bg-white text-[#555A68] text-xs font-medium';
+        }
+      });
+      const p = paperData[k];
+      const title = document.getElementById('paper-title');
+      if (title) title.textContent = p.title;
+      const eq = document.getElementById('paper-eq');
+      if (eq) eq.textContent = p.eq;
+      const stats = document.getElementById('paper-stats');
+      if (stats) stats.textContent = p.stats;
+
+      let html = '';
+      p.qa.forEach((item) => {
+        html += `
+          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-1.5">
+            <div class="font-extrabold text-[#1D3557] text-xs">${item.q}</div>
+            <div class="text-[#555A68] leading-relaxed text-xs pt-1 border-t border-[#E8E2D8]">${item.a}</div>
+          </div>
+        `;
+      });
+      const container = document.getElementById('paper-qa-container');
+      if (container) container.innerHTML = html;
+    }
+
+    // Boss Quiz Data
+    const quizItems = [
+      { q: "The sample variance divides the sum of squared deviations by n.", a: false, exp: "False! It divides by degrees of freedom n − 1 (Bessel's correction) for an unbiased sample variance." },
+      { q: "A population parameter is a random variable; a sample statistic is fixed.", a: false, exp: "False! Population parameters are fixed constants; sample statistics are random variables that vary from sample to sample." },
+      { q: "In an OLS regression with an intercept, Σeᵢ = 0, but Σeᵢ² need not be zero.", a: true, exp: "True! The sum of residuals Σeᵢ is strictly 0, while the sum of squared residuals Σeᵢ² is minimised, not zero." },
+      { q: "OLS chooses the coefficients that minimise the sum of the residuals.", a: false, exp: "False! OLS minimises the SUM OF SQUARED residuals (Σeᵢ²), not the sum of residuals (which always equals zero with an intercept)." },
+      { q: "A BLUE estimator has the smallest variance of all estimators, including non-linear estimators.", a: false, exp: "False! BLUE means Best LINEAR Unbiased Estimator — minimum variance strictly within the class of LINEAR unbiased estimators." },
+      { q: "Autocorrelation makes the OLS estimators biased.", a: false, exp: "False! OLS estimators remain UNBIASED under autocorrelation and heteroscedasticity; only the variances and standard errors are biased." },
+      { q: "Heteroskedasticity means the variance of the error term changes with X.", a: true, exp: "True! Var(uᵢ | Xᵢ) = σᵢ² is non-constant across observations." },
+      { q: "If d = 0.80 and dL = 1.10, there is evidence of positive first-order autocorrelation.", a: true, exp: "True! When d < dL, we reject H₀ and conclude positive autocorrelation exists." },
+      { q: "If d = 3.40 and 4 − dL = 2.90, there is evidence of negative first-order autocorrelation.", a: true, exp: "True! Since d (3.40) > 4 − dL (2.90), we reject H₀ in favor of negative autocorrelation." },
+      { q: "Including a dummy for every category together with an intercept avoids the dummy trap.", a: false, exp: "False! That CREATES the dummy variable trap (perfect multicollinearity). You must drop one category or drop the intercept." },
+      { q: "A significant coefficient on an interaction term D×X means the slope differs between groups.", a: true, exp: "True! D affects the intercept; D×X affects the slope (differential slope coefficient)." },
+      { q: "A high R² proves that the explanatory variables cause the dependent variable.", a: false, exp: "False! Correlation does not imply causation. A high R² only indicates statistical association." },
+      { q: "Adjusted R² can fall when an explanatory variable is added, even though R² never falls.", a: true, exp: "True! If the t-statistic of the new variable is less than 1 in absolute value, Adjusted R² decreases." },
+      { q: "A VIF of 12 for an explanatory variable indicates severe multicollinearity.", a: true, exp: "True! VIF > 10 (or Tolerance < 0.10) is the standard rule of thumb for serious collinearity." },
+      { q: "Multicollinearity makes the OLS estimators biased.", a: false, exp: "False! OLS remains BLUE under multicollinearity. Coefficients remain unbiased; variances are simply large." },
+      { q: "Time-series data are observations on one unit over several periods; cross-sectional data are on many units at one point.", a: true, exp: "True! Standard definitions from Lecture Activity 1." },
+      { q: "The Jarque–Bera test has a null hypothesis of homoscedasticity.", a: false, exp: "False! The Jarque–Bera test has a null hypothesis of NORMALITY (skewness = 0 and kurtosis = 3)." },
+      { q: "White's test regresses the squared residuals on the regressors, their squares, and cross-products.", a: true, exp: "True! That is the auxiliary regression equation for White's General Heteroscedasticity test." },
+      { q: "In a simple two-variable regression, the F test and the t test on the slope give identical conclusions.", a: true, exp: "True! With one regressor, F = t² and both test exactly the same hypothesis with identical p-values." },
+      { q: "A dummy variable can be used to test for a structural break, such as before and after an economic crisis.", a: true, exp: "True! A dummy taking 0 before the crisis and 1 after tests for a structural shift in the intercept and/or slope." }
+    ];
+
+    let currentQuizIdx = 0;
+    let quizComboStreak = 0;
+
+    function renderQuizItem() {
+      const item = quizItems[currentQuizIdx];
+      const prog = document.getElementById('quiz-progress-text');
+      if (prog) prog.textContent = `Item ${currentQuizIdx + 1} / ${quizItems.length}`;
+      const badge = document.getElementById('quiz-item-badge');
+      if (badge) badge.textContent = `ITEM #${currentQuizIdx + 1} OF 20`;
+      const streakDisp = document.getElementById('quiz-streak-display');
+      if (streakDisp) streakDisp.textContent = quizComboStreak + 'x';
+      const qText = document.getElementById('quiz-question-text');
+      if (qText) qText.textContent = item.q;
+
+      const fBox = document.getElementById('quiz-feedback-box');
+      if (fBox) fBox.classList.add('hidden');
+      const btnT = document.getElementById('btn-choice-true');
+      if (btnT) btnT.disabled = false;
+      const btnF = document.getElementById('btn-choice-false');
+      if (btnF) btnF.disabled = false;
+    }
+
+    function handleQuizAnswer(userBool) {
+      const item = quizItems[currentQuizIdx];
+      const isCorrect = (userBool === item.a);
+      const btnT = document.getElementById('btn-choice-true');
+      if (btnT) btnT.disabled = true;
+      const btnF = document.getElementById('btn-choice-false');
+      if (btnF) btnF.disabled = true;
+
+      const fBox = document.getElementById('quiz-feedback-box');
+      const fHeader = document.getElementById('quiz-feedback-header');
+      const fExp = document.getElementById('quiz-feedback-exp');
+      if (fBox) fBox.classList.remove('hidden');
+
+      if (isCorrect) {
+        quizComboStreak++;
+        const streakDisp = document.getElementById('quiz-streak-display');
+        if (streakDisp) streakDisp.textContent = quizComboStreak + 'x';
+        if (fHeader) fHeader.innerHTML = '<span class="tag-bauhaus px-3 py-1 rounded-full bg-[#EBF3F5] text-[#4E878C] text-xs font-bold">EXCELLENT! CORRECT (+15 XP)</span>';
+        if (fBox) fBox.className = 'p-4 rounded-xl border border-[#BBD5D9] bg-[#EBF3F5]/50 space-y-2';
+        addXp(15);
+      } else {
+        quizComboStreak = 0;
+        const streakDisp = document.getElementById('quiz-streak-display');
+        if (streakDisp) streakDisp.textContent = '0x';
+        if (fHeader) fHeader.innerHTML = '<span class="tag-bauhaus px-3 py-1 rounded-full bg-[#FAF3EC] text-[#D95D39] text-xs font-bold">EXAMINER CLUE (+5 XP)</span>';
+        if (fBox) fBox.className = 'p-4 rounded-xl border border-[#F0DBC9] bg-[#FAF3EC]/50 space-y-2';
+        softResetStreak();
+        addXp(5);
+      }
+
+      if (fExp) fExp.innerHTML = item.exp;
+    }
+
+    function advanceQuiz() {
+      playSfx('click');
+      if (currentQuizIdx < quizItems.length - 1) {
+        currentQuizIdx++;
+        renderQuizItem();
+      } else {
+        showToast(`🏆 Battle Complete! Cleared all 20 items. Total XP: ${xp}`, '🏆');
+        currentQuizIdx = 0;
+        renderQuizItem();
+      }
+    }
+
+    function restartQuiz() {
+      playSfx('click');
+      currentQuizIdx = 0;
+      quizComboStreak = 0;
+      renderQuizItem();
+    }
+
+    // Confetti Engine
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas?.getContext('2d');
+    let confettiParticles = [];
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function triggerConfetti() {
+      if (!canvas || !ctx) return;
+      const colors = ['#D95D39', '#1D3557', '#4E878C', '#E9C46A', '#2B2D42'];
+      for (let i = 0; i < 40; i++) {
+        confettiParticles.push({
+          x: window.innerWidth / 2,
+          y: window.innerHeight / 2,
+          vx: (Math.random() - 0.5) * 12,
+          vy: (Math.random() - 0.8) * 12,
+          size: Math.random() * 7 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 10,
+          opacity: 1
+        });
+      }
+    }
+
+    function updateConfetti() {
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confettiParticles = confettiParticles.filter(p => p.opacity > 0);
+      confettiParticles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.25; // gravity
+        p.rotation += p.vRot;
+        p.opacity -= 0.015;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(0, p.opacity);
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+        ctx.restore();
+      });
+      requestAnimationFrame(updateConfetti);
+    }
+    requestAnimationFrame(updateConfetti);
+
+    // Initial load
+    window.addEventListener('DOMContentLoaded', () => {
+      updateHud();
+      renderSprintTimer();
+      setDojoCombo(0);
+      renderMadLibsScript();
+      setArchView('multi');
+      setPaperView('beef');
+      renderQuizItem();
+    });
+  </script>
+</body>
+</html>
