@@ -1235,20 +1235,24 @@
         </div>
       </div>
 
-      <!-- Paper View Display Card -->
-      <div class="paper-card p-6 bg-white space-y-5">
-        <div>
-          <h3 id="paper-title" class="text-base font-black text-[#1D3557]">2022 Question 2 [15 Marks] — Beef Demand Model (n = 10)</h3>
-          <div id="paper-eq" class="p-3 bg-[#FAF7F2] rounded-xl border border-[#D6CEC1] font-mono-code text-xs text-[#1D3557] font-bold mt-2">
-            ln Beef = 3.20 − 0.85 ln Price − 0.29 ln Income
-          </div>
-          <div id="paper-stats" class="text-xs font-mono-code text-[#7A8294] mt-1.5">
-            R² = 0.98 | Adj R² = 0.97 | F = 150.86 (p = 0.00) | DW = 2.49 | Price p = 0.01 | Income p = 0.12
-          </div>
-        </div>
+      <!-- 1. Large Equation Anatomy Card -->
+      <div id="paper-anatomy-container" class="animate-[fadeIn_0.25s_ease-out]">
+        <!-- Injected dynamically via renderPaperView -->
+      </div>
 
-        <div id="paper-qa-container" class="space-y-3">
-          <!-- Injected via JavaScript -->
+      <!-- 2. Dynamic Contextual Interactive Visualizer Workbench -->
+      <div id="paper-vis-container" class="animate-[fadeIn_0.25s_ease-out]">
+        <!-- Injected dynamically via renderPaperView -->
+      </div>
+
+      <!-- 3. Sub-Questions with Interactive Practice Pads & Copy-for-Word Buttons -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] text-xs font-mono-code font-bold">EXAM SUB-QUESTIONS & MARKING MEMORANDA</span>
+          <span class="text-xs text-[#7A8294] font-mono-code">Step-by-step marking rubrics</span>
+        </div>
+        <div id="paper-qa-container" class="space-y-4">
+          <!-- Injected via renderPaperView -->
         </div>
       </div>
 
@@ -2606,35 +2610,747 @@
       }
     };
 
-    function setPaperView(k) {
-      playSfx('click');
-      ['beef', 'charity', 'comrades', 'pass'].forEach(id => {
-        const btn = document.getElementById('p-btn-' + id);
-        if (btn) {
-          btn.className = (id === k) 
-            ? 'paper-btn px-3 py-1.5 bg-[#FAF3EC] text-[#D95D39] text-xs font-bold'
-            : 'paper-btn px-3 py-1.5 bg-white text-[#555A68] text-xs font-medium';
-        }
-      });
-      const p = paperData[k];
-      const title = document.getElementById('paper-title');
-      if (title) title.textContent = p.title;
-      const eq = document.getElementById('paper-eq');
-      if (eq) eq.textContent = p.eq;
-      const stats = document.getElementById('paper-stats');
-      if (stats) stats.textContent = p.stats;
 
-      let html = '';
-      p.qa.forEach((item) => {
-        html += `
-          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-1.5">
-            <div class="font-extrabold text-[#1D3557] text-xs">${item.q}</div>
-            <div class="text-[#555A68] leading-relaxed text-xs pt-1 border-t border-[#E8E2D8]">${item.a}</div>
+// =========================================================
+// REAL NWU EXAM WORKBENCH: VISUALIZERS & EQUATION ANATOMY
+// =========================================================
+
+// State for interactive visualizers
+const paperVisState = {
+  beef: { price: 25, income: 80 },
+  charity: { age: 45, income: 50, tax: 28 },
+  comrades: { age: 'AGE3', edu: 'EDU3', gauteng: true },
+  pass: { expp: 6000 }
+};
+
+function renderPaperView(k) {
+  const p = paperData[k];
+  if (!p) return;
+
+  // 1. Update Paper Buttons
+  ['beef', 'charity', 'comrades', 'pass'].forEach(id => {
+    const btn = document.getElementById('p-btn-' + id);
+    if (btn) {
+      btn.className = (id === k) 
+        ? 'paper-btn px-3 py-1.5 bg-[#FAF3EC] text-[#D95D39] text-xs font-extrabold border-2 border-[#D95D39] shadow-sm'
+        : 'paper-btn px-3 py-1.5 bg-white text-[#555A68] hover:text-[#1D3557] text-xs font-medium border border-[#E0D9CD]';
+    }
+  });
+
+  // 2. Render Equation Anatomy Header
+  const anatomyContainer = document.getElementById('paper-anatomy-container');
+  if (anatomyContainer) {
+    anatomyContainer.innerHTML = buildEquationAnatomy(k, p);
+  }
+
+  // 3. Render Contextual Interactive Visualizer
+  const visContainer = document.getElementById('paper-vis-container');
+  if (visContainer) {
+    visContainer.innerHTML = buildContextualVisualizer(k);
+    initVisualizerInteractivity(k);
+  }
+
+  // 4. Render Sub-Questions with Reps & 1-Click Copy
+  const qaContainer = document.getElementById('paper-qa-container');
+  if (qaContainer) {
+    qaContainer.innerHTML = buildSubQuestions(k, p);
+  }
+}
+
+// Build Large Equation Anatomy
+function buildEquationAnatomy(k, p) {
+  let chips = '';
+  let modelFitBadges = '';
+
+  if (k === 'beef') {
+    chips = `
+      <div class="flex flex-wrap items-center gap-2 text-xs">
+        <span class="p-2 rounded-lg bg-[#EBF3F5] border border-[#BCD4D6] text-[#1D3557] font-bold">
+          [Y] Beef Demand (kg)
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">=</span>
+        <span class="p-2 rounded-lg bg-white border border-[#E0D9CD] text-[#1D3557]">
+          <strong>β₀ = 135.47</strong> <span class="text-[10px] text-[#7A8294]">(SE: 122.34, t: 1.11, p: 0.30)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">−</span>
+        <span class="p-2 rounded-lg bg-[#FAF3EC] border border-[#D95D39] text-[#D95D39] font-bold">
+          <strong>2.73 X₁ (Price)</strong> <span class="text-[10px] text-[#D95D39] font-normal">(p = 0.01 ★ Sig)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">−</span>
+        <span class="p-2 rounded-lg bg-white border border-[#E0D9CD] text-[#555A68]">
+          <strong>0.29 X₂ (Income)</strong> <span class="text-[10px] text-[#7A8294]">(p = 0.51, Insig)</span>
+        </span>
+      </div>
+    `;
+    modelFitBadges = `
+      <div class="flex flex-wrap gap-2 text-[11px] font-mono-code pt-2 border-t border-[#E8E2D8]">
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>n:</strong> 10</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>R²:</strong> 0.98</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>Adj R²:</strong> 0.97</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>F:</strong> 150.86 (p = 0.0000)</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>DW:</strong> 2.49 (Negative zone)</span>
+      </div>
+    `;
+  } else if (k === 'charity') {
+    chips = `
+      <div class="flex flex-wrap items-center gap-2 text-xs">
+        <span class="p-2 rounded-lg bg-[#EBF3F5] border border-[#BCD4D6] text-[#1D3557] font-bold">
+          [Y] Annual Donation (Rand)
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">=</span>
+        <span class="p-2 rounded-lg bg-white border border-[#E0D9CD] text-[#555A68]">
+          <strong>−4.67</strong> <span class="text-[10px] text-[#7A8294]">(Intercept)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">+</span>
+        <span class="p-2 rounded-lg bg-[#E8F8F5] border border-[#2A9D8F] text-[#2A9D8F] font-bold">
+          <strong>1.55 Age</strong> <span class="text-[10px]">(t = 7.13 ★)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">+</span>
+        <span class="p-2 rounded-lg bg-[#E8F8F5] border border-[#2A9D8F] text-[#2A9D8F] font-bold">
+          <strong>1.04 Income</strong> <span class="text-[10px]">(t = 8.03 ★)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">−</span>
+        <span class="p-2 rounded-lg bg-[#FEF9E7] border-2 border-[#E9C46A] text-[#B78103] font-extrabold animate-[pulseGlow_2s_infinite]">
+          <strong>0.48 Tax</strong> <span class="text-[10px] text-[#B78103]">(SE = 0.21, t = ???)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">+</span>
+        <span class="p-2 rounded-lg bg-[#E8F8F5] border border-[#2A9D8F] text-[#2A9D8F] font-bold">
+          <strong>0.18 Deps</strong> <span class="text-[10px]">(t = 4.11 ★)</span>
+        </span>
+      </div>
+    `;
+    modelFitBadges = `
+      <div class="flex flex-wrap gap-2 text-[11px] font-mono-code pt-2 border-t border-[#E8E2D8]">
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>n:</strong> 65</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>R²:</strong> 0.22</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>Adj R²:</strong> 0.21</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>F:</strong> 26.86</span>
+        <span class="bg-[#FAF3EC] px-2 py-0.5 rounded border border-[#D95D39] text-[#D95D39]"><strong>DW:</strong> 0.07 (Severe + Auto)</span>
+      </div>
+    `;
+  } else if (k === 'comrades') {
+    chips = `
+      <div class="flex flex-wrap items-center gap-2 text-xs">
+        <span class="p-2 rounded-lg bg-[#EBF3F5] border border-[#BCD4D6] text-[#1D3557] font-bold">
+          [Y] Spend / Person (Rand)
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">=</span>
+        <span class="p-2 rounded-lg bg-[#FAF7F2] border border-[#D6CEC1] text-[#1D3557] font-bold">
+          <strong>403.02</strong> <span class="text-[10px] text-[#7A8294]">(Base: AGE1 & EDU1)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">+</span>
+        <span class="p-2 rounded-lg bg-white border border-[#E0D9CD] text-[#555A68]">
+          <strong>79.63 AGE2</strong> <span class="text-[10px] text-[#7A8294]">(p = 0.76)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">+</span>
+        <span class="p-2 rounded-lg bg-[#E8F8F5] border-2 border-[#2A9D8F] text-[#2A9D8F] font-extrabold">
+          <strong>633.36 AGE3</strong> <span class="text-[10px]">(30-40yo, p = 0.005 ★)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">+</span>
+        <span class="p-2 rounded-lg bg-[#E8F8F5] border border-[#2A9D8F] text-[#2A9D8F] font-bold">
+          <strong>564.11 AGE4</strong> <span class="text-[10px]">(>40yo, p = 0.02 ★)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">+</span>
+        <span class="p-2 rounded-lg bg-white border border-[#E0D9CD] text-[#555A68]">
+          <strong>144.00 EDU2</strong> <span class="text-[10px] text-[#7A8294]">(Degree, p = 0.43)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">+</span>
+        <span class="p-2 rounded-lg bg-[#E8F8F5] border-2 border-[#2A9D8F] text-[#2A9D8F] font-extrabold">
+          <strong>477.45 EDU3</strong> <span class="text-[10px]">(Master's, p = 0.01 ★)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">+</span>
+        <span class="p-2 rounded-lg bg-[#FAF3EC] border-2 border-[#D95D39] text-[#D95D39] font-extrabold">
+          <strong>316.43 GAUTENG</strong> <span class="text-[10px]">(p = 0.04 ★)</span>
+        </span>
+      </div>
+    `;
+    modelFitBadges = `
+      <div class="flex flex-wrap gap-2 text-[11px] font-mono-code pt-2 border-t border-[#E8E2D8]">
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>n:</strong> 425</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>R²:</strong> 0.357</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>Adj R²:</strong> 0.343</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>F:</strong> 4.196 (p = 0.0004)</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>DW:</strong> 2.007 (Perfect no auto)</span>
+      </div>
+    `;
+  } else if (k === 'pass') {
+    chips = `
+      <div class="flex flex-wrap items-center gap-2 text-xs">
+        <span class="p-2 rounded-lg bg-[#EBF3F5] border border-[#BCD4D6] text-[#1D3557] font-bold">
+          [Y] Maths Pass Rate (%)
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">=</span>
+        <span class="p-2 rounded-lg bg-white border border-[#E0D9CD] text-[#1D3557] font-bold">
+          <strong>36.21</strong> <span class="text-[10px] text-[#7A8294]">(Intercept)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">+</span>
+        <span class="p-2 rounded-lg bg-white border border-[#E0D9CD] text-[#555A68]">
+          <strong>0.00122 AVGSAL</strong>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">+</span>
+        <span class="p-2 rounded-lg bg-white border border-[#E0D9CD] text-[#555A68]">
+          <strong>0.0426 ENROL</strong>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">+</span>
+        <span class="p-2 rounded-lg bg-[#E8F8F5] border-2 border-[#2A9D8F] text-[#2A9D8F] font-extrabold">
+          <strong>0.00136 EXPP</strong> <span class="text-[10px]">(Linear spend)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">−</span>
+        <span class="p-2 rounded-lg bg-[#FAF3EC] border-2 border-[#D95D39] text-[#D95D39] font-extrabold">
+          <strong>0.3979 LUNCH</strong> <span class="text-[10px]">(t = -9.93 ★)</span>
+        </span>
+        <span class="text-sm font-bold text-[#7A8294]">+</span>
+        <span class="p-2 rounded-lg bg-white border border-[#E0D9CD] text-[#555A68]">
+          <strong>0.0172 STAFF</strong>
+        </span>
+      </div>
+    `;
+    modelFitBadges = `
+      <div class="flex flex-wrap gap-2 text-[11px] font-mono-code pt-2 border-t border-[#E8E2D8]">
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>n:</strong> 500</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>R²:</strong> 0.230</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>Adj R²:</strong> 0.222</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>F:</strong> 29.48 (p = 0.0000)</span>
+        <span class="bg-[#FAF7F2] px-2 py-0.5 rounded border border-[#E0D9CD]"><strong>DW:</strong> 1.717 (No auto)</span>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="p-5 bg-[#FAF7F2] rounded-2xl border-2 border-[#1D3557] space-y-3">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E8E2D8] pb-3">
+        <div>
+          <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#1D3557] text-[#FAF7F2] text-xs font-mono-code font-bold">EQUATION ANATOMY & ESTIMATION DECODER</span>
+          <h3 class="text-base sm:text-lg font-extrabold text-[#1D3557] mt-1">${p.title}</h3>
+        </div>
+        <span class="text-xs font-mono-code text-[#7A8294] bg-white px-2.5 py-1 rounded-lg border border-[#E0D9CD]">
+          Official Exam Scope
+        </span>
+      </div>
+      ${chips}
+      ${modelFitBadges}
+    </div>
+  `;
+}
+
+// Build Contextual Interactive Visualizer Workbench
+function buildContextualVisualizer(k) {
+  if (k === 'beef') {
+    return `
+      <div class="p-5 bg-white rounded-2xl border border-[#E0D9CD] shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E8E2D8] pb-3">
+          <div>
+            <span class="tag-bauhaus px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] text-[11px] font-bold">INTERACTIVE DEMAND CURVE</span>
+            <h4 class="font-extrabold text-[#1D3557] text-sm mt-1">Law of Demand: Price Elasticity Response</h4>
+            <p class="text-[11px] text-[#7A8294]">Move the price slider to watch beef consumption respond along the downward-sloping demand curve.</p>
           </div>
-        `;
-      });
-      const container = document.getElementById('paper-qa-container');
-      if (container) container.innerHTML = html;
+          <div class="text-right">
+            <span class="text-xs font-mono-code font-bold text-[#D95D39] bg-[#FAF3EC] px-3 py-1 rounded-lg border border-[#D95D39]">
+              Predicted Demand: <span id="beef-y-val">44.02</span> kg
+            </span>
+          </div>
+        </div>
+
+        <!-- SVG Curve Display -->
+        <div class="relative w-full h-48 bg-[#FAF7F2] rounded-xl border border-[#E8E2D8] overflow-hidden flex items-center justify-center p-2">
+          <svg id="beef-svg" viewBox="0 0 500 180" class="w-full h-full">
+            <!-- Grid lines -->
+            <line x1="50" y1="140" x2="460" y2="140" stroke="#DDD6CA" stroke-width="1.5" />
+            <line x1="50" y1="20" x2="50" y2="140" stroke="#DDD6CA" stroke-width="1.5" />
+            <text x="25" y="25" fill="#7A8294" font-size="10" font-family="monospace">Y (kg)</text>
+            <text x="440" y="155" fill="#7A8294" font-size="10" font-family="monospace">Price (R)</text>
+
+            <!-- Downward Sloping Demand Line -->
+            <path id="beef-demand-line" d="M 60 40 L 440 135" stroke="#1D3557" stroke-width="3" stroke-linecap="round" />
+            
+            <!-- Dynamic Point Marker -->
+            <circle id="beef-marker" cx="200" cy="75" r="7" fill="#D95D39" stroke="#FFFFFF" stroke-width="2.5" class="transition-all duration-150" />
+            <text id="beef-marker-label" x="210" y="70" fill="#1D3557" font-weight="bold" font-size="11" font-family="monospace">P = R25, Y = 44.0kg</text>
+          </svg>
+        </div>
+
+        <!-- Interactive Sliders -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div class="space-y-1">
+            <div class="flex justify-between text-xs">
+              <span class="font-bold text-[#1D3557]">Beef Price (X₁):</span>
+              <span id="beef-p-label" class="font-mono-code font-bold text-[#D95D39]">R25.00 / kg</span>
+            </div>
+            <input type="range" id="beef-p-slider" min="15" max="40" value="25" step="1" oninput="updateBeefVisualizer()" class="w-full accent-[#D95D39] cursor-pointer">
+            <span class="text-[10px] text-[#7A8294]">Negative slope (b₁ = -2.73, p = 0.01 ★)</span>
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex justify-between text-xs">
+              <span class="font-bold text-[#1D3557]">Consumer Income (X₂):</span>
+              <span id="beef-i-label" class="font-mono-code text-[#555A68]">R80.00 / month</span>
+            </div>
+            <input type="range" id="beef-i-slider" min="40" max="150" value="80" step="5" oninput="updateBeefVisualizer()" class="w-full accent-[#1D3557] cursor-pointer">
+            <span class="text-[10px] text-[#7A8294]">Insignificant slope (b₂ = -0.29, p = 0.51)</span>
+          </div>
+        </div>
+
+      </div>
+    `;
+  } else if (k === 'charity') {
+    return `
+      <div class="p-5 bg-white rounded-2xl border border-[#E0D9CD] shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E8E2D8] pb-3">
+          <div>
+            <span class="tag-bauhaus px-2 py-0.5 rounded bg-[#FEF9E7] text-[#B78103] text-[11px] font-bold">2023 EXAM CALCULATION</span>
+            <h4 class="font-extrabold text-[#1D3557] text-sm mt-1">Omitted t-Statistic & Hypothesis Threshold</h4>
+            <p class="text-[11px] text-[#7A8294]">The exam paper omitted the t-statistic for Tax. Calculate and test against critical values.</p>
+          </div>
+          <div class="text-right">
+            <span class="text-xs font-mono-code font-bold text-[#2A9D8F] bg-[#E8F8F5] px-3 py-1 rounded-lg border border-[#2A9D8F]">
+              Predicted Donation: R<span id="charity-donation-val">110.59</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Missing t-statistic Math Workbench -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div class="p-3.5 bg-[#FAF7F2] rounded-xl border border-[#E8E2D8] space-y-1 text-center">
+            <span class="text-[10px] font-mono-code text-[#7A8294] uppercase font-bold">1. Calculate t-statistic</span>
+            <div class="text-sm font-extrabold font-mono-code text-[#1D3557] mt-1">
+              t = b / SE = -0.48 / 0.21
+            </div>
+            <div class="text-lg font-black font-mono-code text-[#D95D39] mt-0.5">
+              = −2.286
+            </div>
+          </div>
+
+          <div class="p-3.5 bg-[#E8F8F5] rounded-xl border border-[#2A9D8F] space-y-1 text-center">
+            <span class="text-[10px] font-mono-code text-[#2A9D8F] uppercase font-bold">2. Test at 5% Level (tc = 1.96)</span>
+            <div class="text-xs font-bold text-[#1D3557] mt-1">
+              |-2.286| > 1.96
+            </div>
+            <div class="text-xs font-extrabold text-[#2A9D8F] mt-0.5">
+              ✅ Reject H₀: Tax is Significant
+            </div>
+          </div>
+
+          <div class="p-3.5 bg-[#FAF3EC] rounded-xl border border-[#D95D39] space-y-1 text-center">
+            <span class="text-[10px] font-mono-code text-[#D95D39] uppercase font-bold">3. Test at 1% Level (tc = 2.576)</span>
+            <div class="text-xs font-bold text-[#1D3557] mt-1">
+              |-2.286| < 2.576
+            </div>
+            <div class="text-xs font-extrabold text-[#D95D39] mt-0.5">
+              ❌ Fail to Reject H₀: Not Sig at 1%
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Sliders -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+          <div class="space-y-1">
+            <div class="flex justify-between text-xs">
+              <span class="font-bold text-[#1D3557]">Age:</span>
+              <span id="charity-age-label" class="font-mono-code text-[#2A9D8F]">45 years</span>
+            </div>
+            <input type="range" id="charity-age-slider" min="20" max="75" value="45" step="1" oninput="updateCharityVisualizer()" class="w-full accent-[#2A9D8F] cursor-pointer">
+          </div>
+          <div class="space-y-1">
+            <div class="flex justify-between text-xs">
+              <span class="font-bold text-[#1D3557]">Income (R'000):</span>
+              <span id="charity-inc-label" class="font-mono-code text-[#2A9D8F]">R50k</span>
+            </div>
+            <input type="range" id="charity-inc-slider" min="10" max="120" value="50" step="5" oninput="updateCharityVisualizer()" class="w-full accent-[#2A9D8F] cursor-pointer">
+          </div>
+          <div class="space-y-1">
+            <div class="flex justify-between text-xs">
+              <span class="font-bold text-[#1D3557]">Marginal Tax Rate (%):</span>
+              <span id="charity-tax-label" class="font-mono-code text-[#D95D39]">28%</span>
+            </div>
+            <input type="range" id="charity-tax-slider" min="10" max="50" value="28" step="1" oninput="updateCharityVisualizer()" class="w-full accent-[#D95D39] cursor-pointer">
+          </div>
+        </div>
+
+      </div>
+    `;
+  } else if (k === 'comrades') {
+    return `
+      <div class="p-5 bg-white rounded-2xl border border-[#E0D9CD] shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E8E2D8] pb-3">
+          <div>
+            <span class="tag-bauhaus px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] text-[11px] font-bold">2024 COMPOSTION ENGINE</span>
+            <h4 class="font-extrabold text-[#1D3557] text-sm mt-1">Interactive Runner Profile & Spending Waterfall</h4>
+            <p class="text-[11px] text-[#7A8294]">Compose any runner profile to see how categorical dummy additions build total spending.</p>
+          </div>
+          <button onclick="loadComradesExamPreset()" class="paper-btn px-3 py-1.5 bg-[#1D3557] hover:bg-[#152741] text-white text-xs font-bold flex items-center gap-1 shadow-sm">
+            <span>⚡ Load Q3.3 Nedbank Sandton Preset</span>
+          </button>
+        </div>
+
+        <!-- Waterfall Bar Visualization -->
+        <div class="space-y-2 p-4 bg-[#FAF7F2] rounded-xl border border-[#E8E2D8]">
+          <div class="flex justify-between text-xs font-mono-code font-bold">
+            <span class="text-[#1D3557]">CALCULATED TOTAL SPENDING:</span>
+            <span id="comrades-total-badge" class="text-base text-[#D95D39]">R1,830.26</span>
+          </div>
+
+          <!-- Stacked Dynamic Bar -->
+          <div class="w-full h-8 bg-white border border-[#D6CEC1] rounded-lg overflow-hidden flex">
+            <div id="bar-base" style="width: 22%;" class="bg-[#1D3557] h-full flex items-center justify-center text-white text-[10px] font-bold transition-all duration-300" title="Base: R403.02">R403</div>
+            <div id="bar-age" style="width: 35%;" class="bg-[#2A9D8F] h-full flex items-center justify-center text-white text-[10px] font-bold transition-all duration-300" title="Age: R633.36">+R633</div>
+            <div id="bar-edu" style="width: 26%;" class="bg-[#E9C46A] h-full flex items-center justify-center text-[#1D3557] text-[10px] font-bold transition-all duration-300" title="Edu: R477.45">+R477</div>
+            <div id="bar-gauteng" style="width: 17%;" class="bg-[#D95D39] h-full flex items-center justify-center text-white text-[10px] font-bold transition-all duration-300" title="Gauteng: R316.43">+R316</div>
+          </div>
+          
+          <div class="flex justify-between text-[10px] font-mono-code text-[#7A8294] pt-1">
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#1D3557]"></span> Base (R403.02)</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#2A9D8F]"></span> Age Additive</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#E9C46A]"></span> Edu Additive</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#D95D39]"></span> Gauteng Additive</span>
+          </div>
+        </div>
+
+        <!-- Interactive Profile Pickers -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          
+          <!-- Age Group -->
+          <div class="space-y-1.5 p-3 bg-white rounded-xl border border-[#E0D9CD]">
+            <span class="font-bold text-[#1D3557]">Age Category:</span>
+            <div class="grid grid-cols-2 gap-1.5">
+              <button onclick="setComradesParam('age', 'AGE1')" id="btn-age-AGE1" class="comrades-opt-btn p-1.5 rounded text-[11px] border text-left">AGE1 (&lt;20) [Base]</button>
+              <button onclick="setComradesParam('age', 'AGE2')" id="btn-age-AGE2" class="comrades-opt-btn p-1.5 rounded text-[11px] border text-left">AGE2 (20-30) [+R80]</button>
+              <button onclick="setComradesParam('age', 'AGE3')" id="btn-age-AGE3" class="comrades-opt-btn p-1.5 rounded text-[11px] border text-left font-bold bg-[#FAF3EC] border-[#D95D39] text-[#D95D39]">AGE3 (30-40) [+R633]</button>
+              <button onclick="setComradesParam('age', 'AGE4')" id="btn-age-AGE4" class="comrades-opt-btn p-1.5 rounded text-[11px] border text-left">AGE4 (&gt;40) [+R564]</button>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div class="space-y-1.5 p-3 bg-white rounded-xl border border-[#E0D9CD]">
+            <span class="font-bold text-[#1D3557]">Education Level:</span>
+            <div class="space-y-1.5">
+              <button onclick="setComradesParam('edu', 'EDU1')" id="btn-edu-EDU1" class="comrades-opt-btn w-full p-1.5 rounded text-[11px] border text-left">EDU1 (Secondary) [Base]</button>
+              <button onclick="setComradesParam('edu', 'EDU2')" id="btn-edu-EDU2" class="comrades-opt-btn w-full p-1.5 rounded text-[11px] border text-left">EDU2 (Degree) [+R144]</button>
+              <button onclick="setComradesParam('edu', 'EDU3')" id="btn-edu-EDU3" class="comrades-opt-btn w-full p-1.5 rounded text-[11px] border text-left font-bold bg-[#FAF3EC] border-[#D95D39] text-[#D95D39]">EDU3 (Master's/Postgrad) [+R477]</button>
+            </div>
+          </div>
+
+          <!-- Province / Employer -->
+          <div class="space-y-1.5 p-3 bg-white rounded-xl border border-[#E0D9CD]">
+            <span class="font-bold text-[#1D3557]">Province / Origin:</span>
+            <div class="space-y-1.5">
+              <button onclick="setComradesParam('gauteng', false)" id="btn-gt-false" class="comrades-opt-btn w-full p-1.5 rounded text-[11px] border text-left">Other Province [R0]</button>
+              <button onclick="setComradesParam('gauteng', true)" id="btn-gt-true" class="comrades-opt-btn w-full p-1.5 rounded text-[11px] border text-left font-bold bg-[#FAF3EC] border-[#D95D39] text-[#D95D39]">GAUTENG / Nedbank Sandton [+R316.43]</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    `;
+  } else if (k === 'pass') {
+    return `
+      <div class="p-5 bg-white rounded-2xl border border-[#E0D9CD] shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E8E2D8] pb-3">
+          <div>
+            <span class="tag-bauhaus px-2 py-0.5 rounded bg-[#EBF3F5] text-[#1D3557] text-[11px] font-bold">QUADRATIC PARABOLA VISUALIZER</span>
+            <h4 class="font-extrabold text-[#1D3557] text-sm mt-1">Diminishing Marginal Returns & Peak Efficiency (EXPP²)</h4>
+            <p class="text-[11px] text-[#7A8294]">See how expenditure per pupil (EXPP) increases pass rates up to the turning point, after which diminishing returns set in.</p>
+          </div>
+          <div class="text-right">
+            <span class="text-xs font-mono-code font-bold text-[#1D3557] bg-[#FAF7F2] px-3 py-1 rounded-lg border border-[#D6CEC1]">
+              Peak Turning Point: <strong class="text-[#D95D39]">R8,095.24 / pupil</strong>
+            </span>
+          </div>
+        </div>
+
+        <!-- Parabola SVG Visualizer -->
+        <div class="relative w-full h-48 bg-[#FAF7F2] rounded-xl border border-[#E8E2D8] overflow-hidden flex items-center justify-center p-2">
+          <svg id="pass-svg" viewBox="0 0 500 180" class="w-full h-full">
+            <!-- Grid Lines -->
+            <line x1="50" y1="150" x2="460" y2="150" stroke="#DDD6CA" stroke-width="1.5" />
+            <line x1="50" y1="20" x2="50" y2="150" stroke="#DDD6CA" stroke-width="1.5" />
+            <text x="20" y="25" fill="#7A8294" font-size="10" font-family="monospace">Pass %</text>
+            <text x="430" y="165" fill="#7A8294" font-size="10" font-family="monospace">EXPP (R)</text>
+
+            <!-- Parabolic Inverted U Curve -->
+            <path d="M 60 130 Q 255 30 450 130" stroke="#1D3557" stroke-width="3" fill="none" stroke-linecap="round" />
+            
+            <!-- Turning Point Peak Dashed Line -->
+            <line x1="255" y1="30" x2="255" y2="150" stroke="#D95D39" stroke-width="1.5" stroke-dasharray="4 3" />
+            <text x="260" y="45" fill="#D95D39" font-size="10" font-weight="bold" font-family="monospace">X* = R8,095 (Peak)</text>
+
+            <!-- Interactive Dynamic Point Marker -->
+            <circle id="pass-marker" cx="200" cy="50" r="7" fill="#2A9D8F" stroke="#FFFFFF" stroke-width="2.5" class="transition-all duration-150" />
+            <text id="pass-marker-label" x="210" y="45" fill="#1D3557" font-weight="bold" font-size="11" font-family="monospace">EXPP = R6,000</text>
+          </svg>
+        </div>
+
+        <!-- Slider & Efficiency Indicator -->
+        <div class="space-y-2 pt-1">
+          <div class="flex justify-between text-xs">
+            <span class="font-bold text-[#1D3557]">Annual School Expenditure per Pupil (EXPP):</span>
+            <span id="pass-expp-label" class="font-mono-code font-bold text-[#2A9D8F]">R6,000 / pupil</span>
+          </div>
+          <input type="range" id="pass-expp-slider" min="2000" max="14000" value="6000" step="250" oninput="updatePassVisualizer()" class="w-full accent-[#2A9D8F] cursor-pointer">
+          <div id="pass-efficiency-indicator" class="p-2.5 rounded-lg bg-[#E8F8F5] border border-[#2A9D8F] text-xs font-bold text-[#2A9D8F] flex items-center justify-between">
+            <span>🟢 Status: Increasing Marginal Returns (b_EXPP > 0)</span>
+            <span class="text-[11px] font-normal text-[#264653]">Additional funding boosts pass rates directly</span>
+          </div>
+        </div>
+
+      </div>
+    `;
+  }
+}
+
+// Build Sub-Questions with Interactive Practice Pads & Copy-for-Word Buttons
+function buildSubQuestions(k, p) {
+  let html = '';
+  p.qa.forEach((item, idx) => {
+    html += `
+      <div class="paper-card p-5 bg-white border border-[#E0D9CD] space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E8E2D8] pb-2.5">
+          <span class="font-black text-[#1D3557] text-xs sm:text-sm">${item.q}</span>
+          <div class="flex items-center gap-1.5">
+            <button onclick="togglePaperPracticePad('${k}', ${idx})" class="paper-btn px-2.5 py-1 bg-[#FAF7F2] hover:bg-[#EAE4D9] text-[11px] font-bold text-[#1D3557]">
+              ✍️ Practice Writing
+            </button>
+            <button onclick="copyToClipboard(document.getElementById('p-memo-${k}-${idx}').innerText, 'Exam Memo')" class="paper-btn px-2.5 py-1 bg-white hover:bg-[#FAF7F2] text-[11px] font-bold text-[#1D3557] flex items-center gap-1 shadow-sm">
+              <span>📋 Copy Memo for Word</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Optional Student Practice Writing Pad -->
+        <div id="p-pad-${k}-${idx}" class="hidden space-y-2 p-3 bg-[#FAF7F2] rounded-xl border border-[#D6CEC1]">
+          <label class="block text-[11px] font-mono-code font-bold text-[#555A68]">
+            Type your answer using NWU standard phrasing ("Holding other variables constant...", H₀/H₁):
+          </label>
+          <textarea id="p-input-${k}-${idx}" rows="2" class="w-full p-2.5 text-xs bg-white border border-[#D6CEC1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1D3557]" placeholder="Type your answer here..."></textarea>
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] text-[#7A8294]">Check against authoritative marking criteria</span>
+            <button onclick="checkPaperPracticeAnswer('${k}', ${idx})" class="paper-btn px-3 py-1 bg-[#1D3557] text-white text-xs font-bold">
+              Check & Bank +XP 🚀
+            </button>
+          </div>
+        </div>
+
+        <!-- Official Lecture Memorandum Box -->
+        <div id="p-memo-${k}-${idx}" class="p-3.5 bg-[#FAF7F2] rounded-xl border-l-4 border-[#2A9D8F] text-[#555A68] text-xs leading-relaxed">
+          ${item.a}
+        </div>
+      </div>
+    `;
+  });
+  return html;
+}
+
+// -------------------------------------------------------------
+// Interactive Model Update Handlers
+// -------------------------------------------------------------
+
+function initVisualizerInteractivity(k) {
+  if (k === 'beef') updateBeefVisualizer();
+  if (k === 'charity') updateCharityVisualizer();
+  if (k === 'comrades') updateComradesVisualizer();
+  if (k === 'pass') updatePassVisualizer();
+}
+
+// 1. Beef Visualizer
+function updateBeefVisualizer() {
+  const pSlider = document.getElementById('beef-p-slider');
+  const iSlider = document.getElementById('beef-i-slider');
+  if (!pSlider || !iSlider) return;
+
+  const price = parseFloat(pSlider.value);
+  const income = parseFloat(iSlider.value);
+  paperVisState.beef.price = price;
+  paperVisState.beef.income = income;
+
+  const yVal = Math.max(0, 135.47 - 2.73 * price - 0.29 * income);
+  
+  const yDisplay = document.getElementById('beef-y-val');
+  const pLabel = document.getElementById('beef-p-label');
+  const iLabel = document.getElementById('beef-i-label');
+  if (yDisplay) yDisplay.textContent = yVal.toFixed(2);
+  if (pLabel) pLabel.textContent = 'R' + price.toFixed(2) + ' / kg';
+  if (iLabel) iLabel.textContent = 'R' + income.toFixed(2) + ' / month';
+
+  // Update SVG marker
+  const marker = document.getElementById('beef-marker');
+  const markerLabel = document.getElementById('beef-marker-label');
+  if (marker && markerLabel) {
+    // Map price (15..40) to x (60..440)
+    const cx = 60 + ((price - 15) / 25) * 380;
+    // Map yVal (0..90) to y (135..40)
+    const cy = 135 - (Math.min(90, yVal) / 90) * 95;
+    marker.setAttribute('cx', cx);
+    marker.setAttribute('cy', cy);
+    markerLabel.setAttribute('x', Math.min(360, cx + 10));
+    markerLabel.setAttribute('y', Math.max(30, cy - 8));
+    markerLabel.textContent = `P=R${price}, Y=${yVal.toFixed(1)}kg`;
+  }
+}
+
+// 2. Charity Visualizer
+function updateCharityVisualizer() {
+  const ageSlider = document.getElementById('charity-age-slider');
+  const incSlider = document.getElementById('charity-inc-slider');
+  const taxSlider = document.getElementById('charity-tax-slider');
+  if (!ageSlider || !incSlider || !taxSlider) return;
+
+  const age = parseFloat(ageSlider.value);
+  const inc = parseFloat(incSlider.value);
+  const tax = parseFloat(taxSlider.value);
+
+  const donation = -4.67 + 1.55 * age + 1.04 * inc - 0.48 * tax + 0.18 * 2;
+  
+  const donDisplay = document.getElementById('charity-donation-val');
+  const ageLabel = document.getElementById('charity-age-label');
+  const incLabel = document.getElementById('charity-inc-label');
+  const taxLabel = document.getElementById('charity-tax-label');
+
+  if (donDisplay) donDisplay.textContent = Math.max(0, donation).toFixed(2);
+  if (ageLabel) ageLabel.textContent = age + ' years';
+  if (incLabel) incLabel.textContent = 'R' + inc + 'k';
+  if (taxLabel) taxLabel.textContent = tax + '%';
+}
+
+// 3. Comrades Visualizer
+function setComradesParam(type, val) {
+  playSfx('pop');
+  paperVisState.comrades[type] = val;
+  updateComradesVisualizer();
+}
+
+function loadComradesExamPreset() {
+  playSfx('fanfare');
+  paperVisState.comrades.age = 'AGE3'; // 30-40yo
+  paperVisState.comrades.edu = 'EDU3'; // Master's
+  paperVisState.comrades.gauteng = true; // Nedbank Sandton
+  updateComradesVisualizer();
+  showToast('⚡ Loaded 2024 Exam Question 3.3 (Nedbank Sandton runner): R1,830.26', 'success');
+}
+
+function updateComradesVisualizer() {
+  const st = paperVisState.comrades;
+  const base = 403.0241;
+  const ageAdd = st.age === 'AGE2' ? 79.63476 : (st.age === 'AGE3' ? 633.3581 : (st.age === 'AGE4' ? 564.1124 : 0));
+  const eduAdd = st.edu === 'EDU2' ? 143.9958 : (st.edu === 'EDU3' ? 477.4459 : 0);
+  const gtAdd = st.gauteng ? 316.4290 : 0;
+
+  const total = base + ageAdd + eduAdd + gtAdd;
+  const totalDisplay = document.getElementById('comrades-total-badge');
+  if (totalDisplay) totalDisplay.textContent = 'R' + total.toFixed(2);
+
+  // Update Buttons
+  ['AGE1', 'AGE2', 'AGE3', 'AGE4'].forEach(id => {
+    const b = document.getElementById('btn-age-' + id);
+    if (b) {
+      b.className = (id === st.age)
+        ? 'comrades-opt-btn p-1.5 rounded text-[11px] border text-left font-bold bg-[#FAF3EC] border-[#D95D39] text-[#D95D39]'
+        : 'comrades-opt-btn p-1.5 rounded text-[11px] border text-left bg-white text-[#555A68] border-[#E0D9CD]';
+    }
+  });
+
+  ['EDU1', 'EDU2', 'EDU3'].forEach(id => {
+    const b = document.getElementById('btn-edu-' + id);
+    if (b) {
+      b.className = (id === st.edu)
+        ? 'comrades-opt-btn w-full p-1.5 rounded text-[11px] border text-left font-bold bg-[#FAF3EC] border-[#D95D39] text-[#D95D39]'
+        : 'comrades-opt-btn w-full p-1.5 rounded text-[11px] border text-left bg-white text-[#555A68] border-[#E0D9CD]';
+    }
+  });
+
+  const bGtFalse = document.getElementById('btn-gt-false');
+  const bGtTrue = document.getElementById('btn-gt-true');
+  if (bGtFalse && bGtTrue) {
+    bGtFalse.className = (!st.gauteng)
+      ? 'comrades-opt-btn w-full p-1.5 rounded text-[11px] border text-left font-bold bg-[#FAF3EC] border-[#D95D39] text-[#D95D39]'
+      : 'comrades-opt-btn w-full p-1.5 rounded text-[11px] border text-left bg-white text-[#555A68] border-[#E0D9CD]';
+    bGtTrue.className = (st.gauteng)
+      ? 'comrades-opt-btn w-full p-1.5 rounded text-[11px] border text-left font-bold bg-[#FAF3EC] border-[#D95D39] text-[#D95D39]'
+      : 'comrades-opt-btn w-full p-1.5 rounded text-[11px] border text-left bg-white text-[#555A68] border-[#E0D9CD]';
+  }
+
+  // Update Stacked Bar Widths
+  const bBase = document.getElementById('bar-base');
+  const bAge = document.getElementById('bar-age');
+  const bEdu = document.getElementById('bar-edu');
+  const bGt = document.getElementById('bar-gauteng');
+
+  if (bBase && bAge && bEdu && bGt) {
+    bBase.style.width = ((base / total) * 100).toFixed(1) + '%';
+    bAge.style.width = ((Math.max(1, ageAdd) / total) * 100).toFixed(1) + '%';
+    bAge.textContent = ageAdd > 0 ? '+R' + Math.round(ageAdd) : 'R0';
+    bEdu.style.width = ((Math.max(1, eduAdd) / total) * 100).toFixed(1) + '%';
+    bEdu.textContent = eduAdd > 0 ? '+R' + Math.round(eduAdd) : 'R0';
+    bGt.style.width = ((Math.max(1, gtAdd) / total) * 100).toFixed(1) + '%';
+    bGt.textContent = gtAdd > 0 ? '+R' + Math.round(gtAdd) : 'R0';
+  }
+}
+
+// 4. Pass Rate Visualizer
+function updatePassVisualizer() {
+  const slider = document.getElementById('pass-expp-slider');
+  if (!slider) return;
+
+  const expp = parseFloat(slider.value);
+  paperVisState.pass.expp = expp;
+
+  const exppLabel = document.getElementById('pass-expp-label');
+  if (exppLabel) exppLabel.textContent = 'R' + expp.toLocaleString() + ' / pupil';
+
+  // Peak Turning Point = 8095.24
+  const marker = document.getElementById('pass-marker');
+  const markerLabel = document.getElementById('pass-marker-label');
+  const indicator = document.getElementById('pass-efficiency-indicator');
+
+  if (marker && markerLabel) {
+    // Map expp (2000..14000) to cx (60..450)
+    const cx = 60 + ((expp - 2000) / 12000) * 390;
+    // Parabolic formula: relative peak at cx=255, cy=30
+    const normalizedDist = (cx - 255) / 195;
+    const cy = 30 + (normalizedDist * normalizedDist) * 100;
+
+    marker.setAttribute('cx', cx);
+    marker.setAttribute('cy', cy);
+    markerLabel.setAttribute('x', Math.min(360, cx + 10));
+    markerLabel.setAttribute('y', Math.max(30, cy - 8));
+    markerLabel.textContent = 'EXPP = R' + expp.toLocaleString();
+  }
+
+  if (indicator) {
+    if (expp < 7600) {
+      indicator.className = 'p-2.5 rounded-lg bg-[#E8F8F5] border border-[#2A9D8F] text-xs font-bold text-[#2A9D8F] flex items-center justify-between';
+      indicator.innerHTML = '<span>🟢 Status: Increasing Marginal Returns (b_EXPP > 0)</span><span class="text-[11px] font-normal text-[#264653]">Additional funding directly increases pass rates</span>';
+    } else if (expp <= 8600) {
+      indicator.className = 'p-2.5 rounded-lg bg-[#FEF9E7] border border-[#E9C46A] text-xs font-bold text-[#B78103] flex items-center justify-between';
+      indicator.innerHTML = '<span>🟡 Status: Peak Efficiency Zone (Turning Point X* ≈ R8,095)</span><span class="text-[11px] font-normal text-[#7A6100]">Optimal resource allocation reached</span>';
+    } else {
+      indicator.className = 'p-2.5 rounded-lg bg-[#FAF3EC] border border-[#D95D39] text-xs font-bold text-[#D95D39] flex items-center justify-between';
+      indicator.innerHTML = '<span>🔴 Status: Diminishing / Negative Returns (b_EXPP² &lt; 0)</span><span class="text-[11px] font-normal text-[#8A2500]">Extra spending yields zero or negative marginal gain (waste)</span>';
+    }
+  }
+}
+
+// Sub-question writing pad toggle & check
+function togglePaperPracticePad(paperKey, idx) {
+  playSfx('click');
+  const pad = document.getElementById(`p-pad-${paperKey}-${idx}`);
+  if (pad) pad.classList.toggle('hidden');
+}
+
+function checkPaperPracticeAnswer(paperKey, idx) {
+  playSfx('pop');
+  const input = document.getElementById(`p-input-${paperKey}-${idx}`);
+  if (!input || input.value.trim().length < 15) {
+    showToast('Type a more complete answer to verify your rep!', '✍️');
+    return;
+  }
+  addXp(30);
+  playSfx('fanfare');
+  showToast('Rep Banked! +30 XP. Compare your phrasing to the memo below.', 'success');
+}
+
+
+    function setPaperView(k) {
+      renderPaperView(k);
     }
 
     // Boss Quiz Data
