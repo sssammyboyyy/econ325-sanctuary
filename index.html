@@ -167,6 +167,10 @@
     }
 
   </style>
+  <!-- KaTeX for Beautiful Math Equations -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-[#E9C46A] selection:text-[#1D3557]">
 
@@ -761,103 +765,173 @@
           </div>
         </div>
 
-        <!-- 6 Mnemonic Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- 7 Expandable Mnemonic Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           
           <!-- Card 1: The BLUE Riddle -->
-          <div class="paper-card p-4 bg-white border border-[#E0D9CD] space-y-2 hover:shadow-md transition-shadow">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono-code font-bold text-[#D95D39] bg-[#FAF3EC] px-2 py-0.5 rounded">RIDDLE #1</span>
-              <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 9, slide 21</span>
+          <div onclick="openDossier('blue')" class="paper-card p-4 bg-white border border-[#E0D9CD] hover:border-[#1D3557] hover:-translate-y-1.5 hover:shadow-xl transition-all duration-200 cursor-pointer flex flex-col justify-between group">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono-code font-bold text-[#D95D39] bg-[#FAF3EC] px-2 py-0.5 rounded">RIDDLE #1</span>
+                <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 9, slide 21</span>
+              </div>
+              <h4 class="font-extrabold text-[#1D3557] text-sm group-hover:text-[#D95D39] transition-colors">The "BLUE" Status Trap</h4>
+              <p class="text-xs text-[#555A68] leading-relaxed">
+                <strong>Multicollinearity:</strong> OLS is <span class="text-[#2A9D8F] font-bold">STILL BLUE</span>! Variances are large, but OLS retains minimum variance among all linear unbiased estimators.
+              </p>
+              <div class="p-2 bg-[#FAF7F2] rounded-lg text-[11px] text-[#1D3557] border-l-2 border-[#D95D39]">
+                <strong>Hetero & Auto:</strong> OLS is linear and unbiased, but <span class="text-[#D95D39] font-bold">LOSES the "B"</span> (inefficient; usual SE formulas invalid).
+              </div>
             </div>
-            <h4 class="font-extrabold text-[#1D3557] text-sm">The "BLUE" Status Trap</h4>
-            <p class="text-xs text-[#555A68] leading-relaxed">
-              <strong>Multicollinearity:</strong> OLS is <span class="text-[#2A9D8F] font-bold">STILL BLUE</span>! Variances are large, but among all linear unbiased estimators, OLS still has the minimum variance.
-            </p>
-            <div class="p-2 bg-[#FAF7F2] rounded-lg text-[11px] text-[#1D3557] border-l-2 border-[#D95D39]">
-              <strong>Hetero & Auto:</strong> OLS is linear and unbiased, but <span class="text-[#D95D39] font-bold">LOSES the "B"</span> (inefficient, tests biased).
+            <div class="pt-2 mt-2 border-t border-[#F0EAE1] flex items-center justify-between text-[11px] font-bold text-[#D95D39] group-hover:text-[#1D3557]">
+              <span>🔍 Expand Deep Dossier</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
             </div>
           </div>
 
           <!-- Card 2: Error Term Reasons (O.R.M.I.) -->
-          <div class="paper-card p-4 bg-white border border-[#E0D9CD] space-y-2 hover:shadow-md transition-shadow">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono-code font-bold text-[#2A9D8F] bg-[#E8F8F5] px-2 py-0.5 rounded">MNEMONIC</span>
-              <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 5, slide 4</span>
+          <div onclick="openDossier('ormi')" class="paper-card p-4 bg-white border border-[#E0D9CD] hover:border-[#2A9D8F] hover:-translate-y-1.5 hover:shadow-xl transition-all duration-200 cursor-pointer flex flex-col justify-between group">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono-code font-bold text-[#2A9D8F] bg-[#E8F8F5] px-2 py-0.5 rounded">MNEMONIC</span>
+                <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 5, slide 4</span>
+              </div>
+              <h4 class="font-extrabold text-[#1D3557] text-sm group-hover:text-[#2A9D8F] transition-colors">4 Error Term Reasons (O.R.M.I.)</h4>
+              <ul class="text-xs text-[#555A68] space-y-1">
+                <li><strong>O:</strong> <em>Omission</em> of minor variables (parsimony).</li>
+                <li><strong>R:</strong> <em>Randomness</em> in human behaviour.</li>
+                <li><strong>M:</strong> <em>Measurement</em> errors in surveys.</li>
+                <li><strong>I:</strong> <em>Imperfect</em> functional form (linear proxy).</li>
+              </ul>
             </div>
-            <h4 class="font-extrabold text-[#1D3557] text-sm">4 Error Term Reasons (O.R.M.I.)</h4>
-            <ul class="text-xs text-[#555A68] space-y-1">
-              <li><strong>O:</strong> <em>Omission</em> of variables (parsimony & data limits).</li>
-              <li><strong>R:</strong> <em>Randomness</em> in human behaviour (unpredictability).</li>
-              <li><strong>M:</strong> <em>Measurement</em> error in surveys/data.</li>
-              <li><strong>I:</strong> <em>Imperfect</em> functional form (linear proxy).</li>
-            </ul>
+            <div class="pt-2 mt-2 border-t border-[#F0EAE1] flex items-center justify-between text-[11px] font-bold text-[#2A9D8F] group-hover:text-[#1D3557]">
+              <span>🔍 Expand Deep Dossier</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
           </div>
 
           <!-- Card 3: DW Test Assumptions (I.N.A.N.) -->
-          <div class="paper-card p-4 bg-white border border-[#E0D9CD] space-y-2 hover:shadow-md transition-shadow">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono-code font-bold text-[#E76F51] bg-[#FDF2E9] px-2 py-0.5 rounded">MNEMONIC</span>
-              <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 11, slide 9</span>
+          <div onclick="openDossier('inan')" class="paper-card p-4 bg-white border-2 border-[#E76F51] hover:border-[#1D3557] hover:-translate-y-1.5 hover:shadow-xl transition-all duration-200 cursor-pointer flex flex-col justify-between group bg-gradient-to-b from-white to-[#FFF9F5]">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono-code font-bold text-[#E76F51] bg-[#FDF2E9] px-2 py-0.5 rounded">AUTOCORRELATION</span>
+                <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 11, slide 9</span>
+              </div>
+              <h4 class="font-extrabold text-[#1D3557] text-sm group-hover:text-[#E76F51] transition-colors">4 DW Assumptions (I.N.A.N.)</h4>
+              <ul class="text-xs text-[#555A68] space-y-1">
+                <li><strong>I:</strong> <em>Intercept</em> must be present in regression.</li>
+                <li><strong>N:</strong> <em>Non-stochastic</em> X explanatory variables.</li>
+                <li><strong>A:</strong> <em>AR(1)</em> first-order scheme only: uₜ = ρuₜ₋₁ + vₜ.</li>
+                <li><strong>N:</strong> <em>NO lagged Y</em> regressor (use Durbin h or LM test!).</li>
+              </ul>
+              <div class="p-1.5 bg-[#FAF3EC] rounded text-[10px] text-[#D95D39] font-bold">
+                ⚡ Includes Live 5-Zone Table Checker
+              </div>
             </div>
-            <h4 class="font-extrabold text-[#1D3557] text-sm">4 DW Assumptions (I.N.A.N.)</h4>
-            <ul class="text-xs text-[#555A68] space-y-1">
-              <li><strong>I:</strong> <em>Intercept</em> must be present in regression.</li>
-              <li><strong>N:</strong> <em>Non-stochastic</em> X explanatory variables.</li>
-              <li><strong>A:</strong> <em>AR(1)</em> scheme only: \( u_t = \rho u_{t-1} + v_t \).</li>
-              <li><strong>N:</strong> <em>NO lagged Y</em> regressor (use Durbin h or LM test!).</li>
-            </ul>
+            <div class="pt-2 mt-2 border-t border-[#F0EAE1] flex items-center justify-between text-[11px] font-bold text-[#E76F51] group-hover:text-[#1D3557]">
+              <span>🔍 Demystify & Test 5 Zones</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
           </div>
 
           <!-- Card 4: Specification Dichotomy -->
-          <div class="paper-card p-4 bg-white border border-[#E0D9CD] space-y-2 hover:shadow-md transition-shadow">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono-code font-bold text-[#457B9D] bg-[#EBF3F5] px-2 py-0.5 rounded">CRITICAL DISTINCTION</span>
-              <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 9, slide 17</span>
+          <div onclick="openDossier('spec')" class="paper-card p-4 bg-white border border-[#E0D9CD] hover:border-[#457B9D] hover:-translate-y-1.5 hover:shadow-xl transition-all duration-200 cursor-pointer flex flex-col justify-between group">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono-code font-bold text-[#457B9D] bg-[#EBF3F5] px-2 py-0.5 rounded">CRITICAL DISTINCTION</span>
+                <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 9, slide 17</span>
+              </div>
+              <h4 class="font-extrabold text-[#1D3557] text-sm group-hover:text-[#457B9D] transition-colors">Omitted vs Irrelevant Variable</h4>
+              <div class="text-xs text-[#555A68] space-y-1.5">
+                <div class="p-1.5 bg-[#FAF3EC] rounded text-[#D95D39] font-medium">
+                  <strong>Omitted Relevant:</strong> BIASED & INCONSISTENT! Lethal error.
+                </div>
+                <div class="p-1.5 bg-[#E8F8F5] rounded text-[#2A9D8F] font-medium">
+                  <strong>Irrelevant Included:</strong> UNBIASED, but INEFFICIENT.
+                </div>
+              </div>
             </div>
-            <h4 class="font-extrabold text-[#1D3557] text-sm">Omitted vs Irrelevant Variable</h4>
-            <div class="text-xs text-[#555A68] space-y-1.5">
-              <div class="p-1.5 bg-[#FAF3EC] rounded text-[#D95D39] font-medium">
-                <strong>Omitted Relevant:</strong> BIASED & INCONSISTENT! Destroys all estimators. Lethal error.
-              </div>
-              <div class="p-1.5 bg-[#E8F8F5] rounded text-[#2A9D8F] font-medium">
-                <strong>Irrelevant Included:</strong> UNBIASED & CONSISTENT, but INEFFICIENT (larger variances).
-              </div>
+            <div class="pt-2 mt-2 border-t border-[#F0EAE1] flex items-center justify-between text-[11px] font-bold text-[#457B9D] group-hover:text-[#1D3557]">
+              <span>🔍 Expand Bias Formulas</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
             </div>
           </div>
 
           <!-- Card 5: Interaction Term Blueprint -->
-          <div class="paper-card p-4 bg-white border border-[#E0D9CD] space-y-2 hover:shadow-md transition-shadow">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono-code font-bold text-[#E9C46A] bg-[#FEF9E7] px-2 py-0.5 rounded">2-PART FORMULA</span>
-              <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 8, slide 10</span>
+          <div onclick="openDossier('interact')" class="paper-card p-4 bg-white border border-[#E0D9CD] hover:border-[#E9C46A] hover:-translate-y-1.5 hover:shadow-xl transition-all duration-200 cursor-pointer flex flex-col justify-between group">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono-code font-bold text-[#E9C46A] bg-[#FEF9E7] px-2 py-0.5 rounded">2-PART FORMULA</span>
+                <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 8, slide 10</span>
+              </div>
+              <h4 class="font-extrabold text-[#1D3557] text-sm group-hover:text-[#D95D39] transition-colors">Interaction Terms (D × X)</h4>
+              <p class="text-xs text-[#555A68] leading-relaxed font-mono-code">
+                Y = β₀ + β₁X + β₂D + β₃(D × X)
+              </p>
+              <div class="text-[11px] text-[#555A68] space-y-1 mt-1">
+                <div><strong>β₂:</strong> Intercept shift (baseline difference).</div>
+                <div><strong>β₃:</strong> Slope tilt (extra marginal return).</div>
+              </div>
             </div>
-            <h4 class="font-extrabold text-[#1D3557] text-sm">Interaction Terms (D × X)</h4>
-            <p class="text-xs text-[#555A68] leading-relaxed">
-              \( Y = \beta_0 + \beta_1 X + \beta_2 D + \beta_3 (D \times X) \)
-            </p>
-            <div class="text-[11px] text-[#555A68] space-y-1 mt-1">
-              <div><strong>1. Intercept Shift (\(\beta_2\)):</strong> Difference in baseline when \( X=0 \).</div>
-              <div><strong>2. Slope Shift (\(\beta_3\)):</strong> Extra marginal return per unit of \( X \).</div>
-              <div><strong>Total Effect:</strong> \( \beta_1 + \beta_3 \) for category \( D=1 \).</div>
+            <div class="pt-2 mt-2 border-t border-[#F0EAE1] flex items-center justify-between text-[11px] font-bold text-[#D95D39] group-hover:text-[#1D3557]">
+              <span>🔍 Expand Answering Template</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
             </div>
           </div>
 
           <!-- Card 6: White Test Auxiliary Regression -->
-          <div class="paper-card p-4 bg-white border border-[#E0D9CD] space-y-2 hover:shadow-md transition-shadow">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono-code font-bold text-[#8338EC] bg-[#F3E8FF] px-2 py-0.5 rounded">PROCEDURE</span>
-              <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 10, slide 10</span>
+          <div onclick="openDossier('white')" class="paper-card p-4 bg-white border border-[#E0D9CD] hover:border-[#8338EC] hover:-translate-y-1.5 hover:shadow-xl transition-all duration-200 cursor-pointer flex flex-col justify-between group">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono-code font-bold text-[#8338EC] bg-[#F3E8FF] px-2 py-0.5 rounded">PROCEDURE</span>
+                <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 10, slide 10</span>
+              </div>
+              <h4 class="font-extrabold text-[#1D3557] text-sm group-hover:text-[#8338EC] transition-colors">White Test & Robust SEs</h4>
+              <div class="text-xs text-[#555A68] space-y-1 leading-relaxed">
+                <div><strong>1. Auxiliary Reg:</strong> Regress eᵢ² on X, X², XⱼXₖ.</div>
+                <div><strong>2. Test Stat:</strong> n · R² ~ χ²(df). H₀: Homoscedasticity.</div>
+                <div><strong>3. Remedy:</strong> White's SEs (<code>ls(h)</code>). β unchanged!</div>
+              </div>
             </div>
-            <h4 class="font-extrabold text-[#1D3557] text-sm">White Test & Robust SEs</h4>
-            <div class="text-xs text-[#555A68] space-y-1 leading-relaxed">
-              <div><strong>1. Auxiliary Reg:</strong> Regress \( e_i^2 \) on \( X \), \( X^2 \), and cross-products \( X_j X_k \).</div>
-              <div><strong>2. Test Stat:</strong> \( n \cdot R^2 \sim \chi^2_{df} \). \( H_0 \): Homoscedasticity.</div>
-              <div><strong>3. Remedy:</strong> White's heteroscedasticity-consistent SEs (<code>ls(h)</code>). Coefficients unchanged; SEs adjusted!</div>
+            <div class="pt-2 mt-2 border-t border-[#F0EAE1] flex items-center justify-between text-[11px] font-bold text-[#8338EC] group-hover:text-[#1D3557]">
+              <span>🔍 Expand 3-Step Guide</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
             </div>
           </div>
 
-        </div>
+          <!-- Card 7: NEW FEATURED CARD - Exam Arithmetic & Stats Tables Decoder -->
+          <div onclick="openDossier('arithmetic')" class="paper-card p-4 bg-gradient-to-br from-[#FFF9F5] via-white to-[#FDF4EE] border-2 border-[#1D3557] hover:border-[#D95D39] hover:-translate-y-1.5 hover:shadow-xl transition-all duration-200 cursor-pointer flex flex-col justify-between group md:col-span-2 lg:col-span-3 xl:col-span-2">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono-code font-bold text-white bg-[#1D3557] px-2.5 py-0.5 rounded-full">MUST-KNOW MATH</span>
+                <span class="text-[10px] text-[#D95D39] font-mono-code font-bold">Paper 1 Scope (60M)</span>
+              </div>
+              <h4 class="font-black text-[#1D3557] text-sm group-hover:text-[#D95D39] transition-colors">🔢 Exam Arithmetic & Stats Tables Decoder</h4>
+              <p class="text-xs text-[#555A68] leading-relaxed">
+                <strong>No manual algebra, but 4 high-yield calculations you MUST know:</strong>
+              </p>
+              <div class="grid grid-cols-2 gap-2 text-[11px] text-[#1D3557] font-mono-code">
+                <div class="p-1.5 bg-white rounded border border-[#E8E2D8]">
+                  • Missing t = b / SE
+                </div>
+                <div class="p-1.5 bg-white rounded border border-[#E8E2D8]">
+                  • Turning Point X* = -b₁ / 2b₂
+                </div>
+                <div class="p-1.5 bg-white rounded border border-[#E8E2D8]">
+                  • Dummy Sum: Ŷ = b₀ + Σbᵢ
+                </div>
+                <div class="p-1.5 bg-white rounded border border-[#E8E2D8]">
+                  • How to Read t, F & DW Tables
+                </div>
+              </div>
+            </div>
+            <div class="pt-2 mt-2 border-t border-[#F0EAE1] flex items-center justify-between text-xs font-extrabold text-[#D95D39] group-hover:text-[#1D3557]">
+              <span>📊 Open Tables & Fast Calculator Simulator</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </div>
+
+        </div>        </div>
 
       </div>
 
@@ -865,7 +939,7 @@
       <!-- Gym Header Banner -->
       <div class="paper-card p-6 bg-gradient-to-r from-[#FAF3EC] via-[#F4EBE1] to-[#EBF3F5] border-[#E2DACB] flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <span class="tag-bauhaus px-3 py-1 rounded-full bg-[#1D3557] text-[#FAF7F2] text-[11px] uppercase tracking-wider font-bold">PAPER 1 MASTER SCOPE • 60 MARKS • ZERO ARITHMETIC</span>
+          <span class="tag-bauhaus px-3 py-1 rounded-full bg-[#1D3557] text-[#FAF7F2] text-[11px] uppercase tracking-wider font-bold">PAPER 1 MASTER SCOPE • 60 MARKS • NO TEDIOUS SUMS • PURE THEORY & FAST RATIO CHECKS</span>
           <h2 class="text-2xl font-extrabold text-[#1D3557] mt-1.5">Theory Paper 1 Physical Reps Gym</h2>
           <p class="text-xs text-[#555A68] mt-1 max-w-2xl leading-relaxed">
             Rebuilt directly from the professor's final revision class hints: <strong>Q1 (15M)</strong> True/False Justification, <strong>Q2 (26M)</strong> Written BLUE & Diagnostics, and <strong>Q3 (19M)</strong> Output & Interaction Terms (D×X). Type your answers to build muscle memory!
@@ -3353,6 +3427,719 @@ function checkPaperPracticeAnswer(paperKey, idx) {
       renderPaperView(k);
     }
 
+
+
+// =========================================================
+// HIGH YIELD MEMORY DOSSIER SYSTEM & INTERACTIVE SIMULATORS
+// =========================================================
+// Dossiers Data Definition for High-Yield Memory Triggers & Mnemonic Wall
+const dossiersData = {
+  blue: {
+    tag: "RIDDLE #1 DEEP DIVE",
+    title: "The 'BLUE' Status Trap: Multicollinearity vs Heteroscedasticity vs Autocorrelation",
+    ref: "Topic 9, slide 21 | Topic 10, slide 6 | Topic 11, slide 5",
+    subtitle: "Why does OLS stay BLUE under Multicollinearity, but lose the 'B' under Heteroscedasticity and Autocorrelation?",
+    summary: `
+      <div class="space-y-4 text-xs leading-relaxed text-[#2B2D42]">
+        <div class="p-3 bg-[#FAF3EC] border-l-4 border-[#D95D39] rounded-r-xl">
+          <p class="font-bold text-[#D95D39] text-sm">💡 The Exam Riddle Demystified</p>
+          <p class="mt-1">In the revision lecture, the professor gave an explicit hint: <em>"YOU MUST KNOW SOMETHING ABOUT 'BLUE' FOR QUESTION 2"</em>. Students often mistakenly assume that any regression problem destroys BLUE. That is an immediate deduction trap!</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div class="p-3 bg-white border border-[#BCD4D6] rounded-xl space-y-1.5">
+            <span class="px-2 py-0.5 bg-[#E8F8F5] text-[#2A9D8F] font-bold text-[10px] rounded">MULTICOLLINEARITY</span>
+            <h5 class="font-extrabold text-[#1D3557] text-xs">OLS IS STILL BLUE!</h5>
+            <p class="text-[11px] text-[#555A68]">All Gauss-Markov assumptions 1–6 remain strictly satisfied. Estimators are <strong>Linear</strong>, <strong>Unbiased</strong>, and possess <strong>Minimum Variance</strong> among all linear unbiased estimators. The variances are large, but no other linear unbiased estimator can achieve a smaller variance!</p>
+          </div>
+          <div class="p-3 bg-white border border-[#E8E2D8] rounded-xl space-y-1.5">
+            <span class="px-2 py-0.5 bg-[#FAF3EC] text-[#D95D39] font-bold text-[10px] rounded">HETEROSCEDASTICITY</span>
+            <h5 class="font-extrabold text-[#1D3557] text-xs">OLS LOSES THE "B" (LUE)</h5>
+            <p class="text-[11px] text-[#555A68]">Variance of errors is non-constant: Var(uᵢ) = σᵢ². OLS is still <strong>Linear</strong> and <strong>Unbiased</strong>, but it is <strong>Inefficient</strong> (not minimum variance). Generalized Least Squares (WLS/GLS) is more efficient.</p>
+          </div>
+          <div class="p-3 bg-white border border-[#E8E2D8] rounded-xl space-y-1.5">
+            <span class="px-2 py-0.5 bg-[#FAF3EC] text-[#D95D39] font-bold text-[10px] rounded">AUTOCORRELATION</span>
+            <h5 class="font-extrabold text-[#1D3557] text-xs">OLS LOSES THE "B" (LUE)</h5>
+            <p class="text-[11px] text-[#555A68]">Covariance between disturbance terms is non-zero: Cov(uₜ, uₛ) ≠ 0. OLS remains <strong>Linear</strong> and <strong>Unbiased</strong>, but is <strong>Inefficient</strong>. Standard error formulas are biased, invalidating t and F tests.</p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-[11px] border-collapse bg-white rounded-lg border border-[#E8E2D8]">
+            <thead>
+              <tr class="bg-[#FAF7F2] text-[#1D3557] border-b border-[#E8E2D8]">
+                <th class="p-2 text-left font-bold">Property / Check</th>
+                <th class="p-2 text-center font-bold">Multicollinearity</th>
+                <th class="p-2 text-center font-bold">Heteroscedasticity</th>
+                <th class="p-2 text-center font-bold">Autocorrelation</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#E8E2D8]">
+              <tr>
+                <td class="p-2 font-bold text-[#1D3557]">Are estimators Linear & Unbiased?</td>
+                <td class="p-2 text-center text-[#2A9D8F] font-bold">YES (Unbiased)</td>
+                <td class="p-2 text-center text-[#2A9D8F] font-bold">YES (Unbiased)</td>
+                <td class="p-2 text-center text-[#2A9D8F] font-bold">YES (Unbiased)</td>
+              </tr>
+              <tr>
+                <td class="p-2 font-bold text-[#1D3557]">Is Variance Minimum (Best)?</td>
+                <td class="p-2 text-center text-[#2A9D8F] font-bold">YES (Still Best!)</td>
+                <td class="p-2 text-center text-[#D95D39] font-bold">NO (Inefficient)</td>
+                <td class="p-2 text-center text-[#D95D39] font-bold">NO (Inefficient)</td>
+              </tr>
+              <tr>
+                <td class="p-2 font-bold text-[#1D3557]">Are usual OLS SE formulas valid?</td>
+                <td class="p-2 text-center text-[#2A9D8F] font-bold">YES (Formulas correct)</td>
+                <td class="p-2 text-center text-[#D95D39] font-bold">NO (Biased SEs)</td>
+                <td class="p-2 text-center text-[#D95D39] font-bold">NO (Usually underestimates SE)</td>
+              </tr>
+              <tr>
+                <td class="p-2 font-bold text-[#1D3557]">Are t & F test conclusions valid?</td>
+                <td class="p-2 text-center text-[#2A9D8F] font-bold">YES (Low power, but valid)</td>
+                <td class="p-2 text-center text-[#D95D39] font-bold">NO (Misleading tests)</td>
+                <td class="p-2 text-center text-[#D95D39] font-bold">NO (Overstates significance)</td>
+              </tr>
+              <tr>
+                <td class="p-2 font-bold text-[#1D3557]">Recommended Remedy</td>
+                <td class="p-2 text-center text-[#555A68]">Do nothing or collect more data</td>
+                <td class="p-2 text-center text-[#1D3557] font-bold">White's Robust SEs (<code>ls(h)</code>)</td>
+                <td class="p-2 text-center text-[#1D3557] font-bold">Newey-West HAC / Cochrane-Orcutt</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="p-3 bg-[#E8F8F5] border border-[#BCD4D6] rounded-xl space-y-1">
+          <p class="font-bold text-[#2A9D8F] text-xs">🎯 The Examiner's Mark Trap (Guaranteed True/False Question)</p>
+          <p class="text-[11px] text-[#555A68]"><em>"True or False: In the presence of high multicollinearity, OLS estimators become biased."</em><br>
+          <strong>Answer: FALSE!</strong> Multicollinearity is a data/sample deficiency (micronumerosity or high correlation between X variables). As long as E(u|X) = 0, OLS is strictly unbiased. You receive 0 marks if you claim it causes bias!</p>
+        </div>
+      </div>
+    `
+  },
+
+  ormi: {
+    tag: "MNEMONIC BREAKDOWN",
+    title: "4 Reasons for the Disturbance Error Term (uᵢ) — O.R.M.I.",
+    ref: "Topic 5, slide 4 | Gujarati & Porter Chapter 2",
+    subtitle: "Why is an econometric model stochastic (Y = β₀ + β₁X + u) rather than deterministic (Y = f(X))?",
+    summary: `
+      <div class="space-y-4 text-xs leading-relaxed text-[#2B2D42]">
+        <p class="text-[#555A68]">Economic theory predicts relationships (e.g. higher income leads to higher consumption), but real data never falls exactly on a single mathematical curve. The error term <strong>uᵢ</strong> represents the distance between reality and our line. The 4 official reasons are remembered by <strong>O.R.M.I.</strong>:</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="p-3 bg-white border-l-4 border-[#2A9D8F] rounded-r-xl border-t border-r border-b border-[#E8E2D8] space-y-1">
+            <span class="font-extrabold text-[#2A9D8F] text-xs">1. O — Omission of Variables (Parsimony)</span>
+            <p class="text-[11px] text-[#555A68]">Models must follow the <strong>principle of parsimony</strong>: we keep models simple and interpretable by including only the 2 to 4 most critical drivers. Dozens of minor variables (e.g., weather, mood, family size) are omitted because collecting data on them is impossible or too costly. Their combined small effects are absorbed into uᵢ.</p>
+          </div>
+
+          <div class="p-3 bg-white border-l-4 border-[#D95D39] rounded-r-xl border-t border-r border-b border-[#E8E2D8] space-y-1">
+            <span class="font-extrabold text-[#D95D39] text-xs">2. R — Randomness in Human Behaviour</span>
+            <p class="text-[11px] text-[#555A68]">Human beings are not robots. Two consumers with the exact same salary, age, and family structure will spend different amounts on groceries this week simply due to human idiosyncrasy, spontaneous impulse, or mood. This intrinsic randomness enters uᵢ.</p>
+          </div>
+
+          <div class="p-3 bg-white border-l-4 border-[#457B9D] rounded-r-xl border-t border-r border-b border-[#E8E2D8] space-y-1">
+            <span class="font-extrabold text-[#457B9D] text-xs">3. M — Measurement Error in Data</span>
+            <p class="text-[11px] text-[#555A68]">Survey and census data frequently contain inaccuracies: people round their income to the nearest thousand, forget minor cash transactions, or misreport hours worked. Errors in measuring the dependent variable Y directly accumulate in the error term.</p>
+          </div>
+
+          <div class="p-3 bg-white border-l-4 border-[#E9C46A] rounded-r-xl border-t border-r border-b border-[#E8E2D8] space-y-1">
+            <span class="font-extrabold text-[#E9C46A] text-xs">4. I — Imperfect Functional Form</span>
+            <p class="text-[11px] text-[#555A68]">True economic relationships are rarely strictly linear; they may be logarithmic, quadratic, or piece-wise. We frequently use a linear model as a practical, first-order approximation. The residual curvature that a straight line cannot fit is relegated to uᵢ.</p>
+          </div>
+        </div>
+
+        <div class="p-3 bg-[#FAF7F2] border border-[#E8E2D8] rounded-xl space-y-1">
+          <p class="font-bold text-[#1D3557] text-xs">📝 4-Mark Perfect Exam Formulation</p>
+          <p class="text-[11px] text-[#555A68] italic">"The disturbance error term uᵢ is required because of: (1) Omission of minor explanatory variables to uphold model parsimony and data constraints; (2) Inherent randomness and non-deterministic nature of human economic decisions; (3) Measurement and reporting errors in survey data; and (4) Imperfect functional form specifications when approximating non-linear realities with linear models."</p>
+        </div>
+      </div>
+    `
+  },
+
+  inan: {
+    tag: "AUTOCORRELATION MASTER DOSSIER",
+    title: "Durbin-Watson Test & 4 Rigorous Assumptions (I.N.A.N.)",
+    ref: "Topic 11, slides 8–15 | Gujarati Chapter 12 | Exam Q2 & Q3",
+    subtitle: "The complete, demystified guide to why DW works, its 4 non-negotiable assumptions, and how to read the 5-zone table.",
+    summary: `
+      <div class="space-y-4 text-xs leading-relaxed text-[#2B2D42]">
+        
+        <!-- Demystifying DW in Plain English -->
+        <div class="p-3 bg-[#EBF3F5] border-l-4 border-[#1D3557] rounded-r-xl">
+          <p class="font-bold text-[#1D3557] text-sm">🧠 What is Durbin-Watson Actually Doing?</p>
+          <p class="mt-1">In simple words: DW tests whether this period's error term (eₜ) is repeating the mistake of the previous period's error term (eₜ₋₁). If a model underpredicts GDP today, does it systematically underpredict GDP tomorrow? That is <strong>First-Order Autocorrelation</strong>.</p>
+          <div class="p-2 bg-white rounded-lg mt-2 font-mono-code text-[11px] text-[#1D3557] border border-[#BCD4D6]">
+            d = Σ(eₜ - eₜ₋₁)² / Σ eₜ² ≈ 2(1 - ρ̂)
+          </div>
+          <p class="mt-1.5 text-[11px] text-[#555A68]">
+            • If correlation <strong>ρ̂ = 0</strong> (clean model) ➔ <strong>d ≈ 2(1 - 0) = 2.0</strong> (The sweet spot).<br>
+            • If positive correlation <strong>ρ̂ = +1</strong> ➔ <strong>d ≈ 2(1 - 1) = 0.0</strong>.<br>
+            • If negative correlation <strong>ρ̂ = -1</strong> ➔ <strong>d ≈ 2(1 - (-1)) = 4.0</strong>.
+          </p>
+        </div>
+
+        <!-- 4 Assumptions (I.N.A.N.) -->
+        <div>
+          <h4 class="font-extrabold text-[#1D3557] text-xs uppercase tracking-wider mb-2">The 4 Assumptions (I.N.A.N.) — Why Each One Matters</h4>
+          <div class="space-y-2">
+            <div class="p-2.5 bg-white border border-[#E8E2D8] rounded-xl flex items-start gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-[#1D3557] text-white flex items-center justify-center font-bold text-xs shrink-0">I</span>
+              <div>
+                <p class="font-bold text-[#1D3557]">Intercept Must Be Present in the Regression</p>
+                <p class="text-[11px] text-[#555A68]">The proof that d ≈ 2(1 - ρ̂) strictly relies on OLS residuals summing to zero (Σeₜ = 0). If you run a regression through the origin (no intercept β₀), residuals do not sum to zero, and the DW test statistics are completely invalid.</p>
+              </div>
+            </div>
+
+            <div class="p-2.5 bg-white border border-[#E8E2D8] rounded-xl flex items-start gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-[#2A9D8F] text-white flex items-center justify-center font-bold text-xs shrink-0">N</span>
+              <div>
+                <p class="font-bold text-[#1D3557]">Non-Stochastic Explanatory Variables (X)</p>
+                <p class="text-[11px] text-[#555A68]">The regressors X must be fixed in repeated sampling or strictly exogenous. If X is stochastic and correlated with disturbance terms, standard DW critical bound tables cannot be used.</p>
+              </div>
+            </div>
+
+            <div class="p-2.5 bg-white border border-[#E8E2D8] rounded-xl flex items-start gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-[#E76F51] text-white flex items-center justify-center font-bold text-xs shrink-0">A</span>
+              <div>
+                <p class="font-bold text-[#1D3557]">AR(1) Scheme Only (First-Order Autoregressive)</p>
+                <p class="text-[11px] text-[#555A68]">The test is derived exclusively for uₜ = ρuₜ₋₁ + vₜ. It <strong>cannot detect</strong> higher-order autocorrelation such as AR(2) or seasonal quarterly autocorrelation AR(4) (very common in economic time series!). For higher orders, you must use the <strong>Breusch-Godfrey LM test</strong>.</p>
+              </div>
+            </div>
+
+            <div class="p-2.5 bg-white border border-[#E8E2D8] rounded-xl flex items-start gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-[#D95D39] text-white flex items-center justify-center font-bold text-xs shrink-0">N</span>
+              <div>
+                <p class="font-bold text-[#1D3557]">NO Lagged Dependent Variable (Yₜ₋₁) Regressor</p>
+                <p class="text-[11px] text-[#555A68]">The model CANNOT include a lagged Y as an independent variable (e.g. Yₜ = β₀ + β₁Yₜ₋₁ + β₂Xₜ + uₜ). If Yₜ₋₁ is present, the DW statistic is <strong>severely biased toward 2</strong> (it falsely reports no autocorrelation even when severe autocorrelation exists!). Remedy: use <strong>Durbin's h-test</strong> or Breusch-Godfrey LM.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive 5-Zone DW Table Decision Simulator -->
+        <div class="p-4 bg-gradient-to-br from-[#FAF7F2] to-[#FFFDF9] border-2 border-[#1D3557] rounded-xl space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#1D3557] text-[#FAF7F2] text-[10px] font-bold">INTERACTIVE TOOL</span>
+            <span class="text-xs font-bold text-[#1D3557]">DW 5-Zone Decision Checker</span>
+          </div>
+          <p class="text-[11px] text-[#555A68]">Enter your exam table critical values (d_L, d_U) and sample DW statistic to immediately visualize which zone it lands in:</p>
+
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <label class="block text-[10px] font-mono-code font-bold text-[#7A8294]">Lower Bound (d_L):</label>
+              <input type="number" id="dw-sim-dl" value="1.08" step="0.01" class="w-full p-1.5 border border-[#D6CEC1] rounded text-xs font-mono-code font-bold text-[#1D3557]" oninput="runDWDossierSimulator()">
+            </div>
+            <div>
+              <label class="block text-[10px] font-mono-code font-bold text-[#7A8294]">Upper Bound (d_U):</label>
+              <input type="number" id="dw-sim-du" value="1.36" step="0.01" class="w-full p-1.5 border border-[#D6CEC1] rounded text-xs font-mono-code font-bold text-[#1D3557]" oninput="runDWDossierSimulator()">
+            </div>
+            <div>
+              <label class="block text-[10px] font-mono-code font-bold text-[#D95D39]">Computed DW (d):</label>
+              <input type="number" id="dw-sim-d" value="2.49" step="0.01" class="w-full p-1.5 border-2 border-[#D95D39] rounded text-xs font-mono-code font-bold text-[#D95D39]" oninput="runDWDossierSimulator()">
+            </div>
+          </div>
+
+          <!-- Live Visual Number Line -->
+          <div id="dw-zones-display" class="space-y-2 pt-2">
+            <!-- Injected dynamically via runDWDossierSimulator -->
+          </div>
+        </div>
+
+      </div>
+    `
+  },
+
+  spec: {
+    tag: "SPECIFICATION ANALYSIS",
+    title: "Model Specification: Omitted Relevant vs Irrelevant Included Regressors",
+    ref: "Topic 9, slides 14–22 | Exam Q2",
+    subtitle: "The life-and-death consequences of specification errors and how to detect them via the Ramsey RESET test.",
+    summary: `
+      <div class="space-y-4 text-xs leading-relaxed text-[#2B2D42]">
+        <div class="p-3 bg-[#FAF3EC] border-l-4 border-[#D95D39] rounded-r-xl">
+          <p class="font-bold text-[#D95D39] text-sm">⚠️ The Asymmetric Penalty of Specification Errors</p>
+          <p class="mt-1">In econometrics, underfitting (omitting a variable) is a fatal sin that destroys all estimators. Overfitting (including unnecessary variables) is a minor inefficiency that preserves unbiasedness.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="p-3 bg-white border border-[#D95D39] rounded-xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 bg-[#FAF3EC] text-[#D95D39] font-bold text-[10px] rounded">1. OMITTED RELEVANT VARIABLE</span>
+              <span class="text-xs font-bold text-[#D95D39]">FATAL ERROR ❌</span>
+            </div>
+            <p class="text-[11px] text-[#555A68]">True model has X₂ (β₂ ≠ 0), but we estimate Y = β₀ + β₁X₁ + v.</p>
+            <div class="p-2 bg-[#FAF7F2] rounded font-mono-code text-[11px] text-[#1D3557]">
+              Bias = β₂ · [Cov(X₁, X₂) / Var(X₁)]
+            </div>
+            <ul class="text-[11px] text-[#555A68] space-y-1 list-disc pl-4">
+              <li><strong>BIASED & INCONSISTENT:</strong> β̂₁ does NOT converge to true β₁ even if n ➔ ∞ (unless Cov(X₁,X₂) = 0).</li>
+              <li><strong>Residual variance is biased:</strong> σ̂² overestimates σ².</li>
+              <li><strong>Invalid Hypotheses:</strong> Standard errors are distorted; all t and F tests are completely untrustworthy.</li>
+            </ul>
+          </div>
+
+          <div class="p-3 bg-white border border-[#2A9D8F] rounded-xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 bg-[#E8F8F5] text-[#2A9D8F] font-bold text-[10px] rounded">2. IRRELEVANT INCLUDED VARIABLE</span>
+              <span class="text-xs font-bold text-[#2A9D8F]">BENIGN FLAW ⚠️</span>
+            </div>
+            <p class="text-[11px] text-[#555A68]">True model only has X₁, but we mistakenly include X₂ (true β₂ = 0).</p>
+            <div class="p-2 bg-[#FAF7F2] rounded font-mono-code text-[11px] text-[#1D3557]">
+              E(β̂₁) = β₁ (Strictly Unbiased!)
+            </div>
+            <ul class="text-[11px] text-[#555A68] space-y-1 list-disc pl-4">
+              <li><strong>UNBIASED & CONSISTENT:</strong> β̂₁ converges to the true parameter value.</li>
+              <li><strong>LOSS OF EFFICIENCY:</strong> Unnecessary variable consumes degrees of freedom. Var(β̂₁) is larger than in the true model.</li>
+              <li><strong>Lower Statistical Power:</strong> Inflated standard errors make t-tests less likely to find significance.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Ramsey RESET Test -->
+        <div class="p-3 bg-white border border-[#BCD4D6] rounded-xl space-y-2">
+          <h5 class="font-extrabold text-[#1D3557] text-xs">🔍 Detection: Ramsey's RESET Test (Regression Specification Error Test)</h5>
+          <p class="text-[11px] text-[#555A68]">How do we test if our model has omitted variables or incorrect functional form without knowing what the missing variable is?</p>
+          <ol class="text-[11px] text-[#555A68] space-y-1 list-decimal pl-4">
+            <li>Estimate original model and save predicted values Ŷᵢ.</li>
+            <li>Run auxiliary regression: Yᵢ = β₀ + β₁X₁ + ... + γ₁Ŷᵢ² + γ₂Ŷᵢ³ + vᵢ.</li>
+            <li>Test H₀: γ₁ = γ₂ = 0 using an F-test (F = [(R²_new - R²_old)/m] / [(1 - R²_new)/(n - k)]).</li>
+            <li>If F is significant (p < 0.05) ➔ <strong>Reject H₀: Model is misspecified!</strong></li>
+          </ol>
+        </div>
+      </div>
+    `
+  },
+
+  interact: {
+    tag: "INTERACTION VARIABLES (D×X)",
+    title: "Interaction Terms: Differential Intercept vs Differential Slope",
+    ref: "Topic 8, slides 8–18 | Exam Q3 (19 Marks Scope)",
+    subtitle: "The foolproof 2-part framework to earn full 5/5 marks on interaction variable interpretation.",
+    summary: `
+      <div class="space-y-4 text-xs leading-relaxed text-[#2B2D42]">
+        <div class="p-3 bg-[#FEF9E7] border-l-4 border-[#E9C46A] rounded-r-xl">
+          <p class="font-bold text-[#1D3557] text-sm">💡 The Full Model Anatomy</p>
+          <p class="mt-1 font-mono-code text-xs text-[#1D3557]">Yᵢ = β₀ + β₁Xᵢ + β₂Dᵢ + β₃(Dᵢ × Xᵢ) + uᵢ</p>
+          <p class="mt-1 text-[11px] text-[#555A68]">Where D = 1 for Target Category (e.g. Female / Gauteng) and D = 0 for Benchmark Category (e.g. Male / Other Province).</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="p-3 bg-white border border-[#E8E2D8] rounded-xl space-y-1.5">
+            <span class="px-2 py-0.5 bg-[#FAF7F2] text-[#1D3557] font-bold text-[10px] rounded">BENCHMARK GROUP (D = 0)</span>
+            <div class="p-2 bg-[#FAF7F2] font-mono-code text-xs text-[#1D3557] font-bold">
+              Y = β₀ + β₁ X
+            </div>
+            <p class="text-[11px] text-[#555A68]">• Intercept = <strong>β₀</strong> (baseline spending when income X = 0).<br>• Slope = <strong>β₁</strong> (marginal propensity to spend per R1 income).</p>
+          </div>
+
+          <div class="p-3 bg-white border border-[#BCD4D6] rounded-xl space-y-1.5">
+            <span class="px-2 py-0.5 bg-[#E8F8F5] text-[#2A9D8F] font-bold text-[10px] rounded">TARGET GROUP (D = 1)</span>
+            <div class="p-2 bg-[#E8F8F5] font-mono-code text-xs text-[#2A9D8F] font-bold">
+              Y = (β₀ + β₂) + (β₁ + β₃) X
+            </div>
+            <p class="text-[11px] text-[#555A68]">• Intercept = <strong>β₀ + β₂</strong> (shifts baseline up or down by β₂).<br>• Slope = <strong>β₁ + β₃</strong> (tilts line steeper or flatter by β₃).</p>
+          </div>
+        </div>
+
+        <div class="p-3 bg-white border-2 border-[#1D3557] rounded-xl space-y-2">
+          <h5 class="font-extrabold text-[#1D3557] text-xs uppercase tracking-wider">The 5-Mark Exam Answering Template</h5>
+          <div class="space-y-1.5 text-[11px] text-[#555A68]">
+            <p class="p-2 bg-[#FAF7F2] rounded border-l-2 border-[#D95D39]">
+              <strong>Part 1 — The Intercept Shift (β₂):</strong><br>
+              <em>"Holding income (X) constant at zero, target category individuals spend [β₂] more/less than benchmark category individuals on average."</em>
+            </p>
+            <p class="p-2 bg-[#FAF7F2] rounded border-l-2 border-[#2A9D8F]">
+              <strong>Part 2 — The Slope Shift (β₃):</strong><br>
+              <em>"Holding other variables constant, for every R1 increase in income, the marginal increase in spending for target category individuals is [β₃] higher/lower than for benchmark category individuals."</em>
+            </p>
+            <p class="p-2 bg-[#FAF7F2] rounded border-l-2 border-[#1D3557]">
+              <strong>Part 3 — Total Group Effect:</strong><br>
+              <em>"The total marginal effect of income for target category individuals is (β₁ + β₃)."</em>
+            </p>
+          </div>
+        </div>
+      </div>
+    `
+  },
+
+  white: {
+    tag: "DIAGNOSTIC PROCEDURE",
+    title: "White's General Heteroscedasticity Test & Robust Standard Errors",
+    ref: "Topic 10, slides 8–16 | Exam Q2",
+    subtitle: "The exact 3-step auxiliary regression procedure, test statistic distribution, and how White's robust SEs solve the problem.",
+    summary: `
+      <div class="space-y-4 text-xs leading-relaxed text-[#2B2D42]">
+        
+        <div class="p-3 bg-[#F3E8FF] border-l-4 border-[#8338EC] rounded-r-xl">
+          <p class="font-bold text-[#8338EC] text-sm">⚡ Why White's Test is Preferred Over Breusch-Pagan</p>
+          <p class="mt-1">Breusch-Pagan assumes errors are normally distributed and only tests for linear forms of heteroscedasticity. White's test is a <strong>general test</strong>: it requires NO normality assumption and tests for linear terms, squares, and cross-products!</p>
+        </div>
+
+        <div class="space-y-2">
+          <div class="p-3 bg-white border border-[#E8E2D8] rounded-xl space-y-1">
+            <span class="font-bold text-[#1D3557] text-xs">Step 1: Estimate Primary OLS Regression</span>
+            <p class="text-[11px] text-[#555A68]">Estimate Y = β₀ + β₁X₁ + β₂X₂ + u. Compute and square the OLS residuals: <strong>eᵢ²</strong>.</p>
+          </div>
+
+          <div class="p-3 bg-white border border-[#E8E2D8] rounded-xl space-y-1">
+            <span class="font-bold text-[#1D3557] text-xs">Step 2: Run the Auxiliary Regression</span>
+            <p class="text-[11px] text-[#555A68]">Regress squared residuals eᵢ² on all original regressors, their squares, and cross-products:</p>
+            <div class="p-2 bg-[#FAF7F2] font-mono-code text-[11px] text-[#1D3557] rounded">
+              eᵢ² = α₀ + α₁X₁ + α₂X₂ + α₃X₁² + α₄X₂² + α₅(X₁X₂) + vᵢ
+            </div>
+            <p class="text-[11px] text-[#555A68]">Obtain the coefficient of determination <strong>R²</strong> from this auxiliary regression.</p>
+          </div>
+
+          <div class="p-3 bg-white border border-[#E8E2D8] rounded-xl space-y-1">
+            <span class="font-bold text-[#1D3557] text-xs">Step 3: Compute the LM Test Statistic & Hypothesis</span>
+            <div class="p-2 bg-[#FAF7F2] font-mono-code text-[11px] text-[#1D3557] rounded">
+              LM = n · R² ~ χ²(df)
+            </div>
+            <p class="text-[11px] text-[#555A68]">
+              Where <strong>df = number of slope regressors in auxiliary regression</strong> (excluding constant α₀).<br>
+              • <strong>H₀:</strong> α₁ = α₂ = ... = α₅ = 0 (Homoscedasticity — errors have constant variance).<br>
+              • <strong>H₁:</strong> At least one αⱼ ≠ 0 (Heteroscedasticity present).<br>
+              • If p-value < 0.05 or n·R² > χ²_crit ➔ <strong>Reject H₀: Heteroscedasticity confirmed!</strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="p-3 bg-[#E8F8F5] border border-[#BCD4D6] rounded-xl space-y-1.5">
+          <h5 class="font-bold text-[#2A9D8F] text-xs">🛠️ The Remedy: White's Heteroscedasticity-Consistent Standard Errors</h5>
+          <p class="text-[11px] text-[#555A68]">
+            In EViews, run <code>ls(h) Y C X1 X2</code>. What actually changes?<br>
+            • <strong>Point estimates (β̂):</strong> DO NOT CHANGE! OLS is already unbiased.<br>
+            • <strong>Standard errors:</strong> Corrected using White's sandwich covariance estimator. They are now asymptotically valid, restoring the integrity of t-statistics, p-values, and confidence intervals!
+          </p>
+        </div>
+
+      </div>
+    `
+  },
+
+  arithmetic: {
+    tag: "FEATURED EXAM GUIDE",
+    title: "🔢 Exam Arithmetic & Stats Tables Decoder: The Complete Blueprint",
+    ref: "Official NWU Scope & Past Papers (2022–2024)",
+    subtitle: "Clear answers to 'Am I doing arithmetic?', how to find missing t-stats, and how to read t, F, and DW tables in seconds.",
+    summary: `
+      <div class="space-y-4 text-xs leading-relaxed text-[#2B2D42]">
+        
+        <!-- The Big Question Answered -->
+        <div class="p-3 bg-[#FAF3EC] border-l-4 border-[#D95D39] rounded-r-xl">
+          <p class="font-bold text-[#D95D39] text-sm">🤔 "Am I seriously doing no arithmetic in the Theory Exam?"</p>
+          <p class="mt-1">
+            <strong>The Short Answer:</strong> You do <strong>NO tedious arithmetic</strong> (no manual matrix inversions, no calculating Σ(X - X̄)² by hand, no long standard deviations). That's what EViews handles in the practical.<br>
+            <strong>HOWEVER:</strong> You are expected to perform <strong>4 specific, lightning-fast arithmetic checks</strong> that the lecturer deliberately sets as mark-traps in Paper 1!
+          </p>
+        </div>
+
+        <!-- The 4 Essential Calculations -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          
+          <div class="p-3 bg-white border border-[#E8E2D8] rounded-xl space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-[#1D3557] text-xs">1. Missing t-Statistic (The #1 Exam Trap)</span>
+              <span class="px-2 py-0.5 bg-[#FAF3EC] text-[#D95D39] text-[10px] font-bold rounded">4 Marks</span>
+            </div>
+            <p class="text-[11px] text-[#555A68]">The lecturer blanks out one t-statistic or standard error in the regression table (e.g. 2023 Charity Exam):</p>
+            <div class="p-2 bg-[#FAF7F2] font-mono-code text-xs text-[#1D3557] font-bold rounded">
+              t = b / SE(b)  &nbsp;|&nbsp;  SE = b / t
+            </div>
+            <p class="text-[11px] text-[#555A68]">Example: If b = -0.48 and SE = 0.21 ➔ t = -0.48 / 0.21 = <strong>-2.286</strong>.</p>
+          </div>
+
+          <div class="p-3 bg-white border border-[#E8E2D8] rounded-xl space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-[#1D3557] text-xs">2. Quadratic Turning Point (Optimal Peak)</span>
+              <span class="px-2 py-0.5 bg-[#E8F8F5] text-[#2A9D8F] text-[10px] font-bold rounded">3 Marks</span>
+            </div>
+            <p class="text-[11px] text-[#555A68]">When model is Y = b₀ + b₁X + b₂X² (e.g. 2023 Grade 7 Pass Rate):</p>
+            <div class="p-2 bg-[#FAF7F2] font-mono-code text-xs text-[#1D3557] font-bold rounded">
+              X* = -b₁ / (2 · b₂)
+            </div>
+            <p class="text-[11px] text-[#555A68]">Example: If b₁ = 0.00136 and b₂ = -0.000000084 ➔ X* = <strong>R8,095.24</strong>.</p>
+          </div>
+
+          <div class="p-3 bg-white border border-[#E8E2D8] rounded-xl space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-[#1D3557] text-xs">3. Profile Prediction with Dummies</span>
+              <span class="px-2 py-0.5 bg-[#EBF3F5] text-[#1D3557] text-[10px] font-bold rounded">3 Marks</span>
+            </div>
+            <p class="text-[11px] text-[#555A68]">Sum baseline intercept + relevant category additives (e.g. 2024 Comrades Nedbank Sandton runner):</p>
+            <div class="p-2 bg-[#FAF7F2] font-mono-code text-xs text-[#1D3557] font-bold rounded">
+              Ŷ = b₀ + b_AGE3 + b_EDU3 + b_GAUTENG
+            </div>
+            <p class="text-[11px] text-[#555A68]">Ŷ = 403.02 + 633.36 + 477.45 + 316.43 = <strong>R1,830.26</strong>.</p>
+          </div>
+
+          <div class="p-3 bg-white border border-[#E8E2D8] rounded-xl space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-[#1D3557] text-xs">4. The F-Statistic and R² Link</span>
+              <span class="px-2 py-0.5 bg-[#FEF9E7] text-[#E9C46A] text-[10px] font-bold rounded">5 Marks</span>
+            </div>
+            <p class="text-[11px] text-[#555A68]">The relationship between overall fit R² and joint significance F:</p>
+            <div class="p-2 bg-[#FAF7F2] font-mono-code text-xs text-[#1D3557] font-bold rounded">
+              F = [R² / (k - 1)] / [(1 - R²) / (n - k)]
+            </div>
+            <p class="text-[11px] text-[#555A68]">F is a monotonically increasing function of R². When R² = 0, F = 0. As R² ➔ 1, F ➔ ∞.</p>
+          </div>
+
+        </div>
+
+        <!-- How to Read Stats Tables in the Exam -->
+        <div class="p-4 bg-white border-2 border-[#1D3557] rounded-xl space-y-3">
+          <h4 class="font-extrabold text-[#1D3557] text-xs uppercase tracking-wider">How to Read Statistical Tables (Step-by-Step)</h4>
+          
+          <div class="space-y-2 text-[11px] text-[#555A68]">
+            <div class="p-2 bg-[#FAF7F2] rounded border-l-2 border-[#1D3557]">
+              <span class="font-bold text-[#1D3557]">1. Reading the t-Table:</span><br>
+              • <strong>Degrees of Freedom:</strong> df = n - k (sample size minus total estimated parameters including intercept).<br>
+              • <strong>Two-Tailed vs One-Tailed:</strong> For H₀: β = 0 vs H₁: β ≠ 0, use two-tailed α = 0.05 (or column t₀.₀₂₅).<br>
+              • <strong>Fast Rule of Thumb:</strong> If n > 30, critical t at 5% is always ≈ <strong>1.96</strong> (or 2.0). At 1%, critical t ≈ <strong>2.58</strong>.<br>
+              • <strong>Decision Rule:</strong> If |t_calc| > t_crit ➔ <strong>Reject H₀</strong> (Variable is statistically significant).
+            </div>
+
+            <div class="p-2 bg-[#FAF7F2] rounded border-l-2 border-[#2A9D8F]">
+              <span class="font-bold text-[#2A9D8F]">2. Reading the F-Table:</span><br>
+              • <strong>Numerator df (df₁):</strong> k - 1 (number of slope explanatory variables).<br>
+              • <strong>Denominator df (df₂):</strong> n - k.<br>
+              • Look up row df₂ and column df₁ at α = 0.05.<br>
+              • <strong>Decision Rule:</strong> If F_calc > F_crit ➔ <strong>Reject H₀</strong> (The regression model is jointly statistically significant).
+            </div>
+
+            <div class="p-2 bg-[#FAF7F2] rounded border-l-2 border-[#D95D39]">
+              <span class="font-bold text-[#D95D39]">3. Reading the Durbin-Watson Table:</span><br>
+              • <strong>Look up:</strong> Sample size <strong>n</strong> (rows) and <strong>k'</strong> (columns = number of explanatory variables <em>excluding intercept</em>!).<br>
+              • Read <strong>d_L</strong> (lower bound) and <strong>d_U</strong> (upper bound).<br>
+              • Calculate symmetry bounds: <strong>4 - d_U</strong> and <strong>4 - d_L</strong>.<br>
+              • Map observed d onto the 5 zones: [0 to d_L: Positive Auto], [d_L to d_U: Inconclusive], [d_U to 4-d_U: No Auto], [4-d_U to 4-d_L: Inconclusive], [4-d_L to 4: Negative Auto].
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Fast Exam Calculator -->
+        <div class="p-4 bg-gradient-to-br from-[#FAF7F2] to-[#FFFDF9] border border-[#D6CEC1] rounded-xl space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#D95D39] text-white text-[10px] font-bold">LIVE CALCULATOR</span>
+            <span class="text-xs font-bold text-[#1D3557]">Instant t-Stat & Turning Point Checker</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Mini t-calc -->
+            <div class="p-3 bg-white rounded-lg border border-[#E8E2D8] space-y-2">
+              <span class="font-bold text-[#1D3557] text-xs">Missing t-Ratio Solver</span>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="text-[10px] text-[#7A8294] font-mono-code">Coeff (b):</label>
+                  <input type="number" id="calc-b" value="-0.48" step="0.01" class="w-full p-1 border rounded text-xs font-mono-code" oninput="runFastCalculators()">
+                </div>
+                <div>
+                  <label class="text-[10px] text-[#7A8294] font-mono-code">Std Error (SE):</label>
+                  <input type="number" id="calc-se" value="0.21" step="0.01" class="w-full p-1 border rounded text-xs font-mono-code" oninput="runFastCalculators()">
+                </div>
+              </div>
+              <div id="calc-t-res" class="p-2 bg-[#FAF7F2] rounded text-xs font-mono-code font-bold text-[#1D3557]">
+                t = -2.286 | Sig at 5% (|t| > 1.96)
+              </div>
+            </div>
+
+            <!-- Mini quadratic peak calc -->
+            <div class="p-3 bg-white rounded-lg border border-[#E8E2D8] space-y-2">
+              <span class="font-bold text-[#1D3557] text-xs">Quadratic Turning Point Solver</span>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="text-[10px] text-[#7A8294] font-mono-code">b₁ (Linear):</label>
+                  <input type="number" id="calc-b1" value="0.00136" step="0.0001" class="w-full p-1 border rounded text-xs font-mono-code" oninput="runFastCalculators()">
+                </div>
+                <div>
+                  <label class="text-[10px] text-[#7A8294] font-mono-code">b₂ (Squared):</label>
+                  <input type="number" id="calc-b2" value="-0.000000084" step="0.00000001" class="w-full p-1 border rounded text-xs font-mono-code" oninput="runFastCalculators()">
+                </div>
+              </div>
+              <div id="calc-peak-res" class="p-2 bg-[#FAF7F2] rounded text-xs font-mono-code font-bold text-[#2A9D8F]">
+                Peak X* = 8,095.24 units
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    `
+  }
+};
+
+
+// High Yield Memory Triggers Dossier Engine
+
+let activeDossierId = null;
+
+function openDossier(id) {
+  playSfx('pop');
+  const d = dossiersData[id];
+  if (!d) return;
+
+  activeDossierId = id;
+  const modal = document.getElementById('dossier-modal');
+  if (!modal) return;
+
+  // Set header details
+  document.getElementById('dossier-tag').textContent = d.tag;
+  document.getElementById('dossier-title').textContent = d.title;
+  document.getElementById('dossier-ref').textContent = d.ref;
+  document.getElementById('dossier-subtitle').textContent = d.subtitle;
+
+  // Set body content
+  const bodyEl = document.getElementById('dossier-body');
+  bodyEl.innerHTML = d.summary;
+
+  // Render Math if KaTeX is loaded
+  if (window.renderMathInElement) {
+    try {
+      renderMathInElement(bodyEl, {
+        delimiters: [
+          { left: "$", right: "$", display: true },
+          { left: "\\(", right: "\\)", display: false }
+        ],
+        throwOnError: false
+      });
+    } catch (e) {
+      console.warn('KaTeX render error:', e);
+    }
+  }
+
+  // Run simulators if present
+  if (id === 'inan') {
+    setTimeout(runDWDossierSimulator, 50);
+  } else if (id === 'arithmetic') {
+    setTimeout(runFastCalculators, 50);
+  }
+
+  modal.classList.remove('hidden');
+  document.body.classList.add('overflow-hidden');
+  addXp(15);
+  showToast(`Opened Dossier: ${d.title.split(':')[0]} (+15 XP)`, 'info');
+}
+
+function closeDossier() {
+  playSfx('click');
+  const modal = document.getElementById('dossier-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+  }
+  document.body.classList.remove('overflow-hidden');
+  activeDossierId = null;
+}
+
+// 5-Zone DW Table Decision Simulator
+function runDWDossierSimulator() {
+  const dLInput = document.getElementById('dw-sim-dl');
+  const dUInput = document.getElementById('dw-sim-du');
+  const dInput = document.getElementById('dw-sim-d');
+  const display = document.getElementById('dw-zones-display');
+  if (!dLInput || !dUInput || !dInput || !display) return;
+
+  const dL = parseFloat(dLInput.value) || 1.00;
+  const dU = parseFloat(dUInput.value) || 1.40;
+  const d = parseFloat(dInput.value) || 2.00;
+
+  const sym4dU = (4 - dU).toFixed(2);
+  const sym4dL = (4 - dL).toFixed(2);
+
+  let zone = '';
+  let verdict = '';
+  let zoneColor = '';
+
+  if (d < dL) {
+    zone = 'Zone 1: [0 to d_L]';
+    verdict = '🔴 Reject H₀: Strong Evidence of Positive First-Order Autocorrelation';
+    zoneColor = '#D95D39';
+  } else if (d >= dL && d <= dU) {
+    zone = 'Zone 2: [d_L to d_U]';
+    verdict = '🟡 Inconclusive Region (Zone of Indecision for Positive Autocorrelation)';
+    zoneColor = '#E9C46A';
+  } else if (d > dU && d < (4 - dU)) {
+    zone = 'Zone 3: [d_U to 4 - d_U]';
+    verdict = '🟢 Fail to Reject H₀: Clean Model (No Evidence of Autocorrelation)';
+    zoneColor = '#2A9D8F';
+  } else if (d >= (4 - dU) && d <= (4 - dL)) {
+    zone = 'Zone 4: [4 - d_U to 4 - d_L]';
+    verdict = '🟡 Inconclusive Region (Zone of Indecision for Negative Autocorrelation)';
+    zoneColor = '#E9C46A';
+  } else {
+    zone = 'Zone 5: [4 - d_L to 4.0]';
+    verdict = '🔴 Reject H₀: Evidence of Negative First-Order Autocorrelation';
+    zoneColor = '#D95D39';
+  }
+
+  display.innerHTML = `
+    <div class="p-3 rounded-xl border-2" style="background-color: ${zoneColor}10; border-color: ${zoneColor};">
+      <div class="flex items-center justify-between text-xs font-mono-code font-bold">
+        <span>Computed DW (d = ${d}) falls in: <strong style="color: ${zoneColor};">${zone}</strong></span>
+        <span class="text-[10px] text-[#7A8294]">Symmetry: 4-d_U = ${sym4dU} | 4-d_L = ${sym4dL}</span>
+      </div>
+      <p class="font-extrabold text-xs mt-1" style="color: ${zoneColor};">${verdict}</p>
+      <div class="mt-2 text-[11px] text-[#555A68]">
+        <strong>Exam Memo Phrasing:</strong> "Because calculated d (${d}) ${d < dL ? '< d_L (' + dL + ')' : d <= dU ? 'falls between d_L (' + dL + ') and d_U (' + dU + ')' : d < (4 - dU) ? 'lies strictly between d_U (' + dU + ') and 4 - d_U (' + sym4dU + ')' : d <= (4 - dL) ? 'falls in the upper inconclusive region between ' + sym4dU + ' and ' + sym4dL : '> 4 - d_L (' + sym4dL + ')'}, we ${d < dL || d > (4 - dL) ? 'reject H₀ at the 5% level' : d <= dU || d <= (4 - dL) ? 'cannot make a definitive conclusion without further tests (e.g. Breusch-Godfrey LM)' : 'fail to reject H₀ and conclude there is no first-order serial correlation'}."
+      </div>
+    </div>
+  `;
+}
+
+// Fast Exam Calculators (t-stat & quadratic turning point)
+function runFastCalculators() {
+  const bInput = document.getElementById('calc-b');
+  const seInput = document.getElementById('calc-se');
+  const tRes = document.getElementById('calc-t-res');
+
+  if (bInput && seInput && tRes) {
+    const b = parseFloat(bInput.value) || 0;
+    const se = parseFloat(seInput.value) || 0.001;
+    const t = (b / se).toFixed(3);
+    const absT = Math.abs(parseFloat(t));
+    let status = '';
+    let color = '';
+    if (absT > 2.576) {
+      status = '★ Highly Sig at 1% (|t| > 2.576)';
+      color = 'text-[#2A9D8F]';
+    } else if (absT > 1.96) {
+      status = '★ Significant at 5% (|t| > 1.96)';
+      color = 'text-[#2A9D8F]';
+    } else {
+      status = '❌ Insignificant at 5% (|t| < 1.96)';
+      color = 'text-[#D95D39]';
+    }
+    tRes.innerHTML = `t = <strong>${t}</strong> &nbsp;|&nbsp; <span class="${color} font-bold">${status}</span>`;
+  }
+
+  const b1Input = document.getElementById('calc-b1');
+  const b2Input = document.getElementById('calc-b2');
+  const peakRes = document.getElementById('calc-peak-res');
+
+  if (b1Input && b2Input && peakRes) {
+    const b1 = parseFloat(b1Input.value) || 0;
+    const b2 = parseFloat(b2Input.value) || 0;
+    if (b2 === 0) {
+      peakRes.textContent = 'b₂ cannot be 0 (linear model has no turning point)';
+      peakRes.className = 'p-2 bg-[#FAF7F2] rounded text-xs font-mono-code font-bold text-[#7A8294]';
+    } else {
+      const peak = (-b1 / (2 * b2)).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const isMax = b2 < 0;
+      peakRes.innerHTML = `Turning Point X* = <strong>${peak}</strong> &nbsp;|&nbsp; <span class="font-bold ${isMax ? 'text-[#2A9D8F]' : 'text-[#D95D39]'}">${isMax ? 'Maximum (Peak efficiency)' : 'Minimum (Trough)'}</span>`;
+    }
+  }
+}
+
+function copyActiveDossierNotes() {
+  if (!activeDossierId || !dossiersData[activeDossierId]) return;
+  const d = dossiersData[activeDossierId];
+  const bodyEl = document.getElementById('dossier-body');
+  const plainText = `${d.title}\n${d.subtitle}\nScope: ${d.ref}\n\n${bodyEl.innerText}`;
+  copyToClipboard(plainText, d.title.split(':')[0] + ' Study Notes');
+}
+
+
     // Boss Quiz Data
     const quizItems = [
       { q: "The sample variance divides the sum of squared deviations by n.", a: false, exp: "False! It divides by degrees of freedom n − 1 (Bessel's correction) for an unbiased sample variance." },
@@ -3465,6 +4252,13 @@ function checkPaperPracticeAnswer(paperKey, idx) {
       canvas.height = window.innerHeight;
     }
     window.addEventListener('resize', resizeCanvas);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeDossier();
+    }
+  });
+
     resizeCanvas();
 
     function triggerConfetti() {
@@ -4427,6 +5221,44 @@ function copyToClipboard(text, label) {
     </div>
   </div>
 
+
+
+  <!-- High-Yield Memory Triggers Slide-Over / Modal Dossier -->
+  <div id="dossier-modal" class="fixed inset-0 z-50 bg-[#1D3557]/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="modal-animated bg-white rounded-2xl border-2 border-[#1D3557] shadow-2xl max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="p-5 bg-gradient-to-r from-[#FAF7F2] via-white to-[#FAF3EC] border-b border-[#E8E2D8] flex items-start justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="dossier-tag" class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#1D3557] text-[#FAF7F2] text-[10px] font-bold">DOSSIER</span>
+            <span id="dossier-ref" class="text-xs font-mono-code text-[#7A8294]">Topic 9, slide 21</span>
+          </div>
+          <h3 id="dossier-title" class="text-lg font-black text-[#1D3557] mt-1.5">Dossier Title</h3>
+          <p id="dossier-subtitle" class="text-xs text-[#555A68] mt-0.5">Dossier Subtitle</p>
+        </div>
+        <button onclick="closeDossier()" class="paper-btn w-9 h-9 rounded-xl bg-white border border-[#D6CEC1] hover:bg-[#FAF7F2] text-[#1D3557] text-lg font-bold flex items-center justify-center shrink-0">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div id="dossier-body" class="p-6 overflow-y-auto custom-scroll space-y-4 text-xs leading-relaxed">
+        <!-- Dynamically injected via openDossier -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 bg-[#FAF7F2] border-t border-[#E8E2D8] flex items-center justify-between gap-3">
+        <button onclick="copyActiveDossierNotes()" class="paper-btn px-4 py-2 bg-white hover:bg-[#FAF7F2] text-[#1D3557] text-xs font-bold flex items-center gap-1.5 shadow-sm">
+          <span>📋 Copy Complete Dossier Notes for Word Doc</span>
+        </button>
+        <button onclick="closeDossier()" class="paper-btn px-4 py-2 bg-[#1D3557] hover:bg-[#2B2D42] text-white text-xs font-bold">
+          Done Reviewing
+        </button>
+      </div>
+
+    </div>
+  </div>
 
 </body>
 </html>
