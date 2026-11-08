@@ -726,6 +726,9 @@
               <option value="d8">D8: Two-Dimension PivotTable (Ch3)</option>
               <option value="d9">D9: Z-Score Standardisation & Manhattan (Ch6)</option>
               <option value="d10">D10: Forecast Error Metrics (RMSE/MAD) (Ch10)</option>
+              <option value="d11">D11: Binary Data & Jaccard Distance (Ch6 - 2025 Memo Q3)</option>
+              <option value="d12">D12: 5 Table Design Principles (Ch3 - 2024/2025 Memo Q2)</option>
+              <option value="d13">D13: Multiple Regression & Dummy Model Choice (Ch8 - 2025 Memo Q4)</option>
             </select>
           </div>
         </div>
@@ -886,6 +889,51 @@
           <h4 class="text-base font-bold text-[#1D3557]">The Trivial Association Rule Trap</h4>
           <p class="text-xs text-gray-600 line-clamp-3">
             Support vs Confidence vs Lift. Why 100% confidence means nothing if the consequent product has a 99% base purchase frequency.
+          </p>
+          <div class="text-xs font-bold text-[#1D3557] flex items-center gap-1 pt-1">
+            <span>Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 7: Jaccard Binary Distance -->
+        <div onclick="openDossier('dossier-jaccard')" class="paper-card p-5 cursor-pointer hover:-translate-y-1 hover:border-[#1D3557] space-y-3 bg-white">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#4E878C] uppercase">2025 Exam Q3</span>
+            <span class="text-xl">🔢</span>
+          </div>
+          <h4 class="text-base font-bold text-[#1D3557]">The Jaccard Binary Distance Decrypter</h4>
+          <p class="text-xs text-gray-600 line-clamp-3">
+            When survey data is 0/1 binary (Yes/No), Euclidean fails. Learn how Mismatches / (Total - Matching Zeros) wins 10 marks.
+          </p>
+          <div class="text-xs font-bold text-[#1D3557] flex items-center gap-1 pt-1">
+            <span>Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 8: 5 Table Design Principles -->
+        <div onclick="openDossier('dossier-table-design')" class="paper-card p-5 cursor-pointer hover:-translate-y-1 hover:border-[#1D3557] space-y-3 bg-white">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#D95D39] uppercase">Free 5 Marks</span>
+            <span class="text-xl">📋</span>
+          </div>
+          <h4 class="text-base font-bold text-[#1D3557]">The 5 Table Design Principles</h4>
+          <p class="text-xs text-gray-600 line-clamp-3">
+            Low data-ink, lines only for headers/totals, left text, right numbers. The 5 rules examiners mark in every paper.
+          </p>
+          <div class="text-xs font-bold text-[#1D3557] flex items-center gap-1 pt-1">
+            <span>Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 9: Multiple Regression & Dummy Variables -->
+        <div onclick="openDossier('dossier-multiple-reg')" class="paper-card p-5 cursor-pointer hover:-translate-y-1 hover:border-[#1D3557] space-y-3 bg-white">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#1D3557] uppercase">2025 Exam Q4</span>
+            <span class="text-xl">📈</span>
+          </div>
+          <h4 class="text-base font-bold text-[#1D3557]">Multiple Regression & Dummy Variables</h4>
+          <p class="text-xs text-gray-600 line-clamp-3">
+            How dummy variables work in ToolPak, how to interpret their slopes, and how to justify model selection via R².
           </p>
           <div class="text-xs font-bold text-[#1D3557] flex items-center gap-1 pt-1">
             <span>Read Dossier →</span>
@@ -1608,6 +1656,30 @@
         prompt: 'Calculate RMSE and explain the unit difference between RMSE, MAD, and MAPE.',
         keywords: ['RMSE', 'SQRT', '0.3768', 'same units', 'percentage'],
         model: 'RMSE = SQRT(0.142) = 0.3768. RMSE and MAD are expressed in the exact same physical units as the original dependent variable Y. MAPE expresses error as a scale-free percentage (%).'
+      },
+      d11: {
+        ch: 'Chapter 6 • 10 Application Marks (2025 Exam Q3)',
+        title: 'Binary Data & Jaccard Distance (Peak Performance Fitness)',
+        scenario: 'Member Morgan (Gym=1, Diet=0, PT=1, Supps=1). Alex (Gym=1, Diet=1, PT=0, Supps=0). Jordan (Gym=1, Diet=0, PT=1, Supps=0). Total variables = 4.',
+        prompt: 'State the Jaccard Distance formula, calculate distance for Morgan vs Alex and Morgan vs Jordan, and state who Morgan should train with.',
+        keywords: ['Jaccard', 'mismatches', '0.75', '0.33', 'Jordan'],
+        model: 'Jaccard Distance = Mismatches / (Total Variables - Matching Zeros).\nMorgan vs Alex: 3 mismatches, 0 matching zeros -> 3 / (4 - 0) = 0.75.\nMorgan vs Jordan: 1 mismatch (Supps), 1 matching zero (Diet) -> 1 / (4 - 1) = 0.33.\nRecommendation: Morgan should train with Jordan because their Jaccard distance (0.33) is lower, indicating more shared positive habits.'
+      },
+      d12: {
+        ch: 'Chapter 3 • 5 Application Marks (2024/2025 Exam Q2.1)',
+        title: 'The 5 Table Design Principles (Free 5 Marks)',
+        scenario: 'You are presented with raw unformatted tables (Olympic Medals or Car Dealerships) and instructed: "Use the table design principles to improve the readability of the table data (5 marks)".',
+        prompt: 'List the exact 5 formatting rules that examiners mark in the official memo.',
+        keywords: ['data-ink', 'titles bold', 'lines only', 'left-aligned', 'right-aligned'],
+        model: '1. Keep data-ink ratio low: Only table headers/titles bold, no other text bold (1 mark).\n2. Use lines/borders only to separate labels from data and totals (1 mark).\n3. Text labels must be left-aligned (1 mark).\n4. Numeric values must be right-aligned (1 mark).\n5. Center vertical labels (1 mark).'
+      },
+      d13: {
+        ch: 'Chapter 8 • 8 Application Marks (2025 Exam Q4)',
+        title: 'Multiple Regression with Dummy Variables & Model Comparison',
+        scenario: 'Single regression: MaintenanceTime = b0 + b1(Panels) has R² = 0.8502. Multiple regression: MaintenanceTime = 0.5533 + 0.0416(Panels) + 0.5071(IssueType) + 0.1602(Technician) has R² = 0.8982.',
+        prompt: 'State the multiple regression equation, interpret the R² comparison, and justify which model management should choose.',
+        keywords: ['0.8982', '89.82%', 'higher R-squared', 'additional variation', 'Question 4.3'],
+        model: 'Multiple regression equation: y_hat = 0.5533 + 0.0416(Panels) + 0.5071(IssueType) + 0.1602(Technician).\nR² of 0.8982 indicates that 89.82% of the variation in maintenance time is explained by the three predictors.\nModel Choice: Choose the multiple regression model because its higher R² explains an additional ~4.8% of sample variation compared to the single-variable model.'
       }
     };
 
@@ -1801,6 +1873,55 @@
               <li><strong>Part-of-Whole:</strong> 100% Stacked Bar (Avoid Pie Charts unless &le; 3 slices).</li>
             </ul>
             <p><strong>Never Use in Exams:</strong> 3D effects, heavy decorative background gridlines, or truncated non-zero y-axes that distort bar heights.</p>
+          </div>
+        `
+      },
+      'dossier-jaccard': {
+        icon: '🔢',
+        title: 'The Jaccard Binary Distance Decrypter (2025 Exam Q3)',
+        html: `
+          <div class="space-y-3">
+            <p><strong>When to use:</strong> When attributes are binary (0/1 or Yes/No), such as fitness habits, transaction items, or clinical symptoms.</p>
+            <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-900 font-mono-code text-xs">
+              <strong>Jaccard Distance Formula:</strong><br>
+              Distance = Mismatches / (Total Variables - Matching Zeros)
+            </div>
+            <p><strong>Why matching zeros are excluded:</strong> If two people both say "No" to playing polo, that does not mean they share a hobby! Jaccard ignores shared absences.</p>
+            <p><strong>Worked 2025 Exam Example:</strong><br>
+            Morgan: [1, 0, 1, 1], Alex: [1, 1, 0, 0] -> Mismatches = 3 (Diet, PT, Supps), Matching Zeros = 0 -> Distance = 3 / (4 - 0) = 0.75.<br>
+            Morgan: [1, 0, 1, 1], Jordan: [1, 0, 1, 0] -> Mismatches = 1 (Supps), Matching Zeros = 1 (Diet) -> Distance = 1 / (4 - 1) = 0.33.<br>
+            <strong>Conclusion:</strong> Jordan is the nearest neighbour (smaller distance = higher similarity).</p>
+          </div>
+        `
+      },
+      'dossier-table-design': {
+        icon: '📋',
+        title: 'The 5 Table Design Principles (5 Free Marks in Q2)',
+        html: `
+          <div class="space-y-3">
+            <p>Every single CMPG222 exam memo (2024 and 2025) awards <strong>5 easy marks</strong> for table redesign. Memorize these exact rules:</p>
+            <ol class="list-decimal list-inside space-y-1.5 text-gray-800">
+              <li><strong>Low Data-Ink Ratio (1 mark):</strong> Only header titles are bold. Nothing else! No filled colored background cells.</li>
+              <li><strong>Minimal Border Lines (1 mark):</strong> Use horizontal lines <em>only</em> directly below the header row and directly above the Total row. Never draw a full grid of vertical box lines!</li>
+              <li><strong>Left-Aligned Labels (1 mark):</strong> Text columns (e.g. Month, Country, Dealership) must be aligned to the left.</li>
+              <li><strong>Right-Aligned Values (1 mark):</strong> All numeric data and calculations must be aligned to the right.</li>
+              <li><strong>Centered Vertical Labels (1 mark):</strong> Set vertical alignment to center in Excel format settings.</li>
+            </ol>
+          </div>
+        `
+      },
+      'dossier-multiple-reg': {
+        icon: '📈',
+        title: 'Multiple Regression with Dummy Variables & R² Interpretation',
+        html: `
+          <div class="space-y-3">
+            <p><strong>The 2025 Exam Q4 Paradigm:</strong> Predicting maintenance time using Panels, IssueType (0=cleaning, 1=electrical), and Technician (0=Sam, 1=Alex).</p>
+            <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-900 font-mono-code text-xs">
+              ŷ = 0.5533 + 0.0416(Panels) + 0.5071(IssueType) + 0.1602(Technician)<br>
+              R² = 0.8982 (89.82% of variation explained)
+            </div>
+            <p><strong>Dummy Variable Slope Meaning:</strong> If IssueType = 1 (electrical fault), maintenance takes on average <strong>0.5071 hours longer</strong> than if IssueType = 0 (cleaning), holding panels and technician constant.</p>
+            <p><strong>Model Comparison Justification:</strong> When asked "Which model would you use and why?", the official answer is: <em>"Use the multiple regression model because its higher R-squared value explains an additional share of variability in the dependent variable."</em></p>
           </div>
         `
       }

@@ -1,0 +1,2719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INL 270 Weaponised Study Station — Indigenous Knowledge Exam Sanctuary</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  
+  <!-- Tailwind Play CDN -->
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  
+  <!-- KaTeX for crisp academic formula rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  
+  <!-- Google Fonts: Sensory-friendly Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --canvas-bg: #FAF7F2;
+      --paper-card: #FFFFFF;
+      --terracotta: #D95D39;
+      --terracotta-dark: #B84725;
+      --cobalt: #1D3557;
+      --cobalt-light: #2A4D7D;
+      --sage: #4E878C;
+      --sage-light: #6BA8AE;
+      --saffron: #E9C46A;
+      --saffron-light: #F4D38A;
+      --charcoal: #2B2D42;
+      --charcoal-muted: #6C757D;
+      --warm-border: #E8E2D8;
+    }
+
+    body {
+      background-color: var(--canvas-bg);
+      background-image: radial-gradient(#DDD6CA 1.2px, transparent 1.2px);
+      background-size: 20px 20px;
+      color: var(--charcoal);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    code, pre, .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Custom Sensory Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1ECE1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D5CBB9;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B8AA94;
+    }
+
+    /* Papercraft elevations */
+    .paper-card {
+      background: var(--paper-card);
+      border: 1px solid var(--warm-border);
+      box-shadow: 0 4px 12px rgba(43, 45, 66, 0.04);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .paper-card:hover {
+      box-shadow: 0 8px 24px rgba(43, 45, 66, 0.08);
+    }
+
+    .paper-interactive {
+      background: var(--paper-card);
+      border: 1px solid var(--warm-border);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .paper-interactive:hover {
+      transform: translateY(-2px);
+      border-color: var(--cobalt);
+      box-shadow: 0 10px 24px rgba(29, 53, 87, 0.12);
+    }
+
+    /* Smooth tab focus transitions */
+    .tab-btn {
+      transition: all 0.15s ease-in-out;
+    }
+    .tab-btn.active {
+      background-color: var(--cobalt);
+      color: #FFFFFF;
+      border-color: var(--cobalt);
+    }
+
+    /* Pulse animation for countdown */
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.92; transform: scale(0.995); }
+    }
+    .pulse-countdown {
+      animation: subtlePulse 4s infinite ease-in-out;
+    }
+
+    /* Drawer backdrop blur */
+    .drawer-backdrop {
+      background: rgba(43, 45, 66, 0.4);
+      backdrop-filter: blur(4px);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- ========================================== -->
+  <!-- TOP EMERGENCY BANNER & LIVE COUNTDOWN       -->
+  <!-- ========================================== -->
+  <header class="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E8E2D8] shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand & Module Identity -->
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-[#1D3557] text-[#FAF7F2] flex items-center justify-center font-bold text-lg shadow-sm">
+          🌿
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="font-extrabold text-lg tracking-tight text-[#1D3557]">INL 270</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-[#E9C46A]/30 text-[#855B14] font-semibold border border-[#E9C46A]/50">WEAPONISED RECALL</span>
+            <span class="hidden sm:inline-block text-xs px-2 py-0.5 rounded-full bg-[#4E878C]/20 text-[#2D5A5E] font-medium">UP InfoSci 2026</span>
+          </div>
+          <p class="text-xs text-[#6C757D] font-medium hidden md:block">IT AIM Labs 2–7 • 100 Marks • 3 Hours • Closed Book CBT</p>
+        </div>
+      </div>
+
+      <!-- Live Exam Countdown Clock -->
+      <div class="flex items-center space-x-2 bg-white px-3.5 py-1.5 rounded-xl border border-[#E8E2D8] shadow-inner pulse-countdown">
+        <span class="w-2.5 h-2.5 rounded-full bg-[#D95D39] animate-ping"></span>
+        <div class="text-xs">
+          <span class="text-[#6C757D] uppercase font-bold tracking-wider text-[10px] block sm:inline">Exam Kickoff:</span>
+          <span id="countdownDisplay" class="font-mono font-bold text-[#D95D39] text-sm tracking-tight ml-1">CALCULATING...</span>
+        </div>
+      </div>
+
+      <!-- XP & Audio Controls -->
+      <div class="flex items-center space-x-3">
+        <!-- Audio Synthesizer Toggle -->
+        <div class="flex items-center bg-white px-2.5 py-1 rounded-xl border border-[#E8E2D8]">
+          <button id="sfxToggleBtn" onclick="toggleAudio()" class="text-xs font-semibold px-2 py-1 rounded text-[#1D3557] hover:bg-[#FAF7F2] flex items-center gap-1.5" title="Toggle Pentatonic Chimes & SFX">
+            <span id="sfxIcon">🔊</span> <span class="hidden lg:inline text-[11px]">Chimes</span>
+          </button>
+          <div class="h-4 w-px bg-[#E8E2D8] mx-1"></div>
+          <button id="droneToggleBtn" onclick="toggleDrone()" class="text-xs font-semibold px-2 py-1 rounded text-[#4E878C] hover:bg-[#FAF7F2] flex items-center gap-1.5" title="Toggle 40Hz ADHD Gamma Focus Drone">
+            <span id="droneIcon">🧘</span> <span class="hidden lg:inline text-[11px]">40Hz Drone</span>
+          </button>
+        </div>
+
+        <!-- Student Level & XP Pill -->
+        <div class="flex items-center space-x-2 bg-[#1D3557] text-[#FAF7F2] px-3 py-1.5 rounded-xl shadow-sm">
+          <span class="text-sm">🏆</span>
+          <div class="text-left">
+            <div class="text-[10px] uppercase font-bold text-[#E9C46A] tracking-wider leading-none">Distinction XP</div>
+            <div class="font-mono font-bold text-xs"><span id="userXp">0</span> XP • <span id="userRank">Novice</span></div>
+          </div>
+        </div>
+
+        <!-- Emergency Flight Plan Button -->
+        <button onclick="openModal('triageModal')" class="bg-[#D95D39] hover:bg-[#B84725] text-white text-xs font-bold px-3 py-2 rounded-xl transition shadow-sm flex items-center gap-1">
+          <span>⚡</span> <span class="hidden sm:inline">Emergency Compass</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Navigation Sub-Bar (Engine Switcher) -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 overflow-x-auto no-scrollbar">
+      <nav class="flex space-x-2 text-xs font-bold whitespace-nowrap">
+        <button onclick="switchEngine('overviewEngine')" class="tab-btn active px-3.5 py-1.5 rounded-lg border border-[#E8E2D8] text-[#1D3557] flex items-center gap-1.5" id="btn-overviewEngine">
+          <span>🗺️</span> 1. Flight Plan
+        </button>
+        <button onclick="switchEngine('workbenchEngine')" class="tab-btn px-3.5 py-1.5 rounded-lg border border-[#E8E2D8] text-[#1D3557] flex items-center gap-1.5" id="btn-workbenchEngine">
+          <span>🔬</span> 2. Framework Workbench
+        </button>
+        <button onclick="switchEngine('essayGymEngine')" class="tab-btn px-3.5 py-1.5 rounded-lg border border-[#E8E2D8] text-[#1D3557] flex items-center gap-1.5" id="btn-essayGymEngine">
+          <span>✍️</span> 3. Essay Reps Gym (75M)
+        </button>
+        <button onclick="switchEngine('mnemonicWallEngine')" class="tab-btn px-3.5 py-1.5 rounded-lg border border-[#E8E2D8] text-[#1D3557] flex items-center gap-1.5" id="btn-mnemonicWallEngine">
+          <span>🧠</span> 4. Mnemonic Wall & Dossiers
+        </button>
+        <button onclick="switchEngine('cbtDojoEngine')" class="tab-btn px-3.5 py-1.5 rounded-lg border border-[#E8E2D8] text-[#1D3557] flex items-center gap-1.5" id="btn-cbtDojoEngine">
+          <span>⚡</span> 5. Computer Lab Dojo (25M)
+        </button>
+        <button onclick="switchEngine('finalBossEngine')" class="tab-btn px-3.5 py-1.5 rounded-lg border border-[#E8E2D8] text-[#1D3557] flex items-center gap-1.5" id="btn-finalBossEngine">
+          <span>👑</span> 6. Final Boss Simulator
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- MAIN CONTENT CONTAINER                    -->
+  <!-- ========================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- ======================================================== -->
+    <!-- ENGINE 1: FLIGHT PLAN & EMERGENCY COMPASS OVERVIEW       -->
+    <!-- ======================================================== -->
+    <section id="overviewEngine" class="engine-section space-y-6">
+      
+      <!-- High Yield Banner -->
+      <div class="paper-card rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-white via-white to-[#FAF7F2] border-l-4 border-l-[#D95D39]">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D95D39]/10 text-[#D95D39] text-xs font-extrabold uppercase tracking-wider">
+              <span>⚠️</span> Target Zero-Panic Threshold (< 15h to Showtime)
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-black text-[#1D3557] tracking-tight">
+              The INL 270 Weaponised Exam Sanctuary
+            </h1>
+            <p class="text-sm text-[#4A4E69] leading-relaxed">
+              Synthesized directly from <strong class="text-[#1D3557]">Ms. C. Firkins'</strong> 2026 course archive, study guides, and exam guidelines. This engine eliminates passive reading and forces the exact paragraph discipline required in the UP IT AIM Labs.
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row md:flex-col gap-3 min-w-[220px]">
+            <button onclick="openModal('triageModal')" class="w-full bg-[#1D3557] hover:bg-[#2A4D7D] text-white text-xs font-bold py-3 px-4 rounded-xl shadow transition text-center flex items-center justify-center gap-2">
+              <span>🎯</span> Run Emergency Triage
+            </button>
+            <button onclick="switchEngine('essayGymEngine')" class="w-full bg-[#FAF7F2] hover:bg-white text-[#1D3557] border border-[#E8E2D8] text-xs font-bold py-2.5 px-4 rounded-xl transition text-center flex items-center justify-center gap-2">
+              <span>✍️</span> Jump to Essay Gym (75 Marks)
+            </button>
+          </div>
+        </div>
+
+        <!-- 3-Pillar Exam Anatomy Bar -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 pt-6 border-t border-[#E8E2D8]">
+          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8]">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#6C757D]">Format & Location</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-[#1D3557]/10 text-[#1D3557] font-mono font-bold">100 Marks</span>
+            </div>
+            <div class="text-base font-extrabold text-[#1D3557]">3 Hours • IT AIM Labs</div>
+            <p class="text-xs text-[#6C757D] mt-1">Closed-book CBT terminal. Blank scratch sheet returned upon submission.</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8]">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#6C757D]">Section A: Short Questions</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-[#4E878C]/15 text-[#2D5A5E] font-mono font-bold">Max 25% (25M)</span>
+            </div>
+            <div class="text-base font-extrabold text-[#4E878C]">MCQ • Jumbled • Matching</div>
+            <p class="text-xs text-[#6C757D] mt-1">Definitions, legal acts, international conventions, and key theorists.</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8]">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#6C757D]">Section B: Long Questions</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-[#D95D39]/15 text-[#B84725] font-mono font-bold">75% (75M)</span>
+            </div>
+            <div class="text-base font-extrabold text-[#D95D39]">Strict 3-Tier Structure</div>
+            <p class="text-xs text-[#6C757D] mt-1">Intro $\to$ Body paragraphs [Identify + Discuss + Example] $\to$ Conclusion.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module Unit Diagnostic Grid (Study Units 1 - 7) -->
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-lg font-extrabold text-[#1D3557]">The 7 Authoritative Study Units</h2>
+            <p class="text-xs text-[#6C757D]">Complete syllabus scope tested tomorrow morning in the IT AIM Labs.</p>
+          </div>
+          <span class="text-xs font-mono font-bold text-[#4E878C] bg-[#4E878C]/10 px-2.5 py-1 rounded-lg">100% Ingested</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          
+          <!-- SU1 Card -->
+          <div class="paper-card rounded-xl p-5 space-y-3 relative overflow-hidden group hover:border-[#1D3557]">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono font-bold text-[#1D3557] bg-[#1D3557]/10 px-2 py-0.5 rounded">SU 1</span>
+              <span class="text-xs text-[#6C757D]">Foundations</span>
+            </div>
+            <h3 class="font-extrabold text-[#1D3557] text-base group-hover:text-[#D95D39] transition">Introduction to IK & IKS</h3>
+            <p class="text-xs text-[#4A4E69] leading-relaxed">
+              Western vs Indigenous systems, Michael & Gayton incommensurability debate, Sillitoe continuum, and the IIRR 3-tier triad (Common, Shared, Specialised).
+            </p>
+            <div class="pt-2 flex items-center justify-between text-xs border-t border-[#E8E2D8]">
+              <span class="text-[#D95D39] font-bold">“Library burns”</span>
+              <button onclick="openDossier('iirr')" class="text-[#1D3557] hover:underline font-bold">View Dossier →</button>
+            </div>
+          </div>
+
+          <!-- SU2 Card -->
+          <div class="paper-card rounded-xl p-5 space-y-3 relative overflow-hidden group hover:border-[#1D3557]">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono font-bold text-[#1D3557] bg-[#1D3557]/10 px-2 py-0.5 rounded">SU 2</span>
+              <span class="text-xs text-[#6C757D]">Policy & Treaties</span>
+            </div>
+            <h3 class="font-extrabold text-[#1D3557] text-base group-hover:text-[#D95D39] transition">Organisations & Policies</h3>
+            <p class="text-xs text-[#4A4E69] leading-relaxed">
+              World Bank IK projects (Guinea MAP traditional healers, Ghana NSBC), UNESCO LINKS, WSIS Geneva Action Plan, and the SA National IKS Policy (2004).
+            </p>
+            <div class="pt-2 flex items-center justify-between text-xs border-t border-[#E8E2D8]">
+              <span class="text-[#4E878C] font-bold">CBD Art 8(j) • Nagoya</span>
+              <button onclick="openDossier('policy')" class="text-[#1D3557] hover:underline font-bold">View Dossier →</button>
+            </div>
+          </div>
+
+          <!-- SU3 Card -->
+          <div class="paper-card rounded-xl p-5 space-y-3 relative overflow-hidden group hover:border-[#1D3557]">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono font-bold text-[#1D3557] bg-[#1D3557]/10 px-2 py-0.5 rounded">SU 3</span>
+              <span class="text-xs text-[#6C757D]">Global Goals</span>
+            </div>
+            <h3 class="font-extrabold text-[#1D3557] text-base group-hover:text-[#D95D39] transition">IK, MDGs & 2030 SDGs</h3>
+            <p class="text-xs text-[#4A4E69] leading-relaxed">
+              Role of IK in eradicating poverty (MDG 1), maternal health (MDG 5), and environmental resilience (MDG 7). Why quantitative tracking missed indigenous well-being.
+            </p>
+            <div class="pt-2 flex items-center justify-between text-xs border-t border-[#E8E2D8]">
+              <span class="text-[#E9C46A] font-bold text-[#855B14]">Target Indicators</span>
+              <button onclick="openDossier('sdgs')" class="text-[#1D3557] hover:underline font-bold">View Dossier →</button>
+            </div>
+          </div>
+
+          <!-- SU4 Card -->
+          <div class="paper-card rounded-xl p-5 space-y-3 relative overflow-hidden group hover:border-[#1D3557]">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono font-bold text-[#1D3557] bg-[#1D3557]/10 px-2 py-0.5 rounded">SU 4</span>
+              <span class="text-xs text-[#D95D39] font-bold">HIGH PROBABILITY</span>
+            </div>
+            <h3 class="font-extrabold text-[#1D3557] text-base group-hover:text-[#D95D39] transition">Capturing, Retrieval & Access</h3>
+            <p class="text-xs text-[#4A4E69] leading-relaxed">
+              Robin McTaggart's 16 Tenets of PAR, the 4-phase cyclical spiral, community entry protocol (FPIC), Virtual Repatriation, and uncompressed PCM audio archiving.
+            </p>
+            <div class="pt-2 flex items-center justify-between text-xs border-t border-[#E8E2D8]">
+              <span class="text-[#D95D39] font-bold">PAR Spiral • FPIC</span>
+              <button onclick="openDossier('par')" class="text-[#1D3557] hover:underline font-bold">View Dossier →</button>
+            </div>
+          </div>
+
+          <!-- SU5 Card -->
+          <div class="paper-card rounded-xl p-5 space-y-3 relative overflow-hidden group hover:border-[#1D3557]">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono font-bold text-[#1D3557] bg-[#1D3557]/10 px-2 py-0.5 rounded">SU 5</span>
+              <span class="text-xs text-[#D95D39] font-bold">HIGH PROBABILITY</span>
+            </div>
+            <h3 class="font-extrabold text-[#1D3557] text-base group-hover:text-[#D95D39] transition">Preservation & Dissemination</h3>
+            <p class="text-xs text-[#4A4E69] leading-relaxed">
+              The 7C Digital IK Preservation Model, institutions as Gateways vs Gatekeepers, and the Ulwazi Programme (eThekwini participatory digital library in isiZulu).
+            </p>
+            <div class="pt-2 flex items-center justify-between text-xs border-t border-[#E8E2D8]">
+              <span class="text-[#4E878C] font-bold">7C Model • Ulwazi</span>
+              <button onclick="openDossier('sevenC')" class="text-[#1D3557] hover:underline font-bold">View Dossier →</button>
+            </div>
+          </div>
+
+          <!-- SU6 Card -->
+          <div class="paper-card rounded-xl p-5 space-y-3 relative overflow-hidden group hover:border-[#1D3557]">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono font-bold text-[#1D3557] bg-[#1D3557]/10 px-2 py-0.5 rounded">SU 6</span>
+              <span class="text-xs text-[#D95D39] font-bold">CORE CASE STUDY</span>
+            </div>
+            <h3 class="font-extrabold text-[#1D3557] text-base group-hover:text-[#D95D39] transition">Intellectual Property & Biopiracy</h3>
+            <p class="text-xs text-[#4A4E69] leading-relaxed">
+              Western IPR limitations, Havasupai Tribe vs ASU case study (genetic exploitation, $700k settlement), SA IK Act 6 of 2019, and NIKSO registry.
+            </p>
+            <div class="pt-2 flex items-center justify-between text-xs border-t border-[#E8E2D8]">
+              <span class="text-[#D95D39] font-bold">Havasupai • IK Act 2019</span>
+              <button onclick="openDossier('havasupai')" class="text-[#1D3557] hover:underline font-bold">View Dossier →</button>
+            </div>
+          </div>
+
+          <!-- SU7 Card -->
+          <div class="paper-card rounded-xl p-5 space-y-3 relative overflow-hidden group hover:border-[#1D3557] sm:col-span-2 lg:col-span-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono font-bold text-[#1D3557] bg-[#1D3557]/10 px-2 py-0.5 rounded">SU 7</span>
+              <span class="text-xs text-[#6C757D]">Recent Innovations & Crises</span>
+            </div>
+            <h3 class="font-extrabold text-[#1D3557] text-base group-hover:text-[#D95D39] transition">Gender Issues, Modern Shocks & Generative AI</h3>
+            <p class="text-xs text-[#4A4E69] leading-relaxed">
+              Pre-colonial matrilineal egalitarianism vs Victorian patriarchal disruption. Gender Mainstreaming. Resilience in COVID-19 self-imposed lockdowns, Crimean Tatars in the Russia-Ukraine War, and GenAI cultural misappropriation (sacred motifs scraped without attribution or consent).
+            </p>
+            <div class="pt-2 flex items-center justify-between text-xs border-t border-[#E8E2D8]">
+              <span class="text-[#1D3557] font-bold">Matrilineal Systems • GenAI Digital Biopiracy</span>
+              <button onclick="openDossier('genderAi')" class="text-[#1D3557] hover:underline font-bold">View Dossier →</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Quick Jump Action Row -->
+      <div class="p-6 rounded-2xl bg-white border border-[#E8E2D8] flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h3 class="font-extrabold text-[#1D3557] text-base">Ready for your reps?</h3>
+          <p class="text-xs text-[#6C757D]">Remember: Reading notes gives you an illusion of competence. Typing them out builds neural pathways.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="switchEngine('cbtDojoEngine')" class="px-4 py-2 bg-[#4E878C] hover:bg-[#6BA8AE] text-white text-xs font-bold rounded-xl transition shadow-sm">
+            ⚡ Practice 25M CBT Drills
+          </button>
+          <button onclick="switchEngine('essayGymEngine')" class="px-5 py-2.5 bg-[#D95D39] hover:bg-[#B84725] text-white text-xs font-bold rounded-xl transition shadow-sm">
+            ✍️ Open 75M Essay Typing Pad
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- ENGINE 2: INTERACTIVE FRAMEWORK WORKBENCH                -->
+    <!-- ======================================================== -->
+    <section id="workbenchEngine" class="engine-section hidden space-y-6">
+      
+      <!-- Engine Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#E8E2D8] gap-2">
+        <div>
+          <h2 class="text-2xl font-black text-[#1D3557] tracking-tight">Interactive Framework Workbench</h2>
+          <p class="text-xs text-[#6C757D]">Deconstruct complex theoretical frameworks with tactile interactive components.</p>
+        </div>
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-bold text-[#6C757D]">Active Visualizer:</span>
+          <select id="workbenchSelector" onchange="switchWorkbenchTab(this.value)" class="text-xs font-bold bg-white border border-[#E8E2D8] rounded-xl px-3 py-1.5 text-[#1D3557] shadow-sm focus:outline-none focus:border-[#1D3557]">
+            <option value="sevenCTab">1. The 7C Preservation Model</option>
+            <option value="parSpiralTab">2. McTaggart's PAR 4-Stage Spiral</option>
+            <option value="continuumTab">3. Western vs IK Continuum</option>
+            <option value="essayAnatomyTab">4. Ms. Firkins' Essay Formula</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Workbench Tab 1: The 7C Preservation Model -->
+      <div id="sevenCTab" class="workbench-tab space-y-4">
+        <div class="paper-card rounded-2xl p-6 bg-white">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+            <div>
+              <span class="text-xs font-mono font-bold text-[#D95D39] uppercase tracking-wider">Study Unit 5 Core Model</span>
+              <h3 class="text-xl font-extrabold text-[#1D3557]">The 7C Digital IK Preservation Model</h3>
+              <p class="text-xs text-[#6C757D] max-w-2xl mt-1">
+                Preserving Indigenous Knowledge through digital technologies requires more than scanning text. Click each "C" below to inspect its operational mandate and exam execution rules.
+              </p>
+            </div>
+            <div class="flex items-center gap-2 bg-[#FAF7F2] p-2 rounded-xl border border-[#E8E2D8] text-xs font-bold text-[#1D3557]">
+              <span>💡</span> Lecturer Core Quote: <em>"Position IK holders as the main proprietors of the technologies."</em>
+            </div>
+          </div>
+
+          <!-- Clickable 7C Badge Matrix -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 mb-6">
+            <button onclick="select7C(0)" id="c-btn-0" class="c-node p-3 rounded-xl border-2 border-[#1D3557] bg-[#1D3557] text-white text-center transition">
+              <span class="text-lg block">🤝</span>
+              <span class="text-xs font-bold block mt-1">1. Co-design</span>
+            </button>
+            <button onclick="select7C(1)" id="c-btn-1" class="c-node p-3 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-[#1D3557] text-center hover:border-[#1D3557] transition">
+              <span class="text-lg block">💡</span>
+              <span class="text-xs font-bold block mt-1">2. Conceptual</span>
+            </button>
+            <button onclick="select7C(2)" id="c-btn-2" class="c-node p-3 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-[#1D3557] text-center hover:border-[#1D3557] transition">
+              <span class="text-lg block">🛠️</span>
+              <span class="text-xs font-bold block mt-1">3. Capacity</span>
+            </button>
+            <button onclick="select7C(3)" id="c-btn-3" class="c-node p-3 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-[#1D3557] text-center hover:border-[#1D3557] transition">
+              <span class="text-lg block">🏛️</span>
+              <span class="text-xs font-bold block mt-1">4. Context</span>
+            </button>
+            <button onclick="select7C(4)" id="c-btn-4" class="c-node p-3 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-[#1D3557] text-center hover:border-[#1D3557] transition">
+              <span class="text-lg block">📶</span>
+              <span class="text-xs font-bold block mt-1">5. Connect</span>
+            </button>
+            <button onclick="select7C(5)" id="c-btn-5" class="c-node p-3 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-[#1D3557] text-center hover:border-[#1D3557] transition">
+              <span class="text-lg block">📁</span>
+              <span class="text-xs font-bold block mt-1">6. Content</span>
+            </button>
+            <button onclick="select7C(6)" id="c-btn-6" class="c-node p-3 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-[#1D3557] text-center hover:border-[#1D3557] transition">
+              <span class="text-lg block">🌐</span>
+              <span class="text-xs font-bold block mt-1">7. Collab</span>
+            </button>
+          </div>
+
+          <!-- Dynamic Inspection Card -->
+          <div id="cDetailCard" class="p-6 rounded-2xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-4">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Workbench Tab 2: McTaggart's PAR 4-Stage Spiral -->
+      <div id="parSpiralTab" class="workbench-tab hidden space-y-4">
+        <div class="paper-card rounded-2xl p-6 bg-white">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <span class="text-xs font-mono font-bold text-[#4E878C] uppercase tracking-wider">Study Unit 4 Methodology</span>
+              <h3 class="text-xl font-extrabold text-[#1D3557]">Participatory Action Research (PAR) 4-Phase Spiral</h3>
+              <p class="text-xs text-[#6C757D] max-w-2xl mt-1">
+                Defined by Robin McTaggart (1989) with 16 Tenets. PAR is cyclical, self-reflective inquiry aimed at improving social practice rather than treating community members as passive subjects.
+              </p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="cycleParStage(-1)" class="p-2 rounded-lg border border-[#E8E2D8] hover:bg-[#FAF7F2] text-xs font-bold">← Prev</button>
+              <span id="parStepIndicator" class="text-xs font-mono font-bold px-3 py-1 bg-[#1D3557] text-white rounded-lg">Phase 1 / 4</span>
+              <button onclick="cycleParStage(1)" class="p-2 rounded-lg border border-[#E8E2D8] hover:bg-[#FAF7F2] text-xs font-bold">Next →</button>
+            </div>
+          </div>
+
+          <!-- Spiral Steps Tracker -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6">
+            <div id="par-card-0" class="p-4 rounded-xl border-2 border-[#1D3557] bg-[#1D3557] text-white transition">
+              <div class="text-xs font-mono font-bold text-[#E9C46A]">STAGE 1</div>
+              <div class="text-sm font-extrabold mt-1">Reflection</div>
+              <p class="text-[11px] opacity-90 mt-1">Identify shared concerns & problematic social conditions with participants.</p>
+            </div>
+            <div id="par-card-1" class="p-4 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-[#1D3557] transition">
+              <div class="text-xs font-mono font-bold text-[#6C757D]">STAGE 2</div>
+              <div class="text-sm font-extrabold mt-1">Planning</div>
+              <p class="text-[11px] text-[#6C757D] mt-1">Co-construct a joint, context-appropriate action strategy.</p>
+            </div>
+            <div id="par-card-2" class="p-4 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-[#1D3557] transition">
+              <div class="text-xs font-mono font-bold text-[#6C757D]">STAGE 3</div>
+              <div class="text-sm font-extrabold mt-1">Action</div>
+              <p class="text-[11px] text-[#6C757D] mt-1">Implement deliberate interventions in the field with local actors.</p>
+            </div>
+            <div id="par-card-3" class="p-4 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-[#1D3557] transition">
+              <div class="text-xs font-mono font-bold text-[#6C757D]">STAGE 4</div>
+              <div class="text-sm font-extrabold mt-1">Observation</div>
+              <p class="text-[11px] text-[#6C757D] mt-1">Systematically monitor real effects and feedback to begin next cycle.</p>
+            </div>
+          </div>
+
+          <!-- Deep Stage Context -->
+          <div id="parDetailBox" class="p-6 rounded-2xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-4">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Workbench Tab 3: Western vs Indigenous Knowledge Continuum -->
+      <div id="continuumTab" class="workbench-tab hidden space-y-4">
+        <div class="paper-card rounded-2xl p-6 bg-white">
+          <div class="mb-6">
+            <span class="text-xs font-mono font-bold text-[#1D3557] uppercase tracking-wider">Study Unit 1 Epistemology</span>
+            <h3 class="text-xl font-extrabold text-[#1D3557]">The Knowledge Epistemology Matrix</h3>
+            <p class="text-xs text-[#6C757D] mt-1">
+              Comparing Western/Scientific paradigms with Indigenous/Local frameworks (Michael & Gayton, 2002; Sillitoe, Bicker & Pottier, 2002).
+            </p>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left border-collapse">
+              <thead>
+                <tr class="bg-[#1D3557] text-white">
+                  <th class="p-3.5 rounded-tl-xl font-extrabold">Dimension</th>
+                  <th class="p-3.5 font-extrabold">Traditional / Indigenous Knowledge</th>
+                  <th class="p-3.5 rounded-tr-xl font-extrabold">Scientific / Western Knowledge</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#E8E2D8] bg-[#FAF7F2]">
+                <tr class="hover:bg-white transition">
+                  <td class="p-3.5 font-bold text-[#1D3557]">Methodology & Data</td>
+                  <td class="p-3.5 text-[#2B2D42]">Mainly qualitative, experiential, holistic, long-term oral observation</td>
+                  <td class="p-3.5 text-[#2B2D42]">Mainly quantitative, reductionist, experimental, codified data</td>
+                </tr>
+                <tr class="hover:bg-white transition">
+                  <td class="p-3.5 font-bold text-[#1D3557]">Epistemology & View</td>
+                  <td class="p-3.5 text-[#2B2D42]">Intuitive, spiritual, moral dimension embedded in ecosystems</td>
+                  <td class="p-3.5 text-[#2B2D42]">Rational, secular, value-neutral detachment from objects</td>
+                </tr>
+                <tr class="hover:bg-white transition">
+                  <td class="p-3.5 font-bold text-[#1D3557]">Transmission & Storage</td>
+                  <td class="p-3.5 text-[#2B2D42]">Oral tradition, songs, storytelling, rituals, living practice</td>
+                  <td class="p-3.5 text-[#2B2D42]">Written texts, digital databases, scientific peer-reviewed journals</td>
+                </tr>
+                <tr class="hover:bg-white transition">
+                  <td class="p-3.5 font-bold text-[#1D3557]">Ownership & Rights</td>
+                  <td class="p-3.5 text-[#2B2D42]">Communal, intergenerational, custodial responsibility, non-alienable</td>
+                  <td class="p-3.5 text-[#2B2D42]">Individual copyright, patents, limited term (20 yrs), commodity</td>
+                </tr>
+                <tr class="hover:bg-white transition">
+                  <td class="p-3.5 font-bold text-[#1D3557]">Geographic Context</td>
+                  <td class="p-3.5 text-[#2B2D42]">Deeply rooted in local ecological niche and ancestral territory</td>
+                  <td class="p-3.5 text-[#2B2D42]">Universal claims, abstract, context-independent general laws</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Academic Warning Box -->
+          <div class="mt-4 p-4 rounded-xl bg-[#E9C46A]/20 border border-[#E9C46A]/50 flex items-start gap-3">
+            <span class="text-lg">⚖️</span>
+            <div class="text-xs text-[#855B14]">
+              <strong>The Incommensurability Debate (Michael & Gayton, 2002):</strong> They argue that because the two systems originate from vastly distinct worldviews and cultural frameworks, direct hierarchical comparison is flawed. Instead of treating IK as "primitive science" to be validated by laboratories, treat it as an autonomous, valid system of knowing.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Workbench Tab 4: Ms. Firkins' Essay Formula -->
+      <div id="essayAnatomyTab" class="workbench-tab hidden space-y-4">
+        <div class="paper-card rounded-2xl p-6 bg-white">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <span class="text-xs font-mono font-bold text-[#D95D39] uppercase tracking-wider">Exam Marking Blueprint</span>
+              <h3 class="text-xl font-extrabold text-[#1D3557]">Ms. C. Firkins' Long Question Marking Anatomy</h3>
+              <p class="text-xs text-[#6C757D] max-w-2xl mt-1">
+                Extracted directly from <em>INL270_2026_ExamDetails&Info.pdf</em> (Slides 11–13). Single-paragraph long answers will lose massive marks. Follow this exact 3-tier sequence.
+              </p>
+            </div>
+            <div class="px-3 py-1.5 rounded-xl bg-[#D95D39]/10 text-[#D95D39] font-bold text-xs border border-[#D95D39]/20">
+              🚫 Never 1 Unbroken Paragraph
+            </div>
+          </div>
+
+          <!-- Step-by-Step Anatomy Visualizer -->
+          <div class="space-y-4">
+            
+            <!-- Tier 1: Intro -->
+            <div class="p-4 rounded-xl bg-[#FAF7F2] border-l-4 border-l-[#1D3557] border border-[#E8E2D8]">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono font-bold text-[#1D3557] uppercase">Tier 1: Roadmap Introduction (1–2 Sentences)</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-[#1D3557]/10 text-[#1D3557]">Order of Thoughts</span>
+              </div>
+              <p class="text-xs text-[#2B2D42] mt-2 font-medium">
+                <em>"This essay examines the ethical and legal violations that occurred during the Havasupai genetic study at Arizona State University. Specifically, it identifies the failure of Free, Prior, and Informed Consent (FPIC), discusses the spiritual disruption caused to tribal ancestral narratives, and provides concrete remedies enacted through the 2010 legal settlement."</em>
+              </p>
+              <div class="text-[11px] text-[#6C757D] mt-2">
+                ✅ <strong>Why it scores:</strong> Tells the marker immediately where the marks lie and establishes logical flow.
+              </div>
+            </div>
+
+            <!-- Tier 2: The Core Body Paragraphs -->
+            <div class="p-4 rounded-xl bg-[#FAF7F2] border-l-4 border-l-[#D95D39] border border-[#E8E2D8]">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono font-bold text-[#D95D39] uppercase">Tier 2: The Mandatory 3-Phase Body Paragraph</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-[#D95D39]/10 text-[#D95D39]">Identify → Discuss → Example</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+                <div class="p-3 bg-white rounded-lg border border-[#E8E2D8]">
+                  <span class="text-[11px] font-bold text-[#D95D39] block">1. IDENTIFY</span>
+                  <p class="text-xs text-[#2B2D42] mt-1">Explicitly name the concept or violation (e.g. <em>"Secondary research without Free, Prior, and Informed Consent (FPIC)"</em>).</p>
+                </div>
+                <div class="p-3 bg-white rounded-lg border border-[#E8E2D8]">
+                  <span class="text-[11px] font-bold text-[#1D3557] block">2. DISCUSS / DESCRIBE</span>
+                  <p class="text-xs text-[#2B2D42] mt-1">Unpack why this occurs theoretically, how Western science treats samples as raw data, and why this breaches communal trust.</p>
+                </div>
+                <div class="p-3 bg-white rounded-lg border border-[#E8E2D8]">
+                  <span class="text-[11px] font-bold text-[#4E878C] block">3. CONCRETE EXAMPLE</span>
+                  <p class="text-xs text-[#2B2D42] mt-1">Ground it in empirical reality (e.g. <em>"ASU blood samples consented for diabetes were repurposed for schizophrenia and inbreeding"</em>).</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tier 3: Conclusion -->
+            <div class="p-4 rounded-xl bg-[#FAF7F2] border-l-4 border-l-[#4E878C] border border-[#E8E2D8]">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono font-bold text-[#4E878C] uppercase">Tier 3: Separate Concluding Paragraph</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-[#4E878C]/10 text-[#4E878C]">Synthesis & Takeaway</span>
+              </div>
+              <p class="text-xs text-[#2B2D42] mt-2 font-medium">
+                <em>"In conclusion, the case illustrates that genomic research cannot decouple physical biological data from the sacred worldview of indigenous custodians. True research partnership mandates ongoing consent, community ownership, and benefit-sharing protocols."</em>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- ENGINE 3: PHYSICAL REPS GYM (ACTIVE ESSAY TYPING)        -->
+    <!-- ======================================================== -->
+    <section id="essayGymEngine" class="engine-section hidden space-y-6">
+      
+      <!-- Gym Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#E8E2D8] gap-2">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#D95D39] text-white font-mono font-bold">75 MARKS ENGINE</span>
+            <span class="text-xs text-[#6C757D]">Active Typing Pad & Live Keyword Grader</span>
+          </div>
+          <h2 class="text-2xl font-black text-[#1D3557] tracking-tight mt-1">The Essay Physical Reps Gym</h2>
+        </div>
+        
+        <!-- Scenario Switcher -->
+        <div class="flex items-center gap-2">
+          <label class="text-xs font-bold text-[#6C757D]">Scenario:</label>
+          <select id="essayPromptSelect" onchange="loadEssayScenario(this.value)" class="text-xs font-bold bg-white border border-[#E8E2D8] rounded-xl px-3 py-1.5 text-[#1D3557] shadow-sm focus:outline-none focus:border-[#1D3557]">
+            <option value="0">1. Havasupai Tribe vs ASU (SU 6)</option>
+            <option value="1">2. 7C Digital Preservation Framework (SU 5)</option>
+            <option value="2">3. Participatory Action Research Community Entry (SU 4)</option>
+            <option value="3">4. The Ulwazi Programme in eThekwini (SU 5)</option>
+            <option value="4">5. Western IPR Failure & SA IK Act 2019 (SU 6)</option>
+            <option value="5">6. Matrilineal Erosion & GenAI Appropriation (SU 7)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Main Gym Interactive Panel -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left: Prompt Brief & Required Rubric -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <div class="paper-card rounded-2xl p-5 bg-white space-y-3">
+            <div class="flex items-center justify-between">
+              <span id="promptUnitBadge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#1D3557]/10 text-[#1D3557]">Study Unit 6</span>
+              <span id="promptMarkBadge" class="text-xs font-bold text-[#D95D39]">25 Marks</span>
+            </div>
+            
+            <h3 id="promptTitle" class="text-lg font-extrabold text-[#1D3557]">
+              The Havasupai Tribe Genetic Exploitation Case
+            </h3>
+            
+            <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] text-xs text-[#4A4E69] leading-relaxed" id="promptScenarioDesc">
+              Explain the ethical, cultural, and legal implications of the genetic research conducted on the Havasupai Tribe by Arizona State University. Discuss how Free, Prior, and Informed Consent (FPIC) was breached, the spiritual injury caused by scientific migration narratives, and the significance of the 2010 settlement.
+            </div>
+
+            <!-- Mandatory Keyword Checklist -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-[#6C757D]">Mandatory Academic Keywords</span>
+                <span id="kwScoreBadge" class="text-[11px] font-mono font-bold text-[#4E878C]">0 / 6 Hit</span>
+              </div>
+              <div id="keywordChips" class="flex flex-wrap gap-1.5">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Structure Checklist Warning -->
+            <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-1">
+              <div class="font-bold">Ms. Firkins' Grading Check:</div>
+              <ul class="list-disc list-inside space-y-0.5 text-[11px]">
+                <li>Did you include a 1–2 sentence introduction?</li>
+                <li>Is your body broken into distinct paragraphs?</li>
+                <li>Did each paragraph follow: <strong>Identify → Discuss → Example</strong>?</li>
+              </ul>
+            </div>
+
+            <!-- Word Export Tool -->
+            <button onclick="copyModelAnswerForWord()" class="w-full py-2.5 px-4 rounded-xl border border-[#1D3557] bg-white text-[#1D3557] hover:bg-[#FAF7F2] font-bold text-xs transition flex items-center justify-center gap-2">
+              <span>📋</span> Copy Model Answer for Word
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- Right: Typing Pad & Auto-Grader -->
+        <div class="lg:col-span-7 space-y-4">
+          
+          <div class="paper-card rounded-2xl p-5 bg-white space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#6C757D]">Your Answer Pad</span>
+              <div class="flex items-center gap-2 text-xs">
+                <span id="wordCountLabel" class="font-mono text-[#6C757D]">0 words</span>
+                <span id="paraCountLabel" class="font-mono text-[#6C757D]">(0 paragraphs)</span>
+              </div>
+            </div>
+
+            <textarea id="essayTypingArea" oninput="gradeEssayInput()" rows="12" placeholder="Start typing your structured answer here... Follow: [1. Intro Roadmap] -> [2. Body: Identify -> Discuss -> Example] -> [3. Conclusion]" class="w-full p-4 rounded-xl border border-[#E8E2D8] bg-[#FAF7F2] focus:bg-white text-xs sm:text-sm text-[#2B2D42] focus:outline-none focus:border-[#1D3557] focus:ring-1 focus:ring-[#1D3557] transition leading-relaxed resize-y"></textarea>
+
+            <!-- Auto-Grader Result Bar -->
+            <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <div class="text-xs font-bold text-[#1D3557]">Live Keyword Calibration</div>
+                <div class="text-[11px] text-[#6C757D]" id="evalFeedbackText">Start typing to evaluate required terms and paragraph structure.</div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="toggleModelAnswer()" class="px-3 py-1.5 rounded-lg border border-[#E8E2D8] bg-white hover:bg-[#FAF7F2] text-xs font-bold text-[#1D3557] transition">
+                  <span id="memoToggleText">Show Official Memo</span>
+                </button>
+                <button onclick="submitEssayForXp()" class="px-4 py-1.5 rounded-lg bg-[#1D3557] hover:bg-[#2A4D7D] text-white text-xs font-bold transition shadow-sm">
+                  Claim XP (+50)
+                </button>
+              </div>
+            </div>
+
+            <!-- Model Memo Drawer (Hidden by default) -->
+            <div id="modelMemoBox" class="hidden p-4 rounded-xl bg-white border-2 border-[#4E878C] text-xs space-y-3">
+              <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-2">
+                <span class="font-extrabold text-[#4E878C]">OFFICIAL MODEL DISTINCTION ANSWER</span>
+                <button onclick="copyModelAnswerForWord()" class="text-[11px] font-bold text-[#1D3557] hover:underline">Copy All →</button>
+              </div>
+              <div id="modelMemoContent" class="space-y-2 text-[#2B2D42] leading-relaxed">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- ENGINE 4: MNEMONIC WALL & EXPANDABLE DEEP DOSSIERS       -->
+    <!-- ======================================================== -->
+    <section id="mnemonicWallEngine" class="engine-section hidden space-y-6">
+      
+      <!-- Engine Header -->
+      <div class="pb-4 border-b border-[#E8E2D8]">
+        <h2 class="text-2xl font-black text-[#1D3557] tracking-tight">The Tactical Mnemonic Wall</h2>
+        <p class="text-xs text-[#6C757D]">8 high-yield memory anchors designed to prevent mental blanking during exam crunches.</p>
+      </div>
+
+      <!-- 8 Papercraft Interactive Mnemonic Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- Card 1: HAVASUPAI -->
+        <div onclick="openDossier('havasupai')" class="paper-interactive rounded-2xl p-5 cursor-pointer space-y-3 group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-[#D95D39] bg-[#D95D39]/10 px-2 py-0.5 rounded">SU 6</span>
+            <span class="text-lg">🩸</span>
+          </div>
+          <h3 class="font-black text-[#1D3557] text-base group-hover:text-[#D95D39] transition">HAVASUPAI Breach</h3>
+          <p class="text-xs text-[#6C757D]">Consent for diabetes misused for schizophrenia, inbreeding, and Bering Strait origin migration.</p>
+          <div class="pt-2 text-xs font-bold text-[#1D3557] flex items-center justify-between border-t border-[#E8E2D8]">
+            <span>$700k Settlement</span>
+            <span class="group-hover:translate-x-1 transition">Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 2: 7-C WHEEL -->
+        <div onclick="openDossier('sevenC')" class="paper-interactive rounded-2xl p-5 cursor-pointer space-y-3 group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-[#4E878C] bg-[#4E878C]/10 px-2 py-0.5 rounded">SU 5</span>
+            <span class="text-lg">🎡</span>
+          </div>
+          <h3 class="font-black text-[#1D3557] text-base group-hover:text-[#4E878C] transition">The 7C Wheel</h3>
+          <p class="text-xs text-[#6C757D]">Co-design, Conceptualisation, Capacity, Context, Connectivity, Content, Collaboration.</p>
+          <div class="pt-2 text-xs font-bold text-[#1D3557] flex items-center justify-between border-t border-[#E8E2D8]">
+            <span>Digital Preservation</span>
+            <span class="group-hover:translate-x-1 transition">Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 3: PAR SPIRAL -->
+        <div onclick="openDossier('par')" class="paper-interactive rounded-2xl p-5 cursor-pointer space-y-3 group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-[#1D3557] bg-[#1D3557]/10 px-2 py-0.5 rounded">SU 4</span>
+            <span class="text-lg">🔄</span>
+          </div>
+          <h3 class="font-black text-[#1D3557] text-base group-hover:text-[#1D3557] transition">P.A.R. 4-Stage Spiral</h3>
+          <p class="text-xs text-[#6C757D]">Reflection $\to$ Planning $\to$ Action $\to$ Observation. McTaggart's 16 Tenets and FPIC ethics.</p>
+          <div class="pt-2 text-xs font-bold text-[#1D3557] flex items-center justify-between border-t border-[#E8E2D8]">
+            <span>Social Emancipation</span>
+            <span class="group-hover:translate-x-1 transition">Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 4: ULWAZI PROGRAMME -->
+        <div onclick="openDossier('ulwazi')" class="paper-interactive rounded-2xl p-5 cursor-pointer space-y-3 group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-[#E9C46A] bg-[#E9C46A]/30 text-[#855B14] px-2 py-0.5 rounded">SU 5</span>
+            <span class="text-lg">📚</span>
+          </div>
+          <h3 class="font-black text-[#1D3557] text-base group-hover:text-[#855B14] transition">Ulwazi Participatory</h3>
+          <p class="text-xs text-[#6C757D]">eThekwini Durban municipal library Web 2.0 collaborative memory in isiZulu with local curators.</p>
+          <div class="pt-2 text-xs font-bold text-[#1D3557] flex items-center justify-between border-t border-[#E8E2D8]">
+            <span>Local Language Web</span>
+            <span class="group-hover:translate-x-1 transition">Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 5: IIRR TRIAD -->
+        <div onclick="openDossier('iirr')" class="paper-interactive rounded-2xl p-5 cursor-pointer space-y-3 group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-[#1D3557] bg-[#1D3557]/10 px-2 py-0.5 rounded">SU 1</span>
+            <span class="text-lg">🔺</span>
+          </div>
+          <h3 class="font-black text-[#1D3557] text-base group-hover:text-[#D95D39] transition">I.I.R.R. Triad</h3>
+          <p class="text-xs text-[#6C757D]">Common Knowledge (all), Shared Knowledge (many/trades), Specialised Knowledge (few/sangomas).</p>
+          <div class="pt-2 text-xs font-bold text-[#1D3557] flex items-center justify-between border-t border-[#E8E2D8]">
+            <span>Knowledge Distribution</span>
+            <span class="group-hover:translate-x-1 transition">Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 6: WESTERN IP TRAP -->
+        <div onclick="openDossier('ipTrap')" class="paper-interactive rounded-2xl p-5 cursor-pointer space-y-3 group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-[#D95D39] bg-[#D95D39]/10 px-2 py-0.5 rounded">SU 6</span>
+            <span class="text-lg">⚖️</span>
+          </div>
+          <h3 class="font-black text-[#1D3557] text-base group-hover:text-[#D95D39] transition">Western IPR Trap</h3>
+          <p class="text-xs text-[#6C757D]">Why patents fail: Individual vs Communal; 20-yr expiry vs Perpetual; Novelty vs Intergenerational.</p>
+          <div class="pt-2 text-xs font-bold text-[#1D3557] flex items-center justify-between border-t border-[#E8E2D8]">
+            <span>SA IK Act 6 of 2019</span>
+            <span class="group-hover:translate-x-1 transition">Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 7: AGRAWAL DILEMMA -->
+        <div onclick="openDossier('agrawal')" class="paper-interactive rounded-2xl p-5 cursor-pointer space-y-3 group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-[#4E878C] bg-[#4E878C]/10 px-2 py-0.5 rounded">SU 1</span>
+            <span class="text-lg">🏛️</span>
+          </div>
+          <h3 class="font-black text-[#1D3557] text-base group-hover:text-[#4E878C] transition">Agrawal Scientisation</h3>
+          <p class="text-xs text-[#6C757D]">Arun Agrawal's critique: Ex-situ archiving strips context and turns living practice into inert museum artifacts.</p>
+          <div class="pt-2 text-xs font-bold text-[#1D3557] flex items-center justify-between border-t border-[#E8E2D8]">
+            <span>In-situ vs Ex-situ</span>
+            <span class="group-hover:translate-x-1 transition">Read Dossier →</span>
+          </div>
+        </div>
+
+        <!-- Card 8: GENAI & MODERN CRISES -->
+        <div onclick="openDossier('genderAi')" class="paper-interactive rounded-2xl p-5 cursor-pointer space-y-3 group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-[#1D3557] bg-[#1D3557]/10 px-2 py-0.5 rounded">SU 7</span>
+            <span class="text-lg">🤖</span>
+          </div>
+          <h3 class="font-black text-[#1D3557] text-base group-hover:text-[#1D3557] transition">GenAI & Modern Shocks</h3>
+          <p class="text-xs text-[#6C757D]">Matrilineal disruption, COVID-19 self-quarantine, and GenAI scraping sacred motifs without attribution.</p>
+          <div class="pt-2 text-xs font-bold text-[#1D3557] flex items-center justify-between border-t border-[#E8E2D8]">
+            <span>Digital Cultural Theft</span>
+            <span class="group-hover:translate-x-1 transition">Read Dossier →</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- ENGINE 5: COMPUTER LAB CBT DOJO (SHORT QUESTIONS - 25M)   -->
+    <!-- ======================================================== -->
+    <section id="cbtDojoEngine" class="engine-section hidden space-y-6">
+      
+      <!-- Engine Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#E8E2D8] gap-2">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#4E878C] text-white font-mono font-bold">25 MARKS ENGINE</span>
+            <span class="text-xs text-[#6C757D]">Simulating the UP IT AIM Labs CBT System</span>
+          </div>
+          <h2 class="text-2xl font-black text-[#1D3557] tracking-tight mt-1">Computer Lab CBT Short Questions Dojo</h2>
+        </div>
+        
+        <!-- Drill Submode Switcher -->
+        <div class="flex items-center gap-1.5 bg-white p-1 rounded-xl border border-[#E8E2D8]">
+          <button onclick="switchCbtMode('mcq')" id="btn-cbt-mcq" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#1D3557] text-white transition">
+            1. MCQs (15 Qs)
+          </button>
+          <button onclick="switchCbtMode('jumbled')" id="btn-cbt-jumbled" class="px-3 py-1.5 rounded-lg text-xs font-bold text-[#1D3557] hover:bg-[#FAF7F2] transition">
+            2. Jumbled Sentences
+          </button>
+          <button onclick="switchCbtMode('matching')" id="btn-cbt-matching" class="px-3 py-1.5 rounded-lg text-xs font-bold text-[#1D3557] hover:bg-[#FAF7F2] transition">
+            3. Concept Matching
+          </button>
+        </div>
+      </div>
+
+      <!-- CBT Submode 1: MCQs -->
+      <div id="cbtMcqBox" class="space-y-4">
+        <div class="paper-card rounded-2xl p-6 bg-white space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+            <span class="text-xs font-mono font-bold text-[#1D3557]">Question <span id="mcqIndexLabel">1</span> of 15</span>
+            <span class="text-xs font-mono font-bold text-[#4E878C]">CBT Score: <span id="mcqScoreLabel">0</span> / 15</span>
+          </div>
+
+          <div id="mcqQuestionText" class="text-base font-extrabold text-[#1D3557] leading-snug">
+            <!-- Question text injected here -->
+          </div>
+
+          <div id="mcqOptionsGrid" class="grid grid-cols-1 gap-2.5 pt-2">
+            <!-- Injected via JS -->
+          </div>
+
+          <div id="mcqRationaleBox" class="hidden p-4 rounded-xl text-xs space-y-1">
+            <!-- Injected via JS -->
+          </div>
+
+          <div class="flex items-center justify-between pt-3 border-t border-[#E8E2D8]">
+            <button onclick="prevMcq()" id="prevMcqBtn" class="px-4 py-1.5 rounded-xl border border-[#E8E2D8] text-xs font-bold text-[#6C757D] hover:bg-[#FAF7F2]">
+              ← Previous
+            </button>
+            <button onclick="nextMcq()" id="nextMcqBtn" class="px-5 py-2 rounded-xl bg-[#1D3557] hover:bg-[#2A4D7D] text-xs font-bold text-white transition shadow-sm">
+              Next Question →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CBT Submode 2: Jumbled Sentences -->
+      <div id="cbtJumbledBox" class="hidden space-y-4">
+        <div class="paper-card rounded-2xl p-6 bg-white space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+            <div>
+              <span class="text-xs font-mono font-bold text-[#D95D39]">Jumbled Definition Drill</span>
+              <h3 class="text-base font-extrabold text-[#1D3557]" id="jumbledTargetTitle">WIPO Definition of Intellectual Property</h3>
+            </div>
+            <span id="jumbledStatusBadge" class="text-xs font-mono font-bold px-2.5 py-1 rounded bg-[#FAF7F2] text-[#6C757D]">Click chips in correct sequence</span>
+          </div>
+
+          <!-- Answer Drop Zone -->
+          <div class="space-y-1">
+            <label class="text-xs font-bold text-[#6C757D]">Your Constructed Sentence:</label>
+            <div id="jumbledDropZone" class="min-h-[70px] p-4 rounded-xl border-2 border-dashed border-[#1D3557]/40 bg-[#FAF7F2] flex flex-wrap gap-2 items-center">
+              <span class="text-xs text-[#6C757D] italic">Select words from the pool below...</span>
+            </div>
+          </div>
+
+          <!-- Available Chips Pool -->
+          <div class="space-y-1">
+            <label class="text-xs font-bold text-[#6C757D]">Available Word Chips:</label>
+            <div id="jumbledWordPool" class="p-4 rounded-xl border border-[#E8E2D8] bg-white flex flex-wrap gap-2 items-center">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-3 border-t border-[#E8E2D8]">
+            <button onclick="resetJumbledDrill()" class="px-4 py-2 rounded-xl border border-[#E8E2D8] text-xs font-bold text-[#D95D39] hover:bg-[#FAF7F2]">
+              ↺ Reset Chips
+            </button>
+            <button onclick="checkJumbledSolution()" class="px-5 py-2 rounded-xl bg-[#4E878C] hover:bg-[#6BA8AE] text-xs font-bold text-white transition shadow-sm">
+              Verify Sequence
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CBT Submode 3: Concept Matching -->
+      <div id="cbtMatchingBox" class="hidden space-y-4">
+        <div class="paper-card rounded-2xl p-6 bg-white space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+            <div>
+              <span class="text-xs font-mono font-bold text-[#4E878C]">Tactile Concept Matcher</span>
+              <h3 class="text-base font-extrabold text-[#1D3557]">Match the Term to its Authoritative Definition</h3>
+            </div>
+            <span id="matchingScorePill" class="text-xs font-mono font-bold px-2.5 py-1 rounded bg-[#4E878C]/10 text-[#4E878C]">0 / 6 Matched</span>
+          </div>
+
+          <p class="text-xs text-[#6C757D]">Click a term on the left, then click its corresponding match on the right.</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+            <!-- Left Terms -->
+            <div id="matchingLeftCol" class="space-y-2">
+              <!-- Injected via JS -->
+            </div>
+
+            <!-- Right Definitions -->
+            <div id="matchingRightCol" class="space-y-2">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+
+          <div class="flex justify-end pt-3 border-t border-[#E8E2D8]">
+            <button onclick="resetMatchingDrill()" class="px-4 py-2 rounded-xl border border-[#E8E2D8] text-xs font-bold text-[#6C757D] hover:bg-[#FAF7F2]">
+              ↺ Reset Matching Board
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- ENGINE 6: THE FINAL BOSS EXAM SIMULATOR (100 MARKS)      -->
+    <!-- ======================================================== -->
+    <section id="finalBossEngine" class="engine-section hidden space-y-6">
+      
+      <!-- Boss Header -->
+      <div class="paper-card rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-[#1D3557] to-[#2A4D7D] text-white">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E9C46A]/20 text-[#E9C46A] text-xs font-mono font-bold">
+              👑 CAPSTONE SYNTHESIS TEST
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight">The 100-Mark IT AIM Labs Simulation</h2>
+            <p class="text-xs text-[#E8E2D8] leading-relaxed">
+              Full examination simulation matching the exact structure of tomorrow morning's paper: 25 marks of rapid-fire CBT questions followed by 3 comprehensive long essay scenario questions (75 marks).
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-3 min-w-[200px]">
+            <div class="bg-black/30 p-3 rounded-xl border border-white/10 text-center font-mono">
+              <span class="text-[10px] uppercase text-[#E9C46A] font-bold block">Boss Timer</span>
+              <span id="bossTimerDisplay" class="text-2xl font-bold">180:00</span>
+            </div>
+            <button id="bossStartBtn" onclick="toggleBossExamTimer()" class="w-full bg-[#D95D39] hover:bg-[#B84725] text-white text-xs font-bold py-3 rounded-xl shadow transition">
+              Start Simulation
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss Exam Questions Container -->
+      <div class="space-y-6">
+        
+        <!-- Section A: 25 Marks -->
+        <div class="paper-card rounded-2xl p-6 bg-white space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+            <div>
+              <span class="text-xs font-mono font-bold text-[#4E878C]">SECTION A: SHORT QUESTIONS</span>
+              <h3 class="text-lg font-extrabold text-[#1D3557]">CBT Component (25 Marks)</h3>
+            </div>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#FAF7F2] text-[#6C757D]">25 Marks</span>
+          </div>
+
+          <div class="space-y-4 text-xs">
+            <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-2">
+              <div class="font-bold text-[#1D3557]">Q1. (5M) Contrast the 3 types of Indigenous Knowledge identified by the International Institute for Rural Reconstruction (IIRR).</div>
+              <textarea id="bossQ1" rows="3" class="w-full p-2.5 rounded-lg border border-[#E8E2D8] bg-white text-xs focus:outline-none focus:border-[#1D3557]" placeholder="Define Common, Shared, and Specialised Knowledge with examples..."></textarea>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-2">
+              <div class="font-bold text-[#1D3557]">Q2. (5M) State Robin McTaggart's 4 cyclical stages of Participatory Action Research (PAR) in correct operational order.</div>
+              <input type="text" id="bossQ2" class="w-full p-2.5 rounded-lg border border-[#E8E2D8] bg-white text-xs focus:outline-none focus:border-[#1D3557]" placeholder="e.g., Reflection, Planning, Action, Observation">
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-2">
+              <div class="font-bold text-[#1D3557]">Q3. (5M) Why is uncompressed linear PCM (WAV) strictly mandated over MP3 for the digital preservation of indigenous oral histories?</div>
+              <textarea id="bossQ3" rows="3" class="w-full p-2.5 rounded-lg border border-[#E8E2D8] bg-white text-xs focus:outline-none focus:border-[#1D3557]" placeholder="Discuss lossy compression, frequency truncation, and archival master integrity..."></textarea>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-2">
+              <div class="font-bold text-[#1D3557]">Q4. (10M) Match the 5 international and South African instruments to their primary function:</div>
+              <div class="text-[11px] text-[#6C757D] space-y-1">
+                <div>• CBD Article 8(j) • Nagoya Protocol (2010) • SA IKS Policy (2004) • SA IK Act 6 of 2019 • Ulwazi Programme</div>
+              </div>
+              <textarea id="bossQ4" rows="4" class="w-full p-2.5 rounded-lg border border-[#E8E2D8] bg-white text-xs focus:outline-none focus:border-[#1D3557]" placeholder="Pair each instrument with its legal or practical function..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section B: 75 Marks Long Questions -->
+        <div class="paper-card rounded-2xl p-6 bg-white space-y-6">
+          <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+            <div>
+              <span class="text-xs font-mono font-bold text-[#D95D39]">SECTION B: LONG ESSAY QUESTIONS</span>
+              <h3 class="text-lg font-extrabold text-[#1D3557]">Scenario Contextualisation (3 × 25 = 75 Marks)</h3>
+            </div>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800">Strict Paragraph Rule</span>
+          </div>
+
+          <!-- Essay 1 -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-sm text-[#1D3557]">Essay 1 (25M): The Havasupai Case & Genetic Biopiracy</h4>
+              <span class="text-xs font-mono text-[#D95D39] font-bold">25 Marks</span>
+            </div>
+            <p class="text-xs text-[#6C757D]">
+              In 1990, the Havasupai Tribe consented to provide blood samples for Type 2 diabetes research. Evaluate how Arizona State University violated Free, Prior, and Informed Consent (FPIC), how the findings damaged tribal sacred origin narratives, and what institutional safeguards are required under South Africa's Protection, Promotion, Development and Management of Indigenous Knowledge Act 6 of 2019.
+            </p>
+            <textarea id="bossEssay1" rows="8" class="w-full p-3 rounded-xl border border-[#E8E2D8] bg-[#FAF7F2] text-xs focus:outline-none focus:border-[#1D3557]" placeholder="Structure: 1-2 sentence roadmap intro -> Paragraphs [Identify -> Discuss -> Example] -> Separate conclusion..."></textarea>
+          </div>
+
+          <!-- Essay 2 -->
+          <div class="space-y-2 pt-4 border-t border-[#E8E2D8]">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-sm text-[#1D3557]">Essay 2 (25M): The 7C Model & Participatory Digital Libraries</h4>
+              <span class="text-xs font-mono text-[#D95D39] font-bold">25 Marks</span>
+            </div>
+            <p class="text-xs text-[#6C757D]">
+              Critically assess how the 7C Digital IK Preservation Model overcomes the historic alienation of indigenous communities. Use the Ulwazi Programme (eThekwini Municipality) as an empirical case study to illustrate how co-design, capacity building, and native-language content management transform institutions from "gatekeepers" into "gateways".
+            </p>
+            <textarea id="bossEssay2" rows="8" class="w-full p-3 rounded-xl border border-[#E8E2D8] bg-[#FAF7F2] text-xs focus:outline-none focus:border-[#1D3557]" placeholder="Structure: 1-2 sentence roadmap intro -> Paragraphs [Identify -> Discuss -> Example] -> Separate conclusion..."></textarea>
+          </div>
+
+          <!-- Essay 3 -->
+          <div class="space-y-2 pt-4 border-t border-[#E8E2D8]">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-sm text-[#1D3557]">Essay 3 (25M): Gender Erosion, COVID-19 & Generative AI Biopiracy</h4>
+              <span class="text-xs font-mono text-[#D95D39] font-bold">25 Marks</span>
+            </div>
+            <p class="text-xs text-[#6C757D]">
+              Examine the historical transition from pre-colonial matrilineal egalitarianism to colonial patriarchal domination. Contrast this with modern crises: how indigenous communities demonstrated resilience during COVID-19, and how Generative AI poses a novel threat of digital cultural appropriation and uncredited extraction of traditional designs.
+            </p>
+            <textarea id="bossEssay3" rows="8" class="w-full p-3 rounded-xl border border-[#E8E2D8] bg-[#FAF7F2] text-xs focus:outline-none focus:border-[#1D3557]" placeholder="Structure: 1-2 sentence roadmap intro -> Paragraphs [Identify -> Discuss -> Example] -> Separate conclusion..."></textarea>
+          </div>
+
+          <!-- Final Grade Evaluator Button -->
+          <div class="pt-4 border-t border-[#E8E2D8] flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-xs text-[#6C757D]">
+              Answers are scanned for mandatory keyword hits, paragraph segmentation, and academic terminology.
+            </div>
+            <button onclick="evaluateFinalBossExam()" class="px-6 py-3 bg-[#D95D39] hover:bg-[#B84725] text-white text-xs font-bold rounded-xl shadow-md transition">
+              Submit Final Boss for Letter Grade & Score 🏆
+            </button>
+          </div>
+
+          <!-- Boss Diagnostic Result Modal Target -->
+          <div id="bossResultsCard" class="hidden p-6 rounded-2xl bg-[#FAF7F2] border-2 border-[#1D3557] space-y-4">
+            <!-- Injected via JS -->
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- SLIDE-OVER DEEP DOSSIER MODAL              -->
+  <!-- ========================================== -->
+  <div id="dossierModal" class="fixed inset-0 z-50 hidden flex justify-end">
+    <!-- Backdrop -->
+    <div onclick="closeDossier()" class="drawer-backdrop fixed inset-0"></div>
+    
+    <!-- Drawer Content -->
+    <div class="relative z-10 w-full max-w-2xl bg-white h-full shadow-2xl border-l border-[#E8E2D8] flex flex-col overflow-hidden">
+      <!-- Header -->
+      <div class="p-6 border-b border-[#E8E2D8] flex items-center justify-between bg-[#FAF7F2]">
+        <div class="flex items-center space-x-2">
+          <span id="dossierIcon" class="text-2xl">📋</span>
+          <div>
+            <span id="dossierUnitTag" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#1D3557]/10 text-[#1D3557]">STUDY UNIT</span>
+            <h3 id="dossierTitle" class="text-lg font-black text-[#1D3557] leading-tight">Dossier Title</h3>
+          </div>
+        </div>
+        <button onclick="closeDossier()" class="w-8 h-8 rounded-full border border-[#E8E2D8] hover:bg-white text-sm font-bold flex items-center justify-center text-[#6C757D]">
+          ✕
+        </button>
+      </div>
+
+      <!-- Scrollable Body -->
+      <div id="dossierBody" class="flex-1 p-6 overflow-y-auto space-y-6 text-xs text-[#2B2D42] leading-relaxed">
+        <!-- Injected via JS -->
+      </div>
+
+      <!-- Footer -->
+      <div class="p-4 border-t border-[#E8E2D8] bg-[#FAF7F2] flex items-center justify-between">
+        <span class="text-[11px] text-[#6C757D]">Press <kbd class="px-1.5 py-0.5 rounded bg-white border border-[#E8E2D8] font-mono">ESC</kbd> to exit</span>
+        <button onclick="closeDossier()" class="px-4 py-2 rounded-xl bg-[#1D3557] text-white text-xs font-bold hover:bg-[#2A4D7D] transition">
+          Close Dossier
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- EMERGENCY TRIAGE FLIGHT PLAN MODAL         -->
+  <!-- ========================================== -->
+  <div id="triageModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div onclick="closeModal('triageModal')" class="drawer-backdrop fixed inset-0"></div>
+    <div class="relative z-10 w-full max-w-xl bg-white rounded-2xl shadow-2xl border border-[#E8E2D8] overflow-hidden p-6 space-y-5">
+      
+      <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">⚡</span>
+          <div>
+            <h3 class="font-extrabold text-[#1D3557] text-lg">Emergency Triage Compass</h3>
+            <p class="text-xs text-[#6C757D]">Select your remaining time to optimize your highest-ROI study path.</p>
+          </div>
+        </div>
+        <button onclick="closeModal('triageModal')" class="w-8 h-8 rounded-full border border-[#E8E2D8] hover:bg-[#FAF7F2] text-xs font-bold text-[#6C757D]">
+          ✕
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <label class="text-xs font-bold text-[#1D3557] block">How much time do you have left before 11:15 AM?</label>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          <button onclick="setTriagePlan('panic')" id="triage-panic" class="p-3 rounded-xl border-2 border-[#D95D39] bg-[#D95D39]/10 text-left transition">
+            <span class="text-xs font-mono font-bold text-[#D95D39] block">&lt; 4 Hours</span>
+            <span class="text-xs font-extrabold text-[#1D3557] block mt-0.5">Emergency Triage</span>
+          </button>
+          <button onclick="setTriagePlan('crunch')" id="triage-crunch" class="p-3 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-left hover:border-[#1D3557] transition">
+            <span class="text-xs font-mono font-bold text-[#4E878C] block">4–8 Hours</span>
+            <span class="text-xs font-extrabold text-[#1D3557] block mt-0.5">High-Yield Crunch</span>
+          </button>
+          <button onclick="setTriagePlan('mastery')" id="triage-mastery" class="p-3 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-left hover:border-[#1D3557] transition">
+            <span class="text-xs font-mono font-bold text-[#1D3557] block">8–14 Hours</span>
+            <span class="text-xs font-extrabold text-[#1D3557] block mt-0.5">Full Mastery Plan</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dynamic Plan Checklist Output -->
+      <div id="triagePlanOutput" class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E8E2D8] space-y-2 text-xs">
+        <!-- Injected via JS -->
+      </div>
+
+      <div class="flex justify-end pt-2">
+        <button onclick="closeModal('triageModal')" class="px-5 py-2.5 bg-[#1D3557] text-white text-xs font-bold rounded-xl hover:bg-[#2A4D7D] transition">
+          Adopt Flight Plan
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- FOOTER                                     -->
+  <!-- ========================================== -->
+  <footer class="mt-auto border-t border-[#E8E2D8] bg-white py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#6C757D]">
+      <div class="flex items-center space-x-2">
+        <span class="font-bold text-[#1D3557]">INL 270 Weaponised Study Station</span>
+        <span>•</span>
+        <span>UP Information Science 2026 Archive</span>
+      </div>
+      <div>
+        <span>Built with Warm Bauhaus Sensibility • Zero Fluff Guarantee • 100% Anonymized</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- PURE ZERO-DEPENDENCY WEAPONISED SCRIPT     -->
+  <!-- ========================================== -->
+  <script>
+    // --- 1. WEB AUDIO API SYNTHESIZER ---
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    let sfxEnabled = true;
+    let droneOsc = null;
+    let droneGain = null;
+    let isDroneRunning = false;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playSfx(type) {
+      if (!sfxEnabled) return;
+      initAudio();
+      const now = audioCtx.currentTime;
+
+      if (type === 'fanfare') {
+        // Pentatonic marimba chord: A4, C#5, E5, A5
+        [440, 554.37, 659.25, 880].forEach((freq, i) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + i * 0.08);
+          gain.gain.setValueAtTime(0.04, now + i * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.08 + 0.35);
+          osc.start(now + i * 0.08);
+          osc.stop(now + i * 0.08 + 0.35);
+        });
+      } else if (type === 'pop') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(640, now + 0.08);
+        gain.gain.setValueAtTime(0.04, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+        osc.start(now);
+        osc.stop(now + 0.08);
+      } else if (type === 'error') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.frequency.setValueAtTime(200, now);
+        osc.frequency.setValueAtTime(150, now + 0.1);
+        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      }
+    }
+
+    function toggleAudio() {
+      sfxEnabled = !sfxEnabled;
+      const icon = document.getElementById('sfxIcon');
+      icon.textContent = sfxEnabled ? '🔊' : '🔇';
+      if (sfxEnabled) playSfx('pop');
+    }
+
+    function toggleDrone() {
+      initAudio();
+      const icon = document.getElementById('droneIcon');
+      if (isDroneRunning) {
+        if (droneGain) {
+          droneGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+          setTimeout(() => {
+            if (droneOsc) droneOsc.stop();
+            isDroneRunning = false;
+            icon.textContent = '🧘';
+          }, 500);
+        }
+      } else {
+        droneOsc = audioCtx.createOscillator();
+        droneGain = audioCtx.createGain();
+        droneOsc.connect(droneGain);
+        droneGain.connect(audioCtx.destination);
+        
+        // 40Hz Gamma frequency binaural base tone with warm harmonic
+        droneOsc.type = 'triangle';
+        droneOsc.frequency.setValueAtTime(40, audioCtx.currentTime);
+        droneGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+        droneGain.gain.exponentialRampToValueAtTime(0.025, audioCtx.currentTime + 1);
+        droneOsc.start();
+        isDroneRunning = true;
+        icon.textContent = '🎧';
+      }
+    }
+
+    // --- 2. LIVE EXAM COUNTDOWN ---
+    // Target: Monday 9 November 2026 at 11:15 AM SAST (UTC+2)
+    const examDate = new Date('2026-11-09T11:15:00+02:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = examDate - now;
+      const display = document.getElementById('countdownDisplay');
+
+      if (diff <= 0) {
+        display.textContent = 'EXAM IN PROGRESS / WRITTEN';
+        return;
+      }
+
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      display.textContent = `${hours}h ${minutes}m ${seconds}s`;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // --- 3. XP & PERSISTENCE STATE ---
+    let userXp = parseInt(localStorage.getItem('inl270_xp') || '0', 10);
+
+    function addXp(amount) {
+      userXp += amount;
+      localStorage.setItem('inl270_xp', userXp.toString());
+      updateXpDisplay();
+      playSfx('fanfare');
+    }
+
+    function updateXpDisplay() {
+      const xpEl = document.getElementById('userXp');
+      const rankEl = document.getElementById('userRank');
+      if (xpEl) xpEl.textContent = userXp;
+      
+      let rank = 'Novice';
+      if (userXp >= 300) rank = 'Distinction Legend';
+      else if (userXp >= 180) rank = 'IKS Master';
+      else if (userXp >= 80) rank = 'Community Custodian';
+      else if (userXp >= 30) rank = 'Junior Archivist';
+      
+      if (rankEl) rankEl.textContent = rank;
+    }
+    updateXpDisplay();
+
+    // --- 4. ENGINE SWITCHING ---
+    function switchEngine(engineId) {
+      playSfx('pop');
+      document.querySelectorAll('.engine-section').forEach(el => el.classList.add('hidden'));
+      const activeEl = document.getElementById(engineId);
+      if (activeEl) activeEl.classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`btn-${engineId}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- 5. WORKBENCH TABS & 7C DATA ---
+    const sevenCData = [
+      {
+        title: "1. Co-design Technologies",
+        badge: "Core Mandate",
+        icon: "🤝",
+        quote: "Position knowledge holders at the centre of knowledge preservation technology design.",
+        desc: "Technologies must not be built by outside Western developers and dropped onto a village. Indigenous knowledge custodians must be co-designers who define system architecture, user interface conventions, and who controls access permissions.",
+        examTip: "In an essay, cite this to prove that digital preservation fails when community members are treated merely as passive research informants rather than architectural partners."
+      },
+      {
+        title: "2. Conceptualisation",
+        badge: "Epistemological Fit",
+        icon: "💡",
+        quote: "Thorough understanding of the nature of Indigenous Knowledge before choosing tools.",
+        desc: "Indigenous Knowledge is holistic, intergenerational, and largely oral. System developers must conceptualise how software represents non-linear, collective, and sacred lore without forcing it into rigid Western alphanumeric database tables.",
+        examTip: "Use this to critique Western relational databases that require single unique primary keys and individual author fields."
+      },
+      {
+        title: "3. Capacity Building",
+        badge: "Sustainability",
+        icon: "🛠️",
+        quote: "Empower community youth and elders with local technical mastery.",
+        desc: "Outside consultants leave once funding ends. Capacity building mandates training local community custodians to record audio, capture moving images, input metadata, and administer the digital library independently.",
+        examTip: "Connect this directly to the Ulwazi Programme, where local Durban librarians and youth were trained as digital champions."
+      },
+      {
+        title: "4. Contextualisation",
+        badge: "Cultural Integrity",
+        icon: "🏛️",
+        quote: "Preserve knowledge embedded within its linguistic, spiritual, and physical context.",
+        desc: "Decoupling traditional medicinal knowledge from the rituals, seasonal harvesting laws, or spiritual prayers invalidates its authenticity. Contextualisation guarantees that metadata captures the sacred context, season, and custodianship rules.",
+        examTip: "Explain why ex-situ museum indexing destroys context (citing Arun Agrawal)."
+      },
+      {
+        title: "5. Connectivity",
+        badge: "Infrastructure",
+        icon: "📶",
+        quote: "Bridge the infrastructure and digital divide in rural areas.",
+        desc: "Many indigenous communities face intermittent electricity, expensive mobile data, and no broadband. Systems must support offline caching, local mesh networks, or low-bandwidth audio delivery rather than demanding cloud streaming.",
+        examTip: "Crucial exam point for African rural settings where cloud-only platforms fail."
+      },
+      {
+        title: "6. Content Management",
+        badge: "Custodial Governance",
+        icon: "📁",
+        quote: "Respect customary laws, secret-sacred restrictions, and gendered knowledge.",
+        desc: "Not all knowledge is for public consumption. Content management systems must enforce tiered access control: women-only knowledge, secret initiation rites, and sacred lineage records must not be publicly viewable on Google.",
+        examTip: "Distinguish open-access Western libraries from restricted indigenous custodial protocols."
+      },
+      {
+        title: "7. Collaboration",
+        badge: "Multi-Stakeholder",
+        icon: "🌐",
+        quote: "Equitable multi-stakeholder partnerships based on mutual trust and benefit sharing.",
+        desc: "Bridges the gap between university researchers, national government bodies (e.g. NIKSO in South Africa), municipal public libraries, and the traditional tribal authority under formal memorandums of understanding.",
+        examTip: "Contrast genuine collaboration with exploitative 'helicopter science'."
+      }
+    ];
+
+    function select7C(index) {
+      playSfx('pop');
+      document.querySelectorAll('.c-node').forEach((btn, idx) => {
+        if (idx === index) {
+          btn.className = "c-node p-3 rounded-xl border-2 border-[#1D3557] bg-[#1D3557] text-white text-center transition";
+        } else {
+          btn.className = "c-node p-3 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-[#1D3557] text-center hover:border-[#1D3557] transition";
+        }
+      });
+
+      const data = sevenCData[index];
+      const detail = document.getElementById('cDetailCard');
+      detail.innerHTML = `
+        <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">${data.icon}</span>
+            <h4 class="font-extrabold text-[#1D3557] text-base">${data.title}</h4>
+          </div>
+          <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#D95D39]/10 text-[#D95D39]">${data.badge}</span>
+        </div>
+        <blockquote class="italic text-xs font-semibold text-[#1D3557] border-l-2 border-[#D95D39] pl-3">
+          "${data.quote}"
+        </blockquote>
+        <p class="text-xs text-[#2B2D42] leading-relaxed">
+          ${data.desc}
+        </p>
+        <div class="p-3 rounded-xl bg-white border border-[#E8E2D8] text-xs">
+          <strong class="text-[#D95D39]">🎯 Exam Execution Tip:</strong> ${data.examTip}
+        </div>
+      `;
+    }
+    // Init with first 7C
+    select7C(0);
+
+    // Workbench Tab Switcher
+    function switchWorkbenchTab(tabId) {
+      playSfx('pop');
+      document.querySelectorAll('.workbench-tab').forEach(el => el.classList.add('hidden'));
+      const active = document.getElementById(tabId);
+      if (active) active.classList.remove('hidden');
+    }
+
+    // PAR Cyclical Stages
+    const parStages = [
+      {
+        stage: "Stage 1: Reflection",
+        code: "Phase 1 / 4",
+        desc: "The critical self-evaluation where researchers and community members collaboratively identify shared dilemmas, colonial legacies, or urgent communal needs. Practitioners examine their own social assumptions and define problems collectively.",
+        rules: ["Must involve community elders and women", "Cannot be imposed by outside institutional agendas", "Establishes mutual trust and shared objectives"]
+      },
+      {
+        stage: "Stage 2: Planning",
+        code: "Phase 2 / 4",
+        desc: "Developing a strategic, context-appropriate plan of action. Unlike rigid experimental research designs, this plan is flexible, dialectical, and incorporates traditional customary governance alongside scientific methods.",
+        rules: ["Obtain Free, Prior, and Informed Consent (FPIC)", "Establish clear benefit-sharing mechanisms", "Agree on intellectual property ownership upfront"]
+      },
+      {
+        stage: "Stage 3: Action",
+        code: "Phase 3 / 4",
+        desc: "Implementing the planned deliberate intervention in the real social setting. Knowledge holders and researchers work as equal co-practitioners (e.g. conducting participatory mapping or recording oral narratives).",
+        rules: ["Direct community participation in fieldwork", "Continuous reflection on unintended disruptions", "Respect local taboos and sacred boundaries"]
+      },
+      {
+        stage: "Stage 4: Observation",
+        code: "Phase 4 / 4",
+        desc: "Systematically observing and documenting the effects of the action. The evidence gathered is analyzed collaboratively to evaluate whether social practice was enhanced, which directly informs the next cycle of Reflection.",
+        rules: ["Transparent documentation with the community", "Evaluating whether real empowerment occurred", "Feeding lessons into Cycle 2"]
+      }
+    ];
+    let currentParStep = 0;
+
+    function cycleParStage(delta) {
+      playSfx('pop');
+      currentParStep = (currentParStep + delta + parStages.length) % parStages.length;
+      updateParDisplay();
+    }
+
+    function updateParDisplay() {
+      const data = parStages[currentParStep];
+      document.getElementById('parStepIndicator').textContent = data.code;
+      
+      for (let i = 0; i < 4; i++) {
+        const card = document.getElementById(`par-card-${i}`);
+        if (i === currentParStep) {
+          card.className = "p-4 rounded-xl border-2 border-[#1D3557] bg-[#1D3557] text-white transition";
+        } else {
+          card.className = "p-4 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-[#1D3557] transition";
+        }
+      }
+
+      const box = document.getElementById('parDetailBox');
+      box.innerHTML = `
+        <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-2">
+          <h4 class="font-extrabold text-[#1D3557] text-sm">${data.stage}</h4>
+          <span class="text-xs font-mono font-bold text-[#4E878C]">Robin McTaggart (1989)</span>
+        </div>
+        <p class="text-xs text-[#2B2D42] leading-relaxed">${data.desc}</p>
+        <div class="space-y-1">
+          <span class="text-xs font-bold text-[#1D3557]">Operational Guidelines:</span>
+          <ul class="list-disc list-inside text-xs text-[#6C757D] space-y-0.5">
+            ${data.rules.map(r => `<li>${r}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+    }
+    updateParDisplay();
+
+    // --- 6. ESSAY REPS GYM SCENARIOS & KEYWORD GRADER ---
+    const essayScenarios = [
+      {
+        unit: "Study Unit 6",
+        marks: "25 Marks",
+        title: "The Havasupai Tribe Genetic Exploitation Case",
+        desc: "Explain the ethical, cultural, and legal implications of the genetic research conducted on the Havasupai Tribe by Arizona State University. Discuss how Free, Prior, and Informed Consent (FPIC) was breached, the spiritual injury caused by scientific migration narratives, and the significance of the 2010 settlement.",
+        keywords: ["Free Prior and Informed Consent", "Havasupai", "schizophrenia", "Bering Strait", "sacred origin", "700,000", "repatriation"],
+        modelAnswer: `
+          <p><strong>1. Introduction (Roadmap):</strong><br>
+          This essay examines the ethical and legal violations committed by Arizona State University (ASU) researchers against the Havasupai Tribe of the Grand Canyon. It identifies the failure to obtain valid Free, Prior, and Informed Consent (FPIC), discusses the profound spiritual disruption inflicted upon tribal creation cosmology, and details the legal remedies achieved in the landmark 2010 settlement.</p>
+          
+          <p><strong>2. Body Paragraph 1 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> The foundational breach committed by ASU researchers was the severe violation of Free, Prior, and Informed Consent (FPIC).<br>
+          <em>[Discuss]:</em> Under ethical research guidelines, participants must be explicitly informed of all intended uses of their biological data. ASU researchers secured consent strictly for studying the high incidence of Type 2 diabetes within the tribe. However, without tribal permission or re-consent, researchers subsequently repurposed these 1,518 blood samples for unauthorized secondary genetic investigations.<br>
+          <em>[Example]:</em> The blood was unethically used in published studies examining schizophrenia, genetic inbreeding, and population migration theories across the Bering Strait, directly violating the original research agreement.</p>
+          
+          <p><strong>3. Body Paragraph 2 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> The secondary research caused catastrophic spiritual and psychological injury to the tribe's cultural identity.<br>
+          <em>[Discuss]:</em> In indigenous cosmology, physical blood contains spiritual essence and remains inextricably linked to ancestral territory. For the Havasupai, traditional origin narratives hold that the Grand Canyon is the sacred birthplace of humanity. When university scientists published genetic assertions claiming the tribe migrated from Asia via the Bering Strait, they challenged the tribe's sacred truth.<br>
+          <em>[Example]:</em> Elders expressed intense spiritual distress, fearing that the younger generation would lose faith in oral traditions, and tribal leaders felt their political sovereignty and ancestral land claims were actively undermined.</p>
+          
+          <p><strong>4. Body Paragraph 3 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> The resulting legal battle established an international benchmark for indigenous genomic justice.<br>
+          <em>[Discuss]:</em> After discovering the unauthorized studies at a doctoral defense presentation, tribal leadership filed a lawsuit against ASU's Board of Regents demanding accountability, compensation, and the return of biological property.<br>
+          <em>[Example]:</em> In 2010, ASU settled the lawsuit by paying $700,000 to tribal members, providing funding for community health development, and crucially repatriating all remaining blood samples so they could receive ceremonial burial in tribal soil.</p>
+          
+          <p><strong>5. Conclusion:</strong><br>
+          In conclusion, the Havasupai case demonstrates that biological specimens cannot be extracted as mere detached scientific commodity. True academic partnership requires continuous consent, strict data governance, and deep institutional respect for indigenous sovereignty and spiritual lore.</p>
+        `
+      },
+      {
+        unit: "Study Unit 5",
+        marks: "25 Marks",
+        title: "The 7C Digital IK Preservation Framework & Community Empowerment",
+        desc: "Discuss how the 7C Digital IK Preservation Model ensures that digital technologies empower indigenous knowledge holders rather than alienate them. Analyze why institutions must shift from 'knowledge gatekeepers' to 'knowledge gateways'.",
+        keywords: ["7C", "Co-design", "Conceptualisation", "Capacity building", "Contextualisation", "gatekeeper", "gateway", "indigenous"],
+        modelAnswer: `
+          <p><strong>1. Introduction (Roadmap):</strong><br>
+          This essay analyzes the 7C Digital Indigenous Knowledge Preservation Model as a transformative framework for academic and heritage institutions. It identifies the operational pillars of the framework, discusses how co-design and capacity building prevent digital alienation, and examines why institutions must transition from restrictive gatekeepers to respectful gateways.</p>
+          
+          <p><strong>2. Body Paragraph 1 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> The core operational principle of the 7C Model is positioning indigenous knowledge holders at the centre through Co-design and Conceptualisation.<br>
+          <em>[Discuss]:</em> Western archival technologies frequently impose rigid metadata schemas (like Dublin Core) that assume single authors and open commercial dissemination. Conceptualisation demands understanding that IK is holistic, oral, and intergenerational. Co-design ensures elders dictate how their knowledge is structured and accessed.<br>
+          <em>[Example]:</em> Rather than forcing elders into keyboard typing, co-designed interfaces utilize touchscreens, indigenous iconography, and voice recording in the native tongue.</p>
+          
+          <p><strong>3. Body Paragraph 2 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> The institutional transition from 'Knowledge Gatekeeper' to 'Knowledge Gateway'.<br>
+          <em>[Discuss]:</em> Historically, colonial archives acted as gatekeepers—extracting artifacts and locking them behind university walls, catalogued under Western taxonomies with zero access granted back to the originating communities. A knowledge gateway proactively facilitates community stewardship and access.<br>
+          <em>[Example]:</em> As demonstrated by the UN Permanent Forum on Indigenous Issues (18th Session), libraries acting as gateways establish digital repatriation portals and host community workshops that train local youth to preserve their own living heritage.</p>
+          
+          <p><strong>4. Conclusion:</strong><br>
+          In conclusion, the 7C framework proves that digital preservation is an ethical and social endeavor rather than a mere technical exercise. Sustainable preservation only succeeds when custodians retain full ownership of both the technology and the resulting archive.</p>
+        `
+      },
+      {
+        unit: "Study Unit 4",
+        marks: "25 Marks",
+        title: "Participatory Action Research (PAR) & Community Entry Ethics",
+        desc: "Explain the philosophy of Participatory Action Research (PAR) based on Robin McTaggart's 16 Tenets and its 4-phase cyclical spiral. Describe the mandatory ethical protocols researchers must follow before entering a rural indigenous community.",
+        keywords: ["McTaggart", "Reflection", "Planning", "Action", "Observation", "Free Prior and Informed Consent", "cordial", "extractive"],
+        modelAnswer: `
+          <p><strong>1. Introduction (Roadmap):</strong><br>
+          This essay explores the methodology of Participatory Action Research (PAR) developed by Robin McTaggart (1989). It outlines the 4-stage iterative spiral, discusses the imperative to eliminate extractive research, and details the ethical community entry protocols necessary for genuine collaborative inquiry.</p>
+          
+          <p><strong>2. Body Paragraph 1 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> PAR's 4-Phase Cyclical Spiral (Reflection → Planning → Action → Observation).<br>
+          <em>[Discuss]:</em> PAR rejects the positivist illusion that the researcher is an objective outsider observing passive subjects. Instead, it operates as an ongoing spiral where inquiry begins with collective reflection on a social inequality, proceeds to joint planning, executes concrete action, and observes the lived consequences to trigger a new cycle.<br>
+          <em>[Example]:</em> In an indigenous agricultural project, researchers and local smallholders reflect on crop failure, co-plan drought-resistant planting using traditional sorghum varieties, plant the test crops, and analyze harvest yields together.</p>
+          
+          <p><strong>3. Body Paragraph 2 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> Ethical Community Entry Protocols and Free, Prior, and Informed Consent (FPIC).<br>
+          <em>[Discuss]:</em> Researchers must never conduct 'helicopter science'—arriving unannounced, harvesting data, and leaving. Field guidelines mandate establishing a cordial relationship with the community and traditional tribal council months before data collection begins.<br>
+          <em>[Example]:</em> Researchers must present their intentions to traditional leadership, hold community gatherings, explain research risks in the vernacular language, and secure communal FPIC before recording a single interview.</p>
+          
+          <p><strong>4. Conclusion:</strong><br>
+          In conclusion, PAR transforms academic research into an instrument of emancipatory social practice, ensuring that the fruits of inquiry belong primarily to the community whose knowledge sustained it.</p>
+        `
+      },
+      {
+        unit: "Study Unit 5",
+        marks: "25 Marks",
+        title: "The Ulwazi Programme as a Participatory Digital Library",
+        desc: "Critically evaluate the Ulwazi Programme implemented by the eThekwini Municipality (Durban). Explain how it utilized Web 2.0 technologies, fostered community participation in isiZulu, and addressed the challenges of indigenous digital preservation.",
+        keywords: ["Ulwazi", "eThekwini", "Durban", "isiZulu", "Web 2.0", "community", "crowdsourcing", "preservation"],
+        modelAnswer: `
+          <p><strong>1. Introduction (Roadmap):</strong><br>
+          This essay evaluates the Ulwazi Programme, an indigenous digital library initiative pioneered by the eThekwini Municipal Library in KwaZulu-Natal. It identifies the utilization of Web 2.0 participatory tools, discusses the empowerment of local communities through vernacular language documentation in isiZulu, and analyzes solutions to digital preservation challenges.</p>
+          
+          <p><strong>2. Body Paragraph 1 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> Integration of Web 2.0 Collaborative Technologies with Public Libraries.<br>
+          <em>[Discuss]:</em> Traditional municipal libraries primarily housed physical Western print materials. The Ulwazi Programme recognized that local indigenous heritage existed orally outside published books. By implementing a collaborative, wiki-style Web 2.0 platform, the library democratized authoring.<br>
+          <em>[Example]:</em> Local community members were empowered to submit oral testimonies, photographs, and historical family genealogies directly to the public web archive.</p>
+          
+          <p><strong>3. Body Paragraph 2 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> Preserving Linguistic Integrity through Vernacular Documentation in isiZulu.<br>
+          <em>[Discuss]:</em> One of the primary barriers identified by the UN Permanent Forum on Indigenous Issues is the dominance of English on the internet. The Ulwazi Programme addressed this by encouraging and prioritizing submissions in isiZulu, ensuring authentic cultural nuances were preserved.<br>
+          <em>[Example]:</em> Articles on traditional Zulu medicinal herbs, cultural ceremonies (like Umhlanga), and clan histories were compiled in authentic vernacular idiom by native speakers.</p>
+          
+          <p><strong>4. Conclusion:</strong><br>
+          In conclusion, the Ulwazi Programme stands as a benchmark for municipal innovation, proving that public libraries can actively revitalize indigenous heritage by turning community members from passive consumers into recognized digital curators.</p>
+        `
+      },
+      {
+        unit: "Study Unit 6",
+        marks: "25 Marks",
+        title: "The Western Intellectual Property Trap & South Africa's IK Act 6 of 2019",
+        desc: "Examine why conventional Western Intellectual Property Rights (patents, copyright) fail to protect Indigenous Knowledge. Discuss the South African legislative response, focusing on the Protection, Promotion, Development and Management of Indigenous Knowledge Act 6 of 2019.",
+        keywords: ["Intellectual Property", "patent", "novelty", "individual", "collective", "perpetual", "IK Act", "NIKSO"],
+        modelAnswer: `
+          <p><strong>1. Introduction (Roadmap):</strong><br>
+          This essay examines the fundamental incompatibility between Western Intellectual Property Rights (IPR) and Indigenous Knowledge Systems. It identifies the structural misalignments in patent criteria, discusses the vulnerability to corporate biopiracy, and analyzes South Africa's sui generis legislative remedy: the Protection, Promotion, Development and Management of Indigenous Knowledge Act 6 of 2019.</p>
+          
+          <p><strong>2. Body Paragraph 1 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> The Western Patent Paradigm Mismatch (Novelty, Individual Authorship, Finite Term).<br>
+          <em>[Discuss]:</em> Western patent law requires three strict criteria: novelty, an inventive step, and industrial applicability. Indigenous Knowledge fails these tests because it is intergenerational (not 'novel' under patent law) and collectively held by an entire tribe rather than an individual corporate inventor. Furthermore, patents expire after 20 years, casting inventions into the public domain where corporations can exploit them without paying royalties.<br>
+          <em>[Example]:</em> Pharmaceutical corporations patenting active compounds derived from the Hoodia plant (used for centuries by the San people to stave off hunger) without recognizing ancestral collective ownership.</p>
+          
+          <p><strong>3. Body Paragraph 2 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> South Africa's Sui Generis Remedy: The IK Act (Act 6 of 2019) and NIKSO.<br>
+          <em>[Discuss]:</em> Rather than forcing traditional lore into the flawed Intellectual Property Laws Amendment Act (IPLAA), Act 6 of 2019 established dedicated sui generis protection. It legally recognizes indigenous communities as perpetual rights holders, mandates equitable benefit-sharing agreements for commercial use, and created the National Indigenous Knowledge Systems Office (NIKSO).<br>
+          <em>[Example]:</em> NIKSO operates the Traditional Knowledge Recording System (TKRS), creating prior-art documentation to block foreign biopirates while securing commercial royalties for rural communities.</p>
+          
+          <p><strong>4. Conclusion:</strong><br>
+          In conclusion, standard Western intellectual property regimes function as instruments of commercial enclosure. South Africa's Act 6 of 2019 offers a progressive blueprint by legally affirming the perpetual, communal, and sacred character of African traditional knowledge.</p>
+        `
+      },
+      {
+        unit: "Study Unit 7",
+        marks: "25 Marks",
+        title: "Colonial Patriarchal Disruption, COVID-19 Resilience & Generative AI Biopiracy",
+        desc: "Discuss how European colonisation transformed pre-colonial matrilineal egalitarian societies into patriarchal systems. Contrast this with modern crises: how indigenous communities responded to COVID-19, and the emerging threat of Generative AI cultural misappropriation.",
+        keywords: ["matrilineal", "patriarchal", "egalitarian", "COVID-19", "Generative AI", "misappropriation", "sacred", "resilience"],
+        modelAnswer: `
+          <p><strong>1. Introduction (Roadmap):</strong><br>
+          This essay investigates the historical erosion and contemporary resilience of indigenous societies. It identifies how European colonisation dismantled matrilineal and egalitarian gender structures, discusses indigenous self-reliance during the COVID-19 pandemic, and evaluates the modern biopiracy threat posed by Generative AI training on sacred cultural imagery.</p>
+          
+          <p><strong>2. Body Paragraph 1 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> Disruption of Pre-Colonial Matrilineal Structures by Colonial Patriarchal Systems.<br>
+          <em>[Discuss]:</em> In many pre-colonial African and indigenous American societies, communities were structured matrilineally or followed egalitarian systems where women held decisive economic, agricultural, and spiritual authority as seed guardians and healers. European colonial authorities imposed Victorian legal frameworks that vested all property, land rights, and political representation exclusively in men.<br>
+          <em>[Example]:</em> Indigenous women were stripped of traditional land tenure, leaving them vulnerable to intersectional discrimination based on gender, race, and indigenous status.</p>
+          
+          <p><strong>3. Body Paragraph 2 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> Community Resilience during COVID-19 through Traditional Knowledge.<br>
+          <em>[Discuss]:</em> When modern healthcare supply chains collapsed, remote indigenous communities revitalized ancestral crisis protocols. They implemented traditional self-imposed lockdowns (quarantine practices) and mobilized indigenous herbal remedies to sustain immunity, supported by indigenous advocacy organizations.<br>
+          <em>[Example]:</em> Traditional leaders restricted entry to vulnerable ancestral territories, preventing catastrophic spread while using documented traditional medicines for symptom relief.</p>
+          
+          <p><strong>4. Body Paragraph 3 (Identify → Discuss → Example):</strong><br>
+          <em>[Identify]:</em> Generative AI as Digital Cultural Misappropriation and Biopiracy.<br>
+          <em>[Discuss]:</em> Generative AI models (e.g. Midjourney, DALL-E) are trained by scraping billions of web images without consent. These models reproduce sacred indigenous patterns, totem iconography, and ritual artwork on demand for commercial users, with zero attribution, provenance, or compensation to originating communities.<br>
+          <em>[Example]:</em> Commercial brands generating synthetic 'indigenous African textiles' via AI prompts, commodifying sacred motifs and destroying local artisan livelihoods.</p>
+          
+          <p><strong>5. Conclusion:</strong><br>
+          In conclusion, the history of indigenous knowledge is one of enduring resistance. From colonial patriarchy to algorithmic AI extraction, protecting indigenous heritage requires legal frameworks that vigorously defend collective rights across physical and digital frontiers.</p>
+        `
+      }
+    ];
+
+    let currentPromptIdx = 0;
+
+    function loadEssayScenario(idx) {
+      playSfx('pop');
+      currentPromptIdx = parseInt(idx, 10);
+      const data = essayScenarios[currentPromptIdx];
+      
+      document.getElementById('promptUnitBadge').textContent = data.unit;
+      document.getElementById('promptMarkBadge').textContent = data.marks;
+      document.getElementById('promptTitle').textContent = data.title;
+      document.getElementById('promptScenarioDesc').textContent = data.desc;
+      
+      const chipsEl = document.getElementById('keywordChips');
+      chipsEl.innerHTML = data.keywords.map(kw => `
+        <span class="kw-chip text-[11px] font-mono px-2 py-0.5 rounded-md bg-[#FAF7F2] text-[#6C757D] border border-[#E8E2D8] transition" data-kw="${kw}">
+          ${kw}
+        </span>
+      `).join('');
+
+      document.getElementById('modelMemoContent').innerHTML = data.modelAnswer;
+      document.getElementById('modelMemoBox').classList.add('hidden');
+      document.getElementById('memoToggleText').textContent = 'Show Official Memo';
+
+      // Clear or reset typing pad
+      document.getElementById('essayTypingArea').value = '';
+      gradeEssayInput();
+    }
+
+    function gradeEssayInput() {
+      const text = document.getElementById('essayTypingArea').value;
+      const data = essayScenarios[currentPromptIdx];
+      
+      // Word & paragraph counting
+      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+      const paragraphs = text.split(/\n+/).filter(p => p.trim().length > 0).length;
+      
+      document.getElementById('wordCountLabel').textContent = `${words} words`;
+      document.getElementById('paraCountLabel').textContent = `(${paragraphs} paragraphs)`;
+
+      // Keyword matching
+      let hitCount = 0;
+      const lower = text.toLowerCase();
+      
+      document.querySelectorAll('.kw-chip').forEach(chip => {
+        const kw = chip.getAttribute('data-kw').toLowerCase();
+        if (lower.includes(kw)) {
+          hitCount++;
+          chip.className = "kw-chip text-[11px] font-mono px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold";
+        } else {
+          chip.className = "kw-chip text-[11px] font-mono px-2 py-0.5 rounded-md bg-[#FAF7F2] text-[#6C757D] border border-[#E8E2D8]";
+        }
+      });
+
+      document.getElementById('kwScoreBadge').textContent = `${hitCount} / ${data.keywords.length} Hit`;
+
+      // Live feedback string
+      const fb = document.getElementById('evalFeedbackText');
+      if (words === 0) {
+        fb.textContent = "Start typing to evaluate required terms and paragraph structure.";
+      } else if (paragraphs < 3) {
+        fb.innerHTML = `<span class="text-[#D95D39] font-bold">⚠️ Warning:</span> Only ${paragraphs} paragraph(s) detected. Ms. Firkins penalizes single-block answers! Use intro, body, and conclusion.`;
+      } else if (hitCount >= Math.ceil(data.keywords.length * 0.6)) {
+        fb.innerHTML = `<span class="text-emerald-700 font-bold">✓ High Academic Quality:</span> ${hitCount}/${data.keywords.length} keywords active across ${paragraphs} structured paragraphs!`;
+      } else {
+        fb.innerHTML = `Structure good (${paragraphs} paragraphs), but need more mandatory terms (${hitCount}/${data.keywords.length} hit).`;
+      }
+    }
+
+    function toggleModelAnswer() {
+      playSfx('pop');
+      const box = document.getElementById('modelMemoBox');
+      const btnText = document.getElementById('memoToggleText');
+      if (box.classList.contains('hidden')) {
+        box.classList.remove('hidden');
+        btnText.textContent = 'Hide Official Memo';
+      } else {
+        box.classList.add('hidden');
+        btnText.textContent = 'Show Official Memo';
+      }
+    }
+
+    function copyModelAnswerForWord() {
+      const content = document.getElementById('modelMemoContent').innerText;
+      navigator.clipboard.writeText(content).then(() => {
+        playSfx('pop');
+        alert("📋 Model Answer copied to clipboard! Paste directly into Microsoft Word.");
+      });
+    }
+
+    function submitEssayForXp() {
+      const text = document.getElementById('essayTypingArea').value;
+      const paragraphs = text.split(/\n+/).filter(p => p.trim().length > 0).length;
+      if (text.trim().length < 80 || paragraphs < 2) {
+        playSfx('error');
+        alert("Please draft at least 2 structured paragraphs before claiming your Reps XP.");
+        return;
+      }
+      addXp(50);
+      alert("🎉 +50 Distinction XP Awarded! Rep logged in your physical memory.");
+    }
+
+    // Init first scenario
+    loadEssayScenario(0);
+
+    // --- 7. TACTICAL DOSSIERS ---
+    const dossiers = {
+      havasupai: {
+        icon: "🩸",
+        unit: "STUDY UNIT 6 • CASE STUDY",
+        title: "The Havasupai Tribe vs Arizona State University (2010)",
+        content: `
+          <div class="space-y-4">
+            <div class="p-3 bg-red-50 border border-red-200 rounded-xl text-red-900">
+              <strong>The Case Core:</strong> In 1990, the isolated Havasupai people living at the base of the Grand Canyon permitted ASU geneticists to draw blood to investigate soaring Type 2 diabetes rates. Unknown to the tribe, researchers repurposed the samples for genetic schizophrenia, inbreeding, and ancestral migration studies across the Bering Strait.
+            </div>
+            
+            <h4 class="font-extrabold text-[#1D3557] text-sm">Key Academic Elements:</h4>
+            <ul class="list-disc list-inside space-y-1.5 text-xs text-[#2B2D42]">
+              <li><strong>Breach of Informed Consent:</strong> Consent forms were vague. Researchers argued they had broad consent for "behavioral/medical" research; courts confirmed secondary research without explicit consent is illegal.</li>
+              <li><strong>Spiritual & Cultural Violation:</strong> Havasupai creation theology holds the Grand Canyon as the sacred physical origin of human life. ASU published papers alleging Asian migration via the Bering Strait, insulting sacred truth and damaging land claims.</li>
+              <li><strong>Stigmatization:</strong> Inbreeding and schizophrenia papers stigmatized community members in public records without consultation.</li>
+              <li><strong>The 2010 Settlement:</strong> ASU paid $700,000 compensation, returned 1,518 blood samples for ceremonial burial, and instituted strict tribal research governance protocols.</li>
+            </ul>
+
+            <div class="p-3 bg-[#FAF7F2] border border-[#E8E2D8] rounded-xl text-xs">
+              <strong class="text-[#D95D39]">Examiner Trap:</strong> Don't just say "they stole blood." Use the phrase: <em>"Failure of Free, Prior, and Informed Consent (FPIC) through unauthorized secondary genetic repurposing."</em>
+            </div>
+          </div>
+        `
+      },
+      sevenC: {
+        icon: "🎡",
+        unit: "STUDY UNIT 5 • PRESERVATION",
+        title: "The 7C Digital IK Preservation Model",
+        content: `
+          <div class="space-y-4">
+            <p>Formulated to ensure digital archiving empowers indigenous knowledge holders rather than repeating historic colonial extraction.</p>
+            <div class="grid grid-cols-1 gap-2 text-xs">
+              <div class="p-2.5 bg-[#FAF7F2] rounded-lg border border-[#E8E2D8]"><strong>1. Co-design:</strong> Technology interfaces co-created with elders, not imposed.</div>
+              <div class="p-2.5 bg-[#FAF7F2] rounded-lg border border-[#E8E2D8]"><strong>2. Conceptualisation:</strong> Grasping the holistic, oral nature of IK before coding databases.</div>
+              <div class="p-2.5 bg-[#FAF7F2] rounded-lg border border-[#E8E2D8]"><strong>3. Capacity Building:</strong> Training community members to record, digitize, and curate their own archive.</div>
+              <div class="p-2.5 bg-[#FAF7F2] rounded-lg border border-[#E8E2D8]"><strong>4. Contextualisation:</strong> Keeping lore embedded within its spiritual, linguistic, and local setting.</div>
+              <div class="p-2.5 bg-[#FAF7F2] rounded-lg border border-[#E8E2D8]"><strong>5. Connectivity:</strong> Accounting for rural power cuts, bandwidth limits, and device accessibility.</div>
+              <div class="p-2.5 bg-[#FAF7F2] rounded-lg border border-[#E8E2D8]"><strong>6. Content Management:</strong> Enforcing secret-sacred access restrictions (gender/initiation laws).</div>
+              <div class="p-2.5 bg-[#FAF7F2] rounded-lg border border-[#E8E2D8]"><strong>7. Collaboration:</strong> Equitable partnerships between universities, state registries, and tribal authorities.</div>
+            </div>
+          </div>
+        `
+      },
+      par: {
+        icon: "🔄",
+        unit: "STUDY UNIT 4 • METHODOLOGY",
+        title: "Participatory Action Research (PAR) & Robin McTaggart (1989)",
+        content: `
+          <div class="space-y-4">
+            <p>PAR is an emancipatory research methodology defined as collective, self-reflective inquiry undertaken by participants in social situations to improve social justice.</p>
+            <h4 class="font-bold text-[#1D3557]">The 4-Stage Spiral:</h4>
+            <ol class="list-decimal list-inside space-y-1 text-xs">
+              <li><strong>Reflection:</strong> Joint identification of problems and community needs.</li>
+              <li><strong>Planning:</strong> Collaborative design of flexible interventions.</li>
+              <li><strong>Action:</strong> Deliberate implementation in the field.</li>
+              <li><strong>Observation:</strong> Systematic monitoring of social outcomes leading into Cycle 2.</li>
+            </ol>
+            <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900">
+              <strong>16 Tenets Highlights:</strong> McTaggart stresses that PAR objectifies personal experience, demands collaborative commitment, and actively changes social practice rather than accumulating passive academic data.
+            </div>
+          </div>
+        `
+      },
+      ulwazi: {
+        icon: "📚",
+        unit: "STUDY UNIT 5 • DIGITAL LIBRARIES",
+        title: "The Ulwazi Programme (eThekwini Municipality / Durban)",
+        content: `
+          <div class="space-y-4">
+            <p>Launched in KwaZulu-Natal to address the scarcity of local, vernacular heritage in public municipal libraries.</p>
+            <ul class="list-disc list-inside space-y-1.5 text-xs text-[#2B2D42]">
+              <li><strong>Web 2.0 Crowdsourcing:</strong> Allowed local citizens to record and submit oral histories, cultural events, and clan genealogies directly.</li>
+              <li><strong>isiZulu Language Priority:</strong> Ensured indigenous vocabulary was preserved natively rather than translated and distorted into English.</li>
+              <li><strong>Community Champions:</strong> Trained local library staff and community youth as digital custodians, achieving capacity building and community ownership.</li>
+            </ul>
+          </div>
+        `
+      },
+      iirr: {
+        icon: "🔺",
+        unit: "STUDY UNIT 1 • CLASSIFICATION",
+        title: "The IIRR 3-Tier Indigenous Knowledge Triad",
+        content: `
+          <div class="space-y-3">
+            <p>The International Institute for Rural Reconstruction (IIRR) established that Indigenous Knowledge is not uniform across a population:</p>
+            <div class="p-3 bg-[#FAF7F2] rounded-xl border border-[#E8E2D8]">
+              <strong class="text-[#1D3557]">1. Common Knowledge:</strong> Held by virtually everyone in the society (e.g., everyday cooking, firewood harvesting, simple seasonal weather signs).
+            </div>
+            <div class="p-3 bg-[#FAF7F2] rounded-xl border border-[#E8E2D8]">
+              <strong class="text-[#4E878C]">2. Shared Knowledge:</strong> Held by many, but not all members (e.g., villagers of a specific occupational group, blacksmiths, traditional midwives, hunters).
+            </div>
+            <div class="p-3 bg-[#FAF7F2] rounded-xl border border-[#E8E2D8]">
+              <strong class="text-[#D95D39]">3. Specialised Knowledge:</strong> Held strictly by a chosen few who received extensive apprenticeships or spiritual callings (e.g., Sangomas, herbalists, divine rainmakers, sacred lorekeepers).
+            </div>
+          </div>
+        `
+      },
+      ipTrap: {
+        icon: "⚖️",
+        unit: "STUDY UNIT 6 • LAW & POLICY",
+        title: "The Western IPR Trap & South Africa's IK Act 6 of 2019",
+        content: `
+          <div class="space-y-4">
+            <h4 class="font-bold text-[#1D3557]">Why Western Patents Fail Indigenous Knowledge:</h4>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="p-2.5 bg-red-50 text-red-900 rounded-lg"><strong>Western Patent:</strong> Requires novelty; individual author; expires after 20 years into public domain.</div>
+              <div class="p-2.5 bg-emerald-50 text-emerald-900 rounded-lg"><strong>Indigenous Knowledge:</strong> Intergenerational; held communally; perpetual rights; spiritual stewardship.</div>
+            </div>
+            <h4 class="font-bold text-[#1D3557]">The South African Legislative Remedy:</h4>
+            <p class="text-xs text-[#2B2D42]">The <em>Protection, Promotion, Development and Management of Indigenous Knowledge Act (Act 6 of 2019)</em> established sui generis legal protection. It mandates NIKSO (National Indigenous Knowledge Systems Office), creates the Traditional Knowledge Recording System (TKRS), and requires legally binding benefit-sharing agreements before commercializing bio-resources.</p>
+          </div>
+        `
+      },
+      agrawal: {
+        icon: "🏛️",
+        unit: "STUDY UNIT 1 • CRITIQUE",
+        title: "Arun Agrawal's Scientisation Dilemma (1995)",
+        content: `
+          <div class="space-y-3">
+            <p>Arun Agrawal famously critiqued international development agencies (like the World Bank) attempting to 'save' indigenous knowledge by building vast ex-situ text databases.</p>
+            <div class="p-3 bg-[#FAF7F2] rounded-xl border border-[#E8E2D8] text-xs">
+              <strong>The Dilemma:</strong> To archive IK in a Western database, scientists 'scientise' it—stripping away its songs, spiritual rituals, and local ecological relationships. In doing so, they kill the living, dynamic practice and preserve only an inert museum specimen.
+            </div>
+            <p class="text-xs text-[#6C757D]"><strong>Exam Takeaway:</strong> True preservation must be <em>in-situ</em> (supporting living communities on their land) rather than purely <em>ex-situ</em> (storing dead files in Western archives).</p>
+          </div>
+        `
+      },
+      genderAi: {
+        icon: "🤖",
+        unit: "STUDY UNIT 7 • MODERN DISRUPTIONS",
+        title: "Matrilineal Disruption, COVID-19 & Generative AI Biopiracy",
+        content: `
+          <div class="space-y-4">
+            <h4 class="font-bold text-[#1D3557]">1. Colonial Patriarchal Imposition:</h4>
+            <p class="text-xs text-[#2B2D42]">Pre-colonial indigenous societies frequently operated on egalitarian and matrilineal frameworks where women controlled agricultural seeds and ancestral lineages. Colonial administrators imposed patriarchal legal titles, disinheriting women and creating multiple intersectional discrimination.</p>
+            <h4 class="font-bold text-[#1D3557]">2. Generative AI Digital Misappropriation:</h4>
+            <p class="text-xs text-[#2B2D42]">Modern GenAI models scrape sacred indigenous artistic motifs, weaving patterns, and totems without communal consent. AI image generators commercialize synthetic copies of sacred cultural heritage without attribution, benefit sharing, or respect for custodial customary laws.</p>
+          </div>
+        `
+      }
+    };
+
+    function openDossier(key) {
+      playSfx('pop');
+      const data = dossiers[key];
+      if (!data) return;
+
+      document.getElementById('dossierIcon').textContent = data.icon;
+      document.getElementById('dossierUnitTag').textContent = data.unit;
+      document.getElementById('dossierTitle').textContent = data.title;
+      document.getElementById('dossierBody').innerHTML = data.content;
+
+      document.getElementById('dossierModal').classList.remove('hidden');
+    }
+
+    function closeDossier() {
+      playSfx('pop');
+      document.getElementById('dossierModal').classList.add('hidden');
+    }
+
+    // Modal helpers
+    function openModal(id) {
+      playSfx('pop');
+      document.getElementById(id).classList.remove('hidden');
+    }
+    function closeModal(id) {
+      playSfx('pop');
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    // Escape key listener for modals
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeDossier();
+        closeModal('triageModal');
+      }
+    });
+
+    // --- 8. EMERGENCY TRIAGE COMPASS ---
+    const triagePlans = {
+      panic: {
+        title: "< 4 Hours Panic Protocol",
+        badge: "Critical Survival",
+        items: [
+          "1. Read the Havasupai Case Dossier (SU 6) — 100% core essay probability.",
+          "2. Memorize the 7C Preservation Model (SU 5) — list Co-design, Conceptualisation, Capacity, Context, Connectivity, Content, Collaboration.",
+          "3. Memorize McTaggart's 4 PAR stages: Reflection → Planning → Action → Observation (SU 4).",
+          "4. Practice 1 Essay in the Reps Gym using the strict formula: Intro → [Identify → Discuss → Example] → Conclusion.",
+          "5. Run 10 rapid-fire MCQs in the CBT Dojo to lock in legal dates (IK Act 2019, WIPO, CBD)."
+        ]
+      },
+      crunch: {
+        title: "4–8 Hours High-Yield Crunch Plan",
+        badge: "Distinction Track",
+        items: [
+          "1. Complete all 6 Essay Scenarios in the Physical Reps Gym (claim all +300 XP).",
+          "2. Read the Ulwazi Programme (SU 5) and SA IK Act 6 of 2019 dossiers.",
+          "3. Master the IIRR Triad (Common, Shared, Specialised) and Michael & Gayton incommensurability debate.",
+          "4. Run through the CBT Concept Matcher and Jumbled Sentence unscrambler.",
+          "5. Complete Section A and 1 long question in the Final Boss Simulator."
+        ]
+      },
+      mastery: {
+        title: "8–14 Hours Complete Mastery Flight Plan",
+        badge: "Top Cohort Guarantee",
+        items: [
+          "1. Deep review of all 8 Mnemonic Dossiers.",
+          "2. Practice typing full model answers for both Havasupai and Ulwazi Programme.",
+          "3. Review SU 7: Matrilineal systems, COVID-19 traditional isolation, and GenAI biopiracy.",
+          "4. Complete the entire 100-Mark Final Boss Exam under timed conditions.",
+          "5. Export all model memos to Word using the 1-click export tool for morning review before 11:15 AM."
+        ]
+      }
+    };
+
+    function setTriagePlan(mode) {
+      playSfx('pop');
+      ['panic', 'crunch', 'mastery'].forEach(m => {
+        const btn = document.getElementById(`triage-${m}`);
+        if (m === mode) {
+          btn.className = "p-3 rounded-xl border-2 border-[#1D3557] bg-[#1D3557] text-white text-left transition";
+        } else {
+          btn.className = "p-3 rounded-xl border-2 border-[#E8E2D8] bg-[#FAF7F2] text-[#1D3557] text-left hover:border-[#1D3557] transition";
+        }
+      });
+
+      const plan = triagePlans[mode];
+      const out = document.getElementById('triagePlanOutput');
+      out.innerHTML = `
+        <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-2">
+          <strong class="text-[#1D3557] text-sm">${plan.title}</strong>
+          <span class="text-xs font-mono font-bold text-[#D95D39]">${plan.badge}</span>
+        </div>
+        <ul class="space-y-1.5 text-xs text-[#2B2D42] mt-2">
+          ${plan.items.map(it => `<li>${it}</li>`).join('')}
+        </ul>
+      `;
+    }
+    // Init triage with crunch
+    setTriagePlan('crunch');
+
+    // --- 9. CBT DOJO (MCQ, JUMBLED, MATCHING) ---
+    function switchCbtMode(mode) {
+      playSfx('pop');
+      ['mcq', 'jumbled', 'matching'].forEach(m => {
+        const box = document.getElementById(`cbt${m.charAt(0).toUpperCase() + m.slice(1)}Box`);
+        const btn = document.getElementById(`btn-cbt-${m}`);
+        if (m === mode) {
+          box.classList.remove('hidden');
+          btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-[#1D3557] text-white transition";
+        } else {
+          box.classList.add('hidden');
+          btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-[#1D3557] hover:bg-[#FAF7F2] transition";
+        }
+      });
+    }
+
+    // 15 Comprehensive MCQs across SU 1 - 7
+    const mcqBank = [
+      {
+        q: "Which African proverb encapsulates the catastrophic loss of oral indigenous heritage when community elders pass away?",
+        options: [
+          "“It takes a village to raise a child.”",
+          "“When an elder dies, a library burns.”",
+          "“Smooth seas do not make skillful sailors.”",
+          "“Knowledge without wisdom is like water in the sand.”"
+        ],
+        ans: 1,
+        rationale: "Quoted prominently in Study Unit 1 (Amadou Hampâté Bâ) to illustrate that oral traditional knowledge exists within living human custodians rather than static print volumes."
+      },
+      {
+        q: "According to the International Institute for Rural Reconstruction (IIRR), knowledge held strictly by traditional healers (sangomas) or sacred lorekeepers is classified as:",
+        options: [
+          "Common Knowledge",
+          "Shared Knowledge",
+          "Specialised Knowledge",
+          "Universal Knowledge"
+        ],
+        ans: 2,
+        rationale: "Specialised knowledge is restricted to specific individuals who underwent rigorous spiritual callings or specialized apprenticeships."
+      },
+      {
+        q: "Michael & Gayton (2002) argue regarding Western and Indigenous Knowledge systems that:",
+        options: [
+          "Western science must validate indigenous knowledge before it is useful",
+          "They originate from vastly different cultures and are incommensurable for hierarchical comparison",
+          "Indigenous knowledge is merely an unrefined precursor to modern science",
+          "Both systems follow identical empirical quantitative frameworks"
+        ],
+        ans: 1,
+        rationale: "They advocate for incommensurability: recognizing both as autonomous, culturally valid ways of knowing without subordinating one to the other."
+      },
+      {
+        q: "What was the unauthorized secondary research conducted on the Havasupai Tribe's blood samples that directly contradicted their sacred creation beliefs?",
+        options: [
+          "Studies on cardiac disease and hypertension",
+          "Studies claiming their ancestors migrated from Asia across the Bering Strait",
+          "Studies proving their immunity to viral influenza",
+          "Studies cataloging traditional culinary diets"
+        ],
+        ans: 1,
+        rationale: "ASU researchers published papers suggesting Bering Strait migration from Asia, violating tribal origin narratives that the Grand Canyon is humanity's birthplace."
+      },
+      {
+        q: "Which international agreement's Article 8(j) mandates that signatories respect, preserve, and maintain traditional knowledge relevant for biodiversity conservation?",
+        options: [
+          "The World Trade Organization TRIPS Agreement",
+          "The Convention on Biological Diversity (CBD)",
+          "The Geneva Convention on Warfare",
+          "The Paris Climate Agreement"
+        ],
+        ans: 1,
+        rationale: "CBD Article 8(j) is the cornerstone global convention protecting traditional ecological knowledge and requiring equitable benefit-sharing."
+      },
+      {
+        q: "What is the primary operational objective of the 7C Digital IK Preservation Model's 'Co-design' component?",
+        options: [
+          "Allowing university computer scientists to independently design software architectures",
+          "Positioning knowledge holders at the centre of preservation technology design",
+          "Purchasing off-the-shelf Western database packages",
+          "Exporting indigenous records to foreign cloud servers"
+        ],
+        ans: 1,
+        rationale: "Co-design ensures that community elders and custodians dictate the technology interface and governance protocols."
+      },
+      {
+        q: "In Participatory Action Research (Robin McTaggart, 1989), what is the correct operational sequence of the cyclical spiral?",
+        options: [
+          "Planning → Action → Observation → Reflection",
+          "Reflection → Planning → Action → Observation",
+          "Action → Observation → Planning → Reflection",
+          "Observation → Action → Reflection → Planning"
+        ],
+        ans: 1,
+        rationale: "PAR begins with collective Reflection on social reality, followed by Planning, Action, and Observation."
+      },
+      {
+        q: "Which South African municipal library spearheaded the Ulwazi Programme to crowdsource local oral heritage in isiZulu?",
+        options: [
+          "City of Johannesburg Library",
+          "eThekwini Municipality (Durban)",
+          "Tshwane Metropolitan Library",
+          "Cape Town Central Library"
+        ],
+        ans: 1,
+        rationale: "The Ulwazi Programme was developed by eThekwini Municipal Libraries in KwaZulu-Natal using Web 2.0 collaborative tools in isiZulu."
+      },
+      {
+        q: "Why do standard Western patents fail to protect traditional knowledge?",
+        options: [
+          "Patents require novelty, individual authorship, and expire after 20 years into the public domain",
+          "Patents are completely free to register worldwide",
+          "Patents only apply to digital computer software",
+          "Traditional knowledge has already been patented by the United Nations"
+        ],
+        ans: 0,
+        rationale: "Patents mandate novelty (excluding intergenerational lore), individual corporate ownership, and expire after 20 years, making traditional knowledge vulnerable to biopiracy."
+      },
+      {
+        q: "South Africa's sui generis legislation enacted in 2019 to protect, develop, and manage indigenous knowledge is known as:",
+        options: [
+          "The Copyright Act 98 of 1978",
+          "The Protection, Promotion, Development and Management of Indigenous Knowledge Act 6 of 2019",
+          "The Promotion of Access to Information Act (PAIA)",
+          "The Electronic Communications and Transactions Act (ECTA)"
+        ],
+        ans: 1,
+        rationale: "Act 6 of 2019 established dedicated sui generis recognition for IK holders, NIKSO, and benefit-sharing frameworks."
+      },
+      {
+        q: "Which file format standard is strictly mandated by the Library of Congress for archival master preservation of indigenous oral sound histories?",
+        options: [
+          "Lossy MP3 (128 kbps)",
+          "Uncompressed Linear PCM Broadcast WAV (24-bit / 96 kHz)",
+          "Compressed AAC audio",
+          "RealAudio (RA)"
+        ],
+        ans: 1,
+        rationale: "Preservation masters require uncompressed linear PCM (WAV) to avoid the irreversible frequency loss caused by MP3 compression."
+      },
+      {
+        q: "What was Arun Agrawal's primary critique of international development agencies archiving indigenous knowledge in centralized databases?",
+        options: [
+          "Databases are too inexpensive to justify research grants",
+          "Ex-situ archiving scientises and de-contextualizes living community practices into static museum pieces",
+          "Indigenous people refuse to use computers",
+          "Western scientists already know all indigenous knowledge"
+        ],
+        ans: 1,
+        rationale: "Agrawal argued that isolating knowledge from its ecological and spiritual living context strips it of its functional authenticity."
+      },
+      {
+        q: "Before European colonial disruption, how were many indigenous societies structured with regard to gender and resource custody?",
+        options: [
+          "Strictly patriarchal with women barred from property ownership",
+          "Matrilineal and egalitarian with women serving as seed custodians and spiritual leaders",
+          "Exclusively male military councils with no female participation",
+          "Feudal monarchies governed by external colonial charters"
+        ],
+        ans: 1,
+        rationale: "Many pre-colonial communities were matrilineal and egalitarian, with women holding crucial authority in agricultural biodiversity and healing."
+      },
+      {
+        q: "During the COVID-19 pandemic, what traditional practice highlighted the resilience of remote indigenous communities?",
+        options: [
+          "Complete reliance on Western pharmaceutical supply chains",
+          "Traditional self-imposed quarantine lockdowns combined with indigenous herbal immune remedies",
+          "Abandoning ancestral territories to move into crowded urban metropolises",
+          "Ceasing all traditional leadership governance"
+        ],
+        ans: 1,
+        rationale: "Communities instituted ancestral self-quarantine protocols and traditional herbal treatments to survive supply disruptions."
+      },
+      {
+        q: "How does modern Generative AI (e.g. text-to-image models) present a novel threat of digital biopiracy to indigenous communities?",
+        options: [
+          "By automatically translating ancient texts into English",
+          "By scraping sacred patterns and ritual motifs without communal consent to generate commercial synthetic derivatives",
+          "By refusing to run on mobile smartphones in rural areas",
+          "By requiring high electrical voltage in village clinics"
+        ],
+        ans: 1,
+        rationale: "Generative AI scrapes and commercializes sacred cultural designs without attribution, consent, or benefit sharing with indigenous custodians."
+      }
+    ];
+
+    let currentMcqIdx = 0;
+    let mcqScore = 0;
+    const answeredMcqs = new Set();
+
+    function renderMcq() {
+      const q = mcqBank[currentMcqIdx];
+      document.getElementById('mcqIndexLabel').textContent = currentMcqIdx + 1;
+      document.getElementById('mcqQuestionText').textContent = `${currentMcqIdx + 1}. ${q.q}`;
+
+      const grid = document.getElementById('mcqOptionsGrid');
+      grid.innerHTML = q.options.map((opt, i) => `
+        <button onclick="selectMcqOption(${i})" id="opt-btn-${i}" class="p-3.5 rounded-xl border border-[#E8E2D8] bg-[#FAF7F2] hover:bg-white text-left text-xs font-medium text-[#2B2D42] transition flex items-center justify-between">
+          <span>${opt}</span>
+          <span class="font-mono text-[10px] text-[#6C757D] border border-[#E8E2D8] px-1.5 py-0.5 rounded bg-white">Option ${i+1}</span>
+        </button>
+      `).join('');
+
+      document.getElementById('mcqRationaleBox').className = "hidden p-4 rounded-xl text-xs space-y-1";
+      document.getElementById('prevMcqBtn').disabled = currentMcqIdx === 0;
+      document.getElementById('nextMcqBtn').textContent = currentMcqIdx === mcqBank.length - 1 ? 'Finish Drill' : 'Next Question →';
+    }
+
+    function selectMcqOption(choice) {
+      const q = mcqBank[currentMcqIdx];
+      const isCorrect = choice === q.ans;
+      const rationaleBox = document.getElementById('mcqRationaleBox');
+
+      // Highlight options
+      q.options.forEach((_, i) => {
+        const btn = document.getElementById(`opt-btn-${i}`);
+        btn.disabled = true;
+        if (i === q.ans) {
+          btn.className = "p-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-left text-xs font-bold text-emerald-900 flex items-center justify-between";
+        } else if (i === choice) {
+          btn.className = "p-3.5 rounded-xl border-2 border-red-500 bg-red-50 text-left text-xs font-bold text-red-900 flex items-center justify-between";
+        } else {
+          btn.className = "p-3.5 rounded-xl border border-[#E8E2D8] bg-[#FAF7F2] text-left text-xs opacity-50 flex items-center justify-between";
+        }
+      });
+
+      if (isCorrect) {
+        playSfx('fanfare');
+        if (!answeredMcqs.has(currentMcqIdx)) {
+          mcqScore++;
+          answeredMcqs.add(currentMcqIdx);
+          document.getElementById('mcqScoreLabel').textContent = mcqScore;
+          addXp(10);
+        }
+        rationaleBox.className = "p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs space-y-1";
+        rationaleBox.innerHTML = `<strong>✓ Correct!</strong> ${q.rationale}`;
+      } else {
+        playSfx('error');
+        rationaleBox.className = "p-4 rounded-xl bg-red-50 border border-red-200 text-red-900 text-xs space-y-1";
+        rationaleBox.innerHTML = `<strong>✕ Incorrect.</strong> ${q.rationale}`;
+      }
+    }
+
+    function prevMcq() {
+      if (currentMcqIdx > 0) {
+        playSfx('pop');
+        currentMcqIdx--;
+        renderMcq();
+      }
+    }
+    function nextMcq() {
+      if (currentMcqIdx < mcqBank.length - 1) {
+        playSfx('pop');
+        currentMcqIdx++;
+        renderMcq();
+      } else {
+        playSfx('fanfare');
+        alert(`🏁 CBT Drill Complete! You scored ${mcqScore} / ${mcqBank.length} marks.`);
+      }
+    }
+    renderMcq();
+
+    // JUMBLED SENTENCES DATA & LOGIC
+    const jumbledDrills = [
+      {
+        title: "WIPO Definition of Intellectual Property (2012)",
+        chips: ["Intellectual", "Property", "refers", "to", "creations", "of", "the", "mind", "such", "as", "inventions", "and", "artistic", "works"],
+        correct: "Intellectual Property refers to creations of the mind such as inventions and artistic works"
+      },
+      {
+        title: "The African Oral Proverb (Amadou Hampâté Bâ)",
+        chips: ["When", "an", "elder", "dies", "in", "Africa", "a", "library", "burns", "to", "the", "ground"],
+        correct: "When an elder dies in Africa a library burns to the ground"
+      },
+      {
+        title: "Robin McTaggart's Definition of PAR (1989)",
+        chips: ["Participatory", "Action", "Research", "is", "collective", "self-reflective", "enquiry", "undertaken", "to", "improve", "social", "practice"],
+        correct: "Participatory Action Research is collective self-reflective enquiry undertaken to improve social practice"
+      }
+    ];
+    let activeJumbledIdx = 0;
+    let userJumbledWords = [];
+
+    function loadJumbledDrill(idx) {
+      activeJumbledIdx = idx;
+      const drill = jumbledDrills[idx];
+      document.getElementById('jumbledTargetTitle').textContent = drill.title;
+      userJumbledWords = [];
+      renderJumbledUI();
+    }
+
+    function renderJumbledUI() {
+      const drill = jumbledDrills[activeJumbledIdx];
+      const drop = document.getElementById('jumbledDropZone');
+      const pool = document.getElementById('jumbledWordPool');
+
+      // Render Drop Zone
+      if (userJumbledWords.length === 0) {
+        drop.innerHTML = `<span class="text-xs text-[#6C757D] italic">Click chips below to construct the definition in sequence...</span>`;
+      } else {
+        drop.innerHTML = userJumbledWords.map((w, idx) => `
+          <button onclick="removeJumbledWord(${idx})" class="px-2.5 py-1 rounded-lg bg-[#1D3557] text-white text-xs font-bold shadow-sm hover:bg-[#D95D39] transition">
+            ${w} ✕
+          </button>
+        `).join('');
+      }
+
+      // Render Available Pool
+      // Shuffle unselected chips
+      const available = drill.chips.filter((_, i) => !userJumbledWords.includes(drill.chips[i]) || 
+        userJumbledWords.filter(x => x === drill.chips[i]).length < drill.chips.filter(x => x === drill.chips[i]).length
+      );
+
+      pool.innerHTML = drill.chips.map((w, i) => {
+        // check how many times w appears in userJumbledWords vs total in chips
+        const countInUser = userJumbledWords.filter(x => x === w).length;
+        const totalInDrill = drill.chips.filter(x => x === w).length;
+        const isUsed = countInUser >= totalInDrill;
+
+        return `
+          <button onclick="addJumbledWord('${w}')" ${isUsed ? 'disabled' : ''} class="px-3 py-1.5 rounded-lg border border-[#E8E2D8] ${isUsed ? 'opacity-30 bg-gray-100' : 'bg-[#FAF7F2] hover:bg-white text-[#1D3557]'} text-xs font-bold transition">
+            ${w}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function addJumbledWord(word) {
+      playSfx('pop');
+      userJumbledWords.push(word);
+      renderJumbledUI();
+    }
+
+    function removeJumbledWord(index) {
+      playSfx('pop');
+      userJumbledWords.splice(index, 1);
+      renderJumbledUI();
+    }
+
+    function resetJumbledDrill() {
+      playSfx('pop');
+      userJumbledWords = [];
+      renderJumbledUI();
+      document.getElementById('jumbledStatusBadge').textContent = 'Click chips in correct sequence';
+      document.getElementById('jumbledStatusBadge').className = 'text-xs font-mono font-bold px-2.5 py-1 rounded bg-[#FAF7F2] text-[#6C757D]';
+    }
+
+    function checkJumbledSolution() {
+      const drill = jumbledDrills[activeJumbledIdx];
+      const attempt = userJumbledWords.join(' ');
+      const badge = document.getElementById('jumbledStatusBadge');
+
+      if (attempt === drill.correct) {
+        playSfx('fanfare');
+        addXp(30);
+        badge.textContent = '✓ Perfect Sequence (+30 XP)';
+        badge.className = 'text-xs font-mono font-bold px-2.5 py-1 rounded bg-emerald-100 text-emerald-800';
+      } else {
+        playSfx('error');
+        badge.textContent = '✕ Incorrect Sequence — Try Again';
+        badge.className = 'text-xs font-mono font-bold px-2.5 py-1 rounded bg-red-100 text-red-800';
+      }
+    }
+    loadJumbledDrill(0);
+
+    // CONCEPT MATCHING ARENA
+    const matchingPairs = [
+      { id: "p1", term: "CBD Article 8(j)", desc: "Global convention mandating respect and benefit-sharing for traditional biodiversity knowledge." },
+      { id: "p2", term: "SA IK Act 6 of 2019", desc: "Sui generis legislation establishing statutory perpetual rights for indigenous custodians and NIKSO." },
+      { id: "p3", term: "The Ulwazi Programme", desc: "Participatory Web 2.0 digital library in eThekwini crowdsourcing local history in isiZulu." },
+      { id: "p4", term: "Robin McTaggart (1989)", desc: "Formulated the 16 Tenets and 4-phase cyclical spiral of Participatory Action Research." },
+      { id: "p5", term: "Nagoya Protocol (2010)", desc: "International legal instrument governing Access and Benefit-Sharing (ABS) of genetic resources." },
+      { id: "p6", term: "Broadcast WAV (24-bit/96kHz)", desc: "Mandatory uncompressed PCM archival format for preserving oral history sound recordings." }
+    ];
+
+    let selectedLeftId = null;
+    let matchedIds = new Set();
+
+    function renderMatchingUI() {
+      const leftCol = document.getElementById('matchingLeftCol');
+      const rightCol = document.getElementById('matchingRightCol');
+
+      leftCol.innerHTML = matchingPairs.map(p => {
+        const isMatched = matchedIds.has(p.id);
+        const isSelected = selectedLeftId === p.id;
+        return `
+          <button onclick="selectMatchingLeft('${p.id}')" ${isMatched ? 'disabled' : ''} class="w-full p-3 rounded-xl border text-left text-xs font-extrabold transition flex items-center justify-between ${isMatched ? 'border-emerald-300 bg-emerald-50 text-emerald-900 line-through opacity-70' : isSelected ? 'border-[#1D3557] bg-[#1D3557] text-white shadow' : 'border-[#E8E2D8] bg-[#FAF7F2] hover:bg-white text-[#1D3557]'}">
+            <span>${p.term}</span>
+            <span>${isMatched ? '✓' : '→'}</span>
+          </button>
+        `;
+      }).join('');
+
+      // Shuffle right definitions deterministically
+      const shuffled = [...matchingPairs].sort((a, b) => b.desc.localeCompare(a.desc));
+      rightCol.innerHTML = shuffled.map(p => {
+        const isMatched = matchedIds.has(p.id);
+        return `
+          <button onclick="selectMatchingRight('${p.id}')" ${isMatched ? 'disabled' : ''} class="w-full p-3 rounded-xl border text-left text-xs font-medium transition ${isMatched ? 'border-emerald-300 bg-emerald-50 text-emerald-900 line-through opacity-70' : 'border-[#E8E2D8] bg-white hover:border-[#1D3557] text-[#2B2D42]'}">
+            ${p.desc}
+          </button>
+        `;
+      }).join('');
+
+      document.getElementById('matchingScorePill').textContent = `${matchedIds.size} / ${matchingPairs.length} Matched`;
+    }
+
+    function selectMatchingLeft(id) {
+      playSfx('pop');
+      selectedLeftId = id;
+      renderMatchingUI();
+    }
+
+    function selectMatchingRight(id) {
+      if (!selectedLeftId) {
+        playSfx('error');
+        alert("Please select a term on the left first.");
+        return;
+      }
+
+      if (selectedLeftId === id) {
+        playSfx('fanfare');
+        matchedIds.add(id);
+        selectedLeftId = null;
+        addXp(20);
+        renderMatchingUI();
+        if (matchedIds.size === matchingPairs.length) {
+          alert("🎉 All Concept Pairs Matched! +120 Distinction XP earned.");
+        }
+      } else {
+        playSfx('error');
+        selectedLeftId = null;
+        renderMatchingUI();
+      }
+    }
+
+    function resetMatchingDrill() {
+      playSfx('pop');
+      matchedIds.clear();
+      selectedLeftId = null;
+      renderMatchingUI();
+    }
+    renderMatchingUI();
+
+    // --- 10. FINAL BOSS SIMULATOR (100 MARKS) ---
+    let bossSeconds = 180 * 60; // 3 hours
+    let bossInterval = null;
+
+    function toggleBossExamTimer() {
+      const btn = document.getElementById('bossStartBtn');
+      if (bossInterval) {
+        clearInterval(bossInterval);
+        bossInterval = null;
+        btn.textContent = 'Resume Simulation';
+        playSfx('pop');
+      } else {
+        playSfx('fanfare');
+        btn.textContent = 'Pause Simulation';
+        bossInterval = setInterval(() => {
+          if (bossSeconds <= 0) {
+            clearInterval(bossInterval);
+            alert("⏰ Time is UP! The 3 hours allocated for the IT AIM Labs CBT Exam have elapsed.");
+            return;
+          }
+          bossSeconds--;
+          const hrs = Math.floor(bossSeconds / 3600);
+          const mins = Math.floor((bossSeconds % 3600) / 60);
+          const secs = bossSeconds % 60;
+          document.getElementById('bossTimerDisplay').textContent = 
+            `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }, 1000);
+      }
+    }
+
+    function evaluateFinalBossExam() {
+      playSfx('fanfare');
+      
+      const q1 = document.getElementById('bossQ1').value;
+      const q2 = document.getElementById('bossQ2').value;
+      const q3 = document.getElementById('bossQ3').value;
+      const q4 = document.getElementById('bossQ4').value;
+      const e1 = document.getElementById('bossEssay1').value;
+      const e2 = document.getElementById('bossEssay2').value;
+      const e3 = document.getElementById('bossEssay3').value;
+
+      let score = 0;
+      let notes = [];
+
+      // Q1 Check
+      if (/common/i.test(q1) && /shared/i.test(q1) && /speciali/i.test(q1)) {
+        score += 5;
+        notes.push("✓ Q1: Excellent IIRR triad articulation (+5M)");
+      } else {
+        notes.push("✕ Q1: Missing IIRR definitions (Common, Shared, Specialised) (0/5M)");
+      }
+
+      // Q2 Check
+      if (/reflect/i.test(q2) && /plan/i.test(q2) && /action/i.test(q2) && /observ/i.test(q2)) {
+        score += 5;
+        notes.push("✓ Q2: Perfect 4-phase PAR sequence (+5M)");
+      } else {
+        notes.push("✕ Q2: Incomplete PAR spiral stages (0/5M)");
+      }
+
+      // Q3 Check
+      if (/lossy/i.test(q3) || /frequency/i.test(q3) || /pcm/i.test(q3) || /compress/i.test(q3)) {
+        score += 5;
+        notes.push("✓ Q3: Master digital format preservation analysis (+5M)");
+      } else {
+        notes.push("✕ Q3: Technical format rationale missing (0/5M)");
+      }
+
+      // Q4 Check
+      if (/cbd/i.test(q4) || /nagoya/i.test(q4) || /nikso/i.test(q4) || /ulwazi/i.test(q4)) {
+        score += 10;
+        notes.push("✓ Q4: Accurate policy instrument associations (+10M)");
+      } else {
+        notes.push("✕ Q4: Incomplete policy instruments (+5/10M)");
+        score += 5;
+      }
+
+      // Essay 1 Check (25M)
+      const e1Paras = e1.split(/\n+/).filter(p => p.trim().length > 0).length;
+      if (/havasupai/i.test(e1) && /consent|fpic/i.test(e1) && /schizo|bering/i.test(e1) && e1Paras >= 3) {
+        score += 24;
+        notes.push("✓ Essay 1: High-distinction Havasupai analysis with 3+ structured paragraphs (+24/25M)");
+      } else {
+        score += 15;
+        notes.push("⚠️ Essay 1: Basic coverage; ensure 3+ distinct paragraphs [Identify → Discuss → Example] (+15/25M)");
+      }
+
+      // Essay 2 Check (25M)
+      const e2Paras = e2.split(/\n+/).filter(p => p.trim().length > 0).length;
+      if (/7c|co-design/i.test(e2) && /ulwazi/i.test(e2) && /gate/i.test(e2) && e2Paras >= 3) {
+        score += 23;
+        notes.push("✓ Essay 2: Robust 7C & Ulwazi synthesis with paragraph discipline (+23/25M)");
+      } else {
+        score += 14;
+        notes.push("⚠️ Essay 2: Add more 7C terminology and explicit Ulwazi details (+14/25M)");
+      }
+
+      // Essay 3 Check (25M)
+      const e3Paras = e3.split(/\n+/).filter(p => p.trim().length > 0).length;
+      if (/matrilineal|patriarch/i.test(e3) && /ai|generative/i.test(e3) && e3Paras >= 3) {
+        score += 23;
+        notes.push("✓ Essay 3: Strong historical and GenAI critique (+23/25M)");
+      } else {
+        score += 14;
+        notes.push("⚠️ Essay 3: Review matrilineal pre-colonial systems and GenAI motifs (+14/25M)");
+      }
+
+      const letterGrade = score >= 75 ? "DISTINCTION (A)" : score >= 60 ? "FIRST CLASS PASS (B)" : score >= 50 ? "PASS (C)" : "FAIL (F)";
+      const resultCard = document.getElementById('bossResultsCard');
+      resultCard.classList.remove('hidden');
+      resultCard.innerHTML = `
+        <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+          <div>
+            <span class="text-xs font-mono font-bold text-[#D95D39]">SIMULATION REPORT</span>
+            <h3 class="text-xl font-black text-[#1D3557]">Calculated Exam Score: ${score} / 100 Marks</h3>
+          </div>
+          <span class="px-3 py-1 rounded-xl text-xs font-black ${score >= 75 ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+            ${letterGrade}
+          </span>
+        </div>
+        <div class="space-y-1.5 text-xs">
+          <strong class="text-[#1D3557]">Diagnostic Evaluation:</strong>
+          <ul class="space-y-1 text-[#2B2D42]">
+            ${notes.map(n => `<li>${n}</li>`).join('')}
+          </ul>
+        </div>
+        <div class="p-3 bg-white border border-[#E8E2D8] rounded-xl text-xs">
+          <strong>Exam Morning Advice:</strong> You are primed for tomorrow's 11:15 AM sitting in IT AIM Labs. Keep paragraphs segmented into [Identify → Discuss → Example].
+        </div>
+      `;
+      resultCard.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
