@@ -500,7 +500,7 @@
 
               <!-- Canvas -->
               <div class="relative rounded-xl overflow-hidden border border-[#E0D9CD] bg-[#FAF7F2]">
-                <canvas id="megaphone-canvas" width="560" height="260" class="w-full h-56 block"></canvas>
+                <canvas id="megaphone-canvas" width="560" height="260" class="w-full aspect-[560/260] block"></canvas>
               </div>
 
               <!-- Controls -->
@@ -579,6 +579,14 @@
                   </div>
                 </div>
 
+                <div class="pt-2 flex items-center justify-between text-xs border-t border-[#E8E2D8]">
+                  <label class="flex items-center gap-2 font-bold text-[#1D3557] cursor-pointer">
+                    <input id="soup-cross-toggle" type="checkbox" checked onchange="updateSoupStation()" class="rounded accent-[#2B4C7E]">
+                    <span>Include Cross-Products (Xᵢ × Xⱼ)</span>
+                  </label>
+                  <span class="text-[11px] text-[#7A8294] font-mono-code">df = 2k + k(k-1)/2 vs 2k</span>
+                </div>
+
                 <div class="p-2.5 bg-white rounded-lg border-2 border-[#2B4C7E] flex items-center justify-between text-xs font-mono-code">
                   <span class="font-bold text-[#1D3557]">Total Auxiliary df:</span>
                   <span id="soup-total-df" class="font-black text-[#2B4C7E] text-base">5 Regressors</span>
@@ -620,7 +628,7 @@
 
               <!-- Parabola Canvas -->
               <div class="relative rounded-xl overflow-hidden border border-[#E0D9CD] bg-[#FAF7F2]">
-                <canvas id="reset-canvas" width="560" height="260" class="w-full h-56 block"></canvas>
+                <canvas id="reset-canvas" width="560" height="260" class="w-full aspect-[560/260] block"></canvas>
               </div>
 
               <!-- Controls -->
@@ -665,7 +673,7 @@
 
               <!-- Radial Gauge Canvas -->
               <div class="relative rounded-xl overflow-hidden border border-[#E0D9CD] bg-[#FAF7F2] p-2 flex justify-center">
-                <canvas id="dw-dial-canvas" width="460" height="230" class="w-full max-w-md block"></canvas>
+                <canvas id="dw-dial-canvas" width="460" height="230" class="w-full max-w-md aspect-[2/1] block"></canvas>
               </div>
 
               <!-- Dial Controls -->
@@ -742,18 +750,28 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           
           <!-- Flipcard 1: O.R.M.I. -->
-          <div class="paper-card p-5 bg-white border border-[#D6CEC1] hover:border-[#D95D39] transition-all flex flex-col justify-between space-y-4">
-            <div class="space-y-2">
+          <div id="mnemonic-card-ormi" class="paper-card p-5 bg-white border border-[#D6CEC1] hover:border-[#D95D39] transition-all flex flex-col justify-between space-y-4">
+            <div>
               <div class="flex items-center justify-between">
                 <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] font-mono-code font-bold">MNEMONIC #1 • 4 MARKS</span>
                 <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 5, Slide 4</span>
               </div>
-              <h3 class="font-extrabold text-[#1D3557] text-base">4 Reasons for Disturbance Term (O.R.M.I.)</h3>
-              <p class="text-xs text-[#555A68]">
-                Why does the disturbance term \(u_i\) exist in economic models? Never freeze when asked this 4-mark question.
-              </p>
+              <h3 class="font-extrabold text-[#1D3557] text-base mt-2">4 Reasons for Disturbance Term (O.R.M.I.)</h3>
 
-              <div class="space-y-2 pt-2 text-xs">
+              <!-- Front: Active Recall -->
+              <div id="ormi-front" class="space-y-3 pt-2">
+                <p class="text-xs text-[#555A68]">Why does the disturbance term \(u_i\) exist in economic models? Test your recall before checking!</p>
+                <div class="grid grid-cols-4 gap-2 text-center py-3 font-mono-code">
+                  <div class="p-2.5 rounded-xl bg-[#FAF3EC] border border-[#F0DBC9] font-black text-[#D95D39] text-lg">O</div>
+                  <div class="p-2.5 rounded-xl bg-[#FAF3EC] border border-[#F0DBC9] font-black text-[#D95D39] text-lg">R</div>
+                  <div class="p-2.5 rounded-xl bg-[#FAF3EC] border border-[#F0DBC9] font-black text-[#D95D39] text-lg">M</div>
+                  <div class="p-2.5 rounded-xl bg-[#FAF3EC] border border-[#F0DBC9] font-black text-[#D95D39] text-lg">I</div>
+                </div>
+                <p class="text-[11px] text-center text-[#7A8294] italic">Can you state the 4 factors represented by O, R, M, and I?</p>
+              </div>
+
+              <!-- Back: Full Model Solution -->
+              <div id="ormi-back" class="hidden space-y-2 pt-2 text-xs">
                 <div class="p-2 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
                   <strong class="text-[#D95D39]">O — Omission of minor variables:</strong> Models must remain parsimonious; thousands of minor factors cannot all be included.
                 </div>
@@ -769,77 +787,108 @@
               </div>
             </div>
 
-            <button onclick="copyMnemonicMemo('ormi')" class="paper-btn w-full py-2 bg-[#FAF3EC] hover:bg-[#F3E5D8] text-xs font-bold text-[#D95D39] border border-[#F0DBC9] flex items-center justify-center gap-1.5">
-              <span>📋 Copy 4-Mark Memo Paragraph</span>
-            </button>
+            <div class="pt-2 flex items-center gap-2">
+              <button onclick="toggleMnemonicCard('ormi')" class="paper-btn flex-1 py-2 bg-white hover:bg-[#FAF7F2] text-xs font-bold text-[#1D3557] border border-[#D6CEC1]">
+                <span id="ormi-toggle-text">🔄 Test Recall / Flip</span>
+              </button>
+              <button onclick="copyMnemonicMemo('ormi')" class="paper-btn flex-1 py-2 bg-[#FAF3EC] hover:bg-[#F3E5D8] text-xs font-bold text-[#D95D39] border border-[#F0DBC9] flex items-center justify-center gap-1.5">
+                <span>📋 Copy Memo</span>
+              </button>
+            </div>
           </div>
 
           <!-- Flipcard 2: I.N.A.N. -->
-          <div class="paper-card p-5 bg-white border border-[#D6CEC1] hover:border-[#2B4C7E] transition-all flex flex-col justify-between space-y-4">
-            <div class="space-y-2">
+          <div id="mnemonic-card-inan" class="paper-card p-5 bg-white border border-[#D6CEC1] hover:border-[#2B4C7E] transition-all flex flex-col justify-between space-y-4">
+            <div>
               <div class="flex items-center justify-between">
                 <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#EBF3F5] text-[#2B4C7E] font-mono-code font-bold">MNEMONIC #2 • 4 MARKS</span>
-                <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 11, Slide 9</span>
+                <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 11, Slide 14</span>
               </div>
-              <h3 class="font-extrabold text-[#1D3557] text-base">4 DW Test Assumptions (I.N.A.N.)</h3>
-              <p class="text-xs text-[#555A68]">
-                What 4 conditions must hold to validly apply the Durbin-Watson \(d\) test?
-              </p>
+              <h3 class="font-extrabold text-[#1D3557] text-base mt-2">4 DW Test Assumptions (I.N.A.N.)</h3>
 
-              <div class="space-y-2 pt-2 text-xs">
+              <!-- Front: Active Recall -->
+              <div id="inan-front" class="space-y-3 pt-2">
+                <p class="text-xs text-[#555A68]">What are the 4 strict prerequisites required for Durbin-Watson \(d\) to be valid?</p>
+                <div class="grid grid-cols-4 gap-2 text-center py-3 font-mono-code">
+                  <div class="p-2.5 rounded-xl bg-[#EBF3F5] border border-[#BCD4D6] font-black text-[#2B4C7E] text-lg">I</div>
+                  <div class="p-2.5 rounded-xl bg-[#EBF3F5] border border-[#BCD4D6] font-black text-[#2B4C7E] text-lg">N</div>
+                  <div class="p-2.5 rounded-xl bg-[#EBF3F5] border border-[#BCD4D6] font-black text-[#2B4C7E] text-lg">A</div>
+                  <div class="p-2.5 rounded-xl bg-[#EBF3F5] border border-[#BCD4D6] font-black text-[#2B4C7E] text-lg">N</div>
+                </div>
+                <p class="text-[11px] text-center text-[#7A8294] italic">Remember: The 2nd 'N' is the most dangerous examiner trap!</p>
+              </div>
+
+              <!-- Back: Full Model Solution -->
+              <div id="inan-back" class="hidden space-y-2 pt-2 text-xs">
                 <div class="p-2 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
-                  <strong class="text-[#2B4C7E]">I — Intercept present:</strong> The regression equation must contain an explicit constant parameter (\(\beta_1\)).
+                  <strong class="text-[#2B4C7E]">I — Intercept included:</strong> The regression equation MUST have an explicit constant term (\(eta_1\)).
                 </div>
                 <div class="p-2 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
-                  <strong class="text-[#2B4C7E]">N — Non-stochastic regressors:</strong> Explanatory \(X\) variables are fixed in repeated sampling (strictly exogenous).
+                  <strong class="text-[#2B4C7E]">N — Non-stochastic regressors:</strong> Explanatory variables are fixed in repeated sampling (strictly exogenous).
                 </div>
                 <div class="p-2 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
-                  <strong class="text-[#2B4C7E]">A — AR(1) scheme only:</strong> First-order autocorrelation: \(u_t = \rho u_{t-1} + \epsilon_t\). Does not test higher lags.
+                  <strong class="text-[#2B4C7E]">A — Autoregressive AR(1) only:</strong> Disturbances follow \(u_t = 
+ho u_{t-1} + \epsilon_t\) (does not test higher-order lags).
                 </div>
                 <div class="p-2 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
-                  <strong class="text-[#2B4C7E]">N — No lagged dependent regressor:</strong> No \(Y_{t-1}\) on the right-hand side. (If present, \(d\) is biased toward 2!).
+                  <strong class="text-[#2B4C7E]">N — No lagged dependent regressor:</strong> \(Y_{t-1}\) must NOT appear as an explanatory variable (biases \(d\) toward 2).
                 </div>
               </div>
             </div>
 
-            <button onclick="copyMnemonicMemo('inan')" class="paper-btn w-full py-2 bg-[#EBF3F5] hover:bg-[#D9EAEB] text-xs font-bold text-[#2B4C7E] border border-[#BCD4D6] flex items-center justify-center gap-1.5">
-              <span>📋 Copy 4-Mark Memo Paragraph</span>
-            </button>
+            <div class="pt-2 flex items-center gap-2">
+              <button onclick="toggleMnemonicCard('inan')" class="paper-btn flex-1 py-2 bg-white hover:bg-[#FAF7F2] text-xs font-bold text-[#1D3557] border border-[#D6CEC1]">
+                <span id="inan-toggle-text">🔄 Test Recall / Flip</span>
+              </button>
+              <button onclick="copyMnemonicMemo('inan')" class="paper-btn flex-1 py-2 bg-[#EBF3F5] hover:bg-[#D9EAEB] text-xs font-bold text-[#2B4C7E] border border-[#BCD4D6] flex items-center justify-center gap-1.5">
+                <span>📋 Copy Memo</span>
+              </button>
+            </div>
           </div>
 
           <!-- Flipcard 3: The BLUE Status Trap -->
-          <div class="paper-card p-5 bg-white border border-[#D6CEC1] hover:border-[#2A9D8F] transition-all flex flex-col justify-between space-y-4">
-            <div class="space-y-2">
+          <div id="mnemonic-card-blue" class="paper-card p-5 bg-white border border-[#D6CEC1] hover:border-[#2A9D8F] transition-all flex flex-col justify-between space-y-4">
+            <div>
               <div class="flex items-center justify-between">
-                <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#E8F8F5] text-[#2A9D8F] font-mono-code font-bold">STATUS TRAP • 6 MARKS</span>
-                <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 9 & 10</span>
+                <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#E8F8F5] text-[#2A9D8F] font-mono-code font-bold">THEORY TRAP • 6 MARKS</span>
+                <span class="text-[10px] text-[#7A8294] font-mono-code">Comprehensive Matrix</span>
               </div>
-              <h3 class="font-extrabold text-[#1D3557] text-base">The "BLUE" Status Trap Matrix</h3>
-              <p class="text-xs text-[#555A68]">
-                Examiners intentionally try to trip you up on whether OLS remains BLUE across the 3 major violations.
-              </p>
+              <h3 class="font-extrabold text-[#1D3557] text-base mt-2">The "BLUE" Status Trap Matrix</h3>
 
-              <div class="space-y-2 pt-2 text-xs font-mono-code">
-                <div class="p-2 rounded-lg bg-[#E8F8F5] border border-[#A7E3D8]">
-                  <div class="font-bold text-[#2A9D8F]">1. Multicollinearity:</div>
-                  <div class="text-[#1D3557] text-[11px] font-sans">OLS is <strong>STILL BLUE</strong>! Variances are wide, but OLS retains minimum variance among all linear unbiased estimators.</div>
+              <!-- Front: Active Recall -->
+              <div id="blue-front" class="space-y-3 pt-2">
+                <p class="text-xs text-[#555A68]">Which CLRM violations destroy BLUE status? Test yourself before checking!</p>
+                <div class="p-3 bg-[#FAF7F2] rounded-xl border border-[#E8E2D8] text-xs space-y-1 font-mono-code">
+                  <div>1. Multicollinearity: <strong>BLUE or NOT?</strong></div>
+                  <div>2. Heteroskedasticity: <strong>BLUE or NOT?</strong></div>
+                  <div>3. Autocorrelation: <strong>BLUE or NOT?</strong></div>
+                </div>
+                <p class="text-[11px] text-center text-[#7A8294] italic">Students lose 6 marks here by guessing OLS is biased!</p>
+              </div>
+
+              <!-- Back: Full Model Solution -->
+              <div id="blue-back" class="hidden space-y-2 pt-2 text-xs">
+                <div class="p-2 rounded-lg bg-[#E8F8F5] border border-[#BCD4D6]">
+                  <strong class="text-[#2A9D8F]">1. Multicollinearity: OLS IS STILL BLUE!</strong> Coefficients are unbiased and retain minimum variance. Only sample variances are large.
                 </div>
                 <div class="p-2 rounded-lg bg-[#FAF3EC] border border-[#F0DBC9]">
-                  <div class="font-bold text-[#D95D39]">2. Heteroskedasticity:</div>
-                  <div class="text-[#1D3557] text-[11px] font-sans">OLS is linear & unbiased, but <strong>LOSES the "B"</strong> (inefficient; standard errors are invalid).</div>
+                  <strong class="text-[#D95D39]">2. Heteroskedasticity: NOT BLUE!</strong> OLS is unbiased but NOT efficient (loses minimum variance). Usual SEs are invalid.
                 </div>
                 <div class="p-2 rounded-lg bg-[#FAF3EC] border border-[#F0DBC9]">
-                  <div class="font-bold text-[#D95D39]">3. Autocorrelation:</div>
-                  <div class="text-[#1D3557] text-[11px] font-sans">OLS is linear & unbiased, but <strong>LOSES the "B"</strong> (inefficient; standard errors are invalid).</div>
+                  <strong class="text-[#D95D39]">3. Autocorrelation: NOT BLUE!</strong> OLS is unbiased but NOT efficient. Usual SEs underestimate true variance severely.
                 </div>
               </div>
             </div>
 
-            <button onclick="copyMnemonicMemo('blue')" class="paper-btn w-full py-2 bg-[#E8F8F5] hover:bg-[#D5EFEA] text-xs font-bold text-[#2A9D8F] border border-[#A7E3D8] flex items-center justify-center gap-1.5">
-              <span>📋 Copy BLUE Distinction Memo</span>
-            </button>
+            <div class="pt-2 flex items-center gap-2">
+              <button onclick="toggleMnemonicCard('blue')" class="paper-btn flex-1 py-2 bg-white hover:bg-[#FAF7F2] text-xs font-bold text-[#1D3557] border border-[#D6CEC1]">
+                <span id="blue-toggle-text">🔄 Test Recall / Flip</span>
+              </button>
+              <button onclick="copyMnemonicMemo('blue')" class="paper-btn flex-1 py-2 bg-[#E8F8F5] hover:bg-[#D9EAEB] text-xs font-bold text-[#2A9D8F] border border-[#BCD4D6] flex items-center justify-center gap-1.5">
+                <span>📋 Copy Memo</span>
+              </button>
+            </div>
           </div>
-
         </div>
       </div>
 
@@ -874,25 +923,25 @@
                 <div class="grid grid-cols-2 gap-2">
                   <div>
                     <label class="block text-[#7A8294] text-[10px]">Unrestricted R² (UR):</label>
-                    <input id="ftest-r2-ur" type="number" step="0.001" value="0.485" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
+                    <input id="ftest-r2-ur" type="number" step="0.001" value="0.6542" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
                   </div>
                   <div>
                     <label class="block text-[#7A8294] text-[10px]">Restricted R² (R):</label>
-                    <input id="ftest-r2-r" type="number" step="0.001" value="0.412" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
+                    <input id="ftest-r2-r" type="number" step="0.001" value="0.6120" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
                   </div>
                 </div>
                 <div class="grid grid-cols-3 gap-2">
                   <div>
                     <label class="block text-[#7A8294] text-[10px]">Restrictions (q):</label>
-                    <input id="ftest-q" type="number" value="3" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
+                    <input id="ftest-q" type="number" value="2" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
                   </div>
                   <div>
                     <label class="block text-[#7A8294] text-[10px]">Sample (n):</label>
-                    <input id="ftest-n" type="number" value="120" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
+                    <input id="ftest-n" type="number" value="425" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
                   </div>
                   <div>
                     <label class="block text-[#7A8294] text-[10px]">Total k_UR:</label>
-                    <input id="ftest-k" type="number" value="6" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
+                    <input id="ftest-k" type="number" value="5" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
                   </div>
                 </div>
               </div>
@@ -1279,7 +1328,7 @@
       <!-- ======================================================= -->
       <!-- SECTION 2: TRI-LEVEL WORD MEMO GENERATOR                -->
       <!-- ======================================================= -->
-      <div class="paper-card p-6 bg-white border-2 border-[#4E878C] space-y-5 shadow-sm">
+      <div id="tri-level-memo-container" class="paper-card p-6 bg-white border-2 border-[#4E878C] space-y-5 shadow-sm">
         
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E8E2D8] pb-3">
           <div>
@@ -1288,55 +1337,142 @@
             <p class="text-xs text-[#555A68]">Full marks on every variable interpretation requires three exact pillars: Significance, Magnitude, and Economic Theory.</p>
           </div>
           
-          <div class="flex items-center gap-2">
-            <button onclick="revealExemplarMemo()" class="paper-btn px-3.5 py-1.5 bg-[#FAF3EC] text-[#D95D39] border border-[#F0DBC9] hover:bg-[#F3E5D8] text-xs font-bold flex items-center gap-1.5">
-              <span>✨ Reveal 100% Exemplar Memo</span>
+          <div class="flex flex-wrap items-center gap-2">
+            <button id="memo-tab-fillin" onclick="setMemoMode('fillin')" class="paper-btn px-3 py-1.5 bg-[#4E878C] text-white text-xs font-bold rounded-lg shadow-sm">
+              ✍️ Fill-in Practice
             </button>
-            <button onclick="copyTriLevelWordMemo()" class="paper-btn px-4 py-1.5 bg-[#4E878C] text-white hover:bg-[#3D6C70] text-xs font-bold flex items-center gap-1.5 shadow-sm">
-              <span>📋 Copy for Word Doc (+15 XP)</span>
+            <button id="memo-tab-exemplar" onclick="setMemoMode('exemplar')" class="paper-btn px-3 py-1.5 bg-[#FAF7F2] text-[#1D3557] border border-[#D6CEC1] text-xs font-bold rounded-lg hover:bg-[#EAE4D9]">
+              ✨ 100% Exemplar
+            </button>
+            <button onclick="copyTriLevelWordMemo()" class="paper-btn px-3.5 py-1.5 bg-[#1D3557] text-white hover:bg-[#2B4C7E] text-xs font-bold flex items-center gap-1.5 shadow-sm">
+              <span>📋 Copy for Word (+15 XP)</span>
             </button>
           </div>
         </div>
 
-        <!-- The 3 Levels Breakdown -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          
-          <!-- Level 1: Significance -->
-          <div class="p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="font-extrabold text-xs text-[#1D3557]">Level 1: Significance</span>
-              <span class="px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#1D3557] text-[10px] font-bold">+1 Mark</span>
+        <!-- Mode 1: Scaffolded Fill-in Practice Mode -->
+        <div id="memo-fillin-view" class="space-y-4">
+          <div class="p-3 bg-[#EBF3F5] rounded-xl border border-[#BCD4D6] flex items-center justify-between text-xs">
+            <span class="text-[#1D3557] font-semibold">Currently Interpreting: <strong id="memo-fillin-var-badge" class="font-mono-code text-[#D95D39]">ROE</strong></span>
+            <span class="text-[11px] text-[#555A68]">Select correct tokens, then verify below</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Level 1 Fill-in -->
+            <div id="fillin-card-1" class="p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-extrabold text-xs text-[#1D3557]">Level 1: Significance (+1m)</span>
+                <span id="fill-status-1" class="text-[10px] font-bold text-[#7A8294]">PENDING</span>
+              </div>
+              <div class="text-xs text-[#1D3557] leading-relaxed space-y-2">
+                <p>
+                  <strong id="fill-var-name-1">ROE</strong> is
+                  <select id="fill-sig-select" class="p-1 rounded border border-[#D6CEC1] bg-white font-bold text-xs">
+                    <option value="">-- choose --</option>
+                    <option value="sig">statistically significant</option>
+                    <option value="insig">statistically insignificant</option>
+                  </select>
+                  at the 5% level because p-value is
+                  <select id="fill-cmp-select" class="p-1 rounded border border-[#D6CEC1] bg-white font-bold text-xs">
+                    <option value="">-- choose --</option>
+                    <option value="lt">&lt; 0.05</option>
+                    <option value="gte">&ge; 0.05</option>
+                  </select>,
+                  <select id="fill-h0-select" class="p-1 rounded border border-[#D6CEC1] bg-white font-bold text-xs">
+                    <option value="">-- choose --</option>
+                    <option value="reject">rejecting H₀ (β = 0)</option>
+                    <option value="fail">failing to reject H₀</option>
+                  </select>.
+                </p>
+              </div>
             </div>
-            <p class="text-[11px] text-[#7A8294]">State significance level, test statistic/p-value, and reject/fail to reject H₀.</p>
-            <div id="memo-level1-box" class="p-3 bg-white rounded-lg border border-[#E8E2D8] text-xs text-[#1D3557] leading-relaxed font-mono-code">
-              <!-- Dynamically populated -->
+
+            <!-- Level 2 Fill-in -->
+            <div id="fillin-card-2" class="p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-extrabold text-xs text-[#1D3557]">Level 2: Magnitude (+1m)</span>
+                <span id="fill-status-2" class="text-[10px] font-bold text-[#7A8294]">PENDING</span>
+              </div>
+              <div class="text-xs text-[#1D3557] leading-relaxed space-y-2">
+                <p>
+                  Holding all other variables constant (<em>ceteris paribus</em>), an increase of 1 unit in <strong id="fill-var-name-2">ROE</strong> is associated with an expected
+                  <select id="fill-dir-select" class="p-1 rounded border border-[#D6CEC1] bg-white font-bold text-xs">
+                    <option value="">-- choose --</option>
+                    <option value="inc">increase</option>
+                    <option value="dec">decrease</option>
+                  </select>
+                  in <strong id="fill-depvar-name">SALARY</strong> of <span id="fill-mag-val" class="font-mono-code font-bold text-[#1D3557]">11.5420</span> units.
+                </p>
+              </div>
+            </div>
+
+            <!-- Level 3 Fill-in -->
+            <div id="fillin-card-3" class="p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-extrabold text-xs text-[#1D3557]">Level 3: Theory (+1m)</span>
+                <span id="fill-status-3" class="text-[10px] font-bold text-[#7A8294]">PENDING</span>
+              </div>
+              <div class="text-xs text-[#1D3557] leading-relaxed space-y-2">
+                <p class="text-[11px] text-[#7A8294]">Theoretical justification:</p>
+                <select id="fill-theory-select" class="w-full p-2 rounded border border-[#D6CEC1] bg-white text-xs font-mono-code">
+                  <option value="">-- select theoretical framework --</option>
+                  <option value="correct" id="fill-theory-correct-opt">Matches economic intuition</option>
+                  <option value="distort">Distorts BLUE efficiency under heteroskedasticity</option>
+                  <option value="random">Random noise due to measurement error in survey responses</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          <!-- Level 2: Magnitude & Ceteris Paribus -->
-          <div class="p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="font-extrabold text-xs text-[#1D3557]">Level 2: Magnitude</span>
-              <span class="px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#1D3557] text-[10px] font-bold">+1 Mark</span>
+          <div class="flex items-center justify-between pt-1">
+            <button onclick="checkMemoFillIn()" class="paper-btn px-5 py-2 bg-[#2A9D8F] text-white text-xs font-extrabold rounded-lg shadow-sm flex items-center gap-2">
+              <span>✓ Check My Fill-in Answers</span>
+            </button>
+            <button onclick="revealExemplarMemo()" class="text-xs text-[#D95D39] font-bold hover:underline">
+              Stuck? Reveal 100% Exemplar Memo →
+            </button>
+          </div>
+        </div>
+
+        <!-- Mode 2: 100% Exemplar Memo View -->
+        <div id="memo-exemplar-view" class="hidden space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Level 1: Significance -->
+            <div class="p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-extrabold text-xs text-[#1D3557]">Level 1: Significance</span>
+                <span class="px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#1D3557] text-[10px] font-bold">+1 Mark</span>
+              </div>
+              <p class="text-[11px] text-[#7A8294]">State significance level, test statistic/p-value, and reject/fail to reject H₀.</p>
+              <div id="memo-level1-box" class="p-3 bg-white rounded-lg border border-[#E8E2D8] text-xs text-[#1D3557] leading-relaxed font-mono-code">
+                <!-- Dynamically populated -->
+              </div>
             </div>
-            <p class="text-[11px] text-[#7A8294]">Quantify expected change with units and the mandatory phrase <em>"holding other variables constant"</em>.</p>
-            <div id="memo-level2-box" class="p-3 bg-white rounded-lg border border-[#E8E2D8] text-xs text-[#1D3557] leading-relaxed font-mono-code">
-              <!-- Dynamically populated -->
+
+            <!-- Level 2: Magnitude & Ceteris Paribus -->
+            <div class="p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-extrabold text-xs text-[#1D3557]">Level 2: Magnitude</span>
+                <span class="px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#1D3557] text-[10px] font-bold">+1 Mark</span>
+              </div>
+              <p class="text-[11px] text-[#7A8294]">Quantify expected change with units and mandatory <em>"holding other variables constant"</em>.</p>
+              <div id="memo-level2-box" class="p-3 bg-white rounded-lg border border-[#E8E2D8] text-xs text-[#1D3557] leading-relaxed font-mono-code">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Level 3: Economic Theory -->
+            <div class="p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-extrabold text-xs text-[#1D3557]">Level 3: Economic Theory</span>
+                <span class="px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#1D3557] text-[10px] font-bold">+1 Mark</span>
+              </div>
+              <p class="text-[11px] text-[#7A8294]">Link sign of slope to theoretical intuition (e.g. Human Capital, Principal-Agent).</p>
+              <div id="memo-level3-box" class="p-3 bg-white rounded-lg border border-[#E8E2D8] text-xs text-[#1D3557] leading-relaxed font-mono-code">
+                <!-- Dynamically populated -->
+              </div>
             </div>
           </div>
-
-          <!-- Level 3: Economic Theory -->
-          <div class="p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="font-extrabold text-xs text-[#1D3557]">Level 3: Economic Theory</span>
-              <span class="px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#1D3557] text-[10px] font-bold">+1 Mark</span>
-            </div>
-            <p class="text-[11px] text-[#7A8294]">Link sign of slope to theoretical intuition (e.g. Human Capital, Profit Maximization).</p>
-            <div id="memo-level3-box" class="p-3 bg-white rounded-lg border border-[#E8E2D8] text-xs text-[#1D3557] leading-relaxed font-mono-code">
-              <!-- Dynamically populated -->
-            </div>
-          </div>
-
         </div>
 
       </div>
@@ -1344,9 +1480,9 @@
     </div>
 
     <!-- ======================================================= -->
-    <!-- SLIDE-UP BOTTOM SHEET FOR WORD MEMO (MOBILE ONLY)       -->
+    <!-- SLIDE-UP BOTTOM SHEET FOR WORD MEMO (MOBILE ONLY)       --> (MOBILE ONLY)       -->
     <!-- ======================================================= -->
-    <div id="mobile-memo-bottom-sheet" class="fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-2xl border-t-2 border-[#1D3557] shadow-2xl p-5 space-y-4 transform translate-y-full transition-transform duration-300 md:hidden max-h-[85vh] overflow-y-auto">
+    <div id="mobile-memo-bottom-sheet" class="fixed inset-x-0 bottom-0 z-[70] pb-6 bg-white rounded-t-2xl border-t-2 border-[#1D3557] shadow-2xl p-5 space-y-4 transform translate-y-full transition-transform duration-300 md:hidden max-h-[85vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-2 border-b border-[#E8E2D8]">
         <div class="flex items-center gap-2">
           <span class="text-sm">📝</span>
@@ -1367,9 +1503,53 @@
     </div>
 
     <!-- ======================================================= -->
+        <!-- ======================================================= -->
+    <!-- EVIEWS EQUATION ESTIMATION DIALOG MODAL                 -->
+    <!-- ======================================================= -->
+    <div id="eviews-equation-dialog" class="fixed inset-0 z-[75] bg-[#1D3557]/60 backdrop-blur-sm flex items-center justify-center p-4 hidden" onclick="if(event.target===this) closeEquationDialog()">
+      <div class="modal-animated bg-[#FAF7F2] rounded-2xl border-2 border-[#1D3557] shadow-2xl max-w-lg w-full overflow-hidden" onclick="event.stopPropagation()">
+        <!-- Title Bar -->
+        <div class="bg-[#1D3557] text-white px-4 py-3 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-sm">⚡</span>
+            <span class="font-extrabold text-xs tracking-wider uppercase font-mono-code">EViews Equation Estimation</span>
+          </div>
+          <button onclick="closeEquationDialog()" class="text-white hover:text-[#D95D39] font-bold text-sm">✕</button>
+        </div>
+
+        <div class="p-5 space-y-4">
+          <div>
+            <label for="equation-dialog-spec" class="block text-xs font-bold text-[#1D3557] mb-1">Equation specification:</label>
+            <span class="text-[11px] text-[#7A8294] block mb-1">Dependent variable followed by regressors:</span>
+            <textarea id="equation-dialog-spec" class="w-full h-16 p-2.5 font-mono-code text-xs border border-[#D6CEC1] rounded-lg bg-white focus:outline-none focus:border-[#1D3557]" rows="2"></textarea>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-[#1D3557] mb-1">Estimation Method:</label>
+              <select id="equation-dialog-method" class="w-full p-2 font-mono-code text-xs border border-[#D6CEC1] rounded-lg bg-white">
+                <option>LS - Least Squares (NLS and ARMA)</option>
+                <option>TSLS - Two-Stage Least Squares</option>
+                <option>WLS - Weighted Least Squares</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-[#1D3557] mb-1">Sample Range:</label>
+              <input id="equation-dialog-sample" type="text" class="w-full p-2 font-mono-code text-xs border border-[#D6CEC1] rounded-lg bg-white" value="1 209">
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-[#E8E2D8] flex items-center justify-end gap-2">
+            <button onclick="closeEquationDialog()" class="paper-btn px-4 py-1.5 bg-[#FAF7F2] text-xs font-bold text-[#555A68] hover:bg-[#EAE4D9] rounded-lg">Cancel</button>
+            <button onclick="submitEquationDialog()" class="paper-btn px-5 py-1.5 bg-[#1D3557] text-xs font-bold text-white hover:bg-[#15253D] rounded-lg shadow-sm">OK (Estimate)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- STAT HOTSPOT INSPECTOR MODAL (DESKTOP & TABLET)         -->
     <!-- ======================================================= -->
-    <div id="hotspot-modal" class="fixed inset-0 z-50 bg-[#1D3557]/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div id="hotspot-modal" class="fixed inset-0 z-[75] bg-[#1D3557]/60 backdrop-blur-sm flex items-center justify-center p-4 hidden" onclick="if(event.target===this) closeHotspotModal()">
       <div class="modal-animated bg-white rounded-2xl border-2 border-[#1D3557] shadow-2xl max-w-lg w-full p-6 space-y-4">
         <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
           <div>
@@ -6332,6 +6512,7 @@ function copyToClipboard(text, label) {
 // MULTI-SENSORY AUDIO ENGINE & SFX (BAUHAUS SENSORY PROTOCOL)
 // =========================================================
 let sfxMuted = localStorage.getItem('econ325_sfx_muted') === 'true';
+// audioCtx declared globally above
 
 function updateSfxToggleBtn() {
   const icon = document.getElementById('sfx-mute-icon');
@@ -6347,17 +6528,27 @@ function toggleSfxMute() {
   if (!sfxMuted) playSfx('click');
 }
 
-// Override / Enhance playSfx with crisp mechanical tactile clicks and warm chord chimes
-const _originalPlaySfx = typeof playSfx === 'function' ? playSfx : null;
+function initAudio() {
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!audioCtx && AudioContextClass) {
+      audioCtx = new AudioContextClass();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(() => {});
+    }
+  } catch (err) {}
+}
 
 function playSfx(type) {
   if (sfxMuted) return;
   try {
     initAudio();
+    if (!audioCtx) return;
     const now = audioCtx.currentTime;
 
     if (type === 'click') {
-      // Crisp mechanical typewriter click (~950Hz pop)
+      // Crisp mechanical typewriter click (~950Hz to 320Hz pop)
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
       osc.type = 'triangle';
@@ -6409,9 +6600,7 @@ function playSfx(type) {
       osc.start(now);
       osc.stop(now + 0.03);
     }
-  } catch (e) {
-    // Web audio requires user interaction
-  }
+  } catch (e) {}
 }
 
 // =========================================================
@@ -6444,7 +6633,7 @@ function toggleFormulaMode() {
         renderMathInElement(document.getElementById('tab-act1-story'), {
           delimiters: [
             { left: '$$', right: '$$', display: true },
-            { left: '\(', right: '\)', display: false }
+            { left: '\\(', right: '\\)', display: false }
           ],
           throwOnError: false
         });
@@ -6482,8 +6671,20 @@ function drawMegaphoneCanvas() {
   const canvas = document.getElementById('megaphone-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  const w = canvas.width;
-  const h = canvas.height;
+  
+  // High-DPI support
+  const dpr = window.devicePixelRatio || 1;
+  const baseW = 560;
+  const baseH = 260;
+  if (canvas.width !== Math.round(baseW * dpr) || canvas.height !== Math.round(baseH * dpr)) {
+    canvas.width = Math.round(baseW * dpr);
+    canvas.height = Math.round(baseH * dpr);
+  }
+
+  ctx.save();
+  ctx.scale(dpr, dpr);
+  const w = baseW;
+  const h = baseH;
 
   // Clear
   ctx.fillStyle = '#FAF7F2';
@@ -6514,7 +6715,7 @@ function drawMegaphoneCanvas() {
   ctx.fillText('Residuals eᵢ / Salary', 0, 0);
   ctx.restore();
 
-  // Model parameters: Y = 10 + 0.8 * X
+  // Model parameters: Y = 15 + 0.82 * X
   const b0 = 15;
   const b1 = 0.82;
   const spreadScale = (megaphoneSpread / 100) * 0.45;
@@ -6589,6 +6790,8 @@ function drawMegaphoneCanvas() {
     ctx.lineTo(pxEnd, pyEnd);
     ctx.stroke();
   }
+
+  ctx.restore();
 }
 
 function updateMegaphoneStation(val) {
@@ -6617,29 +6820,33 @@ function updateSoupStation() {
   const k = parseInt(kInput.value);
   const n = parseInt(nInput.value) || 209;
   const r2 = parseFloat(r2Input.value) || 0.082;
+  const includeCross = document.getElementById('soup-cross-toggle')?.checked ?? true;
 
   // Breakdown
   const linear = k;
   const squares = k;
-  const cross = (k * (k - 1)) / 2;
+  const cross = includeCross ? (k * (k - 1)) / 2 : 0;
   const totalDf = linear + squares + cross;
 
   // Update UI counts
   const kDisp = document.getElementById('soup-k-display');
   if (kDisp) {
     const examples = ['Sales', 'Sales, ROE', 'Sales, ROE, Finance', 'Sales, ROE, Finance, Consprod', 'Sales, ROE, Finance, Consprod, Utility'];
-    kDisp.textContent = `k = ${k} (${examples[k - 1]})`;
+    kDisp.textContent = `k = ${k} (${examples[k - 1] || 'Regressors'})`;
   }
-  document.getElementById('soup-linear-count').textContent = linear;
-  document.getElementById('soup-sq-count').textContent = squares;
-  document.getElementById('soup-cross-count').textContent = cross;
-  document.getElementById('soup-total-df').textContent = `${totalDf} Regressors (df = ${totalDf})`;
+  const elLin = document.getElementById('soup-linear-count');
+  const elSq = document.getElementById('soup-sq-count');
+  const elCross = document.getElementById('soup-cross-count');
+  const elDf = document.getElementById('soup-total-df');
+  if (elLin) elLin.textContent = linear;
+  if (elSq) elSq.textContent = squares;
+  if (elCross) elCross.textContent = cross;
+  if (elDf) elDf.textContent = `${totalDf} Regressors (df = ${totalDf})`;
 
   // LM statistic
   const lm = (n * r2).toFixed(2);
 
-  // Approximate Chi-Square critical value at alpha = 0.05
-  // Wilson-Hilferty / exact table lookup
+  // Exact Chi-Square critical value at alpha = 0.05
   const chiSqCritTable = { 2: 5.99, 3: 7.81, 4: 9.49, 5: 11.07, 7: 14.07, 9: 16.92, 14: 23.68, 20: 31.41 };
   const critVal = chiSqCritTable[totalDf] || (totalDf + 1.645 * Math.sqrt(2 * totalDf) + 0.67).toFixed(2);
   const isReject = parseFloat(lm) > parseFloat(critVal);
@@ -6656,7 +6863,7 @@ function updateSoupStation() {
         ${isReject ? '🔴 REJECT H₀ (p < 0.05): Severe Heteroskedasticity Detected!' : '🟢 FAIL TO REJECT H₀ (p ≥ 0.05): Variance is Homoskedastic.'}
       </p>
       <p class="text-[11px] text-[#555A68]">
-        <strong>Examiner Memo Action:</strong> ${isReject ? 'Because LM (' + lm + ') > Critical χ² (' + critVal + '), we reject the null hypothesis of homoscedasticity. Usual t-statistics are biased. Re-estimate with <strong>Huber-White Robust Standard Errors</strong> in EViews Options.' : 'No heteroskedasticity remedy needed. OLS estimators remain BLUE with valid t-ratios.'}
+        <strong>Examiner Memo Action:</strong> ${isReject ? 'Because LM (' + lm + ') > Critical χ² (' + critVal + '), reject null hypothesis of homoscedasticity. Usual t-statistics are biased. Re-estimate with <strong>Huber-White Robust Standard Errors</strong> in EViews Options.' : 'No heteroskedasticity remedy needed. OLS estimators remain BLUE with valid t-ratios.'}
       </p>
     `;
   }
@@ -6671,8 +6878,20 @@ function drawResetCanvas() {
   const canvas = document.getElementById('reset-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  const w = canvas.width;
-  const h = canvas.height;
+  
+  // High-DPI support
+  const dpr = window.devicePixelRatio || 1;
+  const baseW = 560;
+  const baseH = 260;
+  if (canvas.width !== Math.round(baseW * dpr) || canvas.height !== Math.round(baseH * dpr)) {
+    canvas.width = Math.round(baseW * dpr);
+    canvas.height = Math.round(baseH * dpr);
+  }
+
+  ctx.save();
+  ctx.scale(dpr, dpr);
+  const w = baseW;
+  const h = baseH;
 
   ctx.fillStyle = '#FAF7F2';
   ctx.fillRect(0, 0, w, h);
@@ -6720,7 +6939,6 @@ function drawResetCanvas() {
   // Linear OLS Fitted Line (Straight line approximation)
   const yStart = 15;
   const yEnd = 10 + 1.8 * 80 - c * 80 * 80;
-  const slope = (yEnd - yStart) / 80;
 
   ctx.strokeStyle = '#D95D39';
   ctx.lineWidth = 2;
@@ -6739,7 +6957,6 @@ function drawResetCanvas() {
     ctx.beginPath();
     for (let px = 0; px <= plotW; px += 4) {
       const xVal = (px / plotW) * 80;
-      // RESET captures the exact quadratic curve
       const yVal = 10 + 1.8 * xVal - c * xVal * xVal;
       const py = h - mb - (yVal / 70) * plotH;
       if (px === 0) ctx.moveTo(ml + px, py);
@@ -6777,6 +6994,8 @@ function drawResetCanvas() {
       </p>
     `;
   }
+
+  ctx.restore();
 }
 
 function updateResetStation(val) {
@@ -6790,7 +7009,8 @@ function updateResetStation(val) {
 
 function presetReset2023() {
   playSfx('click');
-  document.getElementById('reset-curve-slider').value = '85';
+  const slider = document.getElementById('reset-curve-slider');
+  if (slider) slider.value = '85';
   updateResetStation(85);
   showToast('Loaded 2023 Wage quadratic curvature!', '🥣');
 }
@@ -6804,8 +7024,20 @@ function drawDWDialCanvas(dVal) {
   const canvas = document.getElementById('dw-dial-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  const w = canvas.width;
-  const h = canvas.height;
+  
+  // High-DPI support
+  const dpr = window.devicePixelRatio || 1;
+  const baseW = 460;
+  const baseH = 230;
+  if (canvas.width !== Math.round(baseW * dpr) || canvas.height !== Math.round(baseH * dpr)) {
+    canvas.width = Math.round(baseW * dpr);
+    canvas.height = Math.round(baseH * dpr);
+  }
+
+  ctx.save();
+  ctx.scale(dpr, dpr);
+  const w = baseW;
+  const h = baseH;
 
   ctx.fillStyle = '#FAF7F2';
   ctx.fillRect(0, 0, w, h);
@@ -6819,18 +7051,18 @@ function drawDWDialCanvas(dVal) {
   const sym4dU = 4 - dU;
   const sym4dL = 4 - dL;
 
-  // Helper angle converter: d from 0 to 4 maps to Math.PI to 0
+  // Helper angle converter: d from 0 to 4 maps to Math.PI to 2*Math.PI
   function dToAngle(d) {
     return Math.PI + (d / 4) * Math.PI;
   }
 
   // Draw 5 Arc Zones
   const zones = [
-    { start: 0, end: dL, color: '#D95D39', label: 'Positive Auto' },
-    { start: dL, end: dU, color: '#E9C46A', label: 'Inconclusive' },
-    { start: dU, end: sym4dU, color: '#2A9D8F', label: 'No Autocorrelation (Clean)' },
-    { start: sym4dU, end: sym4dL, color: '#E9C46A', label: 'Inconclusive' },
-    { start: sym4dL, end: 4.0, color: '#D95D39', label: 'Negative Auto' }
+    { start: 0, end: dL, color: '#D95D39' },
+    { start: dL, end: dU, color: '#E9C46A' },
+    { start: dU, end: sym4dU, color: '#2A9D8F' },
+    { start: sym4dU, end: sym4dL, color: '#E9C46A' },
+    { start: sym4dL, end: 4.0, color: '#D95D39' }
   ];
 
   ctx.lineWidth = 26;
@@ -6850,6 +7082,21 @@ function drawDWDialCanvas(dVal) {
     const tx = cx + (radius - 22) * Math.cos(ang);
     const ty = cy + (radius - 22) * Math.sin(ang);
     ctx.fillText(tick.toString(), tx, ty);
+  });
+
+  // Critical Value Indicator Ticks
+  ctx.font = '9px JetBrains Mono, monospace';
+  ctx.fillStyle = '#555A68';
+  [
+    { val: dL, label: 'dL' },
+    { val: dU, label: 'dU' },
+    { val: sym4dU, label: '4-dU' },
+    { val: sym4dL, label: '4-dL' }
+  ].forEach(cp => {
+    const ang = dToAngle(cp.val);
+    const tx = cx + (radius + 20) * Math.cos(ang);
+    const ty = cy + (radius + 20) * Math.sin(ang);
+    ctx.fillText(cp.label, tx, ty);
   });
 
   // Center needle hub
@@ -6875,6 +7122,8 @@ function drawDWDialCanvas(dVal) {
   ctx.beginPath();
   ctx.arc(nx, ny, 4.5, 0, Math.PI * 2);
   ctx.fill();
+
+  ctx.restore();
 
   // Live Verdict Box
   const verdictBox = document.getElementById('dw-station-verdict-box');
@@ -6919,7 +7168,7 @@ function drawDWDialCanvas(dVal) {
 }
 
 function updateDWStation(dVal) {
-  if (dVal !== undefined) currentDW = dVal;
+  if (dVal !== undefined) currentDW = parseFloat(dVal);
   const disp = document.getElementById('dw-station-d-val');
   if (disp) disp.textContent = 'd = ' + currentDW.toFixed(2);
   drawDWDialCanvas(currentDW);
@@ -6928,6 +7177,25 @@ function updateDWStation(dVal) {
 // =========================================================
 // ACT 2: PAST PAPER THEORY ENGINES & SOLVERS
 // =========================================================
+function toggleMnemonicCard(type) {
+  playSfx('click');
+  const front = document.getElementById(`${type}-front`);
+  const back = document.getElementById(`${type}-back`);
+  const btnText = document.getElementById(`${type}-toggle-text`);
+  if (!front || !back) return;
+
+  const isFrontVisible = !front.classList.contains('hidden');
+  if (isFrontVisible) {
+    front.classList.add('hidden');
+    back.classList.remove('hidden');
+    if (btnText) btnText.textContent = '🔄 Show Recall Prompt';
+  } else {
+    front.classList.remove('hidden');
+    back.classList.add('hidden');
+    if (btnText) btnText.textContent = '🔄 Test Recall / Flip';
+  }
+}
+
 function copyMnemonicMemo(type) {
   playSfx('click');
   let text = '';
@@ -6943,61 +7211,113 @@ function copyMnemonicMemo(type) {
   addXp(15);
 }
 
+// Critical F approximation matching standard NWU tables at alpha = 0.05
+function getFCrit05(df1, df2) {
+  const table = {
+    '1,120': 3.92, '1,420': 3.86,
+    '2,60': 3.15, '2,120': 3.07, '2,420': 3.02,
+    '3,60': 2.76, '3,120': 2.68, '3,420': 2.63,
+    '4,60': 2.53, '4,120': 2.45, '4,420': 2.39,
+    '5,60': 2.37, '5,120': 2.29, '5,420': 2.23
+  };
+  const key = `${df1},${df2}`;
+  if (table[key]) return table[key];
+
+  // Wilson-Hilferty / Paulson approximation for F quantile at 95%
+  try {
+    const z = 1.6448536;
+    const d1 = parseFloat(df1);
+    const d2 = parseFloat(df2);
+    const a = 1.0 - 2.0 / (9.0 * d2);
+    const b = 1.0 - 2.0 / (9.0 * d1);
+    const c = 2.0 / (9.0 * d2);
+    const d = 2.0 / (9.0 * d1);
+    const disc = a * a * d + b * b * c - (z * z * c * d);
+    if (disc > 0 && (a * a - z * z * c) > 0) {
+      const top = a * b + z * Math.sqrt(disc);
+      const bot = a * a - z * z * c;
+      return parseFloat(Math.pow(top / bot, 3).toFixed(2));
+    }
+  } catch (err) {}
+  return 3.00;
+}
+
 // Restricted F-Test Solver (2024 Q4)
 function solveRestrictedFTest() {
-  const r2UR = parseFloat(document.getElementById('ftest-r2-ur')?.value || '0.485');
-  const r2R = parseFloat(document.getElementById('ftest-r2-r')?.value || '0.412');
-  const q = parseInt(document.getElementById('ftest-q')?.value || '3');
-  const n = parseInt(document.getElementById('ftest-n')?.value || '120');
-  const kUR = parseInt(document.getElementById('ftest-k')?.value || '6');
-
-  const num = (r2UR - r2R) / q;
-  const denom = (1 - r2UR) / (n - kUR);
-  const fCalc = (num / denom).toFixed(3);
-
-  // Approximate F crit at 5% (df1 = q, df2 = n - kUR)
-  const fCrit = (2.68).toFixed(2);
-  const isReject = parseFloat(fCalc) > parseFloat(fCrit);
+  const r2UR = parseFloat(document.getElementById('ftest-r2-ur')?.value || '0.6542');
+  const r2R = parseFloat(document.getElementById('ftest-r2-r')?.value || '0.6120');
+  const q = parseInt(document.getElementById('ftest-q')?.value || '2');
+  const n = parseInt(document.getElementById('ftest-n')?.value || '425');
+  const kUR = parseInt(document.getElementById('ftest-k')?.value || '5');
 
   const resBox = document.getElementById('ftest-result-box');
-  if (resBox) {
-    resBox.innerHTML = `
-      <div class="font-mono-code text-[11px] space-y-1">
-        <div>Numerator: (R²_UR - R²_R)/q = (${r2UR} - ${r2R}) / ${q} = <strong>${num.toFixed(4)}</strong></div>
-        <div>Denominator: (1 - R²_UR)/(n - k_UR) = (1 - ${r2UR}) / ${n - kUR} = <strong>${denom.toFixed(6)}</strong></div>
-        <div class="pt-1 border-t border-[#E8E2D8] flex items-center justify-between font-bold">
-          <span>F_calc = <strong>${fCalc}</strong></span>
-          <span>F_crit(${q}, ${n - kUR}, 5%) ≈ ${fCrit}</span>
-        </div>
-      </div>
-      <p class="font-extrabold text-xs ${isReject ? 'text-[#2A9D8F]' : 'text-[#D95D39]'} mt-1">
-        ${isReject ? 'Reject H₀: The q omitted variables are JOINTLY statistically significant at 5%.' : 'Fail to Reject H₀: Omitted variables have no joint explanatory power.'}
-      </p>
-    `;
+  if (!resBox) return;
+
+  // Validation
+  if (r2UR >= 1.0 || r2UR < 0) {
+    resBox.innerHTML = '<div class="text-[#D95D39] font-bold text-xs">⚠️ Error: R²_UR must be strictly between 0 and 1.0.</div>';
+    return;
   }
+  if (r2R > r2UR) {
+    resBox.innerHTML = `<div class="text-[#D95D39] font-bold text-xs">⚠️ Error: R²_R (${r2R}) cannot exceed R²_UR (${r2UR}). Imposing restrictions cannot increase R²!</div>`;
+    return;
+  }
+  if (n <= kUR || q <= 0) {
+    resBox.innerHTML = '<div class="text-[#D95D39] font-bold text-xs">⚠️ Error: Sample size n must exceed total unrestricted parameters k_UR.</div>';
+    return;
+  }
+
+  const df1 = q;
+  const df2 = n - kUR;
+  const num = (r2UR - r2R) / q;
+  const denom = (1 - r2UR) / df2;
+  const fCalc = (num / denom).toFixed(3);
+  const fCrit = getFCrit05(df1, df2).toFixed(2);
+  const isReject = parseFloat(fCalc) > parseFloat(fCrit);
+
+  resBox.innerHTML = `
+    <div class="font-mono-code text-[11px] space-y-1">
+      <div>Numerator: (R²_UR - R²_R)/q = (${r2UR} - ${r2R}) / ${q} = <strong>${num.toFixed(4)}</strong></div>
+      <div>Denominator: (1 - R²_UR)/(n - k_UR) = (1 - ${r2UR}) / (${n} - ${kUR}) = <strong>${denom.toFixed(6)}</strong></div>
+      <div class="pt-1 border-t border-[#E8E2D8] flex items-center justify-between font-bold">
+        <span>F_calc = <strong>${fCalc}</strong></span>
+        <span>F_crit(${df1}, ${df2}, 5%) = <strong>${fCrit}</strong></span>
+      </div>
+    </div>
+    <p class="font-extrabold text-xs ${isReject ? 'text-[#2A9D8F]' : 'text-[#D95D39]'} mt-1">
+      ${isReject ? `✓ REJECT H₀: Because F_calc (${fCalc}) > F_crit (${fCrit}), the ${q} omitted variables are JOINTLY statistically significant at 5%.` : `✗ FAIL TO REJECT H₀: Because F_calc (${fCalc}) ≤ F_crit (${fCrit}), the omitted variables have no joint explanatory power.`}
+    </p>
+  `;
 }
 
 function load2024FTestPreset() {
   playSfx('click');
-  document.getElementById('ftest-r2-ur').value = '0.485';
-  document.getElementById('ftest-r2-r').value = '0.412';
-  document.getElementById('ftest-q').value = '3';
-  document.getElementById('ftest-n').value = '120';
-  document.getElementById('ftest-k').value = '6';
+  document.getElementById('ftest-r2-ur').value = '0.6542';
+  document.getElementById('ftest-r2-r').value = '0.6120';
+  document.getElementById('ftest-q').value = '2';
+  document.getElementById('ftest-n').value = '425';
+  document.getElementById('ftest-k').value = '5';
   solveRestrictedFTest();
-  showToast('Loaded 2024 Q4 Comrades Race Data!', '🏃');
+  showToast('Loaded 2024 Q4 ln(WAGE) Exam Data!', '🎯');
 }
 
 function copyFTestMemo() {
   playSfx('click');
-  const r2UR = document.getElementById('ftest-r2-ur').value;
-  const r2R = document.getElementById('ftest-r2-r').value;
-  const q = document.getElementById('ftest-q').value;
-  const n = document.getElementById('ftest-n').value;
-  const kUR = document.getElementById('ftest-k').value;
-  const fCalc = (( (r2UR - r2R)/q ) / ( (1 - r2UR)/(n - kUR) )).toFixed(3);
+  const r2UR = parseFloat(document.getElementById('ftest-r2-ur').value);
+  const r2R = parseFloat(document.getElementById('ftest-r2-r').value);
+  const q = parseInt(document.getElementById('ftest-q').value);
+  const n = parseInt(document.getElementById('ftest-n').value);
+  const kUR = parseInt(document.getElementById('ftest-k').value);
 
-  const memo = `2024 Q4 Restricted F-Test Solution (8 Marks):\n\n1. Hypotheses:\n   H0: beta_4 = beta_5 = beta_6 = 0 (Restricted model is valid; variables are jointly insignificant)\n   H1: At least one beta_j != 0\n\n2. Test Statistic Formula:\n   F = [(R^2_UR - R^2_R) / q] / [(1 - R^2_UR) / (n - k_UR)]\n   F = [(${r2UR} - ${r2R}) / ${q}] / [(1 - ${r2UR}) / (${n} - ${kUR})] = ${fCalc}\n\n3. Critical Value & Decision Rule:\n   Degrees of freedom: df1 = q = ${q}, df2 = n - k_UR = ${n - kUR}.\n   Critical F(0.05; ${q}, ${n - kUR}) = 2.68.\n   Decision: Because F_calc (${fCalc}) > F_crit (2.68), we reject H0 at the 5% significance level.\n\n4. Conclusion:\n   The restricted explanatory variables are jointly statistically significant. Dropping them would introduce severe omitted variable bias.`;
+  const df1 = q;
+  const df2 = n - kUR;
+  const num = (r2UR - r2R) / q;
+  const denom = (1 - r2UR) / df2;
+  const fCalc = (num / denom).toFixed(3);
+  const fCrit = getFCrit05(df1, df2).toFixed(2);
+  const isReject = parseFloat(fCalc) > parseFloat(fCrit);
+
+  const memo = `2024 Q4 Restricted F-Test Solution (7 Marks):\n\n1. Hypotheses:\n   H0: beta_FEMALE = beta_TENURE = 0 (Omitted variables have no joint effect; restriction is valid)\n   H1: At least one beta_j != 0\n\n2. Test Statistic Formula:\n   F = [(R^2_UR - R^2_R) / q] / [(1 - R^2_UR) / (n - k_UR)]\n   Numerator = (${r2UR} - ${r2R}) / ${q} = ${num.toFixed(4)}\n   Denominator = (1 - ${r2UR}) / (${n} - ${kUR}) = ${denom.toFixed(6)}\n   F_calc = ${num.toFixed(4)} / ${denom.toFixed(6)} = ${fCalc}\n\n3. Critical Value & Decision Rule:\n   df1 = q = ${df1}, df2 = n - k_UR = ${df2}.\n   Critical F(0.05; ${df1}, ${df2}) = ${fCrit}.\n   Decision: Because F_calc (${fCalc}) ${isReject ? '>' : '<='} F_crit (${fCrit}), we ${isReject ? 'REJECT H0' : 'FAIL TO REJECT H0'} at the 5% significance level.\n\n4. Econometric Conclusion:\n   ${isReject ? 'The restricted explanatory variables are jointly statistically significant. Dropping them triggers severe omitted variable bias.' : 'The restricted variables are jointly statistically insignificant. They may be omitted without loss of explanatory power.'}`;
   navigator.clipboard.writeText(memo);
   showToast('Copied F-Test Solution to Clipboard! (+20 XP)', '📋');
   addXp(20);
@@ -7057,21 +7377,23 @@ function solveElasticityMatrix() {
 
   let formula = '';
   let interpretation = '';
+  const dir = b >= 0 ? 'increase' : 'decrease';
+  const absB = Math.abs(b);
 
   if (form === 'loglog') {
     formula = `ln(${y}) = b₁ + ${b} · ln(${x})`;
-    interpretation = `"Holding all other variables constant, a <strong>1% increase</strong> in ${x} is associated with an expected <strong>${b}% increase</strong> in ${y} (Constant Elasticity = ${b})."`;
+    interpretation = `"Holding all other variables constant, a <strong>1% increase</strong> in ${x} is associated with an expected <strong>${absB}% ${dir}</strong> in ${y} (Constant Elasticity = ${b})."`;
   } else if (form === 'loglin') {
     formula = `ln(${y}) = b₁ + ${b} · ${x}`;
-    const pct = (b * 100).toFixed(2);
-    interpretation = `"Holding all other variables constant, a <strong>1 unit increase</strong> in ${x} is associated with an expected <strong>${pct}% change</strong> in ${y} (Semi-elasticity)."`;
+    const pct = (absB * 100).toFixed(2);
+    interpretation = `"Holding all other variables constant, a <strong>1 unit increase</strong> in ${x} is associated with an expected <strong>${pct}% ${dir}</strong> in ${y} (Semi-elasticity)."`;
   } else if (form === 'linlog') {
     formula = `${y} = b₁ + ${b} · ln(${x})`;
-    const unitChange = (b / 100).toFixed(4);
-    interpretation = `"Holding all other variables constant, a <strong>1% increase</strong> in ${x} is associated with an expected <strong>${unitChange} unit change</strong> in ${y}."`;
+    const unitChange = (absB / 100).toFixed(4);
+    interpretation = `"Holding all other variables constant, a <strong>1% increase</strong> in ${x} is associated with an expected <strong>${unitChange} unit ${dir}</strong> in ${y}."`;
   } else {
     formula = `${y} = b₁ + ${b} · ${x}`;
-    interpretation = `"Holding all other variables constant, a <strong>1 unit increase</strong> in ${x} is associated with an expected <strong>${b} unit change</strong> in ${y}."`;
+    interpretation = `"Holding all other variables constant, a <strong>1 unit increase</strong> in ${x} is associated with an expected <strong>${absB} unit ${dir}</strong> in ${y}."`;
   }
 
   resBox.innerHTML = `
@@ -7120,11 +7442,11 @@ function initAct2Quiz() {
         </div>
         <span class="tag-bauhaus px-2 py-0.5 rounded text-[10px] font-mono-code bg-white text-[#7A8294] shrink-0">+1.5 Marks</span>
       </div>
-      <div class="flex items-center gap-2 pt-1">
-        <button onclick="handleAct2QuizChoice(${idx}, true)" class="paper-btn px-4 py-1.5 bg-white text-xs font-bold text-[#1D3557] hover:bg-[#EBF3F5] rounded-lg">
+      <div class="flex items-center gap-2 pt-1" id="act2-btn-group-${idx}">
+        <button id="act2-btn-t-${idx}" onclick="handleAct2QuizChoice(${idx}, true)" class="paper-btn px-4 py-1.5 bg-white text-xs font-bold text-[#1D3557] hover:bg-[#EBF3F5] rounded-lg">
           TRUE
         </button>
-        <button onclick="handleAct2QuizChoice(${idx}, false)" class="paper-btn px-4 py-1.5 bg-white text-xs font-bold text-[#1D3557] hover:bg-[#FAF3EC] rounded-lg">
+        <button id="act2-btn-f-${idx}" onclick="handleAct2QuizChoice(${idx}, false)" class="paper-btn px-4 py-1.5 bg-white text-xs font-bold text-[#1D3557] hover:bg-[#FAF3EC] rounded-lg">
           FALSE
         </button>
       </div>
@@ -7134,13 +7456,29 @@ function initAct2Quiz() {
 }
 
 function handleAct2QuizChoice(idx, choice) {
+  // Prevent XP farming on repeated clicks
+  if (act2QuizAnswers[idx] !== undefined) return;
+
   const item = act2QuizItems[idx];
   const isCorrect = choice === item.a;
   act2QuizAnswers[idx] = isCorrect;
 
   const card = document.getElementById(`act2-q-${idx}`);
   const exp = document.getElementById(`act2-exp-${idx}`);
+  const btnT = document.getElementById(`act2-btn-t-${idx}`);
+  const btnF = document.getElementById(`act2-btn-f-${idx}`);
   if (!card || !exp) return;
+
+  // Visual selection mark & disable
+  if (btnT && btnF) {
+    btnT.disabled = true;
+    btnF.disabled = true;
+    if (choice) {
+      btnT.className += ' ring-2 ring-[#1D3557]';
+    } else {
+      btnF.className += ' ring-2 ring-[#1D3557]';
+    }
+  }
 
   if (isCorrect) {
     playSfx('win');
@@ -7246,6 +7584,7 @@ let currentCovariance = 'ordinary'; // 'ordinary' or 'huber-white' or 'hac-newey
 let currentLabMode = 'guided'; // 'guided' or 'free'
 let currentGuidedStep = 1;
 let selectedMemoVar = null;
+let currentMemoMode = 'fillin'; // 'fillin' or 'exemplar'
 
 function selectScenario(key) {
   playSfx('click');
@@ -7268,13 +7607,15 @@ function selectScenario(key) {
   const winTitle = document.getElementById('eviews-window-title');
   if (winTitle) winTitle.textContent = `EViews 12 / 13 — [Workfile: ${s.workfile}]`;
   const sampleDisp = document.getElementById('eviews-sample-display');
-  if (sampleDisp) sampleDisp.textContent = `Range: ${s.sample} (n = ${s.n})`;
-  const cmdInp = document.getElementById('lab-cmd-input');
-  if (cmdInp) cmdInp.value = s.cmd;
+  if (sampleDisp) sampleDisp.textContent = `Sample: ${s.sample}`;
+  const obsDisp = document.getElementById('eviews-obs-display');
+  if (obsDisp) obsDisp.textContent = `Included obs: ${s.n}`;
+  const cmdInput = document.getElementById('lab-cmd-input');
+  if (cmdInput) cmdInput.value = s.cmd;
 
   renderEviewsTable();
-  selectMemoVariable(s.variables[1].name); // Select second variable by default (ROE or EDUC)
-  showToast(`Loaded Scenario ${key}: ${s.name}`, '📊');
+  selectMemoVariable(key === 'A' ? 'ROE' : 'EDUC');
+  showToast(`Loaded ${s.name}`, '📂');
 }
 
 function setLabMode(mode) {
@@ -7282,37 +7623,56 @@ function setLabMode(mode) {
   currentLabMode = mode;
   const guidedBtn = document.getElementById('mode-guided-btn');
   const freeBtn = document.getElementById('mode-free-btn');
-  const stepperBar = document.getElementById('guided-stepper-bar');
+  const guidedPanel = document.getElementById('guided-mode-panel');
 
   if (mode === 'guided') {
-    if (guidedBtn) guidedBtn.className = 'px-3 py-1 text-xs font-bold rounded-lg bg-white text-[#D95D39] shadow-sm';
-    if (freeBtn) freeBtn.className = 'px-3 py-1 text-xs font-semibold rounded-lg text-[#555A68] hover:text-[#1D3557]';
-    if (stepperBar) stepperBar.classList.remove('hidden');
+    if (guidedBtn) guidedBtn.className = 'paper-btn px-3 py-1 bg-[#D95D39] text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-1.5';
+    if (freeBtn) freeBtn.className = 'paper-btn px-3 py-1 bg-[#FAF7F2] text-[#555A68] hover:bg-[#EAE4D9] text-xs font-bold rounded-lg flex items-center gap-1.5';
+    if (guidedPanel) guidedPanel.classList.remove('hidden');
     updateGuidedStepper();
   } else {
-    if (guidedBtn) guidedBtn.className = 'px-3 py-1 text-xs font-semibold rounded-lg text-[#555A68] hover:text-[#1D3557]';
-    if (freeBtn) freeBtn.className = 'px-3 py-1 text-xs font-bold rounded-lg bg-white text-[#1D3557] shadow-sm';
-    if (stepperBar) stepperBar.classList.add('hidden');
+    if (freeBtn) freeBtn.className = 'paper-btn px-3 py-1 bg-[#1D3557] text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-1.5';
+    if (guidedBtn) guidedBtn.className = 'paper-btn px-3 py-1 bg-[#FAF7F2] text-[#555A68] hover:bg-[#EAE4D9] text-xs font-bold rounded-lg flex items-center gap-1.5';
+    if (guidedPanel) guidedPanel.classList.add('hidden');
+    // Clear pulsing targets in free mode
+    document.querySelectorAll('.guided-pulsing-target').forEach(el => {
+      el.classList.remove('guided-pulsing-target', 'ring-4', 'ring-[#D95D39]', 'ring-offset-2', 'animate-pulse');
+    });
   }
 }
 
 const guidedSteps = [
-  { num: 1, title: 'Estimate Equation via Quick Menu', desc: 'Click <strong>Quick → Estimate Equation...</strong> in the menu ribbon, or inspect the command line syntax.', target: 'menu-quick-btn' },
-  { num: 2, title: 'Inspect Output Table & P-Values', desc: 'Click on the <strong>Prob. (p-values)</strong> in the regression table to evaluate statistical significance at the 5% level.', target: 'desktop-eviews-tbody' },
-  { num: 3, title: 'Run Diagnostic Tests (Heteroskedasticity / RESET)', desc: 'Click <strong>View → Residual Diagnostics</strong> to test for heteroskedasticity or Ramsey RESET misspecification.', target: 'menu-view-btn' },
-  { num: 4, title: 'Draft Tri-Level Word Memo', desc: 'Select any significant variable and review the 3-mark memo format: Significance, Magnitude, and Economic Theory.', target: 'memo-level1-box' }
+  { num: 1, title: 'Estimate Equation via Quick Menu', desc: 'Click <strong>Quick → Estimate Equation...</strong> in the menu ribbon, or inspect the command line syntax.', targetId: 'menu-quick-btn' },
+  { num: 2, title: 'Inspect Output Table & P-Values', desc: 'Click on the <strong>Prob. (p-values)</strong> in the regression table to evaluate statistical significance at the 5% level.', targetId: 'desktop-eviews-tbody' },
+  { num: 3, title: 'Run Diagnostic Tests (Heteroskedasticity / RESET)', desc: 'Click <strong>View → Residual Diagnostics</strong> to test for heteroskedasticity or Ramsey RESET misspecification.', targetId: 'menu-view-btn' },
+  { num: 4, title: 'Draft Tri-Level Word Memo', desc: 'Select any significant variable and review the 3-mark memo format: Significance, Magnitude, and Economic Theory.', targetId: 'tri-level-memo-container' }
 ];
 
 function updateGuidedStepper() {
   const step = guidedSteps[currentGuidedStep - 1];
-  document.getElementById('step-number-badge').textContent = `STEP ${step.num} OF 4`;
-  document.getElementById('step-instruction-title').textContent = step.title;
-  document.getElementById('step-instruction-desc').innerHTML = step.desc;
+  const badge = document.getElementById('step-number-badge');
+  const title = document.getElementById('step-instruction-title');
+  const desc = document.getElementById('step-instruction-desc');
+  if (badge) badge.textContent = `STEP ${step.num} OF 4`;
+  if (title) title.textContent = step.title;
+  if (desc) desc.innerHTML = step.desc;
 
   [1, 2, 3, 4].forEach(n => {
     const dot = document.getElementById(`step-dot-${n}`);
     if (dot) dot.className = `h-2 flex-1 rounded-full ${n <= currentGuidedStep ? 'bg-[#D95D39]' : 'bg-[#EAE4D9]'} transition-all`;
   });
+
+  // Highlight active target element with pulsing ring
+  document.querySelectorAll('.guided-pulsing-target').forEach(el => {
+    el.classList.remove('guided-pulsing-target', 'ring-4', 'ring-[#D95D39]', 'ring-offset-2', 'animate-pulse');
+  });
+
+  if (currentLabMode === 'guided' && step.targetId) {
+    const targetEl = document.getElementById(step.targetId);
+    if (targetEl) {
+      targetEl.classList.add('guided-pulsing-target', 'ring-4', 'ring-[#D95D39]', 'ring-offset-2', 'animate-pulse');
+    }
+  }
 }
 
 function nextGuidedStep() {
@@ -7335,27 +7695,25 @@ function prevGuidedStep() {
 
 function toggleEviewsMenu(name) {
   playSfx('click');
-  const dView = document.getElementById('menu-view-dropdown');
-  const dQuick = document.getElementById('menu-quick-dropdown');
-  const dOptions = document.getElementById('menu-options-dropdown');
+  const menuMap = {
+    view: 'menu-view-dropdown',
+    quick: 'menu-quick-dropdown',
+    options: 'menu-options-dropdown'
+  };
 
-  if (name === 'view') {
-    dView?.classList.toggle('hidden');
-    dQuick?.classList.add('hidden');
-    dOptions?.classList.add('hidden');
-  } else if (name === 'quick') {
-    dQuick?.classList.toggle('hidden');
-    dView?.classList.add('hidden');
-    dOptions?.classList.add('hidden');
-  } else if (name === 'options') {
-    dOptions?.classList.toggle('hidden');
-    dView?.classList.add('hidden');
-    dQuick?.classList.add('hidden');
-  }
+  Object.entries(menuMap).forEach(([k, id]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (k === name) {
+      el.classList.toggle('hidden');
+    } else {
+      el.classList.add('hidden');
+    }
+  });
 }
 
-// Close menus when clicking outside
-document.addEventListener('click', (e) => {
+// Global click listener to close dropdowns
+window.addEventListener('click', (e) => {
   if (!e.target.closest('#menu-view-btn') && !e.target.closest('#menu-view-dropdown')) {
     document.getElementById('menu-view-dropdown')?.classList.add('hidden');
   }
@@ -7374,7 +7732,6 @@ function runEviewsAction(action) {
   document.getElementById('menu-options-dropdown')?.classList.add('hidden');
 
   if (action === 'hetero-white') {
-    const s = scenariosData[currentScenarioKey];
     if (currentScenarioKey === 'A') {
       showToast('White Hetero Test: Obs*R² = 24.12, p = 0.0012 < 0.05 (Hetero Detected!)', '🍲');
       applyRobustCovariance('huber-white');
@@ -7389,6 +7746,10 @@ function runEviewsAction(action) {
     }
   } else if (action === 'serial-lm') {
     showToast('Breusch-Godfrey LM: Obs*R² = 2.14, p = 0.34 > 0.05 (No serial correlation)', '✓');
+  } else if (action === 'series-stats') {
+    showToast('Series Summary Statistics generated!', '📊');
+  } else if (action === 'generate-series') {
+    showToast('Series Generator active: genr expersq = exper^2', '⚙️');
   }
 }
 
@@ -7402,15 +7763,33 @@ function applyRobustCovariance(type) {
   showToast(`Applied: ${label}`, '⚙️');
 }
 
+// Authentic EViews Equation Estimation Dialog
 function openEquationDialog() {
   playSfx('click');
   document.getElementById('menu-quick-dropdown')?.classList.add('hidden');
   const s = scenariosData[currentScenarioKey];
-  const userCmd = prompt('EViews Equation Specification:\nDependent variable followed by regressors:', s.cmd.replace('ls ', ''));
-  if (userCmd) {
-    document.getElementById('lab-cmd-input').value = 'ls ' + userCmd;
-    executeLabCommand();
+  const dialog = document.getElementById('eviews-equation-dialog');
+  const specText = document.getElementById('equation-dialog-spec');
+  const sampleInput = document.getElementById('equation-dialog-sample');
+  if (specText) specText.value = s.cmd.replace('ls ', '');
+  if (sampleInput) sampleInput.value = s.sample;
+  if (dialog) dialog.classList.remove('hidden');
+}
+
+function closeEquationDialog() {
+  playSfx('click');
+  document.getElementById('eviews-equation-dialog')?.classList.add('hidden');
+}
+
+function submitEquationDialog() {
+  playSfx('click');
+  const specText = document.getElementById('equation-dialog-spec')?.value.trim();
+  if (specText) {
+    const cmdInput = document.getElementById('lab-cmd-input');
+    if (cmdInput) cmdInput.value = 'ls ' + specText;
   }
+  closeEquationDialog();
+  executeLabCommand();
 }
 
 function executeLabCommand() {
@@ -7567,80 +7946,135 @@ function openHotspotModal(statKey) {
   playSfx('click');
   const s = scenariosData[currentScenarioKey];
   const modal = document.getElementById('hotspot-modal');
+  const tag = document.getElementById('hotspot-modal-tag');
   const title = document.getElementById('hotspot-modal-title');
-  const body = document.getElementById('hotspot-modal-body');
-  const injectBtn = document.getElementById('hotspot-inject-btn');
-  if (!modal || !title || !body) return;
+  const what = document.getElementById('hotspot-modal-what');
+  const trap = document.getElementById('hotspot-modal-trap');
+  const memo = document.getElementById('hotspot-modal-memo');
 
-  const foundVar = s.variables.find(v => v.name === statKey);
+  if (!modal) return;
 
-  if (foundVar) {
-    title.textContent = `Variable: ${foundVar.name} (${foundVar.desc})`;
+  const v = s.variables.find(item => item.name === statKey);
+  if (v) {
     const isRobust = currentCovariance === 'huber-white';
-    const se = isRobust ? foundVar.seRobust : foundVar.se;
-    const tStat = (foundVar.coeff / se).toFixed(3);
+    const se = isRobust ? v.seRobust : v.se;
+    const tStat = (v.coeff / se).toFixed(3);
+    const isSig = v.p < 0.05;
 
-    body.innerHTML = `
-      <div class="p-3 bg-[#FAF7F2] rounded-xl font-mono-code text-xs space-y-1">
-        <div>Coefficient: <strong class="${foundVar.coeff > 0 ? 'text-[#2A9D8F]' : 'text-[#D95D39]'}">${foundVar.coeff.toFixed(4)}</strong></div>
-        <div>Std Error (${isRobust ? 'Huber-White' : 'Ordinary'}): <strong>${se.toFixed(4)}</strong></div>
-        <div>t-Statistic: <strong>${tStat}</strong> | p-Value: <strong class="${foundVar.p < 0.05 ? 'text-[#2A9D8F]' : 'text-[#D95D39]'}">${foundVar.p.toFixed(4)}</strong></div>
-      </div>
-      <div>
-        <h4 class="font-bold text-[#1D3557] text-xs">What this means:</h4>
-        <p>${foundVar.desc}. An increase in ${foundVar.name} is associated with a ${foundVar.coeff.toFixed(3)} unit expected change in ${s.depVar}, holding other variables constant.</p>
-      </div>
-      <div class="p-2.5 bg-[#FAF3EC] rounded-lg border border-[#F0DBC9] text-[#8C3A22]">
-        <strong>⚠️ Examiner Trap:</strong> ${foundVar.trap}
-      </div>
-    `;
-
-    if (injectBtn) {
-      injectBtn.onclick = () => {
-        closeHotspotModal();
-        selectMemoVariable(foundVar.name);
-      };
-    }
+    if (tag) tag.textContent = `VARIABLE: ${v.name} (${s.depVar} Regression)`;
+    if (title) title.textContent = `Parameter Estimate: β̂ = ${v.coeff.toFixed(4)}`;
+    if (what) what.textContent = `${v.desc}. Standard Error = ${se.toFixed(4)}, t-statistic = ${tStat}, p-value = ${v.p.toFixed(4)}.`;
+    if (trap) trap.textContent = v.trap;
+    if (memo) memo.textContent = `"${v.name} is ${isSig ? 'statistically significant' : 'statistically insignificant'} at the 5% level (p = ${v.p.toFixed(4)} ${isSig ? '< 0.05' : '>= 0.05'}). Ceteris paribus, a 1 unit increase in ${v.name} changes ${s.depVar} by ${v.coeff.toFixed(4)}."`;
   } else if (statKey === 'R2') {
-    title.textContent = 'R-Squared (Coefficient of Determination)';
-    body.innerHTML = `
-      <p>R² = ${s.summaryStats.r2}. Measures the proportion of the total sample variation in ${s.depVar} explained by the explanatory regressors.</p>
-      <div class="p-2.5 bg-[#FAF3EC] rounded-lg border border-[#F0DBC9] text-[#8C3A22]">
-        <strong>⚠️ Examiner Trap:</strong> Never claim R² measures causation! Also remember R² never falls when adding variables; only Adjusted R² can penalize unhelpful regressors.
-      </div>
-    `;
+    if (tag) tag.textContent = 'GOODNESS OF FIT: R-SQUARED';
+    if (title) title.textContent = `R² = ${s.summaryStats.r2}`;
+    if (what) what.textContent = `${(parseFloat(s.summaryStats.r2) * 100).toFixed(1)}% of total variation in ${s.depVar} is explained by the regressors.`;
+    if (trap) trap.textContent = 'Never use raw R² to compare models with different numbers of variables; always use Adjusted R²!';
+    if (memo) memo.textContent = `"${(parseFloat(s.summaryStats.r2) * 100).toFixed(1)}% of the variation in ${s.depVar} is explained by the regression model."`;
+  } else if (statKey === 'ADJR2') {
+    if (tag) tag.textContent = 'MODEL SELECTION: ADJUSTED R-SQUARED';
+    if (title) title.textContent = `Adjusted R² = ${s.summaryStats.adjR2}`;
+    if (what) what.textContent = 'Penalizes addition of irrelevant regressors taking degrees of freedom into account.';
+    if (trap) trap.textContent = 'Adjusted R² can be negative if model is extremely poor! It can decrease when adding a variable if |t| < 1.';
+    if (memo) memo.textContent = `"Taking degrees of freedom into account, ${s.summaryStats.adjR2} of the variation in ${s.depVar} is explained."`;
   } else if (statKey === 'FSTAT' || statKey === 'PROBF') {
-    title.textContent = 'F-Statistic & Joint Significance';
-    body.innerHTML = `
-      <p>F = ${s.summaryStats.fStat}, Prob(F) = ${s.summaryStats.probF}. Tests the joint null hypothesis that all slope parameters are simultaneously zero: H₀: β₂ = β₃ = ... = 0.</p>
-      <p class="font-bold text-[#2A9D8F]">Conclusion: Because p < 0.001, we reject H₀. The regression model is jointly statistically significant.</p>
-    `;
+    if (tag) tag.textContent = 'OVERALL SIGNIFICANCE: F-STATISTIC';
+    if (title) title.textContent = `F = ${s.summaryStats.fStat} (Prob = ${s.summaryStats.probF})`;
+    if (what) what.textContent = 'Tests joint hypothesis H0: all slope coefficients equal zero simultaneously.';
+    if (trap) trap.textContent = 'Do not confuse individual t-tests with joint F-test! Under multicollinearity, F is significant while t-tests are insignificant.';
+    if (memo) memo.textContent = `"Because Prob(F) = ${s.summaryStats.probF} < 0.05, we reject H0. The model is overall statistically significant."`;
   } else if (statKey === 'DW') {
-    title.textContent = 'Durbin-Watson d-Statistic';
-    body.innerHTML = `
-      <p>DW = ${s.summaryStats.dw}. Tests for first-order autoregressive serial correlation in the error term.</p>
-      <p>Around 2.0 indicates no first-order serial correlation. Near 0 indicates positive autocorrelation; near 4 indicates negative autocorrelation.</p>
-    `;
+    if (tag) tag.textContent = 'AUTOCORRELATION: DURBIN-WATSON';
+    if (title) title.textContent = `DW Stat = ${s.summaryStats.dw}`;
+    if (what) what.textContent = 'Tests for first-order autocorrelation in time series / ordered residuals.';
+    if (trap) trap.textContent = 'Rule of thumb: DW near 2 = no autocorrelation. DW < dL = positive autocorrelation.';
+    if (memo) memo.textContent = `"Calculated DW = ${s.summaryStats.dw}. Compare against dL and dU critical bounds at 5%."`;
   }
 
   modal.classList.remove('hidden');
 }
 
 function closeHotspotModal() {
+  playSfx('click');
   document.getElementById('hotspot-modal')?.classList.add('hidden');
 }
 
-// Tri-Level Word Memo Builder
+// Tri-Level Word Memo Mode Management
+function setMemoMode(mode) {
+  playSfx('click');
+  currentMemoMode = mode;
+  const tabFillin = document.getElementById('memo-tab-fillin');
+  const tabExemplar = document.getElementById('memo-tab-exemplar');
+  const viewFillin = document.getElementById('memo-fillin-view');
+  const viewExemplar = document.getElementById('memo-exemplar-view');
+
+  if (mode === 'fillin') {
+    if (tabFillin) tabFillin.className = 'paper-btn px-3 py-1.5 bg-[#4E878C] text-white text-xs font-bold rounded-lg shadow-sm';
+    if (tabExemplar) tabExemplar.className = 'paper-btn px-3 py-1.5 bg-[#FAF7F2] text-[#1D3557] border border-[#D6CEC1] text-xs font-bold rounded-lg hover:bg-[#EAE4D9]';
+    if (viewFillin) viewFillin.classList.remove('hidden');
+    if (viewExemplar) viewExemplar.classList.add('hidden');
+  } else {
+    if (tabExemplar) tabExemplar.className = 'paper-btn px-3 py-1.5 bg-[#D95D39] text-white text-xs font-bold rounded-lg shadow-sm';
+    if (tabFillin) tabFillin.className = 'paper-btn px-3 py-1.5 bg-[#FAF7F2] text-[#1D3557] border border-[#D6CEC1] text-xs font-bold rounded-lg hover:bg-[#EAE4D9]';
+    if (viewExemplar) viewExemplar.classList.remove('hidden');
+    if (viewFillin) viewFillin.classList.add('hidden');
+  }
+}
+
 function selectMemoVariable(varName) {
   playSfx('click');
   selectedMemoVar = varName;
   const s = scenariosData[currentScenarioKey];
-  const v = s.variables.find(item => item.name === varName) || s.variables[1];
+  const v = s.variables.find(item => item.name === varName);
+  if (!v) return;
+
   const isRobust = currentCovariance === 'huber-white';
   const se = isRobust ? v.seRobust : v.se;
   const tStat = (v.coeff / se).toFixed(3);
   const isSig = v.p < 0.05;
 
+  // Update Fill-in Mode elements
+  const varBadge = document.getElementById('memo-fillin-var-badge');
+  if (varBadge) varBadge.textContent = v.name;
+  const fillVar1 = document.getElementById('fill-var-name-1');
+  const fillVar2 = document.getElementById('fill-var-name-2');
+  const fillDep = document.getElementById('fill-depvar-name');
+  const fillMag = document.getElementById('fill-mag-val');
+  if (fillVar1) fillVar1.textContent = v.name;
+  if (fillVar2) fillVar2.textContent = v.name;
+  if (fillDep) fillDep.textContent = s.depVar;
+  if (fillMag) fillMag.textContent = Math.abs(v.coeff).toFixed(4);
+
+  // Reset Fill-in selectors and status badges
+  ['fill-sig-select', 'fill-cmp-select', 'fill-h0-select', 'fill-dir-select', 'fill-theory-select'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.value = '';
+      el.className = 'p-1 rounded border border-[#D6CEC1] bg-white font-bold text-xs';
+    }
+  });
+  const theorySel = document.getElementById('fill-theory-select');
+  if (theorySel) theorySel.className = 'w-full p-2 rounded border border-[#D6CEC1] bg-white text-xs font-mono-code';
+
+  const theoryOpt = document.getElementById('fill-theory-correct-opt');
+  if (theoryOpt) {
+    if (v.name === 'ROE') theoryOpt.textContent = 'Conforms to Principal-Agent Theory (higher profit returns reward managerial talent)';
+    else if (v.name === 'SALES') theoryOpt.textContent = 'Aligns with Baumol Sales Maximization (larger firm scale expands CEO responsibility)';
+    else if (v.name === 'EDUC') theoryOpt.textContent = 'Strictly aligns with Human Capital Theory (schooling enhances productivity & market returns)';
+    else if (v.name === 'FEMALE') theoryOpt.textContent = 'Represents documented labor market differential intercept / gender wage gap';
+    else theoryOpt.textContent = 'Conforms to standard economic rationale for this regressor';
+  }
+
+  ['fill-status-1', 'fill-status-2', 'fill-status-3'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.textContent = 'PENDING';
+      el.className = 'text-[10px] font-bold text-[#7A8294]';
+    }
+  });
+
+  // Update Exemplar View
   const box1 = document.getElementById('memo-level1-box');
   const box2 = document.getElementById('memo-level2-box');
   const box3 = document.getElementById('memo-level3-box');
@@ -7671,8 +8105,57 @@ function selectMemoVariable(varName) {
   showToast(`Selected ${v.name} for Word Memo`, '📝');
 }
 
+function checkMemoFillIn() {
+  const s = scenariosData[currentScenarioKey];
+  const v = s.variables.find(item => item.name === (selectedMemoVar || (currentScenarioKey === 'A' ? 'ROE' : 'EDUC')));
+  if (!v) return;
+
+  const isSig = v.p < 0.05;
+  const expectedSig = isSig ? 'sig' : 'insig';
+  const expectedCmp = isSig ? 'lt' : 'gte';
+  const expectedH0 = isSig ? 'reject' : 'fail';
+  const expectedDir = v.coeff > 0 ? 'inc' : 'dec';
+
+  const sigVal = document.getElementById('fill-sig-select')?.value;
+  const cmpVal = document.getElementById('fill-cmp-select')?.value;
+  const h0Val = document.getElementById('fill-h0-select')?.value;
+  const dirVal = document.getElementById('fill-dir-select')?.value;
+  const theoryVal = document.getElementById('fill-theory-select')?.value;
+
+  const l1Ok = (sigVal === expectedSig) && (cmpVal === expectedCmp) && (h0Val === expectedH0);
+  const l2Ok = (dirVal === expectedDir);
+  const l3Ok = (theoryVal === 'correct');
+
+  const st1 = document.getElementById('fill-status-1');
+  const st2 = document.getElementById('fill-status-2');
+  const st3 = document.getElementById('fill-status-3');
+
+  if (st1) {
+    st1.textContent = l1Ok ? '✓ 1.0/1.0 MARKS' : '❌ INCORRECT';
+    st1.className = `text-[10px] font-bold ${l1Ok ? 'text-[#2A9D8F]' : 'text-[#D95D39]'}`;
+  }
+  if (st2) {
+    st2.textContent = l2Ok ? '✓ 1.0/1.0 MARKS' : '❌ INCORRECT';
+    st2.className = `text-[10px] font-bold ${l2Ok ? 'text-[#2A9D8F]' : 'text-[#D95D39]'}`;
+  }
+  if (st3) {
+    st3.textContent = l3Ok ? '✓ 1.0/1.0 MARKS' : '❌ INCORRECT';
+    st3.className = `text-[10px] font-bold ${l3Ok ? 'text-[#2A9D8F]' : 'text-[#D95D39]'}`;
+  }
+
+  if (l1Ok && l2Ok && l3Ok) {
+    playSfx('win');
+    addXp(25);
+    showToast('Distinction Interpretation! +25 XP Banked (3.0 / 3.0 Marks)', '🏆');
+  } else {
+    playSfx('clue');
+    showToast('Review marked areas or click Reveal Exemplar Memo', '⚠️');
+  }
+}
+
 function revealExemplarMemo() {
   playSfx('win');
+  setMemoMode('exemplar');
   addXp(25);
   showToast('Revealed 100% Exemplar Memo! (+25 XP)', '🏆');
 }
@@ -7684,7 +8167,8 @@ function copyTriLevelWordMemo() {
   const box3 = document.getElementById('memo-level3-box');
   if (!box1 || !box2 || !box3) return;
 
-  const fullText = `ECON325 Practical Exam Word Interpretation (SURNAME_INITIALS.DOCX):\n\nLevel 1 (Statistical Significance):\n${box1.innerText}\n\nLevel 2 (Economic Magnitude & Ceteris Paribus):\n${box2.innerText}\n\nLevel 3 (Economic Theory):\n${box3.innerText}`;
+  const s = scenariosData[currentScenarioKey];
+  const fullText = `ECON325 Practical Exam Word Interpretation (SURNAME_INITIALS.DOCX)\nScenario: ${s.name}\nVariable: ${selectedMemoVar || 'Target Variable'}\n\nLevel 1 (Statistical Significance - 1 Mark):\n${box1.innerText}\n\nLevel 2 (Economic Magnitude & Ceteris Paribus - 1 Mark):\n${box2.innerText}\n\nLevel 3 (Economic Theory Justification - 1 Mark):\n${box3.innerText}\n\nTotal Score: 3.0 / 3.0 Marks`;
 
   navigator.clipboard.writeText(fullText);
   showToast('Copied Tri-Level Memo to Clipboard! (+15 XP)', '📋');
@@ -7700,21 +8184,21 @@ function openMobileMemoSheet(varName) {
   const title = document.getElementById('mobile-sheet-title');
   if (!sheet || !body) return;
 
-  title.textContent = `Word Memo: ${varName}`;
+  if (title) title.textContent = `Word Memo: ${varName}`;
   const box1 = document.getElementById('memo-level1-box');
   const box2 = document.getElementById('memo-level2-box');
   const box3 = document.getElementById('memo-level3-box');
 
   body.innerHTML = `
-    <div class="p-2.5 rounded-lg bg-[#FAF7F2] border">
+    <div class="p-2.5 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
       <span class="text-[10px] text-[#7A8294] font-bold uppercase">1. Significance (+1m):</span>
       <p class="mt-0.5">${box1 ? box1.innerText : ''}</p>
     </div>
-    <div class="p-2.5 rounded-lg bg-[#FAF7F2] border">
+    <div class="p-2.5 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
       <span class="text-[10px] text-[#7A8294] font-bold uppercase">2. Magnitude & Ceteris Paribus (+1m):</span>
       <p class="mt-0.5">${box2 ? box2.innerText : ''}</p>
     </div>
-    <div class="p-2.5 rounded-lg bg-[#FAF7F2] border">
+    <div class="p-2.5 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
       <span class="text-[10px] text-[#7A8294] font-bold uppercase">3. Economic Theory (+1m):</span>
       <p class="mt-0.5">${box3 ? box3.innerText : ''}</p>
     </div>
@@ -7728,6 +8212,28 @@ function closeMobileMemoSheet() {
   document.getElementById('mobile-memo-bottom-sheet')?.classList.add('translate-y-full');
 }
 
+// Global Keyboard Handler for Modals & Shortcuts
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeHotspotModal();
+    closeMobileMemoSheet();
+    closeEquationDialog();
+  }
+});
+
+// Debounced Canvas Redraw on Window Resize for High-DPI Adaptation
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    const act1 = document.getElementById('tab-act1-story');
+    if (act1 && !act1.classList.contains('hidden')) {
+      drawMegaphoneCanvas();
+      drawResetCanvas();
+      drawDWDialCanvas(currentDW);
+    }
+  }, 100);
+});
 
 // Initialize Stations and Overhaul Systems
 window.addEventListener('DOMContentLoaded', () => {

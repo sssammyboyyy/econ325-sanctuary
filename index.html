@@ -6512,7 +6512,7 @@ function copyToClipboard(text, label) {
 // MULTI-SENSORY AUDIO ENGINE & SFX (BAUHAUS SENSORY PROTOCOL)
 // =========================================================
 let sfxMuted = localStorage.getItem('econ325_sfx_muted') === 'true';
-let audioCtx = null;
+// audioCtx declared globally above
 
 function updateSfxToggleBtn() {
   const icon = document.getElementById('sfx-mute-icon');
