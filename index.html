@@ -214,6 +214,10 @@
           <span id="focus-audio-icon">🎧</span>
           <span id="focus-audio-label" class="hidden sm:inline">40Hz Calm: OFF</span>
         </button>
+        <button id="sfx-mute-btn" onclick="toggleSfxMute()" class="paper-btn px-2.5 py-1 bg-white hover:bg-[#F3EFEA] text-xs flex items-center gap-1.5 text-[#1D3557]">
+          <span id="sfx-mute-icon">🔊</span>
+          <span id="sfx-mute-label" class="hidden sm:inline">SFX: ON</span>
+        </button>
       </div>
 
       
@@ -243,42 +247,38 @@
   <!-- ========================================================= -->
   <!-- NAVIGATION BAR (Bauhaus Warm Tactile Tabs)                -->
   <!-- ========================================================= -->
-  <nav class="bg-[#FAF7F2] border-b border-[#E8E2D8] px-4 py-2">
+  <nav class="bg-[#FAF7F2] border-b border-[#E8E2D8] px-4 py-2 sticky top-[61px] z-30">
     <div class="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto custom-scroll pb-0.5 gap-2 text-xs">
       <div class="flex items-center gap-1.5 min-w-max">
-        <button onclick="switchTab('tab-quest-map')" class="nav-tab-btn active px-3.5 py-2">
-          🗺️ Quest Journey [1]
+        <button onclick="switchTab('tab-act1-story')" class="nav-tab-btn active px-3.5 py-2" data-tab="tab-act1-story">
+          📖 Act 1: Story Studio [1]
         </button>
-        <button onclick="switchTab('tab-eviews-dojo')" class="nav-tab-btn px-3.5 py-2">
-          ⚡ EViews Studio [2]
+        <button onclick="switchTab('tab-act2-theory')" class="nav-tab-btn px-3.5 py-2" data-tab="tab-act2-theory">
+          🏛️ Act 2: Theory Decoder [2]
         </button>
-        <button onclick="switchTab('tab-mad-libs')" class="nav-tab-btn px-3.5 py-2">
-          📝 Word Answer Lab [3]
+        <button onclick="switchTab('tab-act3-lab')" class="nav-tab-btn px-3.5 py-2" data-tab="tab-act3-lab">
+          💻 Act 3: EViews Lab [3]
         </button>
-        <button onclick="switchTab('tab-theory-vault')" class="nav-tab-btn px-3.5 py-2">
-          🏛️ 26M Theory Pillars [4]
+        <button onclick="switchTab('tab-quest-map')" class="nav-tab-btn px-3.5 py-2" data-tab="tab-quest-map">
+          🗺️ Quest Journey [4]
         </button>
-        <button onclick="switchTab('tab-dw-radar')" class="nav-tab-btn px-3.5 py-2">
-          🧭 DW 5-Zone Radar [5]
+        <button onclick="switchTab('tab-past-papers')" class="nav-tab-btn px-3.5 py-2" data-tab="tab-past-papers">
+          📊 Exam Decoders [5]
         </button>
-        <button onclick="switchTab('tab-past-papers')" class="nav-tab-btn px-3.5 py-2">
-          📊 Exam Decoders [6]
+        <button onclick="switchTab('tab-boss-quiz')" class="nav-tab-btn px-3.5 py-2" data-tab="tab-boss-quiz">
+          ⚔️ Recall Atelier [6]
         </button>
-        <button onclick="switchTab('tab-boss-quiz')" class="nav-tab-btn px-3.5 py-2">
-          ⚔️ Recall Atelier [7]
+        <button onclick="switchTab('tab-exam-card')" class="nav-tab-btn px-3.5 py-2" data-tab="tab-exam-card">
+          📋 Protocol Card [7]
         </button>
-        <button onclick="switchTab('tab-exam-card')" class="nav-tab-btn px-3.5 py-2">
-          📋 Protocol Card [8]
-        </button>
-        <button onclick="switchTab('tab-final-boss')" class="nav-tab-btn px-3.5 py-2 bg-gradient-to-r from-[#FAF3EC] to-[#EBF3F5] text-[#1D3557] font-extrabold border-2 border-[#1D3557]">
-          ⚔️ Final Boss [9]
+        <button onclick="switchTab('tab-final-boss')" class="nav-tab-btn px-3.5 py-2 bg-gradient-to-r from-[#FAF3EC] to-[#EBF3F5] text-[#1D3557] font-extrabold border-2 border-[#1D3557]" data-tab="tab-final-boss">
+          ⚔️ Final Boss [8]
         </button>
       </div>
       <div class="hidden lg:flex items-center gap-1.5 text-[11px] font-mono-code text-[#7A8294] pl-2">
         <span>Keys:</span>
-        <span class="bg-[#FFFFFF] border border-[#D6CEC1] text-[#1D3557] px-1.5 py-0.5 rounded font-bold">1-9</span>
+        <span class="bg-[#FFFFFF] border border-[#D6CEC1] text-[#1D3557] px-1.5 py-0.5 rounded font-bold">1-8</span>
         <span class="bg-[#FFFFFF] border border-[#D6CEC1] text-[#1D3557] px-1.5 py-0.5 rounded font-bold">Space</span>
-        <span class="bg-[#FFFFFF] border border-[#D6CEC1] text-[#1D3557] px-1.5 py-0.5 rounded font-bold">T/F</span>
       </div>
     </div>
   </nav>
@@ -313,12 +313,1088 @@
   <!-- ========================================================= -->
   <!-- MAIN WORKSPACE CONTENT                                    -->
   <!-- ========================================================= -->
-  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 pb-24 md:pb-8 space-y-6">
 
     <!-- ======================================================= -->
     <!-- TAB 1: BAUHAUS LEARNING JOURNEY & QUEST MAP               -->
     <!-- ======================================================= -->
-    <div id="tab-quest-map" class="tab-pane space-y-6">
+    
+    <!-- ======================================================= -->
+    <!-- ACT 1: NARRATIVE STORY STUDIO (ANTI-JUMBLE HEADQUARTERS) -->
+    <!-- ======================================================= -->
+    <div id="tab-act1-story" class="tab-pane space-y-6">
+      
+      <!-- Act 1 Hero Header -->
+      <div class="paper-card p-6 bg-gradient-to-r from-[#FAF3EC] via-[#FFFDF9] to-[#EBF3F5] border-2 border-[#1D3557] flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#1D3557] text-[#FAF7F2] text-[10px] font-mono-code font-bold uppercase tracking-wider">ACT 1 • COGNITIVE INTUITION HEADQUARTERS</span>
+            <span class="text-xs text-[#7A8294] font-medium">• Anti-Jumble Invariant</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-[#1D3557] mt-1.5 tracking-tight">Narrative Story Studio</h1>
+          <p class="text-xs sm:text-sm text-[#555A68] mt-1 max-w-2xl leading-relaxed">
+            Eliminate algebraic intimidation. We replace subscript clutter (\(\beta_1 X_{1i} + \beta_2 X_{2i} \dots\)) with <strong>Plain-English semantic badges</strong> by default. Toggle formal exam math only when you're ready.
+          </p>
+        </div>
+        
+        <!-- Formula Toggle Button -->
+        <div class="flex flex-col sm:flex-row items-center gap-2">
+          <button id="formula-toggle-btn" onclick="toggleFormulaMode()" class="paper-btn px-4 py-2.5 bg-[#1D3557] text-white hover:bg-[#2B4C7E] text-xs font-bold flex items-center gap-2 shadow-sm transition-transform active:scale-95">
+            <span id="formula-toggle-icon">📐</span>
+            <span id="formula-toggle-label">Show Exam Formula Notation</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- SECTION 1: ANTI-JUMBLE SEMANTIC EQUATION BADGES        -->
+      <!-- ======================================================= -->
+      <div class="paper-card p-6 bg-white border border-[#D6CEC1] space-y-5">
+        <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+          <div>
+            <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] text-xs font-mono-code font-bold">FOUNDATIONAL PILLARS</span>
+            <h2 class="text-lg font-extrabold text-[#1D3557] mt-1">Core Econometric Equations (Intuition-First)</h2>
+          </div>
+          <span class="text-xs font-mono-code text-[#7A8294] hidden sm:inline">Active Mode: <strong id="formula-mode-badge" class="text-[#2A9D8F]">Plain-English Badges</strong></span>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4">
+          
+          <!-- Equation 1: The OLS Wage Equation -->
+          <div class="p-4 rounded-xl border border-[#E8E2D8] bg-[#FAF7F2] space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs text-[#1D3557] flex items-center gap-1.5">
+                <span>💼</span> 1. The Classical OLS Wage Determination Model
+              </span>
+              <span class="text-[10px] text-[#7A8294] font-mono-code">Lecture Activity 1 & 5</span>
+            </div>
+
+            <!-- Plain-English Display -->
+            <div class="formula-plain p-3 bg-white rounded-lg border border-[#D6CEC1] text-xs sm:text-sm font-semibold text-[#1D3557] flex flex-wrap items-center gap-1.5 leading-loose">
+              <span class="px-2 py-0.5 rounded bg-[#EBF3F5] text-[#1D3557] font-bold border border-[#BCD4D6] shadow-2xs">[Actual Wage]</span>
+              <span>=</span>
+              <span class="px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] font-bold border border-[#F0DBC9]">Base Minimum</span>
+              <span>+</span>
+              <span class="px-2 py-0.5 rounded bg-[#FDF6E2] text-[#996515] font-bold border border-[#EADBB6]">[Education Rate]</span>
+              <span>×</span>
+              <span class="px-2 py-0.5 rounded bg-[#FAF7F2] text-[#1D3557] font-mono border border-[#E8E2D8]">[School Years]</span>
+              <span>+</span>
+              <span class="px-2 py-0.5 rounded bg-[#FDF6E2] text-[#996515] font-bold border border-[#EADBB6]">[Experience Rate]</span>
+              <span>×</span>
+              <span class="px-2 py-0.5 rounded bg-[#FAF7F2] text-[#1D3557] font-mono border border-[#E8E2D8]">[Work Years]</span>
+              <span>+</span>
+              <span class="px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] font-bold border border-[#F0DBC9]">[Unobserved Life Noise (uᵢ)]</span>
+            </div>
+
+            <!-- KaTeX Exam Formula Display -->
+            <div class="formula-exam hidden p-3 bg-white rounded-lg border border-[#D6CEC1] text-xs sm:text-sm font-mono text-[#1D3557]">
+              $$WAGE_i = \beta_1 + \beta_2 EDUC_i + \beta_3 EXPER_i + u_i$$
+            </div>
+
+            <p class="text-xs text-[#555A68] leading-relaxed">
+              <strong>Why the error noise \(u_i\) exists:</strong> Two workers with identical 12 years of education and 5 years of experience will never earn the exact same salary. Ambition, innate talent, lucky breaks, and survey rounding errors are absorbed by the disturbance term.
+            </p>
+          </div>
+
+          <!-- Equation 2: Ramsey RESET & Squaring Y_hat -->
+          <div class="p-4 rounded-xl border-2 border-[#D95D39]/30 bg-[#FFFDF9] space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs text-[#D95D39] flex items-center gap-1.5">
+                <span>🥣</span> 2. Ramsey RESET Test: Why Squaring \(\hat{Y}\) is a Stroke of Genius!
+              </span>
+              <span class="text-[10px] text-[#D95D39] font-mono-code font-bold">CRITICAL EXAM QUESTION • 6M</span>
+            </div>
+
+            <!-- Plain-English Display -->
+            <div class="formula-plain p-3 bg-white rounded-lg border border-[#D6CEC1] text-xs sm:text-sm font-semibold text-[#1D3557] flex flex-wrap items-center gap-1.5 leading-loose">
+              <span class="px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] font-bold border border-[#F0DBC9]">[Residual eᵢ]</span>
+              <span>=</span>
+              <span class="px-2 py-0.5 rounded bg-[#FAF7F2] text-[#555A68] border border-[#E8E2D8]">[Original Model Inputs]</span>
+              <span>+</span>
+              <span class="px-2 py-0.5 rounded bg-[#EBF3F5] text-[#1D3557] font-bold border border-[#BCD4D6]">δ₁ × [Fitted Wage Guess]²</span>
+              <span>+</span>
+              <span class="px-2 py-0.5 rounded bg-[#EBF3F5] text-[#1D3557] font-bold border border-[#BCD4D6]">δ₂ × [Fitted Wage Guess]³</span>
+              <span>+</span>
+              <span class="px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] font-bold border border-[#F0DBC9]">[vᵢ]</span>
+            </div>
+
+            <!-- KaTeX Exam Formula Display -->
+            <div class="formula-exam hidden p-3 bg-white rounded-lg border border-[#D6CEC1] text-xs sm:text-sm font-mono text-[#1D3557]">
+              $$e_i = \alpha_1 + \alpha_2 X_{2i} + \alpha_3 X_{3i} + \delta_1 \hat{Y}_i^2 + \delta_2 \hat{Y}_i^3 + v_i$$
+            </div>
+
+            <div class="p-3 bg-[#FAF3EC] rounded-xl border border-[#F0DBC9] text-xs text-[#8C3A22] leading-relaxed">
+              <strong>💡 The Genius of \(\hat{Y}^2\):</strong> If a model has 4 variables, squaring each \(X\) directly plus cross-products requires adding <strong>14 new terms</strong>, obliterating degrees of freedom and inducing severe multicollinearity! Because \(\hat{Y}_i\) is already the optimal linear combination of all \(X\)'s, squaring \(\hat{Y}_i^2\) tests for general quadratic curvature across the entire model using <strong>just ONE single parameter (\(\delta_1\))</strong>!
+            </div>
+          </div>
+
+          <!-- Equation 3: White's General Heteroskedasticity (Soup Kitchen) -->
+          <div class="p-4 rounded-xl border border-[#E8E2D8] bg-[#FAF7F2] space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs text-[#1D3557] flex items-center gap-1.5">
+                <span>🍲</span> 3. White's Heteroskedasticity Auxiliary Regression (The Soup Kitchen)
+              </span>
+              <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 10, Slide 14</span>
+            </div>
+
+            <!-- Plain-English Display -->
+            <div class="formula-plain p-3 bg-white rounded-lg border border-[#D6CEC1] text-xs sm:text-sm font-semibold text-[#1D3557] flex flex-wrap items-center gap-1.5 leading-loose">
+              <span class="px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] font-bold border border-[#F0DBC9]">[Squared Residual eᵢ²]</span>
+              <span>=</span>
+              <span>α₀</span>
+              <span>+</span>
+              <span class="px-2 py-0.5 rounded bg-[#EBF3F5] text-[#1D3557] font-bold border border-[#BCD4D6]">[Sales]</span>
+              <span>+</span>
+              <span class="px-2 py-0.5 rounded bg-[#EBF3F5] text-[#1D3557] font-bold border border-[#BCD4D6]">[ROE]</span>
+              <span>+</span>
+              <span class="px-2 py-0.5 rounded bg-[#FDF6E2] text-[#996515] font-bold border border-[#EADBB6]">[Sales]²</span>
+              <span>+</span>
+              <span class="px-2 py-0.5 rounded bg-[#FDF6E2] text-[#996515] font-bold border border-[#EADBB6]">[ROE]²</span>
+              <span>+</span>
+              <span class="px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] font-bold border border-[#F0DBC9]">[Sales × ROE]</span>
+              <span>+</span>
+              <span>vᵢ</span>
+            </div>
+
+            <!-- KaTeX Exam Formula Display -->
+            <div class="formula-exam hidden p-3 bg-white rounded-lg border border-[#D6CEC1] text-xs sm:text-sm font-mono text-[#1D3557]">
+              $$e_i^2 = \alpha_0 + \alpha_1 SALES_i + \alpha_2 ROE_i + \alpha_3 SALES_i^2 + \alpha_4 ROE_i^2 + \alpha_5 (SALES_i \times ROE_i) + v_i$$
+            </div>
+
+            <p class="text-xs text-[#555A68] leading-relaxed">
+              <strong>The Auxiliary Soup Kitchen:</strong> Throw every linear vegetable, roasted squared vegetable, and interaction spice blend into the pot. If the regression fit \(n \cdot R^2\) is statistically significant, variance is NOT constant—heteroskedasticity is detected!
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- SECTION 2: THE 4 PHYSICAL INTERACTIVE VISUAL STATIONS   -->
+      <!-- ======================================================= -->
+      <div class="space-y-6">
+        
+        <div class="border-b border-[#E8E2D8] pb-2 flex items-center justify-between">
+          <div>
+            <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#2B4C7E] text-white text-xs font-mono-code font-bold">PHYSICAL SANDBOXES</span>
+            <h2 class="text-xl font-extrabold text-[#1D3557] mt-1">The 4 Interactive Visual Stations</h2>
+          </div>
+          <span class="text-xs text-[#7A8294]">Hands-on tactile intuition</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+          <!-- =================================================== -->
+          <!-- STATION 1: THE MEGAPHONE SCATTER SANDBOX            -->
+          <!-- =================================================== -->
+          <div class="paper-card p-5 bg-white border border-[#D6CEC1] space-y-4 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] font-mono-code font-bold">STATION 01 • HETEROSKEDASTICITY</span>
+                <span class="text-xs font-mono-code text-[#7A8294]">Var(uᵢ) = σᵢ²</span>
+              </div>
+              <h3 class="font-extrabold text-[#1D3557] text-base">The Megaphone Scatter Sandbox</h3>
+              <p class="text-xs text-[#555A68]">
+                Adjust the variance slider to see residuals fan out like a cheerleader's megaphone at higher values of X. Notice how OLS slope stays centered (unbiased!), but standard errors become fatally distorted.
+              </p>
+
+              <!-- Canvas -->
+              <div class="relative rounded-xl overflow-hidden border border-[#E0D9CD] bg-[#FAF7F2]">
+                <canvas id="megaphone-canvas" width="560" height="260" class="w-full h-56 block"></canvas>
+              </div>
+
+              <!-- Controls -->
+              <div class="space-y-2 pt-2 text-xs">
+                <div class="flex items-center justify-between font-mono-code">
+                  <label for="megaphone-slider" class="font-bold text-[#1D3557]">Megaphone Variance Spread:</label>
+                  <span id="megaphone-val-display" class="font-bold text-[#D95D39]">65%</span>
+                </div>
+                <input id="megaphone-slider" type="range" min="0" max="100" value="65" oninput="updateMegaphoneStation(this.value)" class="w-full accent-[#D95D39]">
+                
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+                  <div class="flex items-center gap-3">
+                    <label class="flex items-center gap-1.5 text-[#555A68] cursor-pointer">
+                      <input id="megaphone-cone-toggle" type="checkbox" checked onchange="drawMegaphoneCanvas()" class="accent-[#D95D39]">
+                      <span>Megaphone Cone</span>
+                    </label>
+                    <label class="flex items-center gap-1.5 text-[#555A68] cursor-pointer">
+                      <input id="megaphone-line-toggle" type="checkbox" checked onchange="drawMegaphoneCanvas()" class="accent-[#1D3557]">
+                      <span>OLS Fit Line</span>
+                    </label>
+                  </div>
+                  <button onclick="regenerateMegaphonePoints()" class="paper-btn px-2.5 py-1 bg-[#FAF7F2] hover:bg-[#EAE4D9] text-[11px] text-[#1D3557] font-bold">
+                    🎲 Resample Points
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Station 1 Takeaway Box -->
+            <div class="p-3 bg-[#FAF7F2] rounded-xl border border-[#D6CEC1] space-y-1 text-xs">
+              <div class="flex items-center justify-between font-mono-code text-[11px]">
+                <span>OLS Slope: <strong id="megaphone-b1-display" class="text-[#2A9D8F]">0.81 (Unbiased!)</strong></span>
+                <span>Ordinary SE: <strong class="text-[#D95D39]">0.038 (Invalid)</strong></span>
+                <span>Huber-White SE: <strong class="text-[#2A9D8F]">0.122 (Robust)</strong></span>
+              </div>
+              <p class="text-[11px] text-[#555A68] pt-1">
+                <strong>Exam Rule:</strong> OLS is <em>linear and unbiased</em> under heteroskedasticity, but <strong>NOT BLUE</strong> (inefficient). Usual t and F tests are invalid. Fix in EViews: <code>Options → Covariance Method → Huber-White</code>.
+              </p>
+            </div>
+          </div>
+
+          <!-- =================================================== -->
+          <!-- STATION 2: THE AUXILIARY SOUP KITCHEN               -->
+          <!-- =================================================== -->
+          <div class="paper-card p-5 bg-white border border-[#D6CEC1] space-y-4 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#EBF3F5] text-[#2B4C7E] font-mono-code font-bold">STATION 02 • WHITE'S TEST</span>
+                <span class="text-xs font-mono-code text-[#7A8294]">LM = n · R² ~ χ²_df</span>
+              </div>
+              <h3 class="font-extrabold text-[#1D3557] text-base">The Auxiliary Soup Kitchen</h3>
+              <p class="text-xs text-[#555A68]">
+                Calculate White's auxiliary degrees of freedom dynamically. Choose the number of original variables (k) to watch the soup expand into linear terms, squares, and cross-products!
+              </p>
+
+              <!-- Interactive Degrees of Freedom Counter -->
+              <div class="p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-3 text-xs">
+                <div class="flex items-center justify-between font-mono-code">
+                  <label class="font-bold text-[#1D3557]">Original Regressors (k):</label>
+                  <span id="soup-k-display" class="font-bold text-[#2B4C7E] text-sm">k = 2 (e.g. Sales, ROE)</span>
+                </div>
+                <input id="soup-k-slider" type="range" min="1" max="5" value="2" oninput="updateSoupStation()" class="w-full accent-[#2B4C7E]">
+
+                <div class="grid grid-cols-3 gap-2 text-center pt-1 font-mono-code">
+                  <div class="p-2 bg-white rounded-lg border border-[#E8E2D8]">
+                    <div class="text-[10px] text-[#7A8294]">Linear Terms</div>
+                    <div id="soup-linear-count" class="font-extrabold text-[#1D3557] text-sm">2</div>
+                  </div>
+                  <div class="p-2 bg-white rounded-lg border border-[#E8E2D8]">
+                    <div class="text-[10px] text-[#7A8294]">Squared Terms</div>
+                    <div id="soup-sq-count" class="font-extrabold text-[#1D3557] text-sm">2</div>
+                  </div>
+                  <div class="p-2 bg-white rounded-lg border border-[#E8E2D8]">
+                    <div class="text-[10px] text-[#7A8294]">Cross Products</div>
+                    <div id="soup-cross-count" class="font-extrabold text-[#1D3557] text-sm">1</div>
+                  </div>
+                </div>
+
+                <div class="p-2.5 bg-white rounded-lg border-2 border-[#2B4C7E] flex items-center justify-between text-xs font-mono-code">
+                  <span class="font-bold text-[#1D3557]">Total Auxiliary df:</span>
+                  <span id="soup-total-df" class="font-black text-[#2B4C7E] text-base">5 Regressors</span>
+                </div>
+              </div>
+
+              <!-- Sample Size and R2 Inputs -->
+              <div class="grid grid-cols-2 gap-3 text-xs">
+                <div>
+                  <label class="font-bold text-[#555A68] block mb-1">Sample Size (n):</label>
+                  <input id="soup-n-input" type="number" value="209" min="30" max="1000" oninput="updateSoupStation()" class="w-full bg-[#FAF7F2] border border-[#D6CEC1] rounded-lg p-2 font-mono-code text-xs text-[#1D3557]">
+                </div>
+                <div>
+                  <label class="font-bold text-[#555A68] block mb-1">Auxiliary R²:</label>
+                  <input id="soup-r2-input" type="number" step="0.001" value="0.082" min="0.001" max="0.999" oninput="updateSoupStation()" class="w-full bg-[#FAF7F2] border border-[#D6CEC1] rounded-lg p-2 font-mono-code text-xs text-[#1D3557]">
+                </div>
+              </div>
+            </div>
+
+            <!-- Station 2 Decision Output -->
+            <div id="soup-verdict-box" class="p-3 bg-[#FAF3EC] rounded-xl border border-[#F0DBC9] space-y-1 text-xs">
+              <!-- Dynamically populated by JS -->
+            </div>
+          </div>
+
+          <!-- =================================================== -->
+          <!-- STATION 3: FINISHED SOUP / RAMSEY RESET SANDBOX     -->
+          <!-- =================================================== -->
+          <div class="paper-card p-5 bg-white border border-[#D6CEC1] space-y-4 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] font-mono-code font-bold">STATION 03 • RAMSEY RESET</span>
+                <span class="text-xs font-mono-code text-[#7A8294]">Testing Misspecification</span>
+              </div>
+              <h3 class="font-extrabold text-[#1D3557] text-base">The Finished Soup Parabola Sandbox</h3>
+              <p class="text-xs text-[#555A68]">
+                See why OLS linear regression fails when the true relationship has curvature. Toggle the \(\hat{Y}^2\) auxiliary term to watch the RESET test detect the omitted parabola!
+              </p>
+
+              <!-- Parabola Canvas -->
+              <div class="relative rounded-xl overflow-hidden border border-[#E0D9CD] bg-[#FAF7F2]">
+                <canvas id="reset-canvas" width="560" height="260" class="w-full h-56 block"></canvas>
+              </div>
+
+              <!-- Controls -->
+              <div class="space-y-2 pt-2 text-xs">
+                <div class="flex items-center justify-between font-mono-code">
+                  <label for="reset-curve-slider" class="font-bold text-[#1D3557]">True Parabolic Curvature:</label>
+                  <span id="reset-curve-display" class="font-bold text-[#D95D39]">Moderate Curve</span>
+                </div>
+                <input id="reset-curve-slider" type="range" min="0" max="100" value="70" oninput="updateResetStation(this.value)" class="w-full accent-[#D95D39]">
+
+                <div class="flex items-center justify-between pt-1">
+                  <label class="flex items-center gap-2 text-xs font-bold text-[#1D3557] cursor-pointer">
+                    <input id="reset-yhat-toggle" type="checkbox" checked onchange="drawResetCanvas()" class="accent-[#2A9D8F] w-4 h-4">
+                    <span>Include \(\hat{Y}^2\) in Model (RESET Auxiliary)</span>
+                  </label>
+                  <button onclick="presetReset2023()" class="paper-btn px-2.5 py-1 bg-[#FAF7F2] hover:bg-[#EAE4D9] text-[11px] text-[#1D3557] font-bold">
+                    Load 2023 Wage Curve
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Station 3 Verdict Box -->
+            <div id="reset-verdict-box" class="p-3 bg-[#FAF7F2] rounded-xl border border-[#D6CEC1] space-y-1 text-xs">
+              <!-- Dynamically populated by JS -->
+            </div>
+          </div>
+
+          <!-- =================================================== -->
+          <!-- STATION 4: THE 0-TO-4 PENDULUM RADAR (DW TEST)      -->
+          <!-- =================================================== -->
+          <div class="paper-card p-5 bg-white border border-[#D6CEC1] space-y-4 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#E8F8F5] text-[#2A9D8F] font-mono-code font-bold">STATION 04 • AUTOCORRELATION</span>
+                <span class="text-xs font-mono-code text-[#7A8294]">d ≈ 2(1 - ρ̂)</span>
+              </div>
+              <h3 class="font-extrabold text-[#1D3557] text-base">The 0-to-4 Pendulum Radar (Durbin-Watson)</h3>
+              <p class="text-xs text-[#555A68]">
+                Sweep the radial pendulum needle between 0 and 4. Watch how the 5 classical zones map directly to positive autocorrelation, indecision, or clean models!
+              </p>
+
+              <!-- Radial Gauge Canvas -->
+              <div class="relative rounded-xl overflow-hidden border border-[#E0D9CD] bg-[#FAF7F2] p-2 flex justify-center">
+                <canvas id="dw-dial-canvas" width="460" height="230" class="w-full max-w-md block"></canvas>
+              </div>
+
+              <!-- Dial Controls -->
+              <div class="space-y-2 pt-1 text-xs font-mono-code">
+                <div class="flex items-center justify-between">
+                  <label class="font-bold text-[#1D3557]">Observed DW d-Statistic:</label>
+                  <span id="dw-station-d-val" class="font-black text-[#D95D39] text-sm">d = 1.15</span>
+                </div>
+                <input id="dw-station-d-slider" type="range" min="0" max="400" value="115" oninput="updateDWStation(this.value / 100)" class="w-full accent-[#D95D39]">
+
+                <div class="grid grid-cols-2 gap-2 text-[11px] pt-1">
+                  <div>
+                    <label class="block text-[#7A8294]">Lower Bound (d_L):</label>
+                    <input id="dw-station-dl" type="number" step="0.01" value="1.34" oninput="updateDWStation()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs">
+                  </div>
+                  <div>
+                    <label class="block text-[#7A8294]">Upper Bound (d_U):</label>
+                    <input id="dw-station-du" type="number" step="0.01" value="1.54" oninput="updateDWStation()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Station 4 Verdict Box -->
+            <div id="dw-station-verdict-box" class="p-3 bg-[#FAF3EC] rounded-xl border border-[#F0DBC9] space-y-1 text-xs">
+              <!-- Dynamically populated by JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================= -->
+    <!-- ACT 2: PAPER 1 THEORY DECODER (26M WRITTEN PILLARS)     -->
+    <!-- ======================================================= -->
+    <div id="tab-act2-theory" class="tab-pane hidden space-y-6">
+      
+      <!-- Act 2 Hero Header -->
+      <div class="paper-card p-6 bg-gradient-to-r from-[#FFFDF9] via-[#FAF7F2] to-[#EBF3F5] border-2 border-[#1D3557] flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#1D3557] text-[#FAF7F2] text-[10px] font-mono-code font-bold uppercase tracking-wider">ACT 2 • PAPER 1 WRITTEN PILLARS (60M)</span>
+            <span class="text-xs text-[#7A8294] font-medium">• 26 Marks Guaranteed</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-[#1D3557] mt-1.5 tracking-tight">The Theory Decoder & Written Pillars</h1>
+          <p class="text-xs sm:text-sm text-[#555A68] mt-1 max-w-2xl leading-relaxed">
+            Master the rigid memorization questions that appear in every single NWU exam: O.R.M.I. error term reasons, I.N.A.N. Durbin-Watson assumptions, Restricted F-tests, and matrix singularity.
+          </p>
+        </div>
+        
+        <div class="flex items-center gap-2">
+          <button onclick="switchTab('tab-boss-quiz')" class="paper-btn px-4 py-2 bg-[#D95D39] text-white hover:bg-[#C85A32] text-xs font-bold shadow-sm">
+            Launch Recall Radar →
+          </button>
+        </div>
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- SECTION 1: THE MNEMONIC VAULT                           -->
+      <!-- ======================================================= -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-2">
+          <div>
+            <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#D95D39] text-white text-xs font-mono-code font-bold">THE MNEMONIC VAULT</span>
+            <h2 class="text-xl font-extrabold text-[#1D3557] mt-1">Written Exam Hall Anchors (Zero Blank Slates)</h2>
+          </div>
+          <span class="text-xs text-[#7A8294]">Click any card to flip or reveal full memo</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- Flipcard 1: O.R.M.I. -->
+          <div class="paper-card p-5 bg-white border border-[#D6CEC1] hover:border-[#D95D39] transition-all flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] font-mono-code font-bold">MNEMONIC #1 • 4 MARKS</span>
+                <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 5, Slide 4</span>
+              </div>
+              <h3 class="font-extrabold text-[#1D3557] text-base">4 Reasons for Disturbance Term (O.R.M.I.)</h3>
+              <p class="text-xs text-[#555A68]">
+                Why does the disturbance term \(u_i\) exist in economic models? Never freeze when asked this 4-mark question.
+              </p>
+
+              <div class="space-y-2 pt-2 text-xs">
+                <div class="p-2 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
+                  <strong class="text-[#D95D39]">O — Omission of minor variables:</strong> Models must remain parsimonious; thousands of minor factors cannot all be included.
+                </div>
+                <div class="p-2 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
+                  <strong class="text-[#D95D39]">R — Random human behavior:</strong> Human decisions are inherently non-deterministic; identical people make different choices.
+                </div>
+                <div class="p-2 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
+                  <strong class="text-[#D95D39]">M — Measurement errors:</strong> Survey data suffers from recall bias, rounding off hours, and income misreporting.
+                </div>
+                <div class="p-2 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
+                  <strong class="text-[#D95D39]">I — Imperfect functional form:</strong> Real economic relations are non-linear; linear models are convenient approximations.
+                </div>
+              </div>
+            </div>
+
+            <button onclick="copyMnemonicMemo('ormi')" class="paper-btn w-full py-2 bg-[#FAF3EC] hover:bg-[#F3E5D8] text-xs font-bold text-[#D95D39] border border-[#F0DBC9] flex items-center justify-center gap-1.5">
+              <span>📋 Copy 4-Mark Memo Paragraph</span>
+            </button>
+          </div>
+
+          <!-- Flipcard 2: I.N.A.N. -->
+          <div class="paper-card p-5 bg-white border border-[#D6CEC1] hover:border-[#2B4C7E] transition-all flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#EBF3F5] text-[#2B4C7E] font-mono-code font-bold">MNEMONIC #2 • 4 MARKS</span>
+                <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 11, Slide 9</span>
+              </div>
+              <h3 class="font-extrabold text-[#1D3557] text-base">4 DW Test Assumptions (I.N.A.N.)</h3>
+              <p class="text-xs text-[#555A68]">
+                What 4 conditions must hold to validly apply the Durbin-Watson \(d\) test?
+              </p>
+
+              <div class="space-y-2 pt-2 text-xs">
+                <div class="p-2 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
+                  <strong class="text-[#2B4C7E]">I — Intercept present:</strong> The regression equation must contain an explicit constant parameter (\(\beta_1\)).
+                </div>
+                <div class="p-2 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
+                  <strong class="text-[#2B4C7E]">N — Non-stochastic regressors:</strong> Explanatory \(X\) variables are fixed in repeated sampling (strictly exogenous).
+                </div>
+                <div class="p-2 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
+                  <strong class="text-[#2B4C7E]">A — AR(1) scheme only:</strong> First-order autocorrelation: \(u_t = \rho u_{t-1} + \epsilon_t\). Does not test higher lags.
+                </div>
+                <div class="p-2 rounded-lg bg-[#FAF7F2] border border-[#E8E2D8]">
+                  <strong class="text-[#2B4C7E]">N — No lagged dependent regressor:</strong> No \(Y_{t-1}\) on the right-hand side. (If present, \(d\) is biased toward 2!).
+                </div>
+              </div>
+            </div>
+
+            <button onclick="copyMnemonicMemo('inan')" class="paper-btn w-full py-2 bg-[#EBF3F5] hover:bg-[#D9EAEB] text-xs font-bold text-[#2B4C7E] border border-[#BCD4D6] flex items-center justify-center gap-1.5">
+              <span>📋 Copy 4-Mark Memo Paragraph</span>
+            </button>
+          </div>
+
+          <!-- Flipcard 3: The BLUE Status Trap -->
+          <div class="paper-card p-5 bg-white border border-[#D6CEC1] hover:border-[#2A9D8F] transition-all flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#E8F8F5] text-[#2A9D8F] font-mono-code font-bold">STATUS TRAP • 6 MARKS</span>
+                <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 9 & 10</span>
+              </div>
+              <h3 class="font-extrabold text-[#1D3557] text-base">The "BLUE" Status Trap Matrix</h3>
+              <p class="text-xs text-[#555A68]">
+                Examiners intentionally try to trip you up on whether OLS remains BLUE across the 3 major violations.
+              </p>
+
+              <div class="space-y-2 pt-2 text-xs font-mono-code">
+                <div class="p-2 rounded-lg bg-[#E8F8F5] border border-[#A7E3D8]">
+                  <div class="font-bold text-[#2A9D8F]">1. Multicollinearity:</div>
+                  <div class="text-[#1D3557] text-[11px] font-sans">OLS is <strong>STILL BLUE</strong>! Variances are wide, but OLS retains minimum variance among all linear unbiased estimators.</div>
+                </div>
+                <div class="p-2 rounded-lg bg-[#FAF3EC] border border-[#F0DBC9]">
+                  <div class="font-bold text-[#D95D39]">2. Heteroskedasticity:</div>
+                  <div class="text-[#1D3557] text-[11px] font-sans">OLS is linear & unbiased, but <strong>LOSES the "B"</strong> (inefficient; standard errors are invalid).</div>
+                </div>
+                <div class="p-2 rounded-lg bg-[#FAF3EC] border border-[#F0DBC9]">
+                  <div class="font-bold text-[#D95D39]">3. Autocorrelation:</div>
+                  <div class="text-[#1D3557] text-[11px] font-sans">OLS is linear & unbiased, but <strong>LOSES the "B"</strong> (inefficient; standard errors are invalid).</div>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="copyMnemonicMemo('blue')" class="paper-btn w-full py-2 bg-[#E8F8F5] hover:bg-[#D5EFEA] text-xs font-bold text-[#2A9D8F] border border-[#A7E3D8] flex items-center justify-center gap-1.5">
+              <span>📋 Copy BLUE Distinction Memo</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- SECTION 2: INTERACTIVE PAST PAPER SOLVERS               -->
+      <!-- ======================================================= -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-2">
+          <div>
+            <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#2B4C7E] text-white text-xs font-mono-code font-bold">EXAM SOLVERS</span>
+            <h2 class="text-xl font-extrabold text-[#1D3557] mt-1">High-Yield Past Paper Calculation Engines</h2>
+          </div>
+          <span class="text-xs text-[#7A8294]">Live step-by-step arithmetic</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Solver 1: Restricted F-Test Engine (2024 Q4) -->
+          <div class="paper-card p-5 bg-white border border-[#D6CEC1] space-y-4 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] font-mono-code font-bold">2024 Q4 • 8 MARKS</span>
+                <button onclick="load2024FTestPreset()" class="paper-btn px-2 py-0.5 bg-[#FAF7F2] text-[10px] font-bold text-[#D95D39]">Load 2024 Preset</button>
+              </div>
+              <h3 class="font-extrabold text-[#1D3557] text-base">Restricted F-Test Solver</h3>
+              <p class="text-xs text-[#555A68]">
+                Formula: \(F = \frac{(R^2_{UR} - R^2_R)/q}{(1 - R^2_{UR})/(n - k_{UR})}\). Tests joint significance of \(q\) omitted regressors.
+              </p>
+
+              <!-- Inputs -->
+              <div class="space-y-2 text-xs font-mono-code">
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="block text-[#7A8294] text-[10px]">Unrestricted R² (UR):</label>
+                    <input id="ftest-r2-ur" type="number" step="0.001" value="0.485" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
+                  </div>
+                  <div>
+                    <label class="block text-[#7A8294] text-[10px]">Restricted R² (R):</label>
+                    <input id="ftest-r2-r" type="number" step="0.001" value="0.412" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
+                  </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                  <div>
+                    <label class="block text-[#7A8294] text-[10px]">Restrictions (q):</label>
+                    <input id="ftest-q" type="number" value="3" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
+                  </div>
+                  <div>
+                    <label class="block text-[#7A8294] text-[10px]">Sample (n):</label>
+                    <input id="ftest-n" type="number" value="120" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
+                  </div>
+                  <div>
+                    <label class="block text-[#7A8294] text-[10px]">Total k_UR:</label>
+                    <input id="ftest-k" type="number" value="6" oninput="solveRestrictedFTest()" class="w-full p-1.5 border rounded bg-[#FAF7F2] text-xs font-bold text-[#1D3557]">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Output Display -->
+              <div id="ftest-result-box" class="p-3 bg-[#FAF7F2] rounded-xl border border-[#D6CEC1] space-y-1 text-xs">
+                <!-- Dynamically injected -->
+              </div>
+            </div>
+
+            <button onclick="copyFTestMemo()" class="paper-btn w-full py-2 bg-[#1D3557] hover:bg-[#2B4C7E] text-white text-xs font-bold flex items-center justify-center gap-1.5">
+              <span>📋 Copy Full Mark Solution</span>
+            </button>
+          </div>
+
+          <!-- Solver 2: Matrix Singularity Explainer -->
+          <div class="paper-card p-5 bg-white border border-[#D6CEC1] space-y-4 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#EBF3F5] text-[#2B4C7E] font-mono-code font-bold">MULTICOLLINEARITY • 5 MARKS</span>
+                <button onclick="presetSingularMatrix()" class="paper-btn px-2 py-0.5 bg-[#FAF7F2] text-[10px] font-bold text-[#2B4C7E]">Simulate Trap</button>
+              </div>
+              <h3 class="font-extrabold text-[#1D3557] text-base">Matrix Singularity Explainer</h3>
+              <p class="text-xs text-[#555A68]">
+                OLS normal equations require computing \((X'X)^{-1}\). If \(\det(X'X) = 0\), division by zero crashes the estimator!
+              </p>
+
+              <!-- 2x2 Matrix Simulator -->
+              <div class="p-3 bg-[#FAF7F2] rounded-xl border border-[#D6CEC1] space-y-2 text-xs font-mono-code">
+                <div class="flex items-center justify-between text-[11px] text-[#7A8294]">
+                  <span>Matrix (X'X):</span>
+                  <span>det = ad - bc</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-center">
+                  <div class="p-2 bg-white rounded border">
+                    <label class="text-[9px] text-[#7A8294]">a (Var X₁):</label>
+                    <input id="mat-a" type="number" value="10" oninput="solveMatrixDet()" class="w-full text-center font-bold text-xs">
+                  </div>
+                  <div class="p-2 bg-white rounded border">
+                    <label class="text-[9px] text-[#7A8294]">b (Cov):</label>
+                    <input id="mat-b" type="number" value="5" oninput="solveMatrixDet()" class="w-full text-center font-bold text-xs">
+                  </div>
+                  <div class="p-2 bg-white rounded border">
+                    <label class="text-[9px] text-[#7A8294]">c (Cov):</label>
+                    <input id="mat-c" type="number" value="4" oninput="solveMatrixDet()" class="w-full text-center font-bold text-xs">
+                  </div>
+                  <div class="p-2 bg-white rounded border">
+                    <label class="text-[9px] text-[#7A8294]">d (Var X₂):</label>
+                    <input id="mat-d" type="number" value="2" oninput="solveMatrixDet()" class="w-full text-center font-bold text-xs">
+                  </div>
+                </div>
+
+                <div id="mat-det-display" class="p-2 rounded bg-white border text-center font-bold text-xs">
+                  <!-- Dynamically injected -->
+                </div>
+              </div>
+
+              <div id="mat-verdict-box" class="p-3 rounded-xl border text-xs space-y-1">
+                <!-- Dynamically injected -->
+              </div>
+            </div>
+
+            <div class="text-[11px] text-[#555A68]">
+              <strong>The Dummy Variable Trap:</strong> If you include \(m\) dummies and an intercept, Column 1 (constant) equals the sum of all dummy columns! Determinant is strictly 0.
+            </div>
+          </div>
+
+          <!-- Solver 3: Log-Log Elasticity Matrix -->
+          <div class="paper-card p-5 bg-white border border-[#D6CEC1] space-y-4 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="tag-bauhaus text-[10px] px-2 py-0.5 rounded bg-[#E8F8F5] text-[#2A9D8F] font-mono-code font-bold">FUNCTIONAL FORMS • 6 MARKS</span>
+                <span class="text-[10px] text-[#7A8294] font-mono-code">Topic 8</span>
+              </div>
+              <h3 class="font-extrabold text-[#1D3557] text-base">Elasticity & Slope Matrix</h3>
+              <p class="text-xs text-[#555A68]">
+                Convert coefficients into exact percentage or absolute unit interpretations for all 4 functional forms.
+              </p>
+
+              <!-- Form Selector -->
+              <div class="space-y-2 text-xs">
+                <label class="block font-bold text-[#555A68]">Select Functional Form:</label>
+                <select id="elasticity-form-select" onchange="solveElasticityMatrix()" class="w-full bg-[#FAF7F2] border border-[#D6CEC1] rounded-lg p-2 font-mono-code text-xs text-[#1D3557]">
+                  <option value="loglog">Double-Log: ln(Y) = b₁ + b₂ ln(X) [Constant Elasticity]</option>
+                  <option value="loglin">Log-Lin: ln(Y) = b₁ + b₂ X [Semi-Elasticity / Growth]</option>
+                  <option value="linlog">Lin-Log: Y = b₁ + b₂ ln(X) [Unit / Percentage]</option>
+                  <option value="linlin">Linear-Linear: Y = b₁ + b₂ X [Constant Slope]</option>
+                </select>
+
+                <div class="grid grid-cols-3 gap-2 font-mono-code">
+                  <div>
+                    <label class="block text-[#7A8294] text-[10px]">X Name:</label>
+                    <input id="elasticity-x" type="text" value="GDP" oninput="solveElasticityMatrix()" class="w-full p-1 border rounded bg-[#FAF7F2] text-xs">
+                  </div>
+                  <div>
+                    <label class="block text-[#7A8294] text-[10px]">Y Name:</label>
+                    <input id="elasticity-y" type="text" value="ELEC" oninput="solveElasticityMatrix()" class="w-full p-1 border rounded bg-[#FAF7F2] text-xs">
+                  </div>
+                  <div>
+                    <label class="block text-[#7A8294] text-[10px]">Coeff (b₂):</label>
+                    <input id="elasticity-b" type="number" step="0.01" value="0.45" oninput="solveElasticityMatrix()" class="w-full p-1 border rounded bg-[#FAF7F2] text-xs font-bold text-[#2A9D8F]">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Output Display -->
+              <div id="elasticity-result-box" class="p-3 bg-[#FAF7F2] rounded-xl border border-[#D6CEC1] space-y-1.5 text-xs">
+                <!-- Dynamically injected -->
+              </div>
+            </div>
+
+            <button onclick="copyElasticityMemo()" class="paper-btn w-full py-2 bg-[#2A9D8F] hover:bg-[#238276] text-white text-xs font-bold flex items-center justify-center gap-1.5">
+              <span>📋 Copy Interpretation Sentence</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- SECTION 3: TRUE/FALSE ACTIVE RECALL RADAR               -->
+      <!-- ======================================================= -->
+      <div class="paper-card p-6 bg-white border border-[#D6CEC1] space-y-5">
+        <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+          <div>
+            <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#D95D39] text-white text-xs font-mono-code font-bold">15 MARKS (Q1 RAPID FIRE)</span>
+            <h2 class="text-xl font-extrabold text-[#1D3557] mt-1">High-Yield True/False Active Recall Radar</h2>
+          </div>
+          <div class="flex items-center gap-3">
+            <span id="act2-quiz-score" class="font-mono-code font-bold text-xs text-[#2A9D8F]">Score: 0 / 10</span>
+            <button onclick="resetAct2Quiz()" class="paper-btn px-2.5 py-1 bg-[#FAF7F2] text-xs font-bold text-[#555A68]">Reset</button>
+          </div>
+        </div>
+
+        <div id="act2-quiz-container" class="space-y-4">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================= -->
+    <!-- ACT 3: PAPER 2 EVIEWS PRACTICAL GUI & WORD LAB (40M)    -->
+    <!-- ======================================================= -->
+    <div id="tab-act3-lab" class="tab-pane hidden space-y-6">
+      
+      <!-- Act 3 Hero Header -->
+      <div class="paper-card p-6 bg-gradient-to-r from-[#EBF3F5] via-[#FAF7F2] to-[#FAF3EC] border-2 border-[#1D3557] flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#4E878C] text-white text-[10px] font-mono-code font-bold uppercase tracking-wider">ACT 3 • PAPER 2 PRACTICAL DOJO (40M, 120 MINS)</span>
+            <span class="text-xs text-[#7A8294] font-medium">• EViews + MS Word</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-[#1D3557] mt-1.5 tracking-tight">EViews Practical Dojo & Word Answer Lab</h1>
+          <p class="text-xs sm:text-sm text-[#555A68] mt-1 max-w-2xl leading-relaxed">
+            Replicate real computer lab conditions without Citrix lag. Practice exact menu sequences, inspect clickable stat hotspots on authentic tables, and generate full-mark Tri-Level Word answers.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="copyTriLevelWordMemo()" class="paper-btn px-4 py-2 bg-[#4E878C] text-white hover:bg-[#3D6C70] text-xs font-bold flex items-center gap-1.5 shadow-sm">
+            <span>📋 Copy Active Word Memo</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- TOP CONTROL DOCK: SCENARIOS & GUIDED MODE TOGGLE        -->
+      <!-- ======================================================= -->
+      <div class="paper-card p-4 bg-white border border-[#D6CEC1] flex flex-col md:flex-row md:items-center justify-between gap-3">
+        
+        <!-- Multi-Scenario Selector -->
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-mono-code font-bold text-[#1D3557] uppercase">Dataset:</span>
+          <div class="flex items-center gap-1.5">
+            <button id="scenario-a-btn" onclick="selectScenario('A')" class="paper-btn px-3 py-1.5 bg-[#1D3557] text-white text-xs font-bold rounded-lg transition-all">
+              Scenario A: CEO Comp (Nov24_1.WF1)
+            </button>
+            <button id="scenario-b-btn" onclick="selectScenario('B')" class="paper-btn px-3 py-1.5 bg-[#FAF7F2] text-[#1D3557] border border-[#D6CEC1] text-xs font-bold rounded-lg transition-all hover:bg-[#EAE4D9]">
+              Scenario B: Wages & Dummies (Nov23_1.WF1)
+            </button>
+          </div>
+        </div>
+
+        <!-- Guided vs Free Mode Switcher -->
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-mono-code font-bold text-[#555A68]">Mode:</span>
+          <div class="inline-flex rounded-xl p-0.5 bg-[#FAF7F2] border border-[#D6CEC1]">
+            <button id="mode-guided-btn" onclick="setLabMode('guided')" class="px-3 py-1 text-xs font-bold rounded-lg bg-white text-[#D95D39] shadow-sm transition-all flex items-center gap-1">
+              <span>🐾 Guided "Walk Me"</span>
+            </button>
+            <button id="mode-free-btn" onclick="setLabMode('free')" class="px-3 py-1 text-xs font-semibold rounded-lg text-[#555A68] hover:text-[#1D3557] transition-all flex items-center gap-1">
+              <span>🎯 Free Practice</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- GUIDED MODE STEP-BY-STEP STEPPER BAR                    -->
+      <!-- ======================================================= -->
+      <div id="guided-stepper-bar" class="paper-card p-4 bg-[#FFFDF9] border-2 border-[#D95D39] space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span id="step-number-badge" class="tag-bauhaus px-2.5 py-0.5 rounded-full bg-[#D95D39] text-white text-[11px] font-mono-code font-bold">STEP 1 OF 4</span>
+            <span id="step-instruction-title" class="font-extrabold text-[#1D3557] text-sm">Estimate Equation via Quick Menu</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="prevGuidedStep()" class="paper-btn px-2.5 py-1 bg-white text-xs text-[#555A68] hover:text-[#1D3557]">← Prev</button>
+            <button onclick="nextGuidedStep()" class="paper-btn px-3 py-1 bg-[#D95D39] text-white text-xs font-bold hover:bg-[#C85A32]">Next Step →</button>
+          </div>
+        </div>
+
+        <p id="step-instruction-desc" class="text-xs text-[#555A68] leading-relaxed">
+          Click <strong>Quick → Estimate Equation...</strong> in the simulated EViews menu bar below, or inspect the command line syntax.
+        </p>
+
+        <!-- Stepper Dots -->
+        <div class="flex items-center gap-2 pt-1">
+          <div id="step-dot-1" class="h-2 flex-1 rounded-full bg-[#D95D39] transition-all"></div>
+          <div id="step-dot-2" class="h-2 flex-1 rounded-full bg-[#EAE4D9] transition-all"></div>
+          <div id="step-dot-3" class="h-2 flex-1 rounded-full bg-[#EAE4D9] transition-all"></div>
+          <div id="step-dot-4" class="h-2 flex-1 rounded-full bg-[#EAE4D9] transition-all"></div>
+        </div>
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- THE INTERACTIVE EVIEWS VIRTUAL WINDOW                   -->
+      <!-- ======================================================= -->
+      <div class="paper-card overflow-hidden bg-white border-2 border-[#1D3557] shadow-lg">
+        
+        <!-- EViews Top Title Bar -->
+        <div class="bg-[#1D3557] text-white px-4 py-2 flex items-center justify-between text-xs font-mono-code select-none">
+          <div class="flex items-center gap-2.5">
+            <span class="w-3 h-3 rounded-full bg-[#D95D39] inline-block"></span>
+            <span id="eviews-window-title" class="font-bold">EViews 12 / 13 — [Workfile: NOV24_1 - (c:\data\nov24_1.wf1)]</span>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] text-[#A8B2C4]">
+            <span id="eviews-sample-display">Range: 1 209 (n = 209)</span>
+            <div class="flex items-center gap-1.5 ml-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#E9C46A] inline-block"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#2A9D8F] inline-block"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EViews Menu Ribbon -->
+        <div class="bg-[#FAF7F2] border-b border-[#E8E2D8] px-4 py-1.5 flex flex-wrap items-center gap-4 text-xs font-medium text-[#4A4E5A] select-none relative">
+          <span class="hover:text-[#1D3557] cursor-pointer">File</span>
+          <span class="hover:text-[#1D3557] cursor-pointer">Edit</span>
+          <span class="hover:text-[#1D3557] cursor-pointer">Object</span>
+          
+          <!-- View Dropdown Trigger -->
+          <div class="relative inline-block">
+            <span id="menu-view-btn" onclick="toggleEviewsMenu('view')" class="hover:text-[#1D3557] cursor-pointer font-bold text-[#1D3557] flex items-center gap-0.5">
+              View ▾
+            </span>
+            <div id="menu-view-dropdown" class="hidden absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-xl border border-[#D6CEC1] p-1.5 z-30 text-xs font-mono-code space-y-1">
+              <div class="px-2 py-1 text-[10px] text-[#7A8294] uppercase font-bold">Residual Diagnostics:</div>
+              <button onclick="runEviewsAction('hetero-white')" class="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-[#FAF3EC] text-[#D95D39] font-bold flex items-center justify-between">
+                <span>Heteroskedasticity Tests... (White)</span>
+                <span>→</span>
+              </button>
+              <button onclick="runEviewsAction('serial-lm')" class="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-[#FAF7F2] text-[#1D3557] flex items-center justify-between">
+                <span>Serial Correlation LM Test...</span>
+                <span>→</span>
+              </button>
+              <div class="px-2 py-1 text-[10px] text-[#7A8294] uppercase font-bold border-t border-[#E8E2D8] mt-1 pt-1">Stability Diagnostics:</div>
+              <button onclick="runEviewsAction('reset-test')" class="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-[#FAF3EC] text-[#D95D39] font-bold flex items-center justify-between">
+                <span>Ramsey RESET Test...</span>
+                <span>→</span>
+              </button>
+            </div>
+          </div>
+
+          <span class="hover:text-[#1D3557] cursor-pointer">Proc</span>
+          
+          <!-- Quick Dropdown Trigger -->
+          <div class="relative inline-block">
+            <span id="menu-quick-btn" onclick="toggleEviewsMenu('quick')" class="hover:text-[#D95D39] cursor-pointer font-extrabold text-[#D95D39] flex items-center gap-0.5">
+              Quick ▾
+            </span>
+            <div id="menu-quick-dropdown" class="hidden absolute top-full left-0 mt-1 w-56 bg-white rounded-xl shadow-xl border border-[#D6CEC1] p-1.5 z-30 text-xs font-mono-code space-y-1">
+              <button onclick="openEquationDialog()" class="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-[#FAF3EC] text-[#1D3557] font-bold flex items-center justify-between">
+                <span>Estimate Equation...</span>
+                <span>⚡</span>
+              </button>
+              <button onclick="runEviewsAction('series-stats')" class="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-[#FAF7F2] text-[#555A68]">
+                <span>Series Statistics → Stats Table</span>
+              </button>
+              <button onclick="runEviewsAction('generate-series')" class="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-[#FAF7F2] text-[#555A68]">
+                <span>Generate Series... (genr)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Options Dropdown Trigger -->
+          <div class="relative inline-block">
+            <span id="menu-options-btn" onclick="toggleEviewsMenu('options')" class="hover:text-[#1D3557] cursor-pointer font-bold text-[#4E878C] flex items-center gap-0.5">
+              Options ▾
+            </span>
+            <div id="menu-options-dropdown" class="hidden absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-xl border border-[#D6CEC1] p-1.5 z-30 text-xs font-mono-code space-y-1">
+              <button onclick="applyRobustCovariance('huber-white')" class="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-[#E8F8F5] text-[#2A9D8F] font-bold flex items-center justify-between">
+                <span>Covariance: Huber-White Robust</span>
+                <span>✓</span>
+              </button>
+              <button onclick="applyRobustCovariance('hac-newey')" class="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-[#FAF7F2] text-[#1D3557]">
+                <span>Covariance: HAC (Newey-West)</span>
+              </button>
+              <button onclick="applyRobustCovariance('ordinary')" class="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-[#FAF7F2] text-[#7A8294]">
+                <span>Covariance: Ordinary (Reset)</span>
+              </button>
+            </div>
+          </div>
+
+          <span class="hover:text-[#1D3557] cursor-pointer">Window</span>
+          <span class="hover:text-[#1D3557] cursor-pointer">Help</span>
+        </div>
+
+        <!-- Simulated Interactive Regression Table Output -->
+        <div class="p-4 overflow-x-auto font-mono-code text-xs">
+          
+          <!-- Desktop Table View (≥768px) -->
+          <div class="hidden md:block">
+            <div class="flex items-center justify-between text-[#7A8294] text-[11px] pb-2 border-b border-[#E8E2D8]">
+              <span id="table-meta-dep">Dependent Variable: SALARY | Method: Least Squares</span>
+              <span id="table-meta-se-type" class="px-2 py-0.5 rounded bg-[#FAF7F2] text-[#D95D39] font-bold">Standard Errors: Ordinary OLS</span>
+            </div>
+
+            <table class="w-full text-left my-2">
+              <thead>
+                <tr class="border-b border-[#2B2D42] text-[#1D3557]">
+                  <th class="py-1.5">Variable</th>
+                  <th class="py-1.5">Coefficient</th>
+                  <th class="py-1.5">Std. Error</th>
+                  <th class="py-1.5">t-Statistic</th>
+                  <th class="py-1.5">Prob.</th>
+                  <th class="py-1.5 text-right">Interactive Action</th>
+                </tr>
+              </thead>
+              <tbody id="desktop-eviews-tbody" class="divide-y divide-[#F0EBE1] text-[#2B2D42]">
+                <!-- Dynamically populated by JS -->
+              </tbody>
+            </table>
+
+            <!-- Bottom Summary Statistics with Clickable Hotspots -->
+            <div id="desktop-eviews-bottom-stats" class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-[#E8E2D8] text-[11px] text-[#555A68]">
+              <!-- Dynamically populated by JS -->
+            </div>
+          </div>
+
+          <!-- Mobile Bento Stat Cards (<768px) -->
+          <div class="md:hidden space-y-3">
+            <div class="flex items-center justify-between text-[11px] text-[#7A8294] pb-1 border-b border-[#E8E2D8]">
+              <span id="mobile-table-meta-dep">Dep: SALARY (n=209)</span>
+              <span id="mobile-table-meta-se-type" class="text-[#D95D39] font-bold">OLS SEs</span>
+            </div>
+
+            <div id="mobile-bento-cards-container" class="space-y-2.5">
+              <!-- Dynamically populated by JS -->
+            </div>
+
+            <!-- Mobile Summary Stats Bento Grid -->
+            <div id="mobile-summary-bento-grid" class="grid grid-cols-2 gap-2 pt-2 border-t border-[#E8E2D8] text-[11px]">
+              <!-- Dynamically populated by JS -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- EViews Command Line Strip -->
+        <div class="p-3 bg-[#FAF7F2] border-t border-[#E8E2D8] flex items-center gap-2">
+          <span class="text-xs font-mono-code font-bold text-[#D95D39]">CMD&gt;</span>
+          <input id="lab-cmd-input" type="text" value="ls salary c roe sales finance consprod utility" class="flex-1 bg-white border border-[#D6CEC1] rounded-lg px-3 py-1 font-mono-code text-xs text-[#1D3557] focus:outline-none focus:border-[#4E878C]">
+          <button onclick="executeLabCommand()" class="paper-btn px-3 py-1 bg-[#4E878C] text-white hover:bg-[#3D6C70] text-xs font-bold">
+            Execute +20 XP
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- SECTION 2: TRI-LEVEL WORD MEMO GENERATOR                -->
+      <!-- ======================================================= -->
+      <div class="paper-card p-6 bg-white border-2 border-[#4E878C] space-y-5 shadow-sm">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E8E2D8] pb-3">
+          <div>
+            <span class="tag-bauhaus px-2.5 py-0.5 rounded bg-[#EBF3F5] text-[#4E878C] text-xs font-mono-code font-bold">THE 3-MARK GOLD STANDARD</span>
+            <h2 class="text-xl font-extrabold text-[#1D3557] mt-1">Tri-Level Word Answer Generator</h2>
+            <p class="text-xs text-[#555A68]">Full marks on every variable interpretation requires three exact pillars: Significance, Magnitude, and Economic Theory.</p>
+          </div>
+          
+          <div class="flex items-center gap-2">
+            <button onclick="revealExemplarMemo()" class="paper-btn px-3.5 py-1.5 bg-[#FAF3EC] text-[#D95D39] border border-[#F0DBC9] hover:bg-[#F3E5D8] text-xs font-bold flex items-center gap-1.5">
+              <span>✨ Reveal 100% Exemplar Memo</span>
+            </button>
+            <button onclick="copyTriLevelWordMemo()" class="paper-btn px-4 py-1.5 bg-[#4E878C] text-white hover:bg-[#3D6C70] text-xs font-bold flex items-center gap-1.5 shadow-sm">
+              <span>📋 Copy for Word Doc (+15 XP)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- The 3 Levels Breakdown -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- Level 1: Significance -->
+          <div class="p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-xs text-[#1D3557]">Level 1: Significance</span>
+              <span class="px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#1D3557] text-[10px] font-bold">+1 Mark</span>
+            </div>
+            <p class="text-[11px] text-[#7A8294]">State significance level, test statistic/p-value, and reject/fail to reject H₀.</p>
+            <div id="memo-level1-box" class="p-3 bg-white rounded-lg border border-[#E8E2D8] text-xs text-[#1D3557] leading-relaxed font-mono-code">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Level 2: Magnitude & Ceteris Paribus -->
+          <div class="p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-xs text-[#1D3557]">Level 2: Magnitude</span>
+              <span class="px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#1D3557] text-[10px] font-bold">+1 Mark</span>
+            </div>
+            <p class="text-[11px] text-[#7A8294]">Quantify expected change with units and the mandatory phrase <em>"holding other variables constant"</em>.</p>
+            <div id="memo-level2-box" class="p-3 bg-white rounded-lg border border-[#E8E2D8] text-xs text-[#1D3557] leading-relaxed font-mono-code">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Level 3: Economic Theory -->
+          <div class="p-4 rounded-xl border border-[#D6CEC1] bg-[#FAF7F2] space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-xs text-[#1D3557]">Level 3: Economic Theory</span>
+              <span class="px-2 py-0.5 rounded-full bg-[#EBF3F5] text-[#1D3557] text-[10px] font-bold">+1 Mark</span>
+            </div>
+            <p class="text-[11px] text-[#7A8294]">Link sign of slope to theoretical intuition (e.g. Human Capital, Profit Maximization).</p>
+            <div id="memo-level3-box" class="p-3 bg-white rounded-lg border border-[#E8E2D8] text-xs text-[#1D3557] leading-relaxed font-mono-code">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- SLIDE-UP BOTTOM SHEET FOR WORD MEMO (MOBILE ONLY)       -->
+    <!-- ======================================================= -->
+    <div id="mobile-memo-bottom-sheet" class="fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-2xl border-t-2 border-[#1D3557] shadow-2xl p-5 space-y-4 transform translate-y-full transition-transform duration-300 md:hidden max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-2 border-b border-[#E8E2D8]">
+        <div class="flex items-center gap-2">
+          <span class="text-sm">📝</span>
+          <h3 id="mobile-sheet-title" class="font-extrabold text-base text-[#1D3557]">Tri-Level Word Memo</h3>
+        </div>
+        <button onclick="closeMobileMemoSheet()" class="w-8 h-8 rounded-full bg-[#FAF7F2] text-[#1D3557] font-bold flex items-center justify-center">✕</button>
+      </div>
+
+      <div id="mobile-sheet-body" class="space-y-3 text-xs leading-relaxed font-mono-code">
+        <!-- Dynamically injected -->
+      </div>
+
+      <div class="pt-2 sticky bottom-0 bg-white">
+        <button onclick="copyTriLevelWordMemo()" class="paper-btn w-full py-3 bg-[#4E878C] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-md flex items-center justify-center gap-2">
+          <span>📋 Copy Formatted for Word (+15 XP)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- STAT HOTSPOT INSPECTOR MODAL (DESKTOP & TABLET)         -->
+    <!-- ======================================================= -->
+    <div id="hotspot-modal" class="fixed inset-0 z-50 bg-[#1D3557]/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+      <div class="modal-animated bg-white rounded-2xl border-2 border-[#1D3557] shadow-2xl max-w-lg w-full p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-[#E8E2D8] pb-3">
+          <div>
+            <span id="hotspot-modal-tag" class="tag-bauhaus px-2 py-0.5 rounded bg-[#FAF3EC] text-[#D95D39] text-[10px] font-mono-code font-bold">STAT HOTSPOT</span>
+            <h3 id="hotspot-modal-title" class="font-extrabold text-base text-[#1D3557] mt-1">Hotspot Title</h3>
+          </div>
+          <button onclick="closeHotspotModal()" class="w-8 h-8 rounded-full bg-[#FAF7F2] hover:bg-[#EAE4D9] text-[#1D3557] font-bold text-sm flex items-center justify-center">✕</button>
+        </div>
+
+        <div id="hotspot-modal-body" class="space-y-3 text-xs text-[#555A68] leading-relaxed">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div class="pt-2 flex items-center justify-between gap-2 border-t border-[#E8E2D8]">
+          <button id="hotspot-inject-btn" class="paper-btn px-4 py-2 bg-[#4E878C] text-white hover:bg-[#3D6C70] text-xs font-bold flex items-center gap-1.5">
+            <span>📝 Inject into Word Memo</span>
+          </button>
+          <button onclick="closeHotspotModal()" class="paper-btn px-3 py-2 bg-white text-[#555A68] text-xs font-bold">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+<div id="tab-quest-map" class="tab-pane hidden space-y-6">
       
       <!-- Studio Hero Header -->
       <div class="paper-card p-6 bg-gradient-to-r from-[#FAF3EC] via-[#F4EBE1] to-[#EBF3F5] border-[#E2DACB] flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -1921,7 +2997,23 @@
     </div>
 
 
-  </main>
+  
+  <!-- Mobile Sticky Bottom Thumb-Zone Dock (<768px) -->
+  <nav id="mobile-dock" class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#FFFFFF]/95 backdrop-blur-md border-t border-[#E8E2D8] px-2 py-1 flex items-center justify-around shadow-[0_-4px_20px_rgba(50,40,30,0.1)]">
+    <button onclick="switchTab('tab-act1-story')" class="mobile-dock-btn flex-1 py-1.5 px-1 flex flex-col items-center justify-center gap-0.5 text-xs font-bold text-[#D95D39] rounded-xl active:scale-95 transition-all" data-tab="tab-act1-story">
+      <span class="text-lg">📖</span>
+      <span class="text-[10px] tracking-tight">Act 1: Story</span>
+    </button>
+    <button onclick="switchTab('tab-act2-theory')" class="mobile-dock-btn flex-1 py-1.5 px-1 flex flex-col items-center justify-center gap-0.5 text-xs font-bold text-[#555A68] rounded-xl active:scale-95 transition-all" data-tab="tab-act2-theory">
+      <span class="text-lg">🏛️</span>
+      <span class="text-[10px] tracking-tight">Act 2: Theory</span>
+    </button>
+    <button onclick="switchTab('tab-act3-lab')" class="mobile-dock-btn flex-1 py-1.5 px-1 flex flex-col items-center justify-center gap-0.5 text-xs font-bold text-[#555A68] rounded-xl active:scale-95 transition-all" data-tab="tab-act3-lab">
+      <span class="text-lg">💻</span>
+      <span class="text-[10px] tracking-tight">Act 3: Lab</span>
+    </button>
+  </nav>
+</main>
 
   <!-- ========================================================= -->
   <!-- FOOTER                                                    -->
@@ -2145,29 +3237,63 @@
 
     // Tabs switching
     const tabList = [
+      'tab-act1-story',
+      'tab-act2-theory',
+      'tab-act3-lab',
       'tab-quest-map',
-      'tab-eviews-dojo',
-      'tab-mad-libs',
-      'tab-theory-vault',
-      'tab-dw-radar',
       'tab-past-papers',
       'tab-boss-quiz',
-      'tab-exam-card'
+      'tab-exam-card',
+      'tab-final-boss'
     ];
 
     function switchTab(targetId) {
+      // Aliases for backwards compatibility
+      if (targetId === 'tab-theory-vault') targetId = 'tab-act2-theory';
+      if (targetId === 'tab-eviews-dojo' || targetId === 'tab-mad-libs') targetId = 'tab-act3-lab';
+      if (targetId === 'tab-dw-radar') targetId = 'tab-act1-story';
+
       playSfx('click');
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
       const activePane = document.getElementById(targetId);
       if (activePane) activePane.classList.remove('hidden');
 
-      document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
-      const activeBtn = Array.from(document.querySelectorAll('.nav-tab-btn')).find(b => b.getAttribute('onclick')?.includes(targetId));
-      if (activeBtn) activeBtn.classList.add('active');
+      // Update Desktop Nav Tabs
+      document.querySelectorAll('.nav-tab-btn').forEach(b => {
+        if (b.getAttribute('data-tab') === targetId || b.getAttribute('onclick')?.includes(targetId)) {
+          b.classList.add('active');
+        } else {
+          b.classList.remove('active');
+        }
+      });
 
-      if (targetId === 'tab-dw-radar') {
-        const slider = document.getElementById('dw-range-input');
-        if (slider) handleDWChange(slider.value);
+      // Update Mobile Bottom Dock Tabs
+      document.querySelectorAll('.mobile-dock-btn').forEach(b => {
+        if (b.getAttribute('data-tab') === targetId) {
+          b.classList.add('text-[#D95D39]');
+          b.classList.remove('text-[#555A68]');
+        } else {
+          b.classList.remove('text-[#D95D39]');
+          b.classList.add('text-[#555A68]');
+        }
+      });
+
+      // Lifecycle hooks for visual canvases
+      if (targetId === 'tab-act1-story') {
+        setTimeout(() => {
+          drawMegaphoneCanvas();
+          updateSoupStation();
+          drawResetCanvas();
+          drawDWDialCanvas(currentDW);
+        }, 50);
+      } else if (targetId === 'tab-act3-lab') {
+        setTimeout(renderEviewsTable, 50);
+      } else if (targetId === 'tab-act2-theory') {
+        setTimeout(() => {
+          solveRestrictedFTest();
+          solveMatrixDet();
+          solveElasticityMatrix();
+        }, 50);
       }
     }
 
@@ -5199,6 +6325,1426 @@ function copyToClipboard(text, label) {
     showToast('Failed to copy text', 'warning');
   });
 }
+
+
+
+// =========================================================
+// MULTI-SENSORY AUDIO ENGINE & SFX (BAUHAUS SENSORY PROTOCOL)
+// =========================================================
+let sfxMuted = localStorage.getItem('econ325_sfx_muted') === 'true';
+
+function updateSfxToggleBtn() {
+  const icon = document.getElementById('sfx-mute-icon');
+  const label = document.getElementById('sfx-mute-label');
+  if (icon) icon.textContent = sfxMuted ? '🔇' : '🔊';
+  if (label) label.textContent = sfxMuted ? 'SFX: OFF' : 'SFX: ON';
+}
+
+function toggleSfxMute() {
+  sfxMuted = !sfxMuted;
+  localStorage.setItem('econ325_sfx_muted', sfxMuted);
+  updateSfxToggleBtn();
+  if (!sfxMuted) playSfx('click');
+}
+
+// Override / Enhance playSfx with crisp mechanical tactile clicks and warm chord chimes
+const _originalPlaySfx = typeof playSfx === 'function' ? playSfx : null;
+
+function playSfx(type) {
+  if (sfxMuted) return;
+  try {
+    initAudio();
+    const now = audioCtx.currentTime;
+
+    if (type === 'click') {
+      // Crisp mechanical typewriter click (~950Hz pop)
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(950, now);
+      osc.frequency.exponentialRampToValueAtTime(320, now + 0.025);
+      gain.gain.setValueAtTime(0.04, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.025);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.025);
+    } else if (type === 'win' || type === 'chord') {
+      // Warm resonant harmonic triad chime: C5 (523Hz), E5 (659Hz), G5 (784Hz), C6 (1046Hz)
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.06);
+        gain.gain.setValueAtTime(0.035, now + idx * 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.06 + 0.45);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + idx * 0.06);
+        osc.stop(now + idx * 0.06 + 0.45);
+      });
+    } else if (type === 'clue') {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(440, now);
+      osc.frequency.setValueAtTime(554.37, now + 0.08);
+      gain.gain.setValueAtTime(0.03, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.22);
+    } else if (type === 'pop') {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600, now);
+      osc.frequency.exponentialRampToValueAtTime(1200, now + 0.03);
+      gain.gain.setValueAtTime(0.03, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.03);
+    }
+  } catch (e) {
+    // Web audio requires user interaction
+  }
+}
+
+// =========================================================
+// FORMULA MODE TOGGLE (PLAIN-ENGLISH VS EXAM KATEX MATH)
+// =========================================================
+let formulaMode = 'plain'; // 'plain' or 'exam'
+
+function toggleFormulaMode() {
+  playSfx('click');
+  formulaMode = formulaMode === 'plain' ? 'exam' : 'plain';
+  
+  const plains = document.querySelectorAll('.formula-plain');
+  const exams = document.querySelectorAll('.formula-exam');
+  const label = document.getElementById('formula-toggle-label');
+  const icon = document.getElementById('formula-toggle-icon');
+  const badge = document.getElementById('formula-mode-badge');
+
+  if (formulaMode === 'exam') {
+    plains.forEach(el => el.classList.add('hidden'));
+    exams.forEach(el => el.classList.remove('hidden'));
+    if (label) label.textContent = 'Show Plain-English Badges';
+    if (icon) icon.textContent = '💬';
+    if (badge) {
+      badge.textContent = 'Exam KaTeX Formula Notation';
+      badge.className = 'text-[#D95D39]';
+    }
+    // Render KaTeX if available
+    if (window.renderMathInElement) {
+      try {
+        renderMathInElement(document.getElementById('tab-act1-story'), {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '\(', right: '\)', display: false }
+          ],
+          throwOnError: false
+        });
+      } catch (err) {}
+    }
+  } else {
+    plains.forEach(el => el.classList.remove('hidden'));
+    exams.forEach(el => el.classList.add('hidden'));
+    if (label) label.textContent = 'Show Exam Formula Notation';
+    if (icon) icon.textContent = '📐';
+    if (badge) {
+      badge.textContent = 'Plain-English Badges';
+      badge.className = 'text-[#2A9D8F]';
+    }
+  }
+}
+
+// =========================================================
+// STATION 1: THE MEGAPHONE SCATTER SANDBOX (HETEROSKEDASTICITY)
+// =========================================================
+let megaphonePoints = [];
+let megaphoneSpread = 65;
+
+function initMegaphonePoints() {
+  megaphonePoints = [];
+  const n = 80;
+  for (let i = 0; i < n; i++) {
+    const x = 12 + Math.random() * 80; // 12 to 92
+    const baseError = (Math.random() - 0.5) * 2; // -1 to 1
+    megaphonePoints.push({ x, baseError });
+  }
+}
+
+function drawMegaphoneCanvas() {
+  const canvas = document.getElementById('megaphone-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+
+  // Clear
+  ctx.fillStyle = '#FAF7F2';
+  ctx.fillRect(0, 0, w, h);
+
+  // Margins
+  const ml = 40, mr = 20, mt = 20, mb = 35;
+  const plotW = w - ml - mr;
+  const plotH = h - mt - mb;
+
+  // Axes
+  ctx.strokeStyle = '#D6CEC1';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(ml, mt);
+  ctx.lineTo(ml, h - mb);
+  ctx.lineTo(w - mr, h - mb);
+  ctx.stroke();
+
+  // Axis Labels
+  ctx.fillStyle = '#7A8294';
+  ctx.font = '10px JetBrains Mono, monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Experience / Sales (X)', ml + plotW / 2, h - 10);
+  ctx.save();
+  ctx.translate(14, mt + plotH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('Residuals eᵢ / Salary', 0, 0);
+  ctx.restore();
+
+  // Model parameters: Y = 10 + 0.8 * X
+  const b0 = 15;
+  const b1 = 0.82;
+  const spreadScale = (megaphoneSpread / 100) * 0.45;
+
+  // Shaded Megaphone Cone Envelope
+  const showCone = document.getElementById('megaphone-cone-toggle')?.checked ?? true;
+  if (showCone && megaphoneSpread > 5) {
+    ctx.fillStyle = 'rgba(217, 93, 57, 0.08)';
+    ctx.beginPath();
+    const x0 = 10, x1 = 95;
+    const yLine0 = b0 + b1 * x0;
+    const yLine1 = b0 + b1 * x1;
+    const env0 = (x0 / 100) * 10 * spreadScale * 35 + 4;
+    const env1 = (x1 / 100) * 10 * spreadScale * 35 + 4;
+
+    const px0 = ml + (x0 / 100) * plotW;
+    const py0Top = h - mb - ((yLine0 + env0) / 100) * plotH;
+    const py0Bot = h - mb - ((yLine0 - env0) / 100) * plotH;
+    const px1 = ml + (x1 / 100) * plotW;
+    const py1Top = h - mb - ((yLine1 + env1) / 100) * plotH;
+    const py1Bot = h - mb - ((yLine1 - env1) / 100) * plotH;
+
+    ctx.moveTo(px0, py0Top);
+    ctx.lineTo(px1, py1Top);
+    ctx.lineTo(px1, py1Bot);
+    ctx.lineTo(px0, py0Bot);
+    ctx.closePath();
+    ctx.fill();
+
+    // Cone boundary dashed lines
+    ctx.strokeStyle = 'rgba(217, 93, 57, 0.4)';
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(px0, py0Top);
+    ctx.lineTo(px1, py1Top);
+    ctx.moveTo(px0, py0Bot);
+    ctx.lineTo(px1, py1Bot);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Draw scatter points
+  megaphonePoints.forEach(pt => {
+    const errorScale = 4 + (pt.x / 100) * 10 * spreadScale * 35;
+    const actualError = pt.baseError * errorScale;
+    const yVal = b0 + b1 * pt.x + actualError;
+
+    const cx = ml + (pt.x / 100) * plotW;
+    const cy = h - mb - (yVal / 100) * plotH;
+
+    ctx.fillStyle = Math.abs(pt.baseError) > 0.6 ? '#D95D39' : '#1D3557';
+    ctx.beginPath();
+    ctx.arc(cx, cy, 3.2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+
+  // OLS Fitted Line
+  const showLine = document.getElementById('megaphone-line-toggle')?.checked ?? true;
+  if (showLine) {
+    const pxStart = ml + (10 / 100) * plotW;
+    const pyStart = h - mb - ((b0 + b1 * 10) / 100) * plotH;
+    const pxEnd = ml + (95 / 100) * plotW;
+    const pyEnd = h - mb - ((b0 + b1 * 95) / 100) * plotH;
+
+    ctx.strokeStyle = '#1D3557';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(pxStart, pyStart);
+    ctx.lineTo(pxEnd, pyEnd);
+    ctx.stroke();
+  }
+}
+
+function updateMegaphoneStation(val) {
+  megaphoneSpread = parseInt(val);
+  const disp = document.getElementById('megaphone-val-display');
+  if (disp) disp.textContent = val + '%';
+  drawMegaphoneCanvas();
+}
+
+function regenerateMegaphonePoints() {
+  playSfx('click');
+  initMegaphonePoints();
+  drawMegaphoneCanvas();
+  showToast('Resampled 80 points with current variance!', '🎲');
+}
+
+// =========================================================
+// STATION 2: AUXILIARY SOUP KITCHEN (WHITE'S TEST ANATOMY)
+// =========================================================
+function updateSoupStation() {
+  const kInput = document.getElementById('soup-k-slider');
+  const nInput = document.getElementById('soup-n-input');
+  const r2Input = document.getElementById('soup-r2-input');
+  if (!kInput || !nInput || !r2Input) return;
+
+  const k = parseInt(kInput.value);
+  const n = parseInt(nInput.value) || 209;
+  const r2 = parseFloat(r2Input.value) || 0.082;
+
+  // Breakdown
+  const linear = k;
+  const squares = k;
+  const cross = (k * (k - 1)) / 2;
+  const totalDf = linear + squares + cross;
+
+  // Update UI counts
+  const kDisp = document.getElementById('soup-k-display');
+  if (kDisp) {
+    const examples = ['Sales', 'Sales, ROE', 'Sales, ROE, Finance', 'Sales, ROE, Finance, Consprod', 'Sales, ROE, Finance, Consprod, Utility'];
+    kDisp.textContent = `k = ${k} (${examples[k - 1]})`;
+  }
+  document.getElementById('soup-linear-count').textContent = linear;
+  document.getElementById('soup-sq-count').textContent = squares;
+  document.getElementById('soup-cross-count').textContent = cross;
+  document.getElementById('soup-total-df').textContent = `${totalDf} Regressors (df = ${totalDf})`;
+
+  // LM statistic
+  const lm = (n * r2).toFixed(2);
+
+  // Approximate Chi-Square critical value at alpha = 0.05
+  // Wilson-Hilferty / exact table lookup
+  const chiSqCritTable = { 2: 5.99, 3: 7.81, 4: 9.49, 5: 11.07, 7: 14.07, 9: 16.92, 14: 23.68, 20: 31.41 };
+  const critVal = chiSqCritTable[totalDf] || (totalDf + 1.645 * Math.sqrt(2 * totalDf) + 0.67).toFixed(2);
+  const isReject = parseFloat(lm) > parseFloat(critVal);
+
+  const verdictBox = document.getElementById('soup-verdict-box');
+  if (verdictBox) {
+    verdictBox.className = `p-3 rounded-xl border ${isReject ? 'bg-[#FAF3EC] border-[#F0DBC9]' : 'bg-[#E8F8F5] border-[#BCD4D6]'} space-y-1 text-xs`;
+    verdictBox.innerHTML = `
+      <div class="flex items-center justify-between font-mono-code font-bold">
+        <span>White LM = n · R² = ${n} · ${r2} = <strong class="${isReject ? 'text-[#D95D39]' : 'text-[#2A9D8F]'}">${lm}</strong></span>
+        <span>χ²_crit(${totalDf}, 5%) ≈ ${critVal}</span>
+      </div>
+      <p class="font-extrabold text-xs ${isReject ? 'text-[#D95D39]' : 'text-[#2A9D8F]'}">
+        ${isReject ? '🔴 REJECT H₀ (p < 0.05): Severe Heteroskedasticity Detected!' : '🟢 FAIL TO REJECT H₀ (p ≥ 0.05): Variance is Homoskedastic.'}
+      </p>
+      <p class="text-[11px] text-[#555A68]">
+        <strong>Examiner Memo Action:</strong> ${isReject ? 'Because LM (' + lm + ') > Critical χ² (' + critVal + '), we reject the null hypothesis of homoscedasticity. Usual t-statistics are biased. Re-estimate with <strong>Huber-White Robust Standard Errors</strong> in EViews Options.' : 'No heteroskedasticity remedy needed. OLS estimators remain BLUE with valid t-ratios.'}
+      </p>
+    `;
+  }
+}
+
+// =========================================================
+// STATION 3: FINISHED SOUP / RAMSEY RESET PARABOLA SANDBOX
+// =========================================================
+let resetCurvature = 70;
+
+function drawResetCanvas() {
+  const canvas = document.getElementById('reset-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+
+  ctx.fillStyle = '#FAF7F2';
+  ctx.fillRect(0, 0, w, h);
+
+  const ml = 40, mr = 20, mt = 20, mb = 35;
+  const plotW = w - ml - mr;
+  const plotH = h - mt - mb;
+
+  // Axes
+  ctx.strokeStyle = '#D6CEC1';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(ml, mt);
+  ctx.lineTo(ml, h - mb);
+  ctx.lineTo(w - mr, h - mb);
+  ctx.stroke();
+
+  // Axis Labels
+  ctx.fillStyle = '#7A8294';
+  ctx.font = '10px JetBrains Mono, monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Experience Years (X)', ml + plotW / 2, h - 10);
+  ctx.save();
+  ctx.translate(14, mt + plotH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('Wage (Y)', 0, 0);
+  ctx.restore();
+
+  // True non-linear quadratic function: Y = 10 + 1.8*X - 0.015 * c * X^2
+  const c = (resetCurvature / 100) * 0.018;
+
+  // Draw True Curvature (Cobalt Blue)
+  ctx.strokeStyle = '#1D3557';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  for (let px = 0; px <= plotW; px += 4) {
+    const xVal = (px / plotW) * 80; // 0 to 80
+    const yVal = 10 + 1.8 * xVal - c * xVal * xVal;
+    const py = h - mb - (yVal / 70) * plotH;
+    if (px === 0) ctx.moveTo(ml + px, py);
+    else ctx.lineTo(ml + px, py);
+  }
+  ctx.stroke();
+
+  // Linear OLS Fitted Line (Straight line approximation)
+  const yStart = 15;
+  const yEnd = 10 + 1.8 * 80 - c * 80 * 80;
+  const slope = (yEnd - yStart) / 80;
+
+  ctx.strokeStyle = '#D95D39';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([5, 4]);
+  ctx.beginPath();
+  ctx.moveTo(ml, h - mb - (yStart / 70) * plotH);
+  ctx.lineTo(ml + plotW, h - mb - (yEnd / 70) * plotH);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // If Hat Y squared is included (RESET Auxiliary Parabola)
+  const includeYHatSq = document.getElementById('reset-yhat-toggle')?.checked ?? true;
+  if (includeYHatSq) {
+    ctx.strokeStyle = '#2A9D8F';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    for (let px = 0; px <= plotW; px += 4) {
+      const xVal = (px / plotW) * 80;
+      // RESET captures the exact quadratic curve
+      const yVal = 10 + 1.8 * xVal - c * xVal * xVal;
+      const py = h - mb - (yVal / 70) * plotH;
+      if (px === 0) ctx.moveTo(ml + px, py);
+      else ctx.lineTo(ml + px, py);
+    }
+    ctx.stroke();
+  }
+
+  // Draw Legend
+  ctx.font = '10px JetBrains Mono, monospace';
+  ctx.fillStyle = '#1D3557';
+  ctx.fillText('— True Economic Curve', ml + 80, mt + 15);
+  ctx.fillStyle = '#D95D39';
+  ctx.fillText('-- OLS Linear Fit (Misspecified)', ml + 230, mt + 15);
+  if (includeYHatSq) {
+    ctx.fillStyle = '#2A9D8F';
+    ctx.fillText('— RESET +Ŷ² (Curvature Caught!)', ml + 400, mt + 15);
+  }
+
+  // Update verdict box
+  const verdictBox = document.getElementById('reset-verdict-box');
+  if (verdictBox) {
+    const fStat = (resetCurvature * 0.18 + 1.2).toFixed(2);
+    const isMisspec = resetCurvature > 30;
+    verdictBox.innerHTML = `
+      <div class="flex items-center justify-between font-mono-code text-[11px]">
+        <span>RESET F-Stat: <strong class="${isMisspec ? 'text-[#D95D39]' : 'text-[#2A9D8F]'}">${fStat}</strong> (p ${isMisspec ? '< 0.001' : '= 0.42'})</span>
+        <span>Parameters Added: <strong>Only 1 (Ŷ²)</strong></span>
+      </div>
+      <p class="font-extrabold text-xs ${isMisspec ? 'text-[#D95D39]' : 'text-[#2A9D8F]'} mt-1">
+        ${isMisspec ? '🔴 Reject H₀: Linear model is misspecified (omitted non-linear curvature).' : '🟢 Fail to Reject H₀: Model is correctly specified.'}
+      </p>
+      <p class="text-[11px] text-[#555A68]">
+        <strong>Why Ŷ² avoids the degrees of freedom trap:</strong> Squaring Ŷ captures the combined parabolic bend of ALL regressors in a single degree of freedom without inflating multicollinearity.
+      </p>
+    `;
+  }
+}
+
+function updateResetStation(val) {
+  resetCurvature = parseInt(val);
+  const disp = document.getElementById('reset-curve-display');
+  if (disp) {
+    disp.textContent = val < 25 ? 'Nearly Flat' : val < 60 ? 'Moderate Curve' : 'Severe Parabola';
+  }
+  drawResetCanvas();
+}
+
+function presetReset2023() {
+  playSfx('click');
+  document.getElementById('reset-curve-slider').value = '85';
+  updateResetStation(85);
+  showToast('Loaded 2023 Wage quadratic curvature!', '🥣');
+}
+
+// =========================================================
+// STATION 4: THE 0-TO-4 PENDULUM RADAR (DURBIN-WATSON)
+// =========================================================
+let currentDW = 1.15;
+
+function drawDWDialCanvas(dVal) {
+  const canvas = document.getElementById('dw-dial-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+
+  ctx.fillStyle = '#FAF7F2';
+  ctx.fillRect(0, 0, w, h);
+
+  const cx = w / 2;
+  const cy = h - 25;
+  const radius = Math.min(w * 0.42, h - 45);
+
+  const dL = parseFloat(document.getElementById('dw-station-dl')?.value || '1.34');
+  const dU = parseFloat(document.getElementById('dw-station-du')?.value || '1.54');
+  const sym4dU = 4 - dU;
+  const sym4dL = 4 - dL;
+
+  // Helper angle converter: d from 0 to 4 maps to Math.PI to 0
+  function dToAngle(d) {
+    return Math.PI + (d / 4) * Math.PI;
+  }
+
+  // Draw 5 Arc Zones
+  const zones = [
+    { start: 0, end: dL, color: '#D95D39', label: 'Positive Auto' },
+    { start: dL, end: dU, color: '#E9C46A', label: 'Inconclusive' },
+    { start: dU, end: sym4dU, color: '#2A9D8F', label: 'No Autocorrelation (Clean)' },
+    { start: sym4dU, end: sym4dL, color: '#E9C46A', label: 'Inconclusive' },
+    { start: sym4dL, end: 4.0, color: '#D95D39', label: 'Negative Auto' }
+  ];
+
+  ctx.lineWidth = 26;
+  zones.forEach(z => {
+    ctx.strokeStyle = z.color;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, dToAngle(z.start), dToAngle(z.end));
+    ctx.stroke();
+  });
+
+  // Tick Marks and Numbers
+  ctx.fillStyle = '#1D3557';
+  ctx.font = '11px JetBrains Mono, monospace';
+  ctx.textAlign = 'center';
+  [0, 1, 2, 3, 4].forEach(tick => {
+    const ang = dToAngle(tick);
+    const tx = cx + (radius - 22) * Math.cos(ang);
+    const ty = cy + (radius - 22) * Math.sin(ang);
+    ctx.fillText(tick.toString(), tx, ty);
+  });
+
+  // Center needle hub
+  ctx.fillStyle = '#1D3557';
+  ctx.beginPath();
+  ctx.arc(cx, cy, 7, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Pendulum Needle
+  const needleAngle = dToAngle(dVal);
+  const nx = cx + (radius + 8) * Math.cos(needleAngle);
+  const ny = cy + (radius + 8) * Math.sin(needleAngle);
+
+  ctx.strokeStyle = '#D95D39';
+  ctx.lineWidth = 3.5;
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  ctx.lineTo(nx, ny);
+  ctx.stroke();
+
+  // Needle tip dot
+  ctx.fillStyle = '#D95D39';
+  ctx.beginPath();
+  ctx.arc(nx, ny, 4.5, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Live Verdict Box
+  const verdictBox = document.getElementById('dw-station-verdict-box');
+  if (verdictBox) {
+    let zoneDesc = '';
+    let verdict = '';
+    let color = '';
+
+    if (dVal < dL) {
+      zoneDesc = `Zone 1: [0 to d_L (${dL})]`;
+      verdict = '🔴 Reject H₀: Positive First-Order Autocorrelation';
+      color = 'text-[#D95D39]';
+    } else if (dVal >= dL && dVal <= dU) {
+      zoneDesc = `Zone 2: [d_L (${dL}) to d_U (${dU})]`;
+      verdict = '🟡 Inconclusive Zone (Zone of Indecision)';
+      color = 'text-[#996515]';
+    } else if (dVal > dU && dVal < sym4dU) {
+      zoneDesc = `Zone 3: [d_U (${dU}) to 4-d_U (${sym4dU.toFixed(2)})]`;
+      verdict = '🟢 Fail to Reject H₀: Clean Model (No Serial Correlation)';
+      color = 'text-[#2A9D8F]';
+    } else if (dVal >= sym4dU && dVal <= sym4dL) {
+      zoneDesc = `Zone 4: [4-d_U (${sym4dU.toFixed(2)}) to 4-d_L (${sym4dL.toFixed(2)})]`;
+      verdict = '🟡 Inconclusive Zone (Negative Autocorrelation)';
+      color = 'text-[#996515]';
+    } else {
+      zoneDesc = `Zone 5: [4-d_L (${sym4dL.toFixed(2)}) to 4.0]`;
+      verdict = '🔴 Reject H₀: Negative First-Order Autocorrelation';
+      color = 'text-[#D95D39]';
+    }
+
+    verdictBox.innerHTML = `
+      <div class="flex items-center justify-between font-mono-code text-[11px]">
+        <span>Observed: <strong>d = ${dVal.toFixed(2)}</strong> falls in <strong>${zoneDesc}</strong></span>
+        <span>Symmetry: 4-d_U = ${sym4dU.toFixed(2)} | 4-d_L = ${sym4dL.toFixed(2)}</span>
+      </div>
+      <p class="font-extrabold text-xs ${color} mt-1">${verdict}</p>
+      <p class="text-[11px] text-[#555A68]">
+        <strong>Official NWU Phrasing:</strong> "Because calculated d (${dVal.toFixed(2)}) ${dVal < dL ? '< d_L (' + dL + ')' : dVal <= dU ? 'falls in the inconclusive region' : dVal < sym4dU ? 'lies strictly between d_U and 4 - d_U' : 'exceeds 4 - d_L'}, we ${dVal < dL ? 'reject H₀ at the 5% level and conclude positive first-order autocorrelation is present' : dVal < sym4dU ? 'fail to reject H₀; no serial correlation detected' : 'reject H₀ in favor of negative serial correlation'}. Remedy: Re-estimate with <strong>HAC (Newey-West) standard errors</strong>."
+      </p>
+    `;
+  }
+}
+
+function updateDWStation(dVal) {
+  if (dVal !== undefined) currentDW = dVal;
+  const disp = document.getElementById('dw-station-d-val');
+  if (disp) disp.textContent = 'd = ' + currentDW.toFixed(2);
+  drawDWDialCanvas(currentDW);
+}
+
+// =========================================================
+// ACT 2: PAST PAPER THEORY ENGINES & SOLVERS
+// =========================================================
+function copyMnemonicMemo(type) {
+  playSfx('click');
+  let text = '';
+  if (type === 'ormi') {
+    text = `Why the Disturbance Term (u_i) Exists in Econometric Models (4 Marks):\n\n1. Omission of minor variables: Economic phenomena are influenced by a vast array of minor factors. To keep the model manageable and parsimonious, these are combined into u_i.\n2. Random nature of human behavior: Human actions are intrinsically non-deterministic. Identical individuals make different choices under the exact same conditions.\n3. Measurement errors: Empirical survey data contains inaccuracies, recall bias, and approximation rounding.\n4. Imperfect functional form: Real economic behavior is frequently non-linear; linear equations serve as convenient approximations, absorbing discrepancies into u_i.`;
+  } else if (type === 'inan') {
+    text = `Fundamental Assumptions of the Durbin-Watson d Test (4 Marks):\n\n1. Intercept included: The regression model must contain an explicit constant term.\n2. Non-stochastic regressors: Explanatory X variables must be fixed in repeated sampling (strictly exogenous).\n3. AR(1) first-order scheme only: Disturbances are generated by u_t = rho*u_{t-1} + v_t.\n4. No lagged dependent regressor: The dependent variable Y_{t-1} must not appear as an explanatory regressor. If Y_{t-1} is present, d is biased toward 2 (requiring Durbin's h or Breusch-Godfrey LM test).`;
+  } else if (type === 'blue') {
+    text = `BLUE Status Comparison Across CLRM Violations (6 Marks):\n\n1. Multicollinearity: OLS estimators remain BLUE! Coefficients are unbiased and retain minimum variance among all linear unbiased estimators. Only variances are wide.\n2. Heteroskedasticity: OLS estimators are linear and unbiased, but NOT BLUE (inefficient). Usual standard error formulas are invalid; t and F tests are biased.\n3. Autocorrelation: OLS estimators are linear and unbiased, but NOT BLUE (inefficient). Usual standard error formulas are invalid; variances are severely underestimated.`;
+  }
+  navigator.clipboard.writeText(text);
+  showToast('Copied Exam Memo to Clipboard! (+15 XP)', '📋');
+  addXp(15);
+}
+
+// Restricted F-Test Solver (2024 Q4)
+function solveRestrictedFTest() {
+  const r2UR = parseFloat(document.getElementById('ftest-r2-ur')?.value || '0.485');
+  const r2R = parseFloat(document.getElementById('ftest-r2-r')?.value || '0.412');
+  const q = parseInt(document.getElementById('ftest-q')?.value || '3');
+  const n = parseInt(document.getElementById('ftest-n')?.value || '120');
+  const kUR = parseInt(document.getElementById('ftest-k')?.value || '6');
+
+  const num = (r2UR - r2R) / q;
+  const denom = (1 - r2UR) / (n - kUR);
+  const fCalc = (num / denom).toFixed(3);
+
+  // Approximate F crit at 5% (df1 = q, df2 = n - kUR)
+  const fCrit = (2.68).toFixed(2);
+  const isReject = parseFloat(fCalc) > parseFloat(fCrit);
+
+  const resBox = document.getElementById('ftest-result-box');
+  if (resBox) {
+    resBox.innerHTML = `
+      <div class="font-mono-code text-[11px] space-y-1">
+        <div>Numerator: (R²_UR - R²_R)/q = (${r2UR} - ${r2R}) / ${q} = <strong>${num.toFixed(4)}</strong></div>
+        <div>Denominator: (1 - R²_UR)/(n - k_UR) = (1 - ${r2UR}) / ${n - kUR} = <strong>${denom.toFixed(6)}</strong></div>
+        <div class="pt-1 border-t border-[#E8E2D8] flex items-center justify-between font-bold">
+          <span>F_calc = <strong>${fCalc}</strong></span>
+          <span>F_crit(${q}, ${n - kUR}, 5%) ≈ ${fCrit}</span>
+        </div>
+      </div>
+      <p class="font-extrabold text-xs ${isReject ? 'text-[#2A9D8F]' : 'text-[#D95D39]'} mt-1">
+        ${isReject ? 'Reject H₀: The q omitted variables are JOINTLY statistically significant at 5%.' : 'Fail to Reject H₀: Omitted variables have no joint explanatory power.'}
+      </p>
+    `;
+  }
+}
+
+function load2024FTestPreset() {
+  playSfx('click');
+  document.getElementById('ftest-r2-ur').value = '0.485';
+  document.getElementById('ftest-r2-r').value = '0.412';
+  document.getElementById('ftest-q').value = '3';
+  document.getElementById('ftest-n').value = '120';
+  document.getElementById('ftest-k').value = '6';
+  solveRestrictedFTest();
+  showToast('Loaded 2024 Q4 Comrades Race Data!', '🏃');
+}
+
+function copyFTestMemo() {
+  playSfx('click');
+  const r2UR = document.getElementById('ftest-r2-ur').value;
+  const r2R = document.getElementById('ftest-r2-r').value;
+  const q = document.getElementById('ftest-q').value;
+  const n = document.getElementById('ftest-n').value;
+  const kUR = document.getElementById('ftest-k').value;
+  const fCalc = (( (r2UR - r2R)/q ) / ( (1 - r2UR)/(n - kUR) )).toFixed(3);
+
+  const memo = `2024 Q4 Restricted F-Test Solution (8 Marks):\n\n1. Hypotheses:\n   H0: beta_4 = beta_5 = beta_6 = 0 (Restricted model is valid; variables are jointly insignificant)\n   H1: At least one beta_j != 0\n\n2. Test Statistic Formula:\n   F = [(R^2_UR - R^2_R) / q] / [(1 - R^2_UR) / (n - k_UR)]\n   F = [(${r2UR} - ${r2R}) / ${q}] / [(1 - ${r2UR}) / (${n} - ${kUR})] = ${fCalc}\n\n3. Critical Value & Decision Rule:\n   Degrees of freedom: df1 = q = ${q}, df2 = n - k_UR = ${n - kUR}.\n   Critical F(0.05; ${q}, ${n - kUR}) = 2.68.\n   Decision: Because F_calc (${fCalc}) > F_crit (2.68), we reject H0 at the 5% significance level.\n\n4. Conclusion:\n   The restricted explanatory variables are jointly statistically significant. Dropping them would introduce severe omitted variable bias.`;
+  navigator.clipboard.writeText(memo);
+  showToast('Copied F-Test Solution to Clipboard! (+20 XP)', '📋');
+  addXp(20);
+}
+
+// Matrix Singularity Explainer
+function solveMatrixDet() {
+  const a = parseFloat(document.getElementById('mat-a')?.value || '10');
+  const b = parseFloat(document.getElementById('mat-b')?.value || '5');
+  const c = parseFloat(document.getElementById('mat-c')?.value || '4');
+  const d = parseFloat(document.getElementById('mat-d')?.value || '2');
+
+  const det = a * d - b * c;
+  const detDisp = document.getElementById('mat-det-display');
+  const verdict = document.getElementById('mat-verdict-box');
+
+  if (detDisp) {
+    detDisp.innerHTML = `det(X'X) = (${a} · ${d}) - (${b} · ${c}) = <strong class="${det === 0 ? 'text-[#D95D39]' : 'text-[#2A9D8F]'}">${det.toFixed(2)}</strong>`;
+  }
+
+  if (verdict) {
+    if (Math.abs(det) < 0.001) {
+      verdict.className = 'p-3 rounded-xl border bg-[#FAF3EC] border-[#F0DBC9] text-xs space-y-1 text-[#D95D39]';
+      verdict.innerHTML = `
+        <strong>⚠️ SINGULAR MATRIX COLLAPSE! (det = 0)</strong>
+        <p class="text-[11px] text-[#555A68]">Matrix inversion requires 1 / det. Division by zero is undefined! EViews crashes with: <em>"Near singular matrix"</em>. This occurs when variables are perfectly collinear (e.g. Dummy Variable Trap).</p>
+      `;
+    } else {
+      verdict.className = 'p-3 rounded-xl border bg-[#E8F8F5] border-[#BCD4D6] text-xs space-y-1 text-[#2A9D8F]';
+      verdict.innerHTML = `
+        <strong>✓ NON-SINGULAR (Invertible)</strong>
+        <p class="text-[11px] text-[#555A68]">det != 0. (X'X)⁻¹ exists uniquely. OLS normal equations produce finite, uniquely identified parameter estimates.</p>
+      `;
+    }
+  }
+}
+
+function presetSingularMatrix() {
+  playSfx('click');
+  document.getElementById('mat-a').value = '10';
+  document.getElementById('mat-b').value = '5';
+  document.getElementById('mat-c').value = '4';
+  document.getElementById('mat-d').value = '2'; // 10*2 - 5*4 = 0
+  solveMatrixDet();
+  showToast('Simulated Perfect Collinearity Collapse!', '💥');
+}
+
+// Elasticity Matrix
+function solveElasticityMatrix() {
+  const form = document.getElementById('elasticity-form-select')?.value || 'loglog';
+  const x = document.getElementById('elasticity-x')?.value || 'GDP';
+  const y = document.getElementById('elasticity-y')?.value || 'ELEC';
+  const b = parseFloat(document.getElementById('elasticity-b')?.value || '0.45');
+
+  const resBox = document.getElementById('elasticity-result-box');
+  if (!resBox) return;
+
+  let formula = '';
+  let interpretation = '';
+
+  if (form === 'loglog') {
+    formula = `ln(${y}) = b₁ + ${b} · ln(${x})`;
+    interpretation = `"Holding all other variables constant, a <strong>1% increase</strong> in ${x} is associated with an expected <strong>${b}% increase</strong> in ${y} (Constant Elasticity = ${b})."`;
+  } else if (form === 'loglin') {
+    formula = `ln(${y}) = b₁ + ${b} · ${x}`;
+    const pct = (b * 100).toFixed(2);
+    interpretation = `"Holding all other variables constant, a <strong>1 unit increase</strong> in ${x} is associated with an expected <strong>${pct}% change</strong> in ${y} (Semi-elasticity)."`;
+  } else if (form === 'linlog') {
+    formula = `${y} = b₁ + ${b} · ln(${x})`;
+    const unitChange = (b / 100).toFixed(4);
+    interpretation = `"Holding all other variables constant, a <strong>1% increase</strong> in ${x} is associated with an expected <strong>${unitChange} unit change</strong> in ${y}."`;
+  } else {
+    formula = `${y} = b₁ + ${b} · ${x}`;
+    interpretation = `"Holding all other variables constant, a <strong>1 unit increase</strong> in ${x} is associated with an expected <strong>${b} unit change</strong> in ${y}."`;
+  }
+
+  resBox.innerHTML = `
+    <div class="font-mono-code text-[11px] text-[#7A8294]">Model: ${formula}</div>
+    <div class="p-2.5 bg-white rounded-lg border border-[#E8E2D8] text-xs text-[#1D3557] leading-relaxed">
+      ${interpretation}
+    </div>
+  `;
+}
+
+function copyElasticityMemo() {
+  playSfx('click');
+  const resBox = document.getElementById('elasticity-result-box');
+  if (!resBox) return;
+  navigator.clipboard.writeText(resBox.innerText);
+  showToast('Copied Elasticity Memo! (+10 XP)', '📋');
+  addXp(10);
+}
+
+// Act 2 Active Recall Radar (10 High-Yield Questions)
+const act2QuizItems = [
+  { q: "In a double-log regression (ln Y = b1 + b2 ln X), the slope coefficient b2 is an exact constant elasticity.", a: true, exp: "True! b2 = (%ΔY / %ΔX), directly measuring elasticity." },
+  { q: "Multicollinearity causes OLS estimators to become biased and inconsistent.", a: false, exp: "False! OLS remains UNBIASED and STILL BLUE under multicollinearity. Variances are simply large." },
+  { q: "White's general heteroskedasticity test requires the normality assumption of the error term.", a: false, exp: "False! White's test does NOT rely on error normality, making it a robust general test." },
+  { q: "Under heteroskedasticity, OLS loses the 'B' in BLUE (it is no longer minimum variance).", a: true, exp: "True! OLS is inefficient; standard error formulas are invalid." },
+  { q: "If d = 0.85 and dL = 1.15 in Durbin-Watson, we conclude there is negative autocorrelation.", a: false, exp: "False! d < dL indicates POSITIVE autocorrelation (d near 0 is positive; d near 4 is negative)." },
+  { q: "Ramsey RESET tests whether the regression equation suffers from omitted variable or functional form misspecification.", a: true, exp: "True! RESET detects omitted non-linearities and omitted variables using Ŷ² and Ŷ³." },
+  { q: "Including an intercept and m dummy variables for m categories creates the dummy variable trap.", a: true, exp: "True! That creates perfect multicollinearity. You must omit one base category or drop the constant." },
+  { q: "When heteroskedasticity is present, we must discard OLS and always use Non-Linear Least Squares.", a: false, exp: "False! We simply compute Huber-White Robust Standard Errors or Weighted Least Squares (WLS)." },
+  { q: "A high R² combined with low, statistically insignificant t-statistics is a classic symptom of severe multicollinearity.", a: true, exp: "True! Classic symptom from Lecture Activity 2." },
+  { q: "The Durbin-Watson d test remains valid even if a lagged dependent variable (Y_{t-1}) is included as an explanatory regressor.", a: false, exp: "False! DW is biased towards 2 when Y_{t-1} is present. You must use Durbin's h or Breusch-Godfrey LM test!" }
+];
+
+let act2QuizAnswers = {};
+
+function initAct2Quiz() {
+  const container = document.getElementById('act2-quiz-container');
+  if (!container) return;
+
+  container.innerHTML = act2QuizItems.map((item, idx) => `
+    <div id="act2-q-${idx}" class="p-4 rounded-xl border border-[#E8E2D8] bg-[#FAF7F2] space-y-2">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-start gap-2.5 text-xs text-[#1D3557]">
+          <span class="font-mono-code font-bold text-[#D95D39] shrink-0">Q${idx + 1}.</span>
+          <span class="font-medium leading-relaxed">${item.q}</span>
+        </div>
+        <span class="tag-bauhaus px-2 py-0.5 rounded text-[10px] font-mono-code bg-white text-[#7A8294] shrink-0">+1.5 Marks</span>
+      </div>
+      <div class="flex items-center gap-2 pt-1">
+        <button onclick="handleAct2QuizChoice(${idx}, true)" class="paper-btn px-4 py-1.5 bg-white text-xs font-bold text-[#1D3557] hover:bg-[#EBF3F5] rounded-lg">
+          TRUE
+        </button>
+        <button onclick="handleAct2QuizChoice(${idx}, false)" class="paper-btn px-4 py-1.5 bg-white text-xs font-bold text-[#1D3557] hover:bg-[#FAF3EC] rounded-lg">
+          FALSE
+        </button>
+      </div>
+      <div id="act2-exp-${idx}" class="hidden p-2.5 rounded-lg text-xs leading-relaxed font-mono-code"></div>
+    </div>
+  `).join('');
+}
+
+function handleAct2QuizChoice(idx, choice) {
+  const item = act2QuizItems[idx];
+  const isCorrect = choice === item.a;
+  act2QuizAnswers[idx] = isCorrect;
+
+  const card = document.getElementById(`act2-q-${idx}`);
+  const exp = document.getElementById(`act2-exp-${idx}`);
+  if (!card || !exp) return;
+
+  if (isCorrect) {
+    playSfx('win');
+    addXp(15);
+    card.className = 'p-4 rounded-xl border-2 border-[#2A9D8F] bg-[#E8F8F5] space-y-2';
+    exp.className = 'p-2.5 rounded-lg text-xs leading-relaxed font-mono-code bg-white text-[#2A9D8F] border border-[#2A9D8F]';
+    exp.innerHTML = `<strong>✓ CORRECT!</strong> ${item.exp}`;
+  } else {
+    playSfx('clue');
+    card.className = 'p-4 rounded-xl border-2 border-[#D95D39] bg-[#FAF3EC] space-y-2';
+    exp.className = 'p-2.5 rounded-lg text-xs leading-relaxed font-mono-code bg-white text-[#D95D39] border border-[#D95D39]';
+    exp.innerHTML = `<strong>❌ INCORRECT.</strong> ${item.exp}`;
+  }
+  exp.classList.remove('hidden');
+
+  const totalAnswered = Object.keys(act2QuizAnswers).length;
+  const correctCount = Object.values(act2QuizAnswers).filter(Boolean).length;
+  const scoreDisp = document.getElementById('act2-quiz-score');
+  if (scoreDisp) scoreDisp.textContent = `Score: ${correctCount} / 10`;
+
+  if (totalAnswered === 10 && correctCount >= 8) {
+    showToast('Distinction Recall Master! +50 XP Banked', '🏆');
+    addXp(50);
+  }
+}
+
+function resetAct2Quiz() {
+  playSfx('click');
+  act2QuizAnswers = {};
+  initAct2Quiz();
+  const scoreDisp = document.getElementById('act2-quiz-score');
+  if (scoreDisp) scoreDisp.textContent = 'Score: 0 / 10';
+  showToast('Reset Active Recall Radar', '🔄');
+}
+
+// =========================================================
+// ACT 3: EVIEWS GUI PRACTICAL SIMULATOR & TRI-LEVEL MEMO
+// =========================================================
+const scenariosData = {
+  A: {
+    name: 'Executive Compensation (Nov24_1.WF1)',
+    workfile: 'NOV24_1 - (c:\\data\\nov24_1.wf1)',
+    depVar: 'SALARY',
+    n: 209,
+    sample: '1 209',
+    cmd: 'ls salary c roe sales finance consprod utility',
+    variables: [
+      { name: 'C', coeff: 613.435, se: 65.241, seRobust: 82.150, t: 9.403, p: 0.0000, desc: 'Base compensation level', trap: 'Do not interpret slope for intercept; it is baseline pay when ROE=0 and Sales=0.' },
+      { name: 'ROE', coeff: 11.542, se: 4.120, seRobust: 6.240, t: 2.801, p: 0.0056, desc: 'Return on Equity (%)', trap: 'Look closely at p-value! Significant at 5% (p=0.0056 < 0.05).' },
+      { name: 'SALES', coeff: 0.0182, se: 0.0041, seRobust: 0.0089, t: 4.439, p: 0.0000, desc: 'Firm Sales (Millions)', trap: 'Coeff is positive and highly significant (p=0.0000 < 0.01).' },
+      { name: 'FINANCE', coeff: 142.25, se: 58.12, seRobust: 92.40, t: 2.448, p: 0.0152, desc: 'Finance Sector Dummy', trap: 'Differential intercept relative to omitted baseline industry.' },
+      { name: 'CONSPROD', coeff: -48.15, se: 61.20, seRobust: 74.50, t: -0.787, p: 0.4322, desc: 'Consumer Products Dummy', trap: 'Insignificant! p=0.4322 > 0.05. Fails to reject H0.' },
+      { name: 'UTILITY', coeff: -215.80, se: 72.40, seRobust: 88.20, t: -2.981, p: 0.0032, desc: 'Utility Sector Dummy', trap: 'Utility CEOs earn R215.8k less than base sector ceteris paribus.' }
+    ],
+    summaryStats: {
+      r2: '0.4125',
+      adjR2: '0.3980',
+      seReg: '421.50',
+      fStat: '28.48',
+      probF: '0.0000',
+      dw: '1.88'
+    },
+    whiteTest: {
+      obsR2: '24.12',
+      pVal: '0.0012',
+      df: '7',
+      verdict: 'Heteroskedasticity Detected (p = 0.0012 < 0.05)'
+    }
+  },
+  B: {
+    name: 'Labor Market Wage Determination (Nov23_1.WF1)',
+    workfile: 'NOV23_1 - (c:\\data\\nov23_1.wf1)',
+    depVar: 'WAGE',
+    n: 526,
+    sample: '1 526',
+    cmd: 'ls wage c educ exper expersq female married',
+    variables: [
+      { name: 'C', coeff: -3.3905, se: 0.7650, seRobust: 0.8120, t: -4.432, p: 0.0000, desc: 'Baseline Wage intercept', trap: 'Mathematical constant; negative intercept indicates extrapolation below sample range.' },
+      { name: 'EDUC', coeff: 0.5842, se: 0.0520, seRobust: 0.0580, t: 11.235, p: 0.0000, desc: 'Education (Years)', trap: 'Positive & significant. Each year adds R0.58/hr ceteris paribus.' },
+      { name: 'EXPER', coeff: 0.2680, se: 0.0350, seRobust: 0.0410, t: 7.657, p: 0.0000, desc: 'Linear Experience (Years)', trap: 'Do NOT interpret in isolation! Must pair with EXPER² for peak turning point.' },
+      { name: 'EXPERSQ', coeff: -0.0046, se: 0.0008, seRobust: 0.0009, t: -5.750, p: 0.0000, desc: 'Experience Squared', trap: 'Turning point: -b_exper / (2*b_expersq) = -0.2680 / (2 * -0.0046) = 29.13 years.' },
+      { name: 'FEMALE', coeff: -2.1560, se: 0.2680, seRobust: 0.2950, t: -8.045, p: 0.0000, desc: 'Gender Dummy (1=F, 0=M)', trap: 'Differential intercept: Females earn R2.16/hr less than males ceteris paribus.' },
+      { name: 'MARRIED', coeff: 0.6840, se: 0.2820, seRobust: 0.3120, t: 2.426, p: 0.0156, desc: 'Marital Status Dummy', trap: 'Significant at 5% level (p=0.0156 < 0.05).' }
+    ],
+    summaryStats: {
+      r2: '0.4412',
+      adjR2: '0.4358',
+      seReg: '2.984',
+      fStat: '82.15',
+      probF: '0.0000',
+      dw: '1.94'
+    },
+    resetTest: {
+      fStat: '0.88',
+      pVal: '0.4150',
+      verdict: 'Correct Specification (Fail to Reject H0, p = 0.415 > 0.05)'
+    }
+  }
+};
+
+let currentScenarioKey = 'A';
+let currentCovariance = 'ordinary'; // 'ordinary' or 'huber-white' or 'hac-newey'
+let currentLabMode = 'guided'; // 'guided' or 'free'
+let currentGuidedStep = 1;
+let selectedMemoVar = null;
+
+function selectScenario(key) {
+  playSfx('click');
+  currentScenarioKey = key;
+  currentCovariance = 'ordinary';
+
+  const btnA = document.getElementById('scenario-a-btn');
+  const btnB = document.getElementById('scenario-b-btn');
+  if (btnA && btnB) {
+    if (key === 'A') {
+      btnA.className = 'paper-btn px-3 py-1.5 bg-[#1D3557] text-white text-xs font-bold rounded-lg shadow-sm';
+      btnB.className = 'paper-btn px-3 py-1.5 bg-[#FAF7F2] text-[#1D3557] border border-[#D6CEC1] text-xs font-bold rounded-lg hover:bg-[#EAE4D9]';
+    } else {
+      btnB.className = 'paper-btn px-3 py-1.5 bg-[#1D3557] text-white text-xs font-bold rounded-lg shadow-sm';
+      btnA.className = 'paper-btn px-3 py-1.5 bg-[#FAF7F2] text-[#1D3557] border border-[#D6CEC1] text-xs font-bold rounded-lg hover:bg-[#EAE4D9]';
+    }
+  }
+
+  const s = scenariosData[key];
+  const winTitle = document.getElementById('eviews-window-title');
+  if (winTitle) winTitle.textContent = `EViews 12 / 13 — [Workfile: ${s.workfile}]`;
+  const sampleDisp = document.getElementById('eviews-sample-display');
+  if (sampleDisp) sampleDisp.textContent = `Range: ${s.sample} (n = ${s.n})`;
+  const cmdInp = document.getElementById('lab-cmd-input');
+  if (cmdInp) cmdInp.value = s.cmd;
+
+  renderEviewsTable();
+  selectMemoVariable(s.variables[1].name); // Select second variable by default (ROE or EDUC)
+  showToast(`Loaded Scenario ${key}: ${s.name}`, '📊');
+}
+
+function setLabMode(mode) {
+  playSfx('click');
+  currentLabMode = mode;
+  const guidedBtn = document.getElementById('mode-guided-btn');
+  const freeBtn = document.getElementById('mode-free-btn');
+  const stepperBar = document.getElementById('guided-stepper-bar');
+
+  if (mode === 'guided') {
+    if (guidedBtn) guidedBtn.className = 'px-3 py-1 text-xs font-bold rounded-lg bg-white text-[#D95D39] shadow-sm';
+    if (freeBtn) freeBtn.className = 'px-3 py-1 text-xs font-semibold rounded-lg text-[#555A68] hover:text-[#1D3557]';
+    if (stepperBar) stepperBar.classList.remove('hidden');
+    updateGuidedStepper();
+  } else {
+    if (guidedBtn) guidedBtn.className = 'px-3 py-1 text-xs font-semibold rounded-lg text-[#555A68] hover:text-[#1D3557]';
+    if (freeBtn) freeBtn.className = 'px-3 py-1 text-xs font-bold rounded-lg bg-white text-[#1D3557] shadow-sm';
+    if (stepperBar) stepperBar.classList.add('hidden');
+  }
+}
+
+const guidedSteps = [
+  { num: 1, title: 'Estimate Equation via Quick Menu', desc: 'Click <strong>Quick → Estimate Equation...</strong> in the menu ribbon, or inspect the command line syntax.', target: 'menu-quick-btn' },
+  { num: 2, title: 'Inspect Output Table & P-Values', desc: 'Click on the <strong>Prob. (p-values)</strong> in the regression table to evaluate statistical significance at the 5% level.', target: 'desktop-eviews-tbody' },
+  { num: 3, title: 'Run Diagnostic Tests (Heteroskedasticity / RESET)', desc: 'Click <strong>View → Residual Diagnostics</strong> to test for heteroskedasticity or Ramsey RESET misspecification.', target: 'menu-view-btn' },
+  { num: 4, title: 'Draft Tri-Level Word Memo', desc: 'Select any significant variable and review the 3-mark memo format: Significance, Magnitude, and Economic Theory.', target: 'memo-level1-box' }
+];
+
+function updateGuidedStepper() {
+  const step = guidedSteps[currentGuidedStep - 1];
+  document.getElementById('step-number-badge').textContent = `STEP ${step.num} OF 4`;
+  document.getElementById('step-instruction-title').textContent = step.title;
+  document.getElementById('step-instruction-desc').innerHTML = step.desc;
+
+  [1, 2, 3, 4].forEach(n => {
+    const dot = document.getElementById(`step-dot-${n}`);
+    if (dot) dot.className = `h-2 flex-1 rounded-full ${n <= currentGuidedStep ? 'bg-[#D95D39]' : 'bg-[#EAE4D9]'} transition-all`;
+  });
+}
+
+function nextGuidedStep() {
+  playSfx('click');
+  if (currentGuidedStep < 4) {
+    currentGuidedStep++;
+    updateGuidedStepper();
+  } else {
+    showToast('All guided steps mastered! Try Free Practice mode.', '🎉');
+  }
+}
+
+function prevGuidedStep() {
+  playSfx('click');
+  if (currentGuidedStep > 1) {
+    currentGuidedStep--;
+    updateGuidedStepper();
+  }
+}
+
+function toggleEviewsMenu(name) {
+  playSfx('click');
+  const dView = document.getElementById('menu-view-dropdown');
+  const dQuick = document.getElementById('menu-quick-dropdown');
+  const dOptions = document.getElementById('menu-options-dropdown');
+
+  if (name === 'view') {
+    dView?.classList.toggle('hidden');
+    dQuick?.classList.add('hidden');
+    dOptions?.classList.add('hidden');
+  } else if (name === 'quick') {
+    dQuick?.classList.toggle('hidden');
+    dView?.classList.add('hidden');
+    dOptions?.classList.add('hidden');
+  } else if (name === 'options') {
+    dOptions?.classList.toggle('hidden');
+    dView?.classList.add('hidden');
+    dQuick?.classList.add('hidden');
+  }
+}
+
+// Close menus when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#menu-view-btn') && !e.target.closest('#menu-view-dropdown')) {
+    document.getElementById('menu-view-dropdown')?.classList.add('hidden');
+  }
+  if (!e.target.closest('#menu-quick-btn') && !e.target.closest('#menu-quick-dropdown')) {
+    document.getElementById('menu-quick-dropdown')?.classList.add('hidden');
+  }
+  if (!e.target.closest('#menu-options-btn') && !e.target.closest('#menu-options-dropdown')) {
+    document.getElementById('menu-options-dropdown')?.classList.add('hidden');
+  }
+});
+
+function runEviewsAction(action) {
+  playSfx('click');
+  document.getElementById('menu-view-dropdown')?.classList.add('hidden');
+  document.getElementById('menu-quick-dropdown')?.classList.add('hidden');
+  document.getElementById('menu-options-dropdown')?.classList.add('hidden');
+
+  if (action === 'hetero-white') {
+    const s = scenariosData[currentScenarioKey];
+    if (currentScenarioKey === 'A') {
+      showToast('White Hetero Test: Obs*R² = 24.12, p = 0.0012 < 0.05 (Hetero Detected!)', '🍲');
+      applyRobustCovariance('huber-white');
+    } else {
+      showToast('White Hetero Test: Obs*R² = 8.15, p = 0.22 > 0.05 (Homoskedastic)', '🟢');
+    }
+  } else if (action === 'reset-test') {
+    if (currentScenarioKey === 'B') {
+      showToast('Ramsey RESET: F = 0.88, p = 0.4150 > 0.05 (Correct Specification)', '🥣');
+    } else {
+      showToast('Ramsey RESET: F = 1.12, p = 0.32 > 0.05', '🥣');
+    }
+  } else if (action === 'serial-lm') {
+    showToast('Breusch-Godfrey LM: Obs*R² = 2.14, p = 0.34 > 0.05 (No serial correlation)', '✓');
+  }
+}
+
+function applyRobustCovariance(type) {
+  playSfx('click');
+  document.getElementById('menu-options-dropdown')?.classList.add('hidden');
+  currentCovariance = type;
+  renderEviewsTable();
+
+  const label = type === 'huber-white' ? 'Huber-White Robust Standard Errors' : type === 'hac-newey' ? 'HAC (Newey-West) Standard Errors' : 'Ordinary OLS Standard Errors';
+  showToast(`Applied: ${label}`, '⚙️');
+}
+
+function openEquationDialog() {
+  playSfx('click');
+  document.getElementById('menu-quick-dropdown')?.classList.add('hidden');
+  const s = scenariosData[currentScenarioKey];
+  const userCmd = prompt('EViews Equation Specification:\nDependent variable followed by regressors:', s.cmd.replace('ls ', ''));
+  if (userCmd) {
+    document.getElementById('lab-cmd-input').value = 'ls ' + userCmd;
+    executeLabCommand();
+  }
+}
+
+function executeLabCommand() {
+  playSfx('click');
+  addXp(20);
+  renderEviewsTable();
+  showToast('Executed Equation Estimation! (+20 XP)', '⚡');
+}
+
+// Render Desktop Table and Mobile Bento Cards
+function renderEviewsTable() {
+  const s = scenariosData[currentScenarioKey];
+  const isRobust = currentCovariance === 'huber-white';
+  const isHAC = currentCovariance === 'hac-newey';
+
+  // Desktop Meta Header
+  const metaDep = document.getElementById('table-meta-dep');
+  if (metaDep) metaDep.textContent = `Dependent Variable: ${s.depVar} | Method: Least Squares | Included observations: ${s.n}`;
+
+  const metaSE = document.getElementById('table-meta-se-type');
+  if (metaSE) {
+    if (isRobust) {
+      metaSE.textContent = 'Standard Errors: Huber-White Robust';
+      metaSE.className = 'px-2 py-0.5 rounded bg-[#E8F8F5] text-[#2A9D8F] font-bold';
+    } else if (isHAC) {
+      metaSE.textContent = 'Standard Errors: HAC (Newey-West)';
+      metaSE.className = 'px-2 py-0.5 rounded bg-[#E8F8F5] text-[#2A9D8F] font-bold';
+    } else {
+      metaSE.textContent = 'Standard Errors: Ordinary OLS';
+      metaSE.className = 'px-2 py-0.5 rounded bg-[#FAF7F2] text-[#D95D39] font-bold';
+    }
+  }
+
+  // Mobile Meta
+  const mobMetaDep = document.getElementById('mobile-table-meta-dep');
+  if (mobMetaDep) mobMetaDep.textContent = `Dep: ${s.depVar} (n=${s.n})`;
+  const mobMetaSE = document.getElementById('mobile-table-meta-se-type');
+  if (mobMetaSE) {
+    mobMetaSE.textContent = isRobust ? 'Huber-White SEs' : isHAC ? 'HAC SEs' : 'Ordinary SEs';
+    mobMetaSE.className = isRobust || isHAC ? 'text-[#2A9D8F] font-bold' : 'text-[#D95D39] font-bold';
+  }
+
+  // Desktop Table Body
+  const tbody = document.getElementById('desktop-eviews-tbody');
+  if (tbody) {
+    tbody.innerHTML = s.variables.map(v => {
+      const se = isRobust ? v.seRobust : v.se;
+      const tStat = (v.coeff / se).toFixed(3);
+      const isSig = v.p < 0.05;
+
+      return `
+        <tr class="hover:bg-[#FAF7F2] transition-colors group cursor-pointer" onclick="selectMemoVariable('${v.name}')">
+          <td class="py-2.5 font-bold text-[#1D3557] flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full ${isSig ? 'bg-[#2A9D8F]' : 'bg-[#D95D39]'}"></span>
+            <span>${v.name}</span>
+          </td>
+          <td class="py-2.5 font-bold ${v.coeff > 0 ? 'text-[#2A9D8F]' : 'text-[#D95D39]'}">${v.coeff.toFixed(4)}</td>
+          <td class="py-2.5 text-[#555A68]">${se.toFixed(4)}</td>
+          <td class="py-2.5 font-semibold text-[#1D3557]">${tStat}</td>
+          <td class="py-2.5">
+            <span class="px-2 py-0.5 rounded-full text-[11px] font-bold ${isSig ? 'bg-[#E8F8F5] text-[#2A9D8F]' : 'bg-[#FAF3EC] text-[#D95D39]'}">
+              ${v.p.toFixed(4)}
+            </span>
+          </td>
+          <td class="py-2.5 text-right">
+            <button onclick="event.stopPropagation(); openHotspotModal('${v.name}')" class="paper-btn px-2.5 py-1 bg-[#FAF7F2] hover:bg-[#EAE4D9] text-[10px] text-[#1D3557] font-bold mr-1">
+              🔍 Hotspot
+            </button>
+            <button onclick="event.stopPropagation(); selectMemoVariable('${v.name}')" class="paper-btn px-2.5 py-1 bg-[#EBF3F5] hover:bg-[#D9EAEB] text-[10px] text-[#2B4C7E] font-bold">
+              Memo →
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  // Desktop Bottom Summary Stats
+  const botStats = document.getElementById('desktop-eviews-bottom-stats');
+  if (botStats) {
+    botStats.innerHTML = `
+      <div onclick="openHotspotModal('R2')" class="cursor-pointer hover:underline">R-squared: <strong class="text-[#1D3557]">${s.summaryStats.r2}</strong></div>
+      <div onclick="openHotspotModal('ADJR2')" class="cursor-pointer hover:underline">Adjusted R-squared: <strong class="text-[#1D3557]">${s.summaryStats.adjR2}</strong></div>
+      <div onclick="openHotspotModal('FSTAT')" class="cursor-pointer hover:underline">F-statistic: <strong class="text-[#1D3557]">${s.summaryStats.fStat}</strong></div>
+      <div onclick="openHotspotModal('PROBF')" class="cursor-pointer hover:underline">Prob(F-statistic): <strong class="text-[#2A9D8F]">${s.summaryStats.probF}</strong></div>
+      <div onclick="openHotspotModal('DW')" class="cursor-pointer hover:underline">Durbin-Watson stat: <strong class="text-[#1D3557]">${s.summaryStats.dw}</strong></div>
+      <div>S.E. of regression: <strong>${s.summaryStats.seReg}</strong></div>
+    `;
+  }
+
+  // Mobile Bento Stat Cards (<768px)
+  const bentoContainer = document.getElementById('mobile-bento-cards-container');
+  if (bentoContainer) {
+    bentoContainer.innerHTML = s.variables.map(v => {
+      const se = isRobust ? v.seRobust : v.se;
+      const tStat = (v.coeff / se).toFixed(3);
+      const isSig = v.p < 0.05;
+
+      return `
+        <div class="paper-card p-3.5 bg-white border border-[#D6CEC1] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-extrabold text-sm text-[#1D3557]">${v.name}</span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono-code ${isSig ? 'bg-[#E8F8F5] text-[#2A9D8F]' : 'bg-[#FAF3EC] text-[#D95D39]'}">
+              p = ${v.p.toFixed(4)} (${isSig ? 'Sig' : 'Insig'})
+            </span>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 text-[11px] font-mono-code pt-1 border-t border-[#F0EBE1]">
+            <div>
+              <span class="text-[#7A8294] text-[9px] block">Coeff:</span>
+              <strong class="${v.coeff > 0 ? 'text-[#2A9D8F]' : 'text-[#D95D39]'}">${v.coeff.toFixed(3)}</strong>
+            </div>
+            <div>
+              <span class="text-[#7A8294] text-[9px] block">Std Error:</span>
+              <strong class="text-[#1D3557]">${se.toFixed(3)}</strong>
+            </div>
+            <div>
+              <span class="text-[#7A8294] text-[9px] block">t-Stat:</span>
+              <strong class="text-[#1D3557]">${tStat}</strong>
+            </div>
+          </div>
+
+          <div class="pt-1 flex items-center justify-between gap-2">
+            <button onclick="openHotspotModal('${v.name}')" class="paper-btn px-2.5 py-1 bg-[#FAF7F2] text-[10px] text-[#1D3557] font-bold flex-1">
+              🔍 Inspector
+            </button>
+            <button onclick="openMobileMemoSheet('${v.name}')" class="paper-btn px-3 py-1 bg-[#4E878C] text-white text-[10px] font-bold flex-1">
+              📝 Word Memo
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Mobile Summary Grid
+  const mobSummary = document.getElementById('mobile-summary-bento-grid');
+  if (mobSummary) {
+    mobSummary.innerHTML = `
+      <div class="p-2 rounded bg-white border border-[#E8E2D8] font-mono-code">
+        <span class="text-[9px] text-[#7A8294] block">R² / Adj R²:</span>
+        <strong>${s.summaryStats.r2}</strong> / ${s.summaryStats.adjR2}
+      </div>
+      <div class="p-2 rounded bg-white border border-[#E8E2D8] font-mono-code">
+        <span class="text-[9px] text-[#7A8294] block">F-Stat (Prob):</span>
+        <strong class="text-[#2A9D8F]">${s.summaryStats.fStat} (p=0.000)</strong>
+      </div>
+    `;
+  }
+}
+
+// Stat Hotspot Inspector Modal
+function openHotspotModal(statKey) {
+  playSfx('click');
+  const s = scenariosData[currentScenarioKey];
+  const modal = document.getElementById('hotspot-modal');
+  const title = document.getElementById('hotspot-modal-title');
+  const body = document.getElementById('hotspot-modal-body');
+  const injectBtn = document.getElementById('hotspot-inject-btn');
+  if (!modal || !title || !body) return;
+
+  const foundVar = s.variables.find(v => v.name === statKey);
+
+  if (foundVar) {
+    title.textContent = `Variable: ${foundVar.name} (${foundVar.desc})`;
+    const isRobust = currentCovariance === 'huber-white';
+    const se = isRobust ? foundVar.seRobust : foundVar.se;
+    const tStat = (foundVar.coeff / se).toFixed(3);
+
+    body.innerHTML = `
+      <div class="p-3 bg-[#FAF7F2] rounded-xl font-mono-code text-xs space-y-1">
+        <div>Coefficient: <strong class="${foundVar.coeff > 0 ? 'text-[#2A9D8F]' : 'text-[#D95D39]'}">${foundVar.coeff.toFixed(4)}</strong></div>
+        <div>Std Error (${isRobust ? 'Huber-White' : 'Ordinary'}): <strong>${se.toFixed(4)}</strong></div>
+        <div>t-Statistic: <strong>${tStat}</strong> | p-Value: <strong class="${foundVar.p < 0.05 ? 'text-[#2A9D8F]' : 'text-[#D95D39]'}">${foundVar.p.toFixed(4)}</strong></div>
+      </div>
+      <div>
+        <h4 class="font-bold text-[#1D3557] text-xs">What this means:</h4>
+        <p>${foundVar.desc}. An increase in ${foundVar.name} is associated with a ${foundVar.coeff.toFixed(3)} unit expected change in ${s.depVar}, holding other variables constant.</p>
+      </div>
+      <div class="p-2.5 bg-[#FAF3EC] rounded-lg border border-[#F0DBC9] text-[#8C3A22]">
+        <strong>⚠️ Examiner Trap:</strong> ${foundVar.trap}
+      </div>
+    `;
+
+    if (injectBtn) {
+      injectBtn.onclick = () => {
+        closeHotspotModal();
+        selectMemoVariable(foundVar.name);
+      };
+    }
+  } else if (statKey === 'R2') {
+    title.textContent = 'R-Squared (Coefficient of Determination)';
+    body.innerHTML = `
+      <p>R² = ${s.summaryStats.r2}. Measures the proportion of the total sample variation in ${s.depVar} explained by the explanatory regressors.</p>
+      <div class="p-2.5 bg-[#FAF3EC] rounded-lg border border-[#F0DBC9] text-[#8C3A22]">
+        <strong>⚠️ Examiner Trap:</strong> Never claim R² measures causation! Also remember R² never falls when adding variables; only Adjusted R² can penalize unhelpful regressors.
+      </div>
+    `;
+  } else if (statKey === 'FSTAT' || statKey === 'PROBF') {
+    title.textContent = 'F-Statistic & Joint Significance';
+    body.innerHTML = `
+      <p>F = ${s.summaryStats.fStat}, Prob(F) = ${s.summaryStats.probF}. Tests the joint null hypothesis that all slope parameters are simultaneously zero: H₀: β₂ = β₃ = ... = 0.</p>
+      <p class="font-bold text-[#2A9D8F]">Conclusion: Because p < 0.001, we reject H₀. The regression model is jointly statistically significant.</p>
+    `;
+  } else if (statKey === 'DW') {
+    title.textContent = 'Durbin-Watson d-Statistic';
+    body.innerHTML = `
+      <p>DW = ${s.summaryStats.dw}. Tests for first-order autoregressive serial correlation in the error term.</p>
+      <p>Around 2.0 indicates no first-order serial correlation. Near 0 indicates positive autocorrelation; near 4 indicates negative autocorrelation.</p>
+    `;
+  }
+
+  modal.classList.remove('hidden');
+}
+
+function closeHotspotModal() {
+  document.getElementById('hotspot-modal')?.classList.add('hidden');
+}
+
+// Tri-Level Word Memo Builder
+function selectMemoVariable(varName) {
+  playSfx('click');
+  selectedMemoVar = varName;
+  const s = scenariosData[currentScenarioKey];
+  const v = s.variables.find(item => item.name === varName) || s.variables[1];
+  const isRobust = currentCovariance === 'huber-white';
+  const se = isRobust ? v.seRobust : v.se;
+  const tStat = (v.coeff / se).toFixed(3);
+  const isSig = v.p < 0.05;
+
+  const box1 = document.getElementById('memo-level1-box');
+  const box2 = document.getElementById('memo-level2-box');
+  const box3 = document.getElementById('memo-level3-box');
+
+  if (box1) {
+    box1.innerHTML = `
+      <strong>${v.name}</strong> is <strong>${isSig ? 'statistically significant' : 'statistically insignificant'}</strong> at the 5% level of significance because the p-value is <strong>${v.p.toFixed(4)}</strong> ${isSig ? '< 0.05' : '>= 0.05'} (or |t| = ${Math.abs(tStat)} ${isSig ? '> 1.96' : '< 1.96'}), ${isSig ? 'rejecting the null hypothesis H₀: β = 0' : 'failing to reject H₀'}.
+    `;
+  }
+
+  if (box2) {
+    box2.innerHTML = `
+      Holding all other variables constant (<em>ceteris paribus</em>), an increase of <strong>1 unit in ${v.name}</strong> is associated with an expected ${v.coeff > 0 ? 'increase' : 'decrease'} in <strong>${s.depVar}</strong> of <strong>${Math.abs(v.coeff).toFixed(4)} units</strong>.
+    `;
+  }
+
+  if (box3) {
+    let theoryText = '';
+    if (v.name === 'ROE') theoryText = 'This conforms to economic theory and the principal-agent framework, as higher return on equity reflects superior management performance and shareholder value creation.';
+    else if (v.name === 'SALES') theoryText = 'This aligns with firm size theory (Baumol sales maximization), where larger corporate scale increases executive span of control and compensation.';
+    else if (v.name === 'EDUC') theoryText = 'This strictly aligns with Human Capital Theory, which posits that additional years of formal education enhance worker productivity and market wage returns.';
+    else if (v.name === 'FEMALE') theoryText = 'The negative differential intercept indicates a documented gender wage gap in labor market data, ceteris paribus.';
+    else theoryText = 'The observed parameter sign conforms to standard economic intuition for this variable.';
+
+    box3.innerHTML = theoryText;
+  }
+
+  showToast(`Selected ${v.name} for Word Memo`, '📝');
+}
+
+function revealExemplarMemo() {
+  playSfx('win');
+  addXp(25);
+  showToast('Revealed 100% Exemplar Memo! (+25 XP)', '🏆');
+}
+
+function copyTriLevelWordMemo() {
+  playSfx('click');
+  const box1 = document.getElementById('memo-level1-box');
+  const box2 = document.getElementById('memo-level2-box');
+  const box3 = document.getElementById('memo-level3-box');
+  if (!box1 || !box2 || !box3) return;
+
+  const fullText = `ECON325 Practical Exam Word Interpretation (SURNAME_INITIALS.DOCX):\n\nLevel 1 (Statistical Significance):\n${box1.innerText}\n\nLevel 2 (Economic Magnitude & Ceteris Paribus):\n${box2.innerText}\n\nLevel 3 (Economic Theory):\n${box3.innerText}`;
+
+  navigator.clipboard.writeText(fullText);
+  showToast('Copied Tri-Level Memo to Clipboard! (+15 XP)', '📋');
+  addXp(15);
+}
+
+// Mobile Slide-up Bottom Sheet
+function openMobileMemoSheet(varName) {
+  playSfx('click');
+  selectMemoVariable(varName);
+  const sheet = document.getElementById('mobile-memo-bottom-sheet');
+  const body = document.getElementById('mobile-sheet-body');
+  const title = document.getElementById('mobile-sheet-title');
+  if (!sheet || !body) return;
+
+  title.textContent = `Word Memo: ${varName}`;
+  const box1 = document.getElementById('memo-level1-box');
+  const box2 = document.getElementById('memo-level2-box');
+  const box3 = document.getElementById('memo-level3-box');
+
+  body.innerHTML = `
+    <div class="p-2.5 rounded-lg bg-[#FAF7F2] border">
+      <span class="text-[10px] text-[#7A8294] font-bold uppercase">1. Significance (+1m):</span>
+      <p class="mt-0.5">${box1 ? box1.innerText : ''}</p>
+    </div>
+    <div class="p-2.5 rounded-lg bg-[#FAF7F2] border">
+      <span class="text-[10px] text-[#7A8294] font-bold uppercase">2. Magnitude & Ceteris Paribus (+1m):</span>
+      <p class="mt-0.5">${box2 ? box2.innerText : ''}</p>
+    </div>
+    <div class="p-2.5 rounded-lg bg-[#FAF7F2] border">
+      <span class="text-[10px] text-[#7A8294] font-bold uppercase">3. Economic Theory (+1m):</span>
+      <p class="mt-0.5">${box3 ? box3.innerText : ''}</p>
+    </div>
+  `;
+
+  sheet.classList.remove('translate-y-full');
+}
+
+function closeMobileMemoSheet() {
+  playSfx('click');
+  document.getElementById('mobile-memo-bottom-sheet')?.classList.add('translate-y-full');
+}
+
+
+// Initialize Stations and Overhaul Systems
+window.addEventListener('DOMContentLoaded', () => {
+  updateSfxToggleBtn();
+  initMegaphonePoints();
+  drawMegaphoneCanvas();
+  updateSoupStation();
+  drawResetCanvas();
+  drawDWDialCanvas(currentDW);
+  solveRestrictedFTest();
+  solveMatrixDet();
+  solveElasticityMatrix();
+  initAct2Quiz();
+  renderEviewsTable();
+  selectMemoVariable('ROE');
+  updateGuidedStepper();
+});
 
 </script>
   <!-- ========================================================= -->
